@@ -7,9 +7,7 @@
         <h3>HBSA - Handbook</h3>
         <br />
         <asp:Label ID="Handbook_Label" runat="server" Text="Label"></asp:Label>
-        <p>
-              <asp:Button ID="DownLoadContent_Button" runat="server" Text="Get the handbook" />
-        </p>
+        <p><asp:Button ID="DownLoadContent_Button" runat="server" Text="Get the handbook" /></p>
         <p>
               &nbsp;</p>
  
