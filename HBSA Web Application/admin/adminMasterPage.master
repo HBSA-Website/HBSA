@@ -1,0 +1,229 @@
+﻿<%@ Master Language="VB" Inherits="HBSA_Web_Application.admin_adminMasterPage" CodeBehind="adminMasterPage.master.vb" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>HBSA Web Administration</title>
+    <link href="../styles/global.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        td {
+            padding: 4px;
+        }
+
+        .normal {
+            text-align: center;
+            color: #0000FF;
+            font-family: Calibri;
+            font-size: 12pt;
+        }
+
+        .header1 {
+            text-align: center;
+            font-weight: bold;
+            color: #0000FF;
+            font-family: Calibri;
+            font-size: 16pt;
+        }
+
+        .header2 {
+            border-left-color: #808080;
+            border-right-color: #C0C0C0;
+            border-top-color: #808080;
+            border-bottom-color: #C0C0C0;
+            background-color: #F7F8FA;
+        }
+
+        /* TAB MENU   
+----------------------------------------------------------*/
+
+        div.hideSkiplink {
+            background-color: #3a4f63;
+        }
+
+        div.menu {
+            padding: 4px 0px 4px 8px;
+        }
+
+            div.menu ul {
+                list-style: none;
+                width: auto;
+            }
+
+                div.menu ul li a, div.menu ul li a:visited {
+                    background-color: #465c71;
+                    border: 1px #bbbbbb solid;
+                    color: #dde4ec;
+                    display: block;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    font-size: 12pt;
+                }
+
+                    div.menu ul li a:hover {
+                        background-color: #bfcbd6;
+                        color: #465c71;
+                        text-decoration: none;
+                        font-size: 12pt;
+                    }
+
+                    div.menu ul li a:active {
+                        background-color: #465c71;
+                        color: #cfdbe6;
+                        text-decoration: none;
+                        font-size: 12pt;
+                    }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="color: #000099">
+
+    <script type="text/javascript"> 
+        <!--#include file="../Scripts/JScript.js"-->
+    </script>
+
+    <form id="form1" runat="server" enctype="multipart/form-data">
+
+        <table style="width: 100%">
+            <tr>
+                <td class="header1">
+                    <span class="header2">HBSA Web Administration.</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="width: auto; text-align: left; font-size: 12pt;">
+                        <asp:Menu ID="NavigationMenu" runat="server"
+                            EnableViewState="False" BackColor="#B5C7DE" DynamicHorizontalOffset="2"
+                            Font-Names="Verdana" ForeColor="#284E98" StaticSubMenuIndent="10px"
+                            BorderColor="#000099" BorderStyle="Solid" BorderWidth="1px" Font-Size="12pt"
+                            Orientation="Horizontal" DisappearAfter="200">
+                            <DynamicHoverStyle CssClass="menu" BackColor="#284E98" ForeColor="White" />
+                            <DynamicMenuItemStyle CssClass="menu" HorizontalPadding="28px" VerticalPadding="2px" Font-Names="Verdana" Font-Size="12pt" />
+                            <DynamicMenuStyle BackColor="#B5C7DE" />
+                            <DynamicSelectedStyle BackColor="#507CD1" />
+                            <Items>
+                                <asp:MenuItem Text=" |Home Pages">
+                                    <asp:MenuItem NavigateUrl="../Home.aspx" Text="Main Site" />
+                                    <asp:MenuItem NavigateUrl="adminHome.aspx" Text="Admin Home" />
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" |Web content">
+                                    <asp:MenuItem NavigateUrl="EditHomePage.aspx" Text="Manage Home Page" />
+                                    <asp:MenuItem NavigateUrl="ContentManager.aspx" Text="Manage Content" />
+                                    <asp:MenuItem NavigateUrl="PictureGalleryManager.aspx" Text="Picture Gallery Manager" />
+                                    <asp:MenuItem NavigateUrl="DocumentManager.aspx" Text="Documents Manager" />
+                                    <asp:MenuItem NavigateUrl="Adverts.aspx" Text="Advertisements" />
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" |Reports">
+                                    <asp:MenuItem NavigateUrl="TaggedPlayers.aspx" Text=" Tagged Players" />
+                                    <asp:MenuItem NavigateUrl="EmailMonitor.aspx" Text=" Email Monitor" />
+                                    <asp:MenuItem NavigateUrl="LastSixMatches.aspx" Text=" Last Six Matches" />
+                                    <asp:MenuItem NavigateUrl="~/TrophiesAndPrizes.aspx" Text=" Trophies and Prizes" />
+                                    <asp:MenuItem NavigateUrl="ActivityLog.aspx" Text=" Activity Log" />
+                                    <asp:MenuItem NavigateUrl="PrivacyReports.aspx" Text=" Privacy acceptance reports" />
+                                    <asp:MenuItem NavigateUrl="ClubsWithoutClubLogin.aspx" Text=" Clubs Without Club Login report" />
+                                    <asp:MenuItem NavigateUrl="EntryFormsNewPlayers.aspx" Text=" Entry Forms New Players report" />
+                                    <asp:MenuItem NavigateUrl="AGMVotesReports.aspx" Text=" AGM Votes" />
+                                    <asp:MenuItem NavigateUrl="C19Compliance.aspx" Text=" Covid 19 Compliance report" />
+                                    <asp:MenuItem NavigateUrl="ContactsReport.aspx" Text=" Contacts Report (Download)" Value="ContactsReport" />
+
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" |Maintenance">
+                                    <asp:MenuItem NavigateUrl="Clubs.aspx" Text="Clubs" />
+                                    <asp:MenuItem NavigateUrl="Players.aspx" Text="Players" />
+                                    <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Leagues / Handicap limits" />
+                                    <asp:MenuItem NavigateUrl="Sections.aspx" Text="Divisions/Sections" />
+                                    <asp:MenuItem NavigateUrl="Teams.aspx" Text="Teams" />
+                                    <asp:MenuItem NavigateUrl="EmailAddresses.aspx" Text="Email addresses and Telephone Nos" />
+                                    <asp:MenuItem Text="Awards (Trophies, Prizes etc.)" Value="">
+                                        <asp:MenuItem NavigateUrl="Awards.aspx" Text="Awards Recipients" Value="" />
+                                        <asp:MenuItem NavigateUrl="AwardsTypes.aspx" Text="Awards types and their names etc." Value="" />
+                                        <asp:MenuItem NavigateUrl="AwardsTemplate.aspx" Text="Awards templates - Competitions, Trophies & Prizes" Value="" />
+                                        <asp:MenuItem NavigateUrl="BreaksCategories.aspx" Text="Maintain Breaks Categories for High Break awards" Value="" />
+                                        <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Handicap limits (Leagues)" />
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="Close Season" Value="">
+                                        <asp:MenuItem NavigateUrl="BetweenSeasons.aspx" Text="Between Seasons" Value="" />
+                                        <asp:MenuItem NavigateUrl="FixtureDates.aspx" Text="Fixture Dates" Value="closeSeason" />
+                                        <asp:MenuItem NavigateUrl="FixtureGrids.aspx" Text="Fixture Grids" Value="closeSeason" />
+                                        <asp:MenuItem NavigateUrl="ArrangeTeamsInSections.aspx" Text="Arrange Teams In Sections" Value="closeSeason" />
+                                        <asp:MenuItem NavigateUrl="LookForTooManyHomeFixtures.aspx" Text="Look for too many home fixtures" Value="closeSeason" />
+                                    </asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="Money.aspx" Text="Debts and Payments" />
+
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" |Leagues">
+                                    <asp:MenuItem NavigateUrl="../MatchResult.aspx" Text="Results Cards" />
+                                    <asp:MenuItem NavigateUrl="PointsAdjuster.aspx" Text="Adjust League Points" />
+                                    <asp:MenuItem Text="Entry Forms Maintenance">
+                                        <asp:MenuItem NavigateUrl="../EntryForm.aspx" Text="Entry Form" />
+                                        <asp:MenuItem NavigateUrl="EntryFees.aspx" Text="Entry Form Fees" />
+                                        <asp:MenuItem NavigateUrl="EntryFormClubsSummary.aspx" Text="Entry Forms - Clubs Summary" />
+                                        <asp:MenuItem NavigateUrl="EntryFormTeamsSummary.aspx" Text="Entry Forms - Teams Summary" />
+                                        <asp:MenuItem NavigateUrl="EntryFormFullReport.aspx" Text="Entry Forms - Full Reports" />
+                                        <asp:MenuItem NavigateUrl="PrivacyReports.aspx" Text=" Privacy acceptance reports" />
+                                        <asp:MenuItem NavigateUrl="ClubsWithoutClubLogin.aspx" Text=" Clubs Without Club Login report" />
+                                        <asp:MenuItem NavigateUrl="EntryFormsNewPlayers.aspx" Text=" Entry Forms New Players report" />
+                                    </asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="../FixtureLists.aspx" Text="Fixture Lists" />
+                                    <asp:MenuItem NavigateUrl="BreaksCategories.aspx" Text="Maintain Breaks Categories for High Break awards" Value="" />
+                                    <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Handicap limits (Leagues)" />
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" |Competitions">
+                                    <asp:MenuItem NavigateUrl="CompetitionsMaintenance.aspx" Text="Set up and maintenance" />
+                                    <asp:MenuItem NavigateUrl="CompetitionsEntries.aspx" Text="Entrants" />
+                                    <asp:MenuItem NavigateUrl="ArrangeEntrantsInCompetition.aspx" Text="Re-arrange Entrants in a competition" />
+                                    <asp:MenuItem NavigateUrl="PlayByDates.aspx" Text="Play By Dates and Round comments" />
+                                    <asp:MenuItem NavigateUrl="Competitionsresults.aspx" Text="Results and progress" />
+                                    <asp:MenuItem NavigateUrl="JuniorsResults.aspx" Text="Enter Juniors Division Results" />
+                                    <asp:MenuItem Text="Competitions Entry Forms Maintenance">
+                                        <asp:MenuItem NavigateUrl="../CompetitionsEntryForm.aspx" Text="On line entry forms" />
+                                        <asp:MenuItem NavigateUrl="CompetitionsEntryFormClubsSummary.aspx" Text="Entry Forms - Clubs Summary" />
+                                        <asp:MenuItem NavigateUrl="CompetitionEntrantsReport.aspx" Text="Entry Forms - Entrants reports by competition" />
+                                        <asp:MenuItem NavigateUrl="../EntryFormShowDetail.aspx?ClubID=0&Form=Competition" Text="Entry Forms - Full Reports on all clubs" />
+                                        <asp:MenuItem NavigateUrl="ClearCompetitionsEntryForms.aspx" Text="Clear all entry forms." ToolTip="Clear out ALL entry forms and any associated data" />
+                                    </asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="BreaksCategories.aspx" Text="Maintain Breaks Categories for High Break awards" Value="" />
+                                    <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Handicap limits (Leagues)" />
+                                    <asp:MenuItem NavigateUrl="PrivacyReports.aspx" Text=" Privacy acceptance reports" />
+                                </asp:MenuItem>
+                                <asp:MenuItem Text=" |Admin">
+                                    <asp:MenuItem NavigateUrl="Administrators.aspx" Text="Administrators" />
+                                    <asp:MenuItem NavigateUrl="UserDetails.aspx" Text="User Details" />
+                                    <asp:MenuItem NavigateUrl="Settings.aspx" Text="Settings" />
+                                    <asp:MenuItem NavigateUrl="Fines.aspx" Text="Fines" />
+                                    <asp:MenuItem NavigateUrl="Money.aspx" Text="Debts and Payments" />
+                                    <asp:MenuItem NavigateUrl="EmailTemplates.aspx" Text="Email Templates" />
+                                    <asp:MenuItem NavigateUrl="NotePad.aspx" Text="Note Pad" />
+                                    <asp:MenuItem NavigateUrl="FAQ.aspx" Text="FAQ" />
+                                </asp:MenuItem>
+
+                                <asp:MenuItem NavigateUrl="adminLogoff.aspx" Text=" |Log out" />
+
+                            </Items>
+
+                            <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
+                            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2" Font-Names="Verdana" Font-Size="10pt" />
+                            <StaticSelectedStyle BackColor="#507CD1" />
+                        </asp:Menu>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <span style="font-size: 12pt; font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: #FF0000">
+            <asp:Literal ID="UnderMaintLiteral" runat="server"></asp:Literal></span>
+
+        <div class="normal" style="text-align: left">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+            </asp:ContentPlaceHolder>
+        </div>
+
+    </form>
+
+</body>
+</html>

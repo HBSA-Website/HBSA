@@ -1,0 +1,74 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/admin/adminMasterPage.master" AutoEventWireup="false" Inherits="HBSA_Web_Application.admin_PointsAdjuster" Codebehind="PointsAdjuster.aspx.vb" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+    <div style="text-align:left; width:100%">
+    <h3>League Points Adjustments</h3>
+
+    <asp:Button ID="Add_Button" runat="server" Text="Create Adjustment" />
+    <br /><br />
+
+                <asp:GridView ID="Adjustments_GridView" runat="server"  
+                        EnableModelValidation="True" Font-Size="9pt" Width="100%" BackColor="White" BorderColor="#E7E7FF" 
+                        BorderStyle="None" BorderWidth="1px" CellPadding="3">
+                        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
+                        <RowStyle Height="18px" BackColor="#E7E7FF" ForeColor="#000044" />
+                        <AlternatingRowStyle Height="18px" BackColor="#F7F7F7" />
+                        <Columns>
+                            <asp:CommandField ButtonType="Button" ControlStyle-ForeColor="#000044" ShowCancelButton="False" SelectText="Change/Delete" ShowSelectButton="True" >
+                                    <ControlStyle Font-Size="7pt" ></ControlStyle>
+                            </asp:CommandField>
+                            </Columns>
+                        <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="#F7F7F7" />
+                    </asp:GridView>
+
+</div>
+                    
+    <asp:Panel ID="Edit_Panel" runat="server" Visible="false">
+        <div style="border: 1px solid #0000FF; position: fixed; top: 200px; left: 300px; color: #0000FF; background-color: #99CCFF;">
+            <table style="text-align:left" >
+                <tr>
+                    <td style="text-align:right"><asp:Literal ID="Selection_Literal" runat="server" Text="Select a division/section and a team:"></asp:Literal></td>
+                    <td><asp:DropDownList ID="Section_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" ></asp:DropDownList>
+                        <asp:DropDownList ID="Team_DropDownList" runat="server" BackColor="#FFFFCC"  ></asp:DropDownList></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right; vertical-align:top;">Notes:</td>
+                    <td>
+                          To delete this entry set the points to zero and save.<br />
+                          To adjust the league position Add or deduct 0.1 points<br />
+                          The maximum number of characters allowed in the comments is 255 
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Number of points to </td>
+                    <td><asp:DropDownList ID="Adjustment_DropDown" runat="server" BackColor="#FFFFCC" >
+                                    <asp:ListItem Value="-">Deduct</asp:ListItem>
+                                    <asp:ListItem Value="+">Add</asp:ListItem>
+                            </asp:DropDownList>
+                        <asp:TextBox ID="Points_TextBox" runat="server" BackColor="#FFFFCC" Width="25px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Comments:</td>
+                    <td><asp:TextBox ID="Comments_TextBox" runat="server" BackColor="#FFFFCC" Width="319px" MaxLength="255" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">
+                        <asp:Button ID="Save_Button" runat="server" Text="Save" /></td>
+                    <td>
+                        <asp:Button ID="Cancel_Button" runat="server" Text="Cancel" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center"><span style="color:red">
+                        <asp:Literal ID="Err_Literal" runat="server"></asp:Literal></span></td>
+                </tr>
+            </table>
+        </div>
+    </asp:Panel>            
+
+    
+</asp:Content>
+

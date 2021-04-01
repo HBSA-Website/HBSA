@@ -1,0 +1,1660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{DCC10F7A-A0FE-43CA-8815-AD6A892DF40B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>HBSA_Web_Application</RootNamespace>
+    <AssemblyName>HBSA Web Application</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MyType>WindowsForm</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44371</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>HBSA Web Application.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>HBSA Web Application.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ajaxcontroltoolkit\19.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxControlToolkit.HtmlEditor.Sanitizer, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.HtmlEditor.Sanitizer.19.1.0\lib\net40\AjaxControlToolkit.HtmlEditor.Sanitizer.dll</HintPath>
+    </Reference>
+    <Reference Include="CKEditor.NET, Version=3.6.4.0, Culture=neutral, PublicKeyToken=e379cdf2f8354999, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CKEditor.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="DeviceDetector.NET">
+      <HintPath>..\packages\DeviceDetector.NET.3.11.4\lib\net45\DeviceDetector.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="YamlDotNet, Version=6.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\YamlDotNet.6.0.0\lib\net45\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin\ActivityLog.aspx" />
+    <Content Include="admin\AdminDownload.aspx" />
+    <Content Include="admin\adminHome.aspx" />
+    <Content Include="admin\Administrators.aspx" />
+    <Content Include="admin\adminLogoff.aspx" />
+    <Content Include="admin\Adverts.aspx" />
+    <Content Include="admin\AGMVotesReports.aspx" />
+    <Content Include="admin\ArrangeEntrantsInCompetition.aspx" />
+    <Content Include="admin\ArrangeTeamsInSections.aspx" />
+    <Content Include="admin\Awards.aspx" />
+    <Content Include="admin\AwardsTemplate.aspx" />
+    <Content Include="admin\AwardsTypes.aspx" />
+    <Content Include="admin\BetweenSeasons.aspx" />
+    <Content Include="admin\BreaksCategories.aspx" />
+    <Content Include="admin\C19Compliance.aspx" />
+    <Content Include="admin\ClearCompetitionsEntryForms.aspx" />
+    <Content Include="admin\Clubs.aspx" />
+    <Content Include="admin\ClubsWithoutClubLogin.aspx" />
+    <Content Include="admin\CompetitionEntrantsReport.aspx" />
+    <Content Include="admin\CompetitionsEntries.aspx" />
+    <Content Include="admin\CompetitionsEntryFormClubsSummary.aspx" />
+    <Content Include="admin\CompetitionsMaintenance.aspx" />
+    <Content Include="admin\CompetitionsResults.aspx" />
+    <Content Include="admin\Configuration.aspx" />
+    <Content Include="admin\ContactsReport.aspx" />
+    <Content Include="admin\ContentEdit.aspx" />
+    <Content Include="admin\Default.aspx" />
+    <Content Include="admin\DocumentManager.aspx" />
+    <Content Include="admin\editHomePage.aspx" />
+    <Content Include="admin\eMailAddresses.aspx" />
+    <Content Include="admin\eMailMonitor.aspx" />
+    <Content Include="admin\eMailTemplateEdit.aspx" />
+    <Content Include="admin\eMailTemplates.aspx" />
+    <Content Include="admin\EntryFees.aspx" />
+    <Content Include="admin\EntryFormClubsSummary.aspx" />
+    <Content Include="admin\EntryFormFullReport.aspx" />
+    <Content Include="admin\EntryFormsNewPlayers.aspx" />
+    <Content Include="admin\EntryFormTeamsSummary.aspx" />
+    <Content Include="admin\FAQ.aspx" />
+    <Content Include="admin\Fines.aspx" />
+    <Content Include="admin\FixtureDates.aspx" />
+    <Content Include="admin\FixtureGrids.aspx" />
+    <Content Include="admin\images\bold_button.gif" />
+    <Content Include="admin\images\EASB_logo.png" />
+    <Content Include="admin\images\EyeClosed.jpg" />
+    <Content Include="admin\images\EyeOpen.jpg" />
+    <Content Include="admin\images\font_button.gif" />
+    <Content Include="admin\images\italics_button.gif" />
+    <Content Include="admin\images\link_button.gif" />
+    <Content Include="admin\images\list_button.gif" />
+    <Content Include="admin\images\loading.gif" />
+    <Content Include="admin\images\reader_24.jpg" />
+    <Content Include="admin\images\spacer.gif" />
+    <Content Include="admin\images\tab.gif" />
+    <Content Include="admin\images\underline_button.gif" />
+    <Content Include="admin\images\white-arrow.gif" />
+    <Content Include="admin\images\YBSA.jpg" />
+    <Content Include="admin\JuniorsResults.aspx" />
+    <Content Include="admin\LastSixMatches.aspx" />
+    <Content Include="admin\Leagues.aspx" />
+    <Content Include="admin\LookForTooManyHomeFixtures.aspx" />
+    <Content Include="admin\Money.aspx" />
+    <Content Include="admin\NotePad.aspx" />
+    <Content Include="admin\PictureGalleryManager.aspx" />
+    <Content Include="admin\PlayByDates.aspx" />
+    <Content Include="admin\Players.aspx" />
+    <Content Include="admin\PointsAdjuster.aspx" />
+    <Content Include="admin\PrivacyReports.aspx" />
+    <Content Include="admin\scripts\Dynamicdragdrop.js" />
+    <Content Include="admin\scripts\redips-drag-min.js" />
+    <Content Include="admin\Sections.aspx" />
+    <Content Include="admin\Settings.aspx" />
+    <Content Include="admin\Styles\Dynamic.css" />
+    <Content Include="admin\TaggedPlayers.aspx" />
+    <Content Include="admin\Teams.aspx" />
+    <Content Include="admin\ContentManager.aspx" />
+    <Content Include="admin\UserDetails.aspx" />
+    <Content Include="Adverts.aspx" />
+    <Content Include="AGM_Vote.aspx" />
+    <Content Include="App_Data\HBSA - Clear.dat" />
+    <Content Include="bin\YamlDotNet.dll" />
+    <Content Include="ckeditor\adapters\jquery.js" />
+    <Content Include="ckeditor\ckeditor.js" />
+    <Content Include="ckeditor\ckeditor_basic.js" />
+    <Content Include="ckeditor\ckeditor_basic_source.js" />
+    <Content Include="ckeditor\ckeditor_source.js" />
+    <Content Include="ckeditor\config.js" />
+    <Content Include="ckeditor\contents.css" />
+    <Content Include="ckeditor\images\spacer.gif" />
+    <Content Include="ckeditor\lang\en-gb.js" />
+    <Content Include="ckeditor\lang\en.js" />
+    <Content Include="ckeditor\lang\_languages.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\cs.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\cy.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\da.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\de.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\el.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\en.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\eo.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\fa.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\fi.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\fr.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\gu.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\he.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\it.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\ku.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\mk.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\nb.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\nl.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\no.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\pt-br.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\ro.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\sk.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\tr.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\ug.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\vi.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\zh-cn.js" />
+    <Content Include="ckeditor\plugins\a11yhelp\lang\_translationstatus.txt" />
+    <Content Include="ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="ckeditor\plugins\adobeair\plugin.js" />
+    <Content Include="ckeditor\plugins\ajax\plugin.js" />
+    <Content Include="ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="ckeditor\plugins\bbcode\plugin.js" />
+    <Content Include="ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\bg.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\cs.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\cy.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\da.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\de.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\el.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\en.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\eo.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\et.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\fa.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\fi.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\fr.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\gu.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\he.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\hr.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\it.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\ku.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\nb.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\nl.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\no.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\pl.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\pt-br.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\sk.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\tr.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\ug.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\uk.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\vi.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\zh-cn.js" />
+    <Content Include="ckeditor\plugins\devtools\lang\_translationstatus.txt" />
+    <Content Include="ckeditor\plugins\devtools\plugin.js" />
+    <Content Include="ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="ckeditor\plugins\docprops\dialogs\docprops.js" />
+    <Content Include="ckeditor\plugins\docprops\plugin.js" />
+    <Content Include="ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="ckeditor\plugins\iframedialog\plugin.js" />
+    <Content Include="ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="ckeditor\plugins\link\images\anchor.gif" />
+    <Content Include="ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="ckeditor\plugins\pastetext\dialogs\pastetext.js" />
+    <Content Include="ckeditor\plugins\placeholder\dialogs\placeholder.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\bg.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\cs.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\cy.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\da.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\de.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\el.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\en.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\eo.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\et.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\fa.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\fi.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\fr.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\he.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\hr.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\it.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\ku.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\nb.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\nl.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\no.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\pl.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\pt-br.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\sk.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\tr.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\ug.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\uk.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\vi.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\zh-cn.js" />
+    <Content Include="ckeditor\plugins\placeholder\lang\_translationstatus.txt" />
+    <Content Include="ckeditor\plugins\placeholder\placeholder.gif" />
+    <Content Include="ckeditor\plugins\placeholder\plugin.js" />
+    <Content Include="ckeditor\plugins\preview\preview.html" />
+    <Content Include="ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\cs.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\cy.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\de.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\el.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\en.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\eo.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\et.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\fa.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\fi.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\fr.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\he.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\hr.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\it.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\ku.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\nb.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\nl.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\no.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\pt-br.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\tr.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\ug.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\zh-cn.js" />
+    <Content Include="ckeditor\plugins\specialchar\lang\_translationstatus.txt" />
+    <Content Include="ckeditor\plugins\stylesheetparser\plugin.js" />
+    <Content Include="ckeditor\plugins\styles\styles\default.js" />
+    <Content Include="ckeditor\plugins\tableresize\plugin.js" />
+    <Content Include="ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="ckeditor\plugins\uicolor\dialogs\uicolor.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\bg.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\cs.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\cy.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\da.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\de.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\el.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\en.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\eo.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\et.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\fa.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\fi.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\fr.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\he.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\hr.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\it.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\ku.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\mk.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\nb.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\nl.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\no.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\pl.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\pt-br.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\sk.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\tr.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\ug.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\uk.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\vi.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\zh-cn.js" />
+    <Content Include="ckeditor\plugins\uicolor\lang\_translationstatus.txt" />
+    <Content Include="ckeditor\plugins\uicolor\plugin.js" />
+    <Content Include="ckeditor\plugins\uicolor\uicolor.gif" />
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\hue_bg.png" />
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\hue_thumb.png" />
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\picker_mask.png" />
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\picker_thumb.png" />
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\yui.css" />
+    <Content Include="ckeditor\plugins\uicolor\yui\yui.js" />
+    <Content Include="ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="ckeditor\plugins\xml\plugin.js" />
+    <Content Include="ckeditor\skins\kama\dialog.css" />
+    <Content Include="ckeditor\skins\kama\editor.css" />
+    <Content Include="ckeditor\skins\kama\icons.png" />
+    <Content Include="ckeditor\skins\kama\icons_rtl.png" />
+    <Content Include="ckeditor\skins\kama\images\dialog_sides.gif" />
+    <Content Include="ckeditor\skins\kama\images\dialog_sides.png" />
+    <Content Include="ckeditor\skins\kama\images\dialog_sides_rtl.png" />
+    <Content Include="ckeditor\skins\kama\images\mini.gif" />
+    <Content Include="ckeditor\skins\kama\images\noimage.png" />
+    <Content Include="ckeditor\skins\kama\images\sprites.png" />
+    <Content Include="ckeditor\skins\kama\images\sprites_ie6.png" />
+    <Content Include="ckeditor\skins\kama\images\toolbar_start.gif" />
+    <Content Include="ckeditor\skins\kama\skin.js" />
+    <Content Include="ckeditor\skins\kama\templates.css" />
+    <Content Include="ckeditor\themes\default\theme.js" />
+    <Content Include="ClubLoginReset.aspx" />
+    <Content Include="Covid-19-Compliance.aspx" />
+    <Content Include="Fines.aspx" />
+    <Content Include="helpFAQ.aspx" />
+    <Content Include="images\AjaxLoadingSave.gif" />
+    <Content Include="images\epsb.png" />
+    <Content Include="images\EyeClosed.jpg" />
+    <Content Include="images\EyeOpen.jpg" />
+    <Content Include="images\LongArrow.png" />
+    <Content Include="images\Rathbones.jpg" />
+    <Content Include="images\snooker2.jpg" />
+    <Content Include="images\TonyClegg.png" />
+    <Content Include="images\warning.png" />
+    <Content Include="images\YBSA.png" />
+    <Content Include="LoginReset.aspx" />
+    <Content Include="mobile\ActiveTableDetail.asmx" />
+    <Content Include="mobile\Adverts.aspx" />
+    <Content Include="mobile\Breaks.aspx" />
+    <Content Include="mobile\ClubLogin.aspx" />
+    <Content Include="mobile\ClubLoginConfirm.aspx" />
+    <Content Include="mobile\ClubLoginRegistration.aspx" />
+    <Content Include="mobile\ClubLoginreset.aspx" />
+    <Content Include="mobile\ClubsPlayers.aspx" />
+    <Content Include="mobile\competitions.aspx" />
+    <Content Include="mobile\Contact.aspx" />
+    <Content Include="mobile\default.aspx" />
+    <Content Include="mobile\Fines.aspx" />
+    <Content Include="mobile\FixtureLists.aspx" />
+    <Content Include="mobile\Handbook.aspx" />
+    <Content Include="mobile\images\menuBox.png" />
+    <Content Include="mobile\InfoPage.aspx" />
+    <Content Include="mobile\leagueTables.aspx" />
+    <Content Include="mobile\Home.aspx" />
+    <Content Include="mobile\LogIn.aspx" />
+    <Content Include="mobile\LoginConfirm.aspx" />
+    <Content Include="mobile\LoginRegistration.aspx" />
+    <Content Include="mobile\LoginReset.aspx" />
+    <Content Include="mobile\MatchResult.aspx" />
+    <Content Include="mobile\Scripts\mobileMaster.js" />
+    <Content Include="mobile\Styles\mobileStyles.css" />
+    <Content Include="mobile\YorkshireLeague.aspx" />
+    <Content Include="PayPalAPIError.aspx" />
+    <Content Include="Breaks.aspx" />
+    <Content Include="ClubLogin.aspx" />
+    <Content Include="ClubLoginConfirm.aspx" />
+    <Content Include="ClubLoginRegistration.aspx" />
+    <Content Include="ClubsPlayers.aspx" />
+    <Content Include="Competitions.aspx" />
+    <Content Include="CompetitionsEntryForm.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="CreateAndDownloadFile.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="EntryForm.aspx" />
+    <Content Include="EntryFormsDownload.aspx" />
+    <Content Include="EntryFormShowDetail.aspx" />
+    <Content Include="PayPalCancelled.aspx" />
+    <Content Include="PayPalCheckOut.aspx" />
+    <Content Include="PayPalConfirm.aspx" />
+    <Content Include="FixtureLists.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Handbook.aspx" />
+    <Content Include="Handicaps.aspx" />
+    <Content Include="Home.aspx" />
+    <Content Include="images\AjaxLoading.gif" />
+    <Content Include="images\balls.jpg" />
+    <Content Include="images\black.jpg" />
+    <Content Include="images\blue.jpg" />
+    <Content Include="images\BlueCircle-First-Disabled.png" />
+    <Content Include="images\BlueCircle-First.png" />
+    <Content Include="images\BlueCircle-Last-Disabled.png" />
+    <Content Include="images\BlueCircle-Last.png" />
+    <Content Include="images\BlueCircle-Next-Disabled.png" />
+    <Content Include="images\BlueCircle-Next.png" />
+    <Content Include="images\BlueCircle-Previous-Disabled.png" />
+    <Content Include="images\BlueCircle-Previous.png" />
+    <Content Include="images\BlueQuestionMark18.bmp" />
+    <Content Include="images\brown.jpg" />
+    <Content Include="images\Exit.bmp" />
+    <Content Include="images\green.jpg" />
+    <Content Include="images\Icon-Calendar.png" />
+    <Content Include="images\menuBarBG.gif" />
+    <Content Include="images\pink.jpg" />
+    <Content Include="images\PointDownSmall.bmp" />
+    <Content Include="images\PointUpSmall.bmp" />
+    <Content Include="images\RathLogo.gif" />
+    <Content Include="images\reader_24.jpg" />
+    <Content Include="images\red.jpg" />
+    <Content Include="images\SHBSA.jpg" />
+    <Content Include="images\white.jpg" />
+    <Content Include="images\WorldSnooker.jpg" />
+    <Content Include="images\Yellow.jpg" />
+    <Content Include="InfoPage.aspx" />
+    <Content Include="JuniorsComp2.aspx" />
+    <Content Include="LeagueTables.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="LoginConfirm.aspx" />
+    <Content Include="LoginProfile.aspx" />
+    <Content Include="LoginRegistration.aspx" />
+    <Content Include="MissingResults.aspx" />
+    <Content Include="NewRegistrations.aspx" />
+    <Content Include="PictureGallery.aspx" />
+    <Content Include="PlayerRecords.aspx" />
+    <Content Include="PlayingRecords.aspx" />
+    <Content Include="Results.aspx" />
+    <Content Include="MatchResult.aspx" />
+    <Content Include="ResultsCardDownload.aspx" />
+    <Content Include="Scripts\JScript.js" />
+    <Content Include="Scripts\ResultsCardJavaScript.js" />
+    <Content Include="mobile\mobileMaster.Master" />
+    <Content Include="bin\regexes\bots.yml" />
+    <Content Include="bin\regexes\client\browsers.yml" />
+    <Content Include="bin\regexes\client\browser_engine.yml" />
+    <Content Include="bin\regexes\client\feed_readers.yml" />
+    <Content Include="bin\regexes\client\libraries.yml" />
+    <Content Include="bin\regexes\client\mediaplayers.yml" />
+    <Content Include="bin\regexes\client\mobile_apps.yml" />
+    <Content Include="bin\regexes\client\pim.yml" />
+    <Content Include="bin\regexes\device\cameras.yml" />
+    <Content Include="bin\regexes\device\car_browsers.yml" />
+    <Content Include="bin\regexes\device\consoles.yml" />
+    <Content Include="bin\regexes\device\mobiles.yml" />
+    <Content Include="bin\regexes\device\portable_media_player.yml" />
+    <Content Include="bin\regexes\device\televisions.yml" />
+    <Content Include="bin\regexes\oss.yml" />
+    <Content Include="bin\regexes\vendorfragments.yml" />
+    <Content Include="SiteMap.aspx" />
+    <Content Include="styles\Desktop.css" />
+    <Content Include="styles\global.css" />
+    <Content Include="TeamRecords.aspx" />
+    <Content Include="TrophiesAndPrizes.aspx" />
+    <Content Include="UnderMaintenance.aspx" />
+    <Content Include="UnseasonedPlayers.aspx" />
+    <Content Include="App_Data\HBSA.dat" />
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WeeklyResultsReport.aspx" />
+    <Content Include="YorkshireLeague.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="admin\ActivityLog.aspx.designer.vb">
+      <DependentUpon>ActivityLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ActivityLog.aspx.vb">
+      <DependentUpon>ActivityLog.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\AdminDownload.aspx.designer.vb">
+      <DependentUpon>AdminDownload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AdminDownload.aspx.vb">
+      <DependentUpon>AdminDownload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\adminHome.aspx.designer.vb">
+      <DependentUpon>adminHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\adminHome.aspx.vb">
+      <DependentUpon>adminHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Administrators.aspx.designer.vb">
+      <DependentUpon>Administrators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Administrators.aspx.vb">
+      <DependentUpon>Administrators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\adminLogoff.aspx.designer.vb">
+      <DependentUpon>adminLogoff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\adminLogoff.aspx.vb">
+      <DependentUpon>adminLogoff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\adminMasterPage.master.designer.vb">
+      <DependentUpon>adminMasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\adminMasterPage.master.vb">
+      <DependentUpon>adminMasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Adverts.aspx.designer.vb">
+      <DependentUpon>Adverts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Adverts.aspx.vb">
+      <DependentUpon>Adverts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AGMVotesReports.aspx.designer.vb">
+      <DependentUpon>AGMVotesReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AGMVotesReports.aspx.vb">
+      <DependentUpon>AGMVotesReports.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\ArrangeEntrantsInCompetition.aspx.designer.vb">
+      <DependentUpon>ArrangeEntrantsInCompetition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ArrangeEntrantsInCompetition.aspx.vb">
+      <DependentUpon>ArrangeEntrantsInCompetition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ArrangeTeamsInSections.aspx.designer.vb">
+      <DependentUpon>ArrangeTeamsInSections.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ArrangeTeamsInSections.aspx.vb">
+      <DependentUpon>ArrangeTeamsInSections.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Awards.aspx.designer.vb">
+      <DependentUpon>Awards.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Awards.aspx.vb">
+      <DependentUpon>Awards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AwardsTemplate.aspx.designer.vb">
+      <DependentUpon>AwardsTemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AwardsTemplate.aspx.vb">
+      <DependentUpon>AwardsTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AwardsTypes.aspx.designer.vb">
+      <DependentUpon>AwardsTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AwardsTypes.aspx.vb">
+      <DependentUpon>AwardsTypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\BetweenSeasons.aspx.designer.vb">
+      <DependentUpon>BetweenSeasons.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\BetweenSeasons.aspx.vb">
+      <DependentUpon>BetweenSeasons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\BreaksCategories.aspx.designer.vb">
+      <DependentUpon>BreaksCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\BreaksCategories.aspx.vb">
+      <DependentUpon>BreaksCategories.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\C19Compliance.aspx.designer.vb">
+      <DependentUpon>C19Compliance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\C19Compliance.aspx.vb">
+      <DependentUpon>C19Compliance.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\ClearCompetitionsEntryForms.aspx.designer.vb">
+      <DependentUpon>ClearCompetitionsEntryForms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ClearCompetitionsEntryForms.aspx.vb">
+      <DependentUpon>ClearCompetitionsEntryForms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Clubs.aspx.designer.vb">
+      <DependentUpon>Clubs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Clubs.aspx.vb">
+      <DependentUpon>Clubs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ClubsWithoutClubLogin.aspx.designer.vb">
+      <DependentUpon>ClubsWithoutClubLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ClubsWithoutClubLogin.aspx.vb">
+      <DependentUpon>ClubsWithoutClubLogin.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\CompetitionEntrantsReport.aspx.designer.vb">
+      <DependentUpon>CompetitionEntrantsReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\CompetitionEntrantsReport.aspx.vb">
+      <DependentUpon>CompetitionEntrantsReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\CompetitionsEntries.aspx.designer.vb">
+      <DependentUpon>CompetitionsEntries.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\CompetitionsEntries.aspx.vb">
+      <DependentUpon>CompetitionsEntries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\CompetitionsEntryFormClubsSummary.aspx.designer.vb">
+      <DependentUpon>CompetitionsEntryFormClubsSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\CompetitionsEntryFormClubsSummary.aspx.vb">
+      <DependentUpon>CompetitionsEntryFormClubsSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\CompetitionsMaintenance.aspx.designer.vb">
+      <DependentUpon>CompetitionsMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\CompetitionsMaintenance.aspx.vb">
+      <DependentUpon>CompetitionsMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\CompetitionsResults.aspx.designer.vb">
+      <DependentUpon>CompetitionsResults.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\CompetitionsResults.aspx.vb">
+      <DependentUpon>CompetitionsResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Configuration.aspx.designer.vb">
+      <DependentUpon>Configuration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Configuration.aspx.vb">
+      <DependentUpon>Configuration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ContactsReport.aspx.designer.vb">
+      <DependentUpon>ContactsReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ContactsReport.aspx.vb">
+      <DependentUpon>ContactsReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\ContentEdit.aspx.designer.vb">
+      <DependentUpon>ContentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ContentEdit.aspx.vb">
+      <DependentUpon>ContentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\DocumentManager.aspx.designer.vb">
+      <DependentUpon>DocumentManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\DocumentManager.aspx.vb">
+      <DependentUpon>DocumentManager.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\editHomePage.aspx.designer.vb">
+      <DependentUpon>editHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\editHomePage.aspx.vb">
+      <DependentUpon>editHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\eMailAddresses.aspx.designer.vb">
+      <DependentUpon>eMailAddresses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\eMailAddresses.aspx.vb">
+      <DependentUpon>eMailAddresses.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\eMailMonitor.aspx.designer.vb">
+      <DependentUpon>eMailMonitor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\eMailMonitor.aspx.vb">
+      <DependentUpon>eMailMonitor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\eMailTemplateEdit.aspx.designer.vb">
+      <DependentUpon>eMailTemplateEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\eMailTemplateEdit.aspx.vb">
+      <DependentUpon>eMailTemplateEdit.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\eMailTemplates.aspx.designer.vb">
+      <DependentUpon>eMailTemplates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\eMailTemplates.aspx.vb">
+      <DependentUpon>eMailTemplates.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\EntryFees.aspx.designer.vb">
+      <DependentUpon>EntryFees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\EntryFees.aspx.vb">
+      <DependentUpon>EntryFees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\EntryFormClubsSummary.aspx.designer.vb">
+      <DependentUpon>EntryFormClubsSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\EntryFormClubsSummary.aspx.vb">
+      <DependentUpon>EntryFormClubsSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\EntryFormFullReport.aspx.designer.vb">
+      <DependentUpon>EntryFormFullReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\EntryFormFullReport.aspx.vb">
+      <DependentUpon>EntryFormFullReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\EntryFormsNewPlayers.aspx.designer.vb">
+      <DependentUpon>EntryFormsNewPlayers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\EntryFormsNewPlayers.aspx.vb">
+      <DependentUpon>EntryFormsNewPlayers.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\EntryFormTeamsSummary.aspx.designer.vb">
+      <DependentUpon>EntryFormTeamsSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\EntryFormTeamsSummary.aspx.vb">
+      <DependentUpon>EntryFormTeamsSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\FAQ.aspx.designer.vb">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\FAQ.aspx.vb">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\Fines.aspx.designer.vb">
+      <DependentUpon>Fines.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Fines.aspx.vb">
+      <DependentUpon>Fines.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\FixtureDates.aspx.designer.vb">
+      <DependentUpon>FixtureDates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\FixtureDates.aspx.vb">
+      <DependentUpon>FixtureDates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\FixtureGrids.aspx.designer.vb">
+      <DependentUpon>FixtureGrids.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\FixtureGrids.aspx.vb">
+      <DependentUpon>FixtureGrids.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\JuniorsResults.aspx.designer.vb">
+      <DependentUpon>JuniorsResults.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\JuniorsResults.aspx.vb">
+      <DependentUpon>JuniorsResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\LastSixMatches.aspx.designer.vb">
+      <DependentUpon>LastSixMatches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\LastSixMatches.aspx.vb">
+      <DependentUpon>LastSixMatches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Leagues.aspx.designer.vb">
+      <DependentUpon>Leagues.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Leagues.aspx.vb">
+      <DependentUpon>Leagues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\LookForTooManyHomeFixtures.aspx.designer.vb">
+      <DependentUpon>LookForTooManyHomeFixtures.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\LookForTooManyHomeFixtures.aspx.vb">
+      <DependentUpon>LookForTooManyHomeFixtures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Money.aspx.designer.vb">
+      <DependentUpon>Money.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Money.aspx.vb">
+      <DependentUpon>Money.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\NotePad.aspx.designer.vb">
+      <DependentUpon>NotePad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\NotePad.aspx.vb">
+      <DependentUpon>NotePad.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\PictureGalleryManager.aspx.designer.vb">
+      <DependentUpon>PictureGalleryManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\PictureGalleryManager.aspx.vb">
+      <DependentUpon>PictureGalleryManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\PlayByDates.aspx.designer.vb">
+      <DependentUpon>PlayByDates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\PlayByDates.aspx.vb">
+      <DependentUpon>PlayByDates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Players.aspx.designer.vb">
+      <DependentUpon>Players.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Players.aspx.vb">
+      <DependentUpon>Players.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\PointsAdjuster.aspx.designer.vb">
+      <DependentUpon>PointsAdjuster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\PointsAdjuster.aspx.vb">
+      <DependentUpon>PointsAdjuster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\PrivacyReports.aspx.designer.vb">
+      <DependentUpon>PrivacyReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\PrivacyReports.aspx.vb">
+      <DependentUpon>PrivacyReports.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\Sections.aspx.designer.vb">
+      <DependentUpon>Sections.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Sections.aspx.vb">
+      <DependentUpon>Sections.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Settings.aspx.designer.vb">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Settings.aspx.vb">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\TaggedPlayers.aspx.designer.vb">
+      <DependentUpon>TaggedPlayers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\TaggedPlayers.aspx.vb">
+      <DependentUpon>TaggedPlayers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Teams.aspx.designer.vb">
+      <DependentUpon>Teams.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Teams.aspx.vb">
+      <DependentUpon>Teams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ContentManager.aspx.designer.vb">
+      <DependentUpon>ContentManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ContentManager.aspx.vb">
+      <DependentUpon>ContentManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\UserDetails.aspx.designer.vb">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\UserDetails.aspx.vb">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adverts.aspx.designer.vb">
+      <DependentUpon>Adverts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adverts.aspx.vb">
+      <DependentUpon>Adverts.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AGM_Vote.aspx.designer.vb">
+      <DependentUpon>AGM_Vote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AGM_Vote.aspx.vb">
+      <DependentUpon>AGM_Vote.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Breaks.aspx.designer.vb">
+      <DependentUpon>Breaks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Breaks.aspx.vb">
+      <DependentUpon>Breaks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubLogin.aspx.designer.vb">
+      <DependentUpon>ClubLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClubLogin.aspx.vb">
+      <DependentUpon>ClubLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubLoginConfirm.aspx.designer.vb">
+      <DependentUpon>ClubLoginConfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClubLoginConfirm.aspx.vb">
+      <DependentUpon>ClubLoginConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ClubLoginRegistration.aspx.designer.vb">
+      <DependentUpon>ClubLoginRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClubLoginRegistration.aspx.vb">
+      <DependentUpon>ClubLoginRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClubLoginReset.aspx.designer.vb">
+      <DependentUpon>ClubLoginReset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClubLoginReset.aspx.vb">
+      <DependentUpon>ClubLoginReset.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ClubsPlayers.aspx.designer.vb">
+      <DependentUpon>ClubsPlayers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClubsPlayers.aspx.vb">
+      <DependentUpon>ClubsPlayers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competitions.aspx.designer.vb">
+      <DependentUpon>Competitions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competitions.aspx.vb">
+      <DependentUpon>Competitions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompetitionsEntryForm.aspx.designer.vb">
+      <DependentUpon>CompetitionsEntryForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompetitionsEntryForm.aspx.vb">
+      <DependentUpon>CompetitionsEntryForm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.aspx.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Covid-19-Compliance.aspx.designer.vb">
+      <DependentUpon>Covid-19-Compliance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Covid-19-Compliance.aspx.vb">
+      <DependentUpon>Covid-19-Compliance.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CreateAndDownloadFile.aspx.designer.vb">
+      <DependentUpon>CreateAndDownloadFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateAndDownloadFile.aspx.vb">
+      <DependentUpon>CreateAndDownloadFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EntryForm.aspx.designer.vb">
+      <DependentUpon>EntryForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EntryForm.aspx.vb">
+      <DependentUpon>EntryForm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EntryFormsDownload.aspx.designer.vb">
+      <DependentUpon>EntryFormsDownload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EntryFormsDownload.aspx.vb">
+      <DependentUpon>EntryFormsDownload.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EntryFormShowDetail.aspx.designer.vb">
+      <DependentUpon>EntryFormShowDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EntryFormShowDetail.aspx.vb">
+      <DependentUpon>EntryFormShowDetail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Fines.aspx.designer.vb">
+      <DependentUpon>Fines.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fines.aspx.vb">
+      <DependentUpon>Fines.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="helpFAQ.aspx.designer.vb">
+      <DependentUpon>helpFAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="helpFAQ.aspx.vb">
+      <DependentUpon>helpFAQ.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LoginReset.aspx.designer.vb">
+      <DependentUpon>LoginReset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginReset.aspx.vb">
+      <DependentUpon>LoginReset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mobile\ActiveTableDetail.asmx.vb">
+      <DependentUpon>ActiveTableDetail.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="mobile\Adverts.aspx.designer.vb">
+      <DependentUpon>Adverts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\Adverts.aspx.vb">
+      <DependentUpon>Adverts.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\Breaks.aspx.designer.vb">
+      <DependentUpon>Breaks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\Breaks.aspx.vb">
+      <DependentUpon>Breaks.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\ClubLogin.aspx.designer.vb">
+      <DependentUpon>ClubLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\ClubLogin.aspx.vb">
+      <DependentUpon>ClubLogin.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\ClubLoginConfirm.aspx.designer.vb">
+      <DependentUpon>ClubLoginConfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\ClubLoginConfirm.aspx.vb">
+      <DependentUpon>ClubLoginConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\ClubLoginRegistration.aspx.designer.vb">
+      <DependentUpon>ClubLoginRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\ClubLoginRegistration.aspx.vb">
+      <DependentUpon>ClubLoginRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\ClubLoginreset.aspx.designer.vb">
+      <DependentUpon>ClubLoginreset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\ClubLoginreset.aspx.vb">
+      <DependentUpon>ClubLoginreset.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\ClubsPlayers.aspx.designer.vb">
+      <DependentUpon>ClubsPlayers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\ClubsPlayers.aspx.vb">
+      <DependentUpon>ClubsPlayers.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\competitions.aspx.designer.vb">
+      <DependentUpon>competitions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\competitions.aspx.vb">
+      <DependentUpon>competitions.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\Contact.aspx.designer.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\Contact.aspx.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\default.aspx.designer.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\default.aspx.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\Fines.aspx.designer.vb">
+      <DependentUpon>Fines.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\Fines.aspx.vb">
+      <DependentUpon>Fines.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\FixtureLists.aspx.designer.vb">
+      <DependentUpon>FixtureLists.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\FixtureLists.aspx.vb">
+      <DependentUpon>FixtureLists.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\Handbook.aspx.designer.vb">
+      <DependentUpon>Handbook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\Handbook.aspx.vb">
+      <DependentUpon>Handbook.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\InfoPage.aspx.designer.vb">
+      <DependentUpon>InfoPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\InfoPage.aspx.vb">
+      <DependentUpon>InfoPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mobile\leagueTables.aspx.designer.vb">
+      <DependentUpon>leagueTables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\leagueTables.aspx.vb">
+      <DependentUpon>leagueTables.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\Home.aspx.designer.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\Home.aspx.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\LogIn.aspx.designer.vb">
+      <DependentUpon>LogIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\LogIn.aspx.vb">
+      <DependentUpon>LogIn.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\LoginConfirm.aspx.designer.vb">
+      <DependentUpon>LoginConfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\LoginConfirm.aspx.vb">
+      <DependentUpon>LoginConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\LoginRegistration.aspx.designer.vb">
+      <DependentUpon>LoginRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\LoginRegistration.aspx.vb">
+      <DependentUpon>LoginRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\LoginReset.aspx.designer.vb">
+      <DependentUpon>LoginReset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\LoginReset.aspx.vb">
+      <DependentUpon>LoginReset.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\MatchResult.aspx.designer.vb">
+      <DependentUpon>MatchResult.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\MatchResult.aspx.vb">
+      <DependentUpon>MatchResult.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\mobileMaster.Master.designer.vb">
+      <DependentUpon>mobileMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\mobileMaster.Master.vb">
+      <DependentUpon>mobileMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mobile\YorkshireLeague.aspx.designer.vb">
+      <DependentUpon>YorkshireLeague.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\YorkshireLeague.aspx.vb">
+      <DependentUpon>YorkshireLeague.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PayPalCancelled.aspx.designer.vb">
+      <DependentUpon>PayPalCancelled.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PayPalCancelled.aspx.vb">
+      <DependentUpon>PayPalCancelled.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PayPalCheckOut.aspx.designer.vb">
+      <DependentUpon>PayPalCheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PayPalCheckOut.aspx.vb">
+      <DependentUpon>PayPalCheckOut.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PayPalConfirm.aspx.designer.vb">
+      <DependentUpon>PayPalConfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PayPalConfirm.aspx.vb">
+      <DependentUpon>PayPalConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="FixtureLists.aspx.designer.vb">
+      <DependentUpon>FixtureLists.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FixtureLists.aspx.vb">
+      <DependentUpon>FixtureLists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handbook.aspx.designer.vb">
+      <DependentUpon>Handbook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handbook.aspx.vb">
+      <DependentUpon>Handbook.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Handicaps.aspx.designer.vb">
+      <DependentUpon>Handicaps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handicaps.aspx.vb">
+      <DependentUpon>Handicaps.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InfoPage.aspx.designer.vb">
+      <DependentUpon>InfoPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InfoPage.aspx.vb">
+      <DependentUpon>InfoPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JuniorsComp2.aspx.designer.vb">
+      <DependentUpon>JuniorsComp2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JuniorsComp2.aspx.vb">
+      <DependentUpon>JuniorsComp2.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LeagueTables.aspx.designer.vb">
+      <DependentUpon>LeagueTables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeagueTables.aspx.vb">
+      <DependentUpon>LeagueTables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginConfirm.aspx.designer.vb">
+      <DependentUpon>LoginConfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginConfirm.aspx.vb">
+      <DependentUpon>LoginConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginProfile.aspx.designer.vb">
+      <DependentUpon>LoginProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginProfile.aspx.vb">
+      <DependentUpon>LoginProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginRegistration.aspx.designer.vb">
+      <DependentUpon>LoginRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginRegistration.aspx.vb">
+      <DependentUpon>LoginRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage.master.designer.vb">
+      <DependentUpon>MasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage.master.vb">
+      <DependentUpon>MasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MissingResults.aspx.designer.vb">
+      <DependentUpon>MissingResults.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MissingResults.aspx.vb">
+      <DependentUpon>MissingResults.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="NewRegistrations.aspx.designer.vb">
+      <DependentUpon>NewRegistrations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewRegistrations.aspx.vb">
+      <DependentUpon>NewRegistrations.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PictureGallery.aspx.designer.vb">
+      <DependentUpon>PictureGallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PictureGallery.aspx.vb">
+      <DependentUpon>PictureGallery.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PlayerRecords.aspx.designer.vb">
+      <DependentUpon>PlayerRecords.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerRecords.aspx.vb">
+      <DependentUpon>PlayerRecords.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PlayingRecords.aspx.designer.vb">
+      <DependentUpon>PlayingRecords.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PlayingRecords.aspx.vb">
+      <DependentUpon>PlayingRecords.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Results.aspx.designer.vb">
+      <DependentUpon>Results.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Results.aspx.vb">
+      <DependentUpon>Results.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MatchResult.aspx.designer.vb">
+      <DependentUpon>MatchResult.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MatchResult.aspx.vb">
+      <DependentUpon>MatchResult.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ResultsCardDownload.aspx.designer.vb">
+      <DependentUpon>ResultsCardDownload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResultsCardDownload.aspx.vb">
+      <DependentUpon>ResultsCardDownload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMap.aspx.designer.vb">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SiteMap.aspx.vb">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeamRecords.aspx.designer.vb">
+      <DependentUpon>TeamRecords.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeamRecords.aspx.vb">
+      <DependentUpon>TeamRecords.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrophiesAndPrizes.aspx.designer.vb">
+      <DependentUpon>TrophiesAndPrizes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrophiesAndPrizes.aspx.vb">
+      <DependentUpon>TrophiesAndPrizes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UnderMaintenance.aspx.designer.vb">
+      <DependentUpon>UnderMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderMaintenance.aspx.vb">
+      <DependentUpon>UnderMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UnseasonedPlayers.aspx.designer.vb">
+      <DependentUpon>UnseasonedPlayers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnseasonedPlayers.aspx.vb">
+      <DependentUpon>UnseasonedPlayers.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WeeklyResultsReport.aspx.designer.vb">
+      <DependentUpon>WeeklyResultsReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeeklyResultsReport.aspx.vb">
+      <DependentUpon>WeeklyResultsReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="YorkshireLeague.aspx.designer.vb">
+      <DependentUpon>YorkshireLeague.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YorkshireLeague.aspx.vb">
+      <DependentUpon>YorkshireLeague.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MasterPage.master" />
+    <Content Include="admin\adminMasterPage.master" />
+    <Content Include="Documents\Entry Form Billiards.pdf" />
+    <Content Include="Documents\Entry Form Snooker.pdf" />
+    <Content Include="Documents\Entry Form Vets.pdf" />
+    <Content Include="Documents\Competition_Entry_Form_Snooker.pdf" />
+    <Content Include="Documents\Competition_Entry_Form_Vets_Billiards.pdf" />
+    <Content Include="Documents\Yorkshire Snooker Championships 2017 ENTRY FORM.pdf" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\PublishProfiles\IIS.pubxml" />
+    <None Include="My Project\PublishProfiles\Local.pubxml" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="Documents\Results Sheet Billiards.pdf" />
+    <Content Include="Documents\Results Sheet Open.pdf" />
+    <Content Include="Documents\Results Sheet Vets.pdf" />
+    <Content Include="Documents\Results Sheet.pdf" />
+    <Content Include="packages.config" />
+    <None Include="Webconfiglive">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HBSAcodeLibrary\HBSAcodeLibrary.csproj">
+      <Project>{845f6a64-85b7-4627-bd91-353ad1c41000}</Project>
+      <Name>HBSAcodeLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50548</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50548/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

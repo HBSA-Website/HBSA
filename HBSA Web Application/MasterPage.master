@@ -1,0 +1,471 @@
+﻿<%@ Master Language="VB" Inherits="HBSA_Web_Application.MasterPage" Codebehind="MasterPage.master.vb" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <title>Huddersfield Billiards and Snooker Association</title>
+    
+    <link href="styles/global.css" rel="stylesheet" type="text/css" />
+     <script type="text/javascript"> 
+        <!--#include file="Scripts/JScript.js"-->
+    </script>
+       
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+        <style type="text/css">
+        /* Remove margins from the 'html' and 'body' tags, and ensure the page takes up full screen height */
+        /*html, body {height:100%; margin:0; padding:0;}*/
+	    /* Set the position and dimensions of the background image. */
+        /*#masterPage-background {position:fixed; top:0; left:0; width:100%; height:100%;}*/
+	    /* Specify the position and layering for the masterPage-content that needs to appear in front of the background image. 
+    		Must have a higher z-index value than the background image. Also add some padding to compensate for 
+	    	removing the margin from the 'html' and 'body' tags. */
+        /*#masterPage-content {position:relative; z-index:1; padding:30px;}*/
+
+            .HandicapChanges
+            {
+                font-family: Verdana;
+                color: crimson;
+                font-size: 11pt;
+            }
+            .auto-style2 {
+                width: 100%;
+            }
+    </style>
+    
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        function loadMenuDiv(divID, ContainerDivID) {
+            hideMenuDiv();
+            if (divID != "") {
+                document.getElementById(divID).style.display = "block";
+                document.getElementById(ContainerDivID).style.display = "block";
+            }
+        }
+        function hideMenuDiv() {
+            var divs = document.getElementsByTagName("div");
+            for (var i = 0; i < divs.length; i++) {
+                if (divs[i].id.length > 8)
+                    if (divs[i].id.substr(0, 8) == "SubMenu_")
+                        divs[i].style.display = "none";
+            }
+        }
+    </script>
+
+    <form id="form1" accept-charset="UTF-8" runat="server">
+
+    <table style="vertical-align:top;width:100%;" >
+        <tr style="height:150px">
+            <td style="text-align:center; border-bottom-style: solid; border-bottom-width: 2px">
+
+                <div style="text-align:center; width:100%;" onmouseover="hideMenuDiv();">
+                    <img src="images/SHBSA.jpg" width="700" alt="Huddersfield Billiards and Snooker Association"/>
+                </div>
+
+                <br />
+             
+                <table id="Menu_Div" style=" width:100%; margin: 0px; padding: 0px; color:#006633; font-family:Verdana; font-size: 8pt;" runat="server" >
+                <tr>    
+                <td style="width:10%"></td>
+                  <%-- Menu Home --%>       
+                <td id="Home" style="text-align:left;width:20%; margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;" >
+                    <div id="Menu_Home" runat="server" onclick="loadMenuDiv('SubMenu_Home_Div','Menu_Home');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Home_Div','Menu_Home');">
+                        <img alt="" style="border-style: none" src="Images/Red.jpg" />
+                        &nbsp;Home,&nbsp;Meetings&nbsp;Adverts&nbsp;etc >>
+                    </div>
+                                 <div id="SubMenu_Home_Div" runat="server" style="position:fixed; display:none;">
+                                    <table id='SubMenu_Home_Table' runat="server" style=" background: rgba(239, 255, 224, 0.80); color:#006633; font-family:Verdana; font-weight:bold; text-align:left;">
+                                         <tr><td style="color:#006633;  text-align:left;">
+                                            <a href="Home.aspx" runat="server" ><img alt="" style="border-style: none" src="Images/red.jpg" />&nbsp;Home Page</a></td></tr>
+                                         <tr><td style=" color:#006633;  text-align:left;">
+                                             <a href="WeeklyResultsReport.aspx"  runat="server"><img alt="" style="border-style: none" src="Images/red.jpg" />&nbsp;Weekly&nbsp;Results&nbsp;Report</a></td></tr>
+                                         <tr><td style=" color:#006633;  text-align:left;">
+                                            <a href="Adverts.aspx"  runat="server"><img alt="" style="border-style: none" src="Images/red.jpg" />&nbsp;Advertisements</a></td></tr>
+
+                                        <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Minutes&Title=Minutes of Meetings" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Minutes of meetings</a></td></tr>
+                                        <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Attendance&Title=Attendance Record" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Attendance records</a></td></tr>
+                                        <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=ImportantDates&Title=Important Dates" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Meetings Dates</a></td></tr>
+
+                                    </table>
+                                 </div>
+                </td>
+
+                <%-- Menu Competitions --%>       
+                <td id="Competitions" style="width:20%; margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                      " >
+
+                    <div id="Menu_Competitions" runat="server" onclick="loadMenuDiv('SubMenu_Competitions_Div','Menu_Competitions');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Competitions_Div','Menu_Competitions');">
+                        <img alt="" style="border-style: none" src="Images/Yellow.jpg" />
+                         &nbsp;Competitions >></div>
+                                 <div id="SubMenu_Competitions_Div"  runat="server"
+                                    style="position:absolute; display:none;" onclick="hideMenuDiv();">
+            
+                                    <table id='SubMenu_Competitions_Table' runat="server" style="background: rgba(239, 255, 224, 0.80);">
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="Competitions.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> The draw, results, dates etc.</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="Contact.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Use contact us to send in a competion result</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="CompetitionsEntryForm.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> On line entry Forms </a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="EntryFormsDownload.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Entry Forms Download</a></td></tr>
+
+                                                                            
+                                    </table>
+                                 </div>
+
+                </td>
+           
+                <%-- Menu Leagues --%>       
+                <td id="League" style="width:20%; margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                      ">
+                   <div id="Menu_League" runat="server" onclick="loadMenuDiv('SubMenu_League_Div','Menu_League');" 
+                                            onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_League_Div','Menu_League');">
+                        <img alt="" style="border-style: none" src="Images/pink.jpg" />
+                        &nbsp;League >></div>
+                                 <div id="SubMenu_League_Div"  runat="server"
+                                    style="position: absolute; display:none;">
+            
+                                    <table id='SubMenu_League_Table' runat="server" style="background: rgba(239, 255, 224, 0.80);">
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; " class="openSeason">
+                                            <a runat="server" href="FixtureLists.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Fixtures</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; " >
+                                            <a runat="server" href="LeagueTables.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> League Tables</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; " class="openseason">
+                                            <a runat="server" href="MatchResult.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Submit match result</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; " >
+                                            <a runat="server" href="Results.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Match Results</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; " class="openSeason">
+                                            <a runat="server" href="MissingResults.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Missing Results</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="ResultsCardDownload.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Download Results Sheets</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="Breaks.aspx"><img alt="" style="border-style: none" src="Images/red.jpg" /> Breaks over 25</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="Handicaps.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Handicaps</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; " class="openSeason">
+                                            <a runat="server" href="UnseasonedPlayers.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Unseasoned Players and their Handicaps</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="PlayingRecords.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Playing Records</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="TeamRecords.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Teams Records</a></td></tr>
+
+<%--                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; " class="anySeason">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Final League Places&Title=Final League Places etc." >
+                                                                                        <img alt="" style="border-style: none" src="Images/red.jpg" /> Last season's Final League Places etc.</a></td></tr>--%>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="PlayerRecords.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Historical Player Records</a></td></tr>
+
+<%--                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; ">
+                                            <a runat="server" href="https://www.johnbastowsnooker.co.uk/hbsa-stats" target="_blank" >
+                                                <img alt="" style="border-style: none" src="Images/red.jpg" /> John Bastow's Super Stats</a></td></tr>--%>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; " class="openSeason">
+                                            <a runat="server" href="NewRegistrations.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> New Registrations</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left;" class="closeSeason">
+                                            <a runat="server" href="EntryForm.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Entry Form</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                             text-align:left; " class="closeSeason">
+                                            <a runat="server" href="EntryFormsDownload.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Entry Forms Download</a></td></tr>
+
+                                    </table>
+                                     <br />
+                                 </div>
+
+                </td>
+           
+                <%-- Menu HBSA --%>       
+                <td id="HBSA_menu" style="width:20%; margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;">
+                     
+                    <div id="Menu_HBSA" runat="server" onclick="loadMenuDiv('SubMenu_HBSA_Div','Menu_HBSA');" 
+                                        onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_HBSA_Div','Menu_HBSA');">
+                        <img alt="" style="border-style: none" src="Images/Brown.jpg" />
+                        &nbsp;H.B.& S. Association >></div>
+
+                              <div id="SubMenu_HBSA_Div"  runat="server"
+                                    style="position:absolute; display:none;">
+                                           
+                                <table id='SubMenu_HBSA_Table' runat="server" style="background: rgba(239, 255, 224, 0.80);">
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=PresidentsMessage&Title=President's Message" ><img alt="" style="border-style: none" src="Images/red.jpg" /> President's Message</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=ImportantDates&Title=Important Dates" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Important Dates</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Officials&Title=Officials" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Officials</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="ClubsPlayers.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Clubs and Players</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="PictureGallery.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Picture Galleries</a></td></tr>
+
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="TrophiesAndPrizes.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Trophy and Prize Winners</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                                <div  runat="server" style="font-size: 8pt;" id="Menu_ROH" onclick="loadMenuDiv('SubMenu_ROH_Div','SubMenu_HBSA_Div');"
+                                                                                         onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_ROH_Div','SubMenu_HBSA_Div');">
+                                                    <img alt="" style="border-style: none" src="Images/red.jpg" /> 
+                                                    <a  runat="server">Rolls of Honour >></a>
+                                        
+                                                    <div id="SubMenu_ROH_Div" runat="server" style="position: relative; left:50px;">
+                                                        <table id='SubMenu_ROH_Table' runat="server">
+                                                <tr><td style="color:#006633;  text-align:left;">
+                                                        <a runat="server" href="InfoPage.aspx?Subject=ROH_Snooker&Title=Roll of Honour for Snooker" >Snooker</a></td></tr>
+                                                <tr><td style="color:#006633;  text-align:left;">
+                                                        <a runat="server" href="InfoPage.aspx?Subject=ROH_Veterans&Title=Roll of Honour for Veterans" >Veterans</a></td></tr>
+                                                <tr><td style="color:#006633;  text-align:left;">
+                                                        <a runat="server" href="InfoPage.aspx?Subject=ROH_Billiards&Title=Roll of Honour for Billiards" >Billiards</a></td></tr>
+                                            </table>
+                                                    </div>
+                                                </div>
+
+                                    </td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=AssociationRules&Title=Association Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Association Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=League Rules&Title=League Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> League Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Competitions Rules&Title=Competitions Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Competitions Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Handicap Leagues Supplementary Rules&Title=Snooker and Billiards  Handicap Leagues Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Snooker and Billiards Handicap Leagues Supplementary Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Open Snooker League Supplementary Rules&Title=Open Snooker League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Open Snooker League Supplementary Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Veterans Snooker League Supplementary Rules&Title=Veterans Snooker League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Veterans Snooker League Supplementary Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Open Billiards League Supplementary Rules&Title=Open Billiards League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Open Billiards League Supplementary Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Yorkshire Association Rules&Title=Yorkshire Association Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Yorkshire Association Rules</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="https://wpbsa.com/rules/" target="_blank">
+                                                <img alt="" style="border-style: none" src="Images/red.jpg" /> Rules of Snooker and Billiards</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Conduct&Title=Conduct and Etiquette" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Conduct and Etiquette</a></td></tr>
+                                    <tr id="HandbookMenuItem" runat="server"><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="Handbook.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Download the complete handbook</a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Privacy Statement&Title=Privacy Policy" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Privacy Policy</a></td></tr>
+                               </table>
+                            </div>
+                </td>
+           
+           </tr>
+       </table>
+
+        <div style="top: 94px; vertical-align:bottom;" onmouseover="hideMenuDiv();">
+        <asp:Button ID="Contact_Button" runat="server" Text="Contact Us"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" />
+        &nbsp;&nbsp;<a runat="server" style="color: #0033CC; font-size: 10pt; background-color: ButtonFace" href="ClubsPlayers.aspx">Contact a Club, Team or Player</a>
+            
+        &nbsp;&nbsp;
+        <asp:Button ID="ClubLogin_Button" runat="server" Text="Club Log in"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" ToolTip="Login here to make Competition Entries" />
+        &nbsp;&nbsp;<asp:Button ID="Login_button" runat="server" Text="Team Log in"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" ToolTip="Log in here to enter match results" />
+            &nbsp;
+        <a runat="server" style="color: #0033CC; font-size: 10pt; background-color: ButtonFace" href="InfoPage.aspx?Subject=COVID-19&Title=COVID-19">Covid-19</a>
+            &nbsp;
+        <asp:Button ID="Covid_19_Compliance_Button" runat="server" Text="Covid 19 Compliance"
+                    BorderStyle="None" Font-Underline="True" ForeColor="#0033cc"
+                    onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="225px" />
+        &nbsp;
+        <asp:Button ID="MatchResult_Button" runat="server" Text="Enter or Change a Match Result"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033cc" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="315px" />
+        &nbsp;
+        <asp:Button ID="EntryForm_Button" runat="server" Text="On line Leagues Entry Form"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="259px" />
+        &nbsp;
+        <asp:Button ID="MyProfile_Button" runat="server" Text="My Registration"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" Visible="false" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" />
+        &nbsp;
+        <asp:Button ID="Fines_Button" runat="server" Text="Fines"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" Visible="false" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" />
+        &nbsp;
+        <asp:Button ID="Admin_Button" runat="server" Text="Return to Admin"
+                BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" Visible="false" 
+                onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" />
+        &nbsp;
+        <a href="helpFAQ.aspx" runat="server" style="color:#0033CC;font-size:10pt;background-color:ButtonFace">Frequently&nbsp;Asked&nbsp;Questions</a>
+<br />
+        <div style="width:100%;text-align:center;">
+            <asp:Literal ID="ClubLogin_Literal" runat="server" ></asp:Literal>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Literal ID="Login_Literal" runat="server"></asp:Literal>
+        </div>
+
+        </div>
+            </td>
+    </tr>
+  </table>
+
+  
+  <div onmouseover="hideMenuDiv();" class="auto-style2" >
+      <%--Premium Advertising slot --%>
+    <table style="width:100%" >
+        <tr>
+            <td style="text-align:center;">
+                <a href="http://www.rathtrombones.com/" target="_blank">
+                    <asp:Image ID="Premium_Image" runat="server" Width="50%" ImageUrl="~/images/Rathbones.jpg" AlternateText="Rath Custom Trombones - www.rathtrombones.com" />
+                </a>
+                <br />
+            </td>
+        </tr>
+    </table>
+  </div>
+
+    <div onmouseover="hideMenuDiv();">
+        <table style="width:100%">
+			<tr>
+				<td style="width:200px; vertical-align:top;background:#ffffff;" class="border-right">
+
+                        <div style="border: 1px solid #008080; width:200px">
+                            <a href="YorkshireLeague.aspx"><img src="images/YBSA.png" alt="YBSA" width="200" /></a>
+                        </div>
+                    <br />    
+                    <div style="text-align:left; border: 2px solid #106496; width:200px">
+                         <br /><a href="http://www.worldsnooker.com" target="_blank"><img src="images/WorldSnooker.jpg" width="200" style="border:none;" alt="World Snooker" />
+                        </a> 
+                    </div>
+                    <br />
+                    
+                    <div style="text-align:left; border: 2px solid #106496; width:200px">
+                        <a href="http://www.epsb.co.uk" target="_blank"><img src="images/epsb.png" width="200" alt="English Partnership for Snooker & Billiards" /></a>
+                    </div>
+                  
+                 <br />
+
+                    <div style="border: 1px solid #008080; width:200px"">
+                        <a id="adLink5" runat="server" ><img id="adImage5" runat="server" src="data:image/JPEG;base64," width="200" alt="" /></a>
+                    </div>
+                    <br />
+
+                   <div style="border: 1px solid #008080; width:200px"">
+                        <a id="adLink6" runat="server" ><img id="adImage6" runat="server" src="data:image/JPEG;base64," style="width:200px" alt="" /></a>
+                    </div>
+
+				
+                </td>
+			
+                <%--Home page content--%>
+                <td style="vertical-align:top; background:#ffffff; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11pt;">
+                   <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+
+                    </asp:ContentPlaceHolder>
+				</td>
+
+                <%--adverts--%>
+                <td class="border-left" style="width:200px; background:#ffffff; vertical-align:top;">
+                        
+                    <div style="border: 1px solid #008080; width:200px"">
+                        <a id="adLink2" runat="server" ><img id="adImage2" runat="server" src="data:image/JPEG;base64," width="200" alt="" /></a>
+                    </div>
+                    <br />
+
+                    <div style="border: 1px solid #008080; width:200px"">
+                        <a id="adLink3" runat="server" ><img id="adImage3" runat="server" src="data:image/JPEG;base64," width="200" alt=""/></a>
+                    </div>
+                    <br />
+
+                    <div style="border: 1px solid #008080; width:200px"">
+                        <a id="adLink4" runat="server" ><img id="adImage4" runat="server" src="data:image/JPEG;base64," width="200" alt=""/></a>
+                    </div>
+                    <br />
+
+                </td>
+            </tr>
+		</table>
+    </div>
+
+    <div style="width:100%;text-align:center; color:white; background-color: #006633; font-family: Calibri;"  onmouseover="this.style.cursor='pointer';hideMenuDiv();">
+        <b>Huddersfield Billiards &amp; Snooker Association</b>
+        <br />
+        <span style="text-align:center;">
+        <asp:Button ID="SiteMap_Button" runat="server" Text="Site Map"
+            BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" Font-Size="10pt" /></span>
+        <br />
+                <div style="padding: 4px; width:70%; text-align:left; color:#006633; background-color:white; display:inline-block; font-size:smaller; ">
+                  THE HUDDERSFIELD BILLIARDS &amp; SNOOKER ASSOCIATION DOES NOT OPERATE OR CONTROL ANY SOCIAL MEDIA SITE SUCH AS A FACEBOOK OR TWITTER ACCOUNT.
+                    <br /><br />
+                  THE ASSOCIATION HAS NO CONNECTION OR INVOLVEMENT WITH THE HUDDERSFIELD SNOOKER FACEBOOK GROUP AND CANNOT BE HELD RESPONSIBLE FOR ANY COMMENT OR CONTENT PUBLISHED ON THIS SOCIAL MEDIA SITE.
+
+                </div>
+        <br />
+        Visitor count <asp:Literal ID="HitCount_Literal" runat="server"></asp:Literal>
+            <i><asp:Literal ID="Page_Literal" runat="server"></asp:Literal></i>
+
+    </div>
+
+<span style="font-size: smaller; font-family: Calibri; font-style: italic">Version <asp:Literal ID="Version_Literal" runat="server"></asp:Literal></span>
+
+</form>
+</body>
+</html>

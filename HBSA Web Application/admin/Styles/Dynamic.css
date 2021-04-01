@@ -1,0 +1,104 @@
+﻿/* drag objects (DIV inside table cells) */
+.drag{
+	cursor: grab;
+	margin: auto;
+	z-index: 10;
+	background-color: white;
+	text-align: center;
+	font-size: 10pt; /* needed for cloned object */
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	/* without width, IE6/7 will not apply filter/opacity to the element ?! */
+	/* IE needs element layout */
+	/*width: 150px;
+	height: 240px;*/
+	/* round corners */
+	border-radius: 1px; /* Opera, Chrome */
+	-moz-border-radius: 1px; /* FF */
+}
+
+#right
+{
+    height: 500px;
+}
+
+
+/* tables */
+div#drag table {
+	background-color: #eee;
+    border:solid;border-color:navy;border-width:1px;
+	/*border-collapse: collapse;*/
+}
+
+/* table cells */
+div#drag td,th{
+	border-style: solid;
+	height: 20px;
+	/*width: 100px;*/
+	text-align: center;
+	font-size: 10pt;
+	padding: 1px;
+}
+		/* right table - td */
+		div#drag #tblPage td{
+			border-width: 0px 1px 1px 0px;
+			border-color: navy;
+			font-weight: normal;
+		}
+
+/* last row and last column without border */
+.noborder{
+	border-width: 0px;
+}
+
+
+/* green objects */
+.green {
+	border: 2px solid #499B33;
+}
+
+
+/* orange objects */
+.orange {
+	border: 2px solid #BF6A30;
+}
+
+
+/* gray objects */
+.gray {
+	border: 2px solid #808080;
+}
+
+
+/* last row background color */
+.last {
+	background-color: #e0e0e0;
+}
+
+
+/* message line */
+#message{
+	color: white;
+	background-color: #aaa;
+	text-align: center;
+	margin-top: 10px;
+}
+
+
+/* dark cells (first column and table header) */
+.dark{
+	color: #444;
+	background-color: #e0e0e0;
+}
+
+/* trash cell */
+.trash {
+	color: white;
+	background-color: SteelBlue;
+}
+
+.bottomLink
+{
+    top: 25px;
+    position: relative;
+}

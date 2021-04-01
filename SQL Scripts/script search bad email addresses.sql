@@ -1,0 +1,8 @@
+exec checkEmailAddresses 'Clubs','ContactEMail'
+exec checkEmailAddresses 'Teams','email'
+exec checkEmailAddresses 'Players','email'
+exec checkEmailAddresses 'admin','email'
+exec checkEmailAddresses 'ResultsUsers','eMailAddress'
+exec checkEmailAddresses 'EntryForm_Clubs','ContactEMail'
+exec checkEmailAddresses 'EntryForm_Teams','email'
+exec checkEmailAddresses 'EntryForm_Players','email'

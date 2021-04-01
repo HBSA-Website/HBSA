@@ -1,0 +1,1 @@
+update players set Over70 = 0 where leagueid in (1,3) and over70<>0

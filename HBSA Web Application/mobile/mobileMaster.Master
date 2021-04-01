@@ -1,0 +1,340 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="mobileMaster.master.vb" Inherits="HBSA_Web_Application.MobileMaster" ClientIDMode="Static" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title>Huddersfield Billiards and Snooker Association</title>
+    
+    <script type="text/javascript"> 
+        <!--#include file="Scripts/mobileMaster.js"-->
+    </script>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+   </asp:ContentPlaceHolder>
+   
+</head>
+
+<body>
+
+    <link href="Styles/mobileStyles.css" rel="stylesheet" type="text/css" />
+
+<form id="form1" runat="server">
+
+    <div class="pageDiv">
+        <table>
+            <tr>
+                <td class="leftImage" onmousedown="hideDiv('rightMenuDiv');loadDiv('leftMenuDiv');" onmouseover="this.style.cursor='pointer';"><img id="leftMenuImage" src="images/menuBox.png" alt="Choose what to do." class="leftImage" /></td>
+                <td class="centerImage" onclick="hideMainMenus();"><img alt="Huddersfield Billiards and Snooker Association" src="../images/SHBSA.jpg" /></td>
+                <td class="rightImage"  onmousedown="hideDiv('leftMenuDiv');loadDiv('rightMenuDiv');" onmouseover="this.style.cursor='pointer';"><img id="rightMenuImage" src="images/menuBox.png" alt="Choose what to do." class="rightImage" /></td>
+            </tr>
+        </table>
+    </div>   
+
+   <div onmouseover="hideMenuDiv();">
+   <%--Premium Advertising slot --%>
+    <a href="http://www.rathtrombones.com/" target="_blank">
+        <asp:Image ID="Premium_Image" runat="server" Width="100%" ImageUrl="~/images/Rathbones.jpg" AlternateText="Rath Custom Trombones - www.rathtrombones.com" />
+    </a>
+            
+  </div>
+
+    <%--Links banner--%>
+    <table>
+        <tr>
+            <td style="width:25%;text-align:center;"><a href="https://www.ybsa.co.uk" target="_blank"><img src="../images/YBSA.png" height="60" /></a></td>
+            <td style="width:25%;text-align:center;"><a href="http://www.worldsnooker.com" target="_blank"><img src="../images/WorldSnooker.jpg" height="60" alt="World Snooker" /></a></td>
+            <td style="width:25%;text-align:center;"><a href="http://www.epsb.co.uk" target="_blank"><img src="../images/epsb.png" height="60" alt="English Partnership for Snooker & Billiards" /></a></td>
+            <td style="width:25%;text-align:center;"><asp:Button CssClass="button" ID="NonMobile_Button" runat="server" Text="Desktop site" height="60" /></td>
+        </tr>
+    </table>
+
+    <asp:Literal ID="Login_Literal" runat="server"></asp:Literal>
+    <asp:Literal ID="clubLogin_Literal" runat="server"></asp:Literal> 
+                
+    <div id="leftMenuDiv" class="menuDiv">
+         <table id="leftMenu_Div" class="menuTable" runat="server" >
+            <tr>    
+
+                <%-- Menu Home --%>       
+                <td id="Home">
+                    <div id="Menu_Home" runat="server" 
+                         onclick="loadMenuDiv('SubMenu_Home_Div','Menu_Home');" 
+                         onmouseover="this.style.cursor='pointer';" 
+                         onmousedown = "loadMenuDiv('SubMenu_Home_Div','Menu_Home');">
+                        <img alt="" src="../Images/Red.jpg" />
+                        <a runat="server">&nbsp;Home&nbsp;&&nbsp;News&nbsp;>></a> 
+                    </div>
+                                 <div id="SubMenu_Home_Div" class="subMenuDiv" runat="server">
+                                    <table id='SubMenu_Home_Table' runat="server">
+                                                <tr><td>
+                                                        <a href="Home.aspx" runat="server" ><img alt="" src="../Images/red.jpg" />&nbsp;Home Page</a></td></tr>
+                                                <tr><td>
+                                                        <a href="../WeeklyResultsReport.aspx"  runat="server"><img alt="" src="../Images/red.jpg" />&nbsp;Weekly&nbsp;Results&nbsp;Report</a></td></tr>
+                                                <tr><td>
+                                                        <a href="Adverts.aspx"  runat="server"><img alt="" src="../Images/red.jpg" />&nbsp;Advertisements</a></td></tr>
+                                    </table>
+                                 </div>
+                </td>
+            </tr>
+            <tr>
+                <%-- Menu Meetings --%>       
+                <td id="Meetings">
+                    <div id="Menu_Meetings" runat="server" onclick="loadMenuDiv('SubMenu_Meetings_Div','Menu_Meetings');" onmouseover="this.style.cursor='pointer';" onmousedown="loadMenuDiv('SubMenu_Meetings_Div','Menu_Meetings');">
+                        <img alt="" src="../Images/Green.jpg" />
+                        <a runat="server">&nbsp;Meetings&nbsp>></a></div>
+                              <div id="SubMenu_Meetings_Div" runat="server" class="subMenuDiv" >
+                                    <table id='SubMenu_Meetings_Table' runat="server">
+                                        <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Minutes&Title=Minutes of Meetings" ><img alt="" src="../Images/red.jpg" /> Minutes of meetings</a></td></tr>
+                                        <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Attendance&Title=Attendance Record" ><img alt="" src="../Images/red.jpg" /> Attendance records</a></td></tr>
+                                        <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=ImportantDates&Title=Important Dates" ><img alt="" src="../Images/red.jpg" /> Meetings Dates</a></td></tr>
+                                    </table>
+                                 </div>
+                </td> 
+            </tr>
+            <tr>
+                <%-- Menu Competitions --%>       
+                <td id="Competitions">
+                    <div id="Menu_Competitions" runat="server" onclick="loadMenuDiv('SubMenu_Competitions_Div','Menu_Competitions');" onmouseover="this.style.cursor='pointer';" onmousedown="loadMenuDiv('SubMenu_Competitions_Div','Menu_Competitions');">
+                        <img alt="" src="../Images/Yellow.jpg" />
+                         <a runat="server">&nbsp;Competitions&nbsp>></a></div>
+                                 <div id="SubMenu_Competitions_Div" class="subMenuDiv">
+                                    <table id='SubMenu_Competitions_Table' runat="server">
+                                    <tr><td>
+                                            <a runat="server" href="competitions.aspx" ><img alt="" src="../Images/red.jpg" /> The draw, results, dates etc.</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="../Contact.aspx" ><img alt="" src="../Images/red.jpg" /> Use contact us to send in a competion result</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="../CompetitionsEntryForm.aspx" ><img alt="" src="../Images/red.jpg" /> On line entry Forms </a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="../EntryFormsDownload.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Forms Download</a></td></tr>
+                                    </table>
+                                  </div>
+                </td>
+            </tr>
+            <tr>
+                <%-- Menu Leagues --%>       
+                <td id="League">
+                   <div id="Menu_League" runat="server" onclick="loadMenuDiv('SubMenu_League_Div','Menu_League');" 
+                                            onmouseover="this.style.cursor='pointer';" onmousedown="loadMenuDiv('SubMenu_League_Div','Menu_League');">
+                        <img alt="" src="../Images/pink.jpg" />
+                        <a runat="server">&nbsp;League&nbsp>></a></div>
+                                 <div id="SubMenu_League_Div" class="subMenuDiv">
+            
+                                    <table id='SubMenu_League_Table' runat="server" >
+
+                                    <tr><td class="openSeason">
+                                            <a runat="server" href="FixtureLists.aspx" ><img alt="" src="../Images/red.jpg" /> Fixtures</a></td></tr>
+
+                                    <tr><td>
+                                            <a runat="server" href="leagueTables.aspx" ><img alt="" src="../Images/red.jpg" /> League Tables</a></td></tr>
+
+                                    <tr><td class="openseason">
+                                            <a runat="server" href="MatchResult.aspx" ><img alt="" src="../Images/red.jpg" /> Submit match result</a></td></tr>
+
+                                    <tr><td>
+                                            <a runat="server" href="../Results.aspx" ><img alt="" src="../Images/red.jpg" /> Match Results</a></td></tr>
+
+                                    <tr><td class="openSeason">
+                                            <a runat="server" href="../MissingResults.aspx" ><img alt="" src="../Images/red.jpg" /> Missing Results</a></td></tr>
+
+                                    <tr><td>
+                                            <a runat="server" href="../ResultsCardDownload.aspx" ><img alt="" src="../Images/red.jpg" /> Download Results Sheets</a></td></tr>
+
+                                    <tr><td>
+                                            <a runat="server" href="Breaks.aspx"><img alt="" src="../Images/red.jpg" /> Breaks over 25</a></td></tr>
+
+                                    <tr><td>
+                                            <a runat="server" href="../Handicaps.aspx" ><img alt="" src="../Images/red.jpg" /> Handicaps</a></td></tr>
+
+                                    <tr><td class="openSeason">
+                                            <a runat="server" href="../UnseasonedPlayers.aspx" ><img alt="" src="../Images/red.jpg" /> Unseasoned Players and their Handicaps</a></td></tr>
+
+                                    <tr><td>
+                                            <a runat="server" href="../PlayingRecords.aspx" ><img alt="" src="../Images/red.jpg" /> Playing Records</a></td></tr>
+
+                                    <tr><td>
+                                            <a runat="server" href="../TeamRecords.aspx" ><img alt="" src="../Images/red.jpg" /> Teams Records</a></td></tr>
+
+<%--                                    <tr><td class="anySeason">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Final League Places&Title=Final League Places etc." >
+                                                                                        <img alt="" src="../Images/red.jpg" /> Last season's Final League Places etc.</a></td></tr>--%>
+
+                                    <tr><td>
+                                            <a runat="server" href="../PlayerRecords.aspx" ><img alt="" src="../Images/red.jpg" /> Historical Player Records</a></td></tr>
+
+                                    <tr><td class="openSeason">
+                                            <a runat="server" href="../NewRegistrations.aspx" ><img alt="" src="../Images/red.jpg" /> New Registrations</a></td></tr>
+
+                                    <tr><td class="closeSeason">
+                                            <a runat="server" href="../EntryForm.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Form</a></td></tr>
+
+                                    <tr><td class="closeSeason">
+                                            <a runat="server" href="../EntryFormsDownload.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Forms Download</a></td></tr>
+
+                                    </table>
+                                     <br />
+                                 </div>
+
+                </td>
+            </tr>
+            <tr>
+                <%-- Menu HBSA --%>       
+                <td id="HBSA_menu">
+                     
+                    <div id="Menu_HBSA" runat="server" onclick="loadMenuDiv('SubMenu_HBSA_Div','Menu_HBSA');" 
+                                        onmouseover="this.style.cursor='pointer';" onmousedown="loadMenuDiv('SubMenu_HBSA_Div','Menu_HBSA');">
+                        <img alt="" src="../Images/Brown.jpg" />
+                        <a runat="server">&nbsp; H.B.& S. Association&nbsp>></a></div>
+
+                              <div id="SubMenu_HBSA_Div" runat="server" class="subMenuDiv">
+                                           
+                                <table id='SubMenu_HBSA_Table' runat="server">
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=PresidentsMessage&Title=President's Message" ><img alt="" src="../Images/red.jpg" /> President's Message</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=ImportantDates&Title=Important Dates" ><img alt="" src="../Images/red.jpg" /> Important Dates</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Officials&Title=Officials" ><img alt="" src="../Images/red.jpg" /> Officials</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="ClubsPlayers.aspx" ><img alt="" src="../Images/red.jpg" /> Clubs and Players</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="../PictureGallery.aspx" ><img alt="" src="../Images/red.jpg" /> Picture Galleries</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="../TrophiesAndPrizes.aspx" ><img alt="" src="../Images/red.jpg" /> Trophy and Prize Winners</a></td></tr>
+                                    <tr><td>
+                                            <div  runat="server" id="Menu_ROH" onclick="loadMenuDiv('SubMenu_ROH_Div','SubMenu_HBSA_Div');"
+                                                  onmouseover="this.style.cursor='pointer';" onmousedown="loadMenuDiv('SubMenu_ROH_Div','SubMenu_HBSA_Div');">
+                                                    <img alt="" src="../Images/red.jpg" /> 
+                                                    Rolls of Honour&nbsp;&gt;&gt;
+                                        
+                                                    <div id="SubMenu_ROH_Div" runat="server" class="subMenuDiv">
+                                                        <table id='SubMenu_ROH_Table' runat="server">
+                                                            <tr><td>
+                                                                    <a runat="server" href="InfoPage.aspx?Subject=ROH_Snooker&Title=Roll of Honour for Snooker" >Snooker</a></td></tr>
+                                                            <tr><td>
+                                                                    <a runat="server" href="InfoPage.aspx?Subject=ROH_Veterans&Title=Roll of Honour for Veterans" >Veterans</a></td></tr>
+                                                            <tr><td>
+                                                                    <a runat="server" href="InfoPage.aspx?Subject=ROH_Billiards&Title=Roll of Honour for Billiards" >Billiards</a></td></tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                    </td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=AssociationRules&Title=Association Rules" ><img alt="" src="../Images/red.jpg" /> Association Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=League Rules&Title=League Rules" ><img alt="" src="../Images/red.jpg" /> League Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Competitions Rules&Title=Competitions Rules" ><img alt="" src="../Images/red.jpg" /> Competitions Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Handicap Leagues Supplementary Rules&Title=Snooker and Billiards  Handicap Leagues Supplementary Rules" ><img alt="" src="../Images/red.jpg" /> Snooker and Billiards Handicap Leagues Supplementary Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Open Snooker League Supplementary Rules&Title=Open Snooker League Supplementary Rules" ><img alt="" src="../Images/red.jpg" /> Open Snooker League Supplementary Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Veterans Snooker League Supplementary Rules&Title=Veterans Snooker League Supplementary Rules" ><img alt="" src="../Images/red.jpg" /> Veterans Snooker League Supplementary Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Open Billiards League Supplementary Rules&Title=Open Billiards League Supplementary Rules" ><img alt="" src="../Images/red.jpg" /> Open Billiards League Supplementary Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Yorkshire Association Rules&Title=Yorkshire Association Rules" ><img alt="" src="../Images/red.jpg" /> Yorkshire Association Rules</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="https://wpbsa.com/rules/" target="_blank">
+                                                <img alt="" src="../Images/red.jpg" /> Rules of Snooker and Billiards</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Conduct&Title=Conduct and Etiquette" ><img alt="" src="../Images/red.jpg" /> Conduct and Etiquette</a></td></tr>
+                                    <tr id="HandbookMenuItem" runat="server"><td>
+                                            <a runat="server" href="Handbook.aspx" ><img alt="" src="../Images/red.jpg" /> Download the complete handbook</a></td></tr>
+                                    <tr><td>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Privacy Statement&Title=Privacy Policy" ><img alt="" style="border-style: none" src="../Images/red.jpg" /> Privacy Policy</a></td></tr>
+
+                               </table>
+                            </div>
+                </td>
+           </tr>
+       </table>
+    </div>            
+
+    <div id="rightMenuDiv" class="menuDiv">
+         <table id="rightMenu_Div" class="menuTable" runat="server" >
+            <tr><td id="contactUsButton"><img alt="" src="../Images/red.jpg" />
+                    <a id="contactUsRef" runat="server" href="Contact.aspx" >ContactUs Page</a></td></tr>
+            <tr><td id="clubLoginButton"><img alt="" src="../Images/red.jpg" />
+                    <a id="clubLoginRef" runat="server" href="ClubLogin.aspx" >Club Login</a></td></tr>
+            <tr><td id="teamLoginButton"><img alt="" src="../Images/red.jpg" />
+                    <asp:Button ID="Login_Button" runat="server" Text="Team log in" BorderStyle="None" ForeColor="Blue" BackColor="#EFF3FB" />
+                </td></tr>
+
+             <tr>
+                 <td id="Covid19Button">
+                     <img alt="" src="../Images/red.jpg" />
+                     <a href="InfoPage.aspx?Subject=COVID-19&Title=COVID-19" runat="server">COVID-19</a></td>
+             </tr>
+
+             <tr><td id="resultButton"><img alt="" src="../Images/red.jpg" />
+                    <a href="MatchResult.aspx" runat="server" >Enter or Change Result</a></td></tr>
+            <tr><td id="EntryFormButton"><img alt="" src="../Images/red.jpg" />
+                    <a href="../EntryForm.aspx" runat="server" >League Entry Forms</a></td></tr>
+            <tr><td id="myRegistrationButton"><img alt="" src="../Images/red.jpg" />
+                    <a href="../LoginProfile.aspx" runat="server" >My Registration</a></td></tr>
+            <tr><td id="finesButton"><img alt="" src="../Images/red.jpg" />
+                    <a href="Fines.aspx" runat="server" >Fines</a></td></tr>
+            <tr><td id="helpFAQButton"><img alt="" src="../Images/red.jpg" />
+                    <a href="../helpFAQ.aspx" runat="server" >Frequently Asked Questions</a></td></tr>
+             
+      </table>
+    </div>        
+
+<script type="text/javascript">
+    function redirectAdvertURL() {
+        advertDiv.style.display = 'none';
+        if (advertURL.value != '') 
+            window.open(advertURL.value, '_blank');
+    }
+</script>
+
+    <div class="advertDiv" id="advertDiv" runat="server" >
+
+        <input id="advertURL" type="hidden" runat="server" />
+
+        <table style="width:100%">
+            <tr onmouseover="this.style.cursor='pointer';" onclick="advertDiv.style.display = 'none';">
+                <td style=" text-align:left; border:none;
+                        background-image: url('../images/menuBarBG.gif'); font-size:20px; text-align:center;">
+                    Advertisement</td>
+                <td><img src="../images/Exit.bmp" height="72" /></td>
+            </tr>
+            <tr>
+                <td onclick="redirectAdvertURL();" colspan="2">
+                    <img id="adImage" runat="server" src="data:image/JPEG;base64," width="400" alt="" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div onclick="hideMainMenus();">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <br />
+    <hr />
+    <div class="footer">
+    <table>
+      <tr> 
+          <td>
+                Huddersfield Billiards &amp; Snooker Association <br />
+          THE HUDDERSFIELD BILLIARDS &amp; SNOOKER ASSOCIATION DOES NOT OPERATE OR CONTROL ANY SOCIAL MEDIA SITE SUCH AS A FACEBOOK OR TWITTER ACCOUNT.
+        <br />
+          THE ASSOCIATION HAS NO CONNECTION OR INVOLVEMENT WITH THE HUDDERSFIELD SNOOKER FACEBOOK GROUP AND CANNOT BE HELD RESPONSIBLE FOR ANY COMMENT OR CONTENT PUBLISHED ON THIS SOCIAL MEDIA SITE.
+          </td>  
+     </tr>
+    </table>
+    </div>
+
+</form>
+</body>
+</html>
