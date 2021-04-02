@@ -494,6 +494,7 @@
     <Content Include="mobile\Fines.aspx" />
     <Content Include="mobile\FixtureLists.aspx" />
     <Content Include="mobile\Handbook.aspx" />
+    <Content Include="mobile\HelpFAQ.aspx" />
     <Content Include="mobile\images\menuBox.png" />
     <Content Include="mobile\InfoPage.aspx" />
     <Content Include="mobile\leagueTables.aspx" />
@@ -1259,6 +1260,13 @@
     </Compile>
     <Compile Include="mobile\Handbook.aspx.vb">
       <DependentUpon>Handbook.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="mobile\HelpFAQ.aspx.designer.vb">
+      <DependentUpon>HelpFAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\HelpFAQ.aspx.vb">
+      <DependentUpon>HelpFAQ.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="mobile\InfoPage.aspx.designer.vb">

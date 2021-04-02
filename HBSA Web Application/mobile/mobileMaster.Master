@@ -284,7 +284,7 @@
             <tr><td id="finesButton"><img alt="" src="../Images/red.jpg" />
                     <a href="Fines.aspx" runat="server" >Fines</a></td></tr>
             <tr><td id="helpFAQButton"><img alt="" src="../Images/red.jpg" />
-                    <a href="../helpFAQ.aspx" runat="server" >Frequently Asked Questions</a></td></tr>
+                    <a href="HelpFAQ.aspx" runat="server" >Frequently Asked Questions</a></td></tr>
              
       </table>
     </div>        
