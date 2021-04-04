@@ -202,7 +202,6 @@
     <Content Include="admin\UserDetails.aspx" />
     <Content Include="Adverts.aspx" />
     <Content Include="AGM_Vote.aspx" />
-    <Content Include="App_Data\HBSA - Clear.dat" />
     <Content Include="bin\YamlDotNet.dll" />
     <Content Include="ckeditor\adapters\jquery.js" />
     <Content Include="ckeditor\ckeditor.js" />

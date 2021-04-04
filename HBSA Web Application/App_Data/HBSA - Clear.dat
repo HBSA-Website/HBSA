@@ -1,3 +1,0 @@
-[connStr] Data Source=188.121.44.217;Initial Catalog=HBSA;Persist Security Info=True;User ID=HBSA;Password=Sn00ker%
-[connStr] Data Source=188.121.44.217;Initial Catalog=HBSA_test;Persist Security Info=True;User ID=HBSA;Password=Sn00ker%
-[connStr] Data Source=localhost\SQLEXPRESS;Initial Catalog=HBSA;Persist Security Info=True;User ID=sa;Password=ethmoid
