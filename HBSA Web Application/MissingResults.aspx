@@ -10,7 +10,7 @@
                 <h2>Missing Results</h2>
             </td>
             <td style="width:80%">
-                    The table below shows matches which have been played, and for which no result has been submitted.
+                    The table below shows matches which should have been played, and for which no result has been submitted.
                     <br />
                     <br />
                     Unless the match has been re-arranged the Home team is liable to a fine if the result is deemed to have been submitted late, 
