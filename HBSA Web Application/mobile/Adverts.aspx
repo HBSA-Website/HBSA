@@ -9,8 +9,7 @@
                     <br />
                     These adverts are identified by the advertisers.<br />
                     If the advertsier supplied his/her web address, clicking the advert will take you to that web page.
-                    <br />
-                    <br />
+                    <br /><br />
                     Select an advert: <asp:DropDownList ID="Adverts_DropDownList" runat="server" AutoPostBack="true" />
                     <br /><asp:Literal ID="WebURL_Literal" runat="server"></asp:Literal>
                     <br /><a id="snapshot_link" runat="server" href="~/Advert.ashx" target="_blank">
