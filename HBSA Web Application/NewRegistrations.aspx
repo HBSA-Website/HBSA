@@ -102,7 +102,7 @@
                     <td style="vertical-align:top; text-align:center">
                         <asp:GridView ID="Handicaps_GridView" runat="server" BackColor="White" 
                             BorderColor="#CC9966" BorderStyle="Solid" BorderWidth="1px" CellPadding="4" 
-                            EnableModelValidation="True" Font-Size="9pt" EmptyDataText="No records found the given selection criteria" >
+                            EnableModelValidation="True" Font-Size="9pt" EmptyDataText="No records found for the given selection criteria" >
                             <AlternatingRowStyle BackColor="#F7F7F7" />
                             <HeaderStyle BackColor="#006600" Font-Bold="True" ForeColor="#FFFFCC" />
                             <RowStyle BackColor="White" ForeColor="#006600" />

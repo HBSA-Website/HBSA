@@ -1,4 +1,4 @@
-﻿Public Class NewRegistrations
+﻿Public Class NewRegistrations1
     Inherits System.Web.UI.Page
     Friend Enum SearchType
         ByClub
@@ -8,7 +8,7 @@
 
         If Not IsPostBack Then
 
-            populateSections()
+            PopulateSections()
 
             'If not yet half way through the season enable the register new player button
             'Register_Button.Visible = 'Feature Disabled    Not FixturesData.HalfwayThroughSeason
@@ -99,7 +99,7 @@
     Protected Sub Section_DropDownList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) _
             Handles Section_DropDownList.SelectedIndexChanged
 
-        populateClubs(Section_DropDownList.SelectedValue)
+        PopulateClubs(Section_DropDownList.SelectedValue)
 
     End Sub
 
@@ -167,5 +167,4 @@
         Return HBSAcodeLibrary.PlayerData.GetSuggestedPlayers(prefixText, count, LeagueID, SectionID, ClubID)
 
     End Function
-
 End Class

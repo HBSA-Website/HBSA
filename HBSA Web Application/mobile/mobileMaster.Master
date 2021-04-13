@@ -169,7 +169,7 @@
                                             <a runat="server" href="../PlayerRecords.aspx" ><img alt="" src="../Images/red.jpg" /> Historical Player Records</a></td></tr>
 
                                     <tr><td class="openSeason">
-                                            <a runat="server" href="../NewRegistrations.aspx" ><img alt="" src="../Images/red.jpg" /> New Registrations</a></td></tr>
+                                            <a runat="server" href="NewRegistrations.aspx" ><img alt="" src="../Images/red.jpg" /> New Registrations</a></td></tr>
 
                                     <tr><td class="closeSeason">
                                             <a runat="server" href="../EntryForm.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Form</a></td></tr>

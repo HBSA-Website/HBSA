@@ -505,6 +505,7 @@
     <Content Include="mobile\LoginReset.aspx" />
     <Content Include="mobile\MatchResult.aspx" />
     <Content Include="mobile\MissingResults.aspx" />
+    <Content Include="mobile\NewRegistrations.aspx" />
     <Content Include="mobile\Scripts\mobileMaster.js" />
     <Content Include="mobile\Styles\mobileStyles.css" />
     <Content Include="mobile\YorkshireLeague.aspx" />
@@ -1338,6 +1339,13 @@
     <Compile Include="mobile\mobileMaster.Master.vb">
       <DependentUpon>mobileMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mobile\NewRegistrations.aspx.designer.vb">
+      <DependentUpon>NewRegistrations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\NewRegistrations.aspx.vb">
+      <DependentUpon>NewRegistrations.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="mobile\YorkshireLeague.aspx.designer.vb">
       <DependentUpon>YorkshireLeague.aspx</DependentUpon>

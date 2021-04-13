@@ -26,6 +26,25 @@ td {
     max-height: 999999px; /*prevent chrome resizing font*/
     font-size: 40px;
 }
+.formatTable {
+    width: auto;
+    border: none;
+    border-collapse: collapse;
+    font-size: 40px;
+    max-height: 999999px; /*prevent chrome resizing font*/
+}
+
+.formatTable th {
+    border: none;
+    max-height: 999999px; /*prevent chrome resizing font*/
+    font-size: 40px;
+}
+
+.formatTable td {
+    border: none;
+    max-height: 999999px; /*prevent chrome resizing font*/
+    font-size: 40px;
+    }
 img {
     border:none;
 }
@@ -255,4 +274,23 @@ textarea {
     color: darkred;
     text-align: left;
     font-size: 24px;
+}
+.mobileCompletionList {
+    font-family: Arial;
+    font-size: 40px;
+    border: solid 1px Gray;
+    cursor: pointer;
+    margin: 0px;
+    padding: 3px;
+    height: 250px;
+    overflow: auto;
+    background-color: #FFFFFF;
+}
+
+.mobileCompletionListItem {
+    color: #191919;
+}
+
+.mobileCompletionItemHighlighted {
+    background-color: #ADD6FF;
 }
