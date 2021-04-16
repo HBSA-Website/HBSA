@@ -9,7 +9,7 @@
         </Services>
     </asp:ScriptManager>
 
-    <br /><span style="font-weight: bold;">Fines</span><br />
+    <br /><span style="font-weight: bold;">Fines</span><br /> 
     <asp:CheckBox ID="Owing_CheckBox" runat="server"
         Text="Only show fines not fully paid:" TextAlign="Left" Checked="True" AutoPostBack="true" CssClass="BigCheckBox" />
 

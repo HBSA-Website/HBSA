@@ -21,6 +21,8 @@ Public Class ActiveTableDetail
                 Return GetPlayerDetail(ID)
             Case "Fine"
                 Return GetFineDetail(ID)
+            Case "Handicap"
+                Return GetHandicapDetail(ID)
             Case Else
                 Return "ERROR:  Unknown detail type: " + DetailType
         End Select
@@ -100,4 +102,26 @@ Public Class ActiveTableDetail
         Return HTML.ToString()
 
     End Function
+    Private Function GetHandicapDetail(ID As String) As String
+
+        Dim parms() As String = ID.Split("|")
+        Dim HTML As StringBuilder = New StringBuilder()
+
+        Using handiCaps As DataTable = HBSAcodeLibrary.PlayerData.HandicapsReportForWeb(parms(2), parms(3), True, parms(0), (parms(4) = 1))
+            Dim player As DataRow = handiCaps.Rows(0)
+            With player
+                HTML.Append("<b>" & player("Player") & "&nbsp;H'Cap: " & player("Current Handicap") & "</b><hr />")
+                If Not IsDBNull(player("Last Season H'cap")) Then
+                    HTML.Append("Last season H'Cap: " & player("Last Season H'cap") & ", effective from: " & player("Last Season H'cap effective from") & "<br/>")
+                    HTML.Append("Played:" & player("Played") & " Won:" & player("Won") & " Lost:" & player("Lost") & " Delta:" & player("Delta"))
+                Else
+                    HTML.Append("No previous season.")
+                End If
+            End With
+        End Using
+
+        Return HTML.ToString()
+
+    End Function
+
 End Class

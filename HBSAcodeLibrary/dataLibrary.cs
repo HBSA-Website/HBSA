@@ -4332,6 +4332,31 @@ namespace HBSAcodeLibrary
 
             return SQLcommands.ExecDataTable("HandicapsReportForWeb", parameters);
         }
+        public static DataTable HandicapsReportForMobile(int sectionID, int clubID,
+                                                      bool searchByName = false, string player = "",
+                                                      bool changesOnly = false)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter> {
+                new SqlParameter("ChangesOnly",changesOnly),
+                new SqlParameter("ClubID",clubID),
+            };
+            if (sectionID >= 100)
+            {
+                parameters.Add(new SqlParameter("LeagueID", sectionID - 100));
+                parameters.Add(new SqlParameter("SectionID", 0));
+            }
+            else
+            {
+                parameters.Add(new SqlParameter("LeagueID", 0));
+                parameters.Add(new SqlParameter("SectionID", sectionID));
+            }
+            if (searchByName)
+            {
+                parameters.Add(new SqlParameter("Player", player));
+            }
+
+            return SQLcommands.ExecDataTable("HandicapsReportForMobile", parameters);
+        }
         public static void UpdateHandicaps(int sectionID)
         {
             List<SqlParameter> parameters = new List<SqlParameter> { };
