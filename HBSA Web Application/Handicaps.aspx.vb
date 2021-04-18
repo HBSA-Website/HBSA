@@ -29,7 +29,7 @@
             End If
 
             For Each row As DataRow In leaguesSections.Rows
-                .Items.Add(New ListItem(row.Item("Section Name"), row.Item("ID")))
+                .Items.Add(New ListItem(row.Item("League Name") & " " & row.Item("Section Name"), row.Item("ID")))
             Next
 
             leaguesSections = HBSAcodeLibrary.LeagueData.GetLeagues()

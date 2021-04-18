@@ -379,8 +379,6 @@ Public Class MatchResult
                         errMsg.Append("<b>The match date cannot be more than 4 weeks after the season end date.<br/>" &
                           "If the match was actually played outside of this limitation you should use " &
                           Format(DateAndTime.DateAdd(DateInterval.Day, 28, Seasons.EndOfSeason), "dd MMM yyyy"))
-
-
                     End If
 
                 End Using
@@ -1086,9 +1084,11 @@ showError:
                                      AwayScore1_TextBox, AwayScore2_TextBox, AwayScore3_TextBox, AwayScore4_TextBox}
 
         For ix As Integer = 0 To 7
-            If PlayerDD(ix).SelectedValue.Split("|")(0) < 0 Then
-                'if no opponent/no show, frame not played set appropiate score
-                ScoreBox(ix).Text = PlayerDD(ix).SelectedValue.Split("|")(0) Mod 2 + 2
+            If Not ((ix Mod 4) = 3 AndAlso Section_DropDownList.SelectedValue >= 7) Then
+                If PlayerDD(ix).SelectedValue.Split("|")(0) < 0 Then
+                    'if no opponent/no show, frame not played set appropiate score
+                    ScoreBox(ix).Text = PlayerDD(ix).SelectedValue.Split("|")(0) Mod 2 + 2
+                End If
             End If
         Next
 

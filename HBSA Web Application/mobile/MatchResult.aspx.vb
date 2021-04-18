@@ -130,7 +130,11 @@ Public Class MatchResult1
                         Dim PlayerID As Integer = 0
                         For Each box As Control In ctl.Controls
                             If box.ClientID.ToLower Like "*player*" Then
-                                PlayerID = CType(box, DropDownList).SelectedValue.Split("|")(0)
+                                If CType(box, DropDownList).SelectedValue.Split("|")(0) = " " Then
+                                    PlayerID = 0
+                                Else
+                                    PlayerID = CType(box, DropDownList).SelectedValue.Split("|")(0)
+                                End If
                             End If
                             If box.ClientID.ToLower Like "*score*" Then
                                 If PlayerID < 0 Then
@@ -1223,9 +1227,11 @@ showError:
                                      AwayScore1_TextBox, AwayScore2_TextBox, AwayScore3_TextBox, AwayScore4_TextBox}
 
         For ix As Integer = 0 To 7
-            If PlayerDD(ix).SelectedValue.Split("|")(0) < 0 Then
-                'if no opponent/no show, frame not played set appropiate score
-                ScoreBox(ix).Text = PlayerDD(ix).SelectedValue.Split("|")(0) Mod 2 + 2
+            If Not ((ix Mod 4) = 3 AndAlso Section_DropDownList.SelectedValue >= 7) Then
+                If PlayerDD(ix).SelectedValue.Split("|")(0) < 0 Then
+                    'if no opponent/no show, frame not played set appropiate score
+                    ScoreBox(ix).Text = PlayerDD(ix).SelectedValue.Split("|")(0) Mod 2 + 2
+                End If
             End If
         Next
 
