@@ -26,7 +26,7 @@
     <span style="font-size:smaller">This page shows last season's playing record, with the last season&#39;s handicap(s), along with the current handicap in force.<br />
     Note that there may be more than one playing record for tagged players showing each handicap used last season.<br />
     <br />
-    To see full playing records for previous seasons go to <a href="PlayerRecords.aspx">Historical Player Records</a>.
+    To see full playing records for previous seasons go to <a href="..\PlayerRecords.aspx">Historical Player Records</a>.
     <br />
     To view any changes made to tagged players' handicaps during this season go to <a href="PlayingRecords.aspx">Playing Records</a>.
     </span>

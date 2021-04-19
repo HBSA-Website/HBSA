@@ -32,7 +32,7 @@
                    HBSAcodeLibrary.Utilities.UKDateTimeNow() > DateAdd(DateInterval.Day, -7, FixturesData.Dates.Rows(0).Item("FixtureDate")) Then
                     'i.e. don't report this until a week before season's first match
 
-                    Dim NewRegistrations As DataTable = HBSAcodeLibrary.SharedRoutines.NewRegistrationsReport
+                    Dim NewRegistrations As DataTable = HBSAcodeLibrary.SharedRoutines.NewRegistrationsReport()
                     If NewRegistrations.Rows.Count > 0 Then
                         With NewRegistrations_GridView
                             .DataSource = NewRegistrations
@@ -67,4 +67,7 @@
 
     End Sub
 
+    Private Sub NewRegistrations_GridView_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles NewRegistrations_GridView.RowDataBound
+        e.Row.Cells(3).Visible = False
+    End Sub
 End Class

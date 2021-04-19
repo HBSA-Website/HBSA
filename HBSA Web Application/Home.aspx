@@ -19,7 +19,7 @@
     <div onmouseover="hideMenuDiv();">
     
         <div id="HandicapChangesDiv" runat="server" class="HandicapChanges" style="width:100%" onmouseover="hideMenuDiv();">
-            <asp:Literal ID="HandicapChanges_Literal" runat="server">Handicap changes made during the last week.<br />Emails have been sent to all relevant persons that can be found In the system.</asp:Literal>
+            <asp:Literal ID="HandicapChanges_Literal" runat="server">Handicap changes made during the last week.<br />Emails have been sent to all relevant persons that can be found in the system.</asp:Literal>
             <table style="width:auto;margin-left:auto;margin-right:auto;">
                 <tr>
                     <td style="text-align:center">

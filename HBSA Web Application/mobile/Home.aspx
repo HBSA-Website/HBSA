@@ -18,7 +18,7 @@
     <div style="margin: 4px">
     
         <div id="HandicapChangesDiv" runat="server" class="HandicapChanges">
-            <asp:Literal ID="HandicapChanges_Literal" runat="server" >Handicap changes made during the last week. Emails have been sent to all relevant persons that can be found In the system.</asp:Literal>
+            <asp:Literal ID="HandicapChanges_Literal" runat="server" >Handicap changes made during the last week. Emails have been sent to all relevant persons that can be found in the system.</asp:Literal>
                         <asp:GridView ID="HandicapChanges_GridView" runat="server" HorizontalAlign="Center" CellPadding="4" >
                             <HeaderStyle CssClass="gridViewHeaderHcap" />
                             <RowStyle CssClass="gridViewRowHcap"/>
