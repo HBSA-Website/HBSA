@@ -9,7 +9,7 @@
     </asp:ScriptManager>
     <script type="text/javascript">
         function autoComplete1_OnClientPopulating(sender, args) {
-            sender.set_contextKey(document.getElementById("<%=Section_DropDownList.ClientID%>").value + '|' + document.getElementById("<%=Club_DropDownList.ClientID%>").value);
+            sender.set_contextKey(document.getElementById("<%=Section_DropDownList.ClientID%>").value + '|' + document.getElementById("<%=Clubs_DropDownList.ClientID%>").value);
         }
     </script>
 
@@ -27,8 +27,10 @@
             <span style="font-size: smaller">Select a division/section, and/or a club and/or a team:</span><br />
             <asp:DropDownList ID="Section_DropDownList" runat="server" AutoPostBack="True" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-            <asp:DropDownList ID="Club_DropDownList" runat="server" AutoPostBack="True" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+            <asp:DropDownList ID="Clubs_DropDownList" runat="server" AutoPostBack="True" />
+            <asp:Literal ID="Team_Literal" runat="server">
+            &nbsp;&nbsp;Team:            
+            </asp:Literal>
             <asp:DropDownList ID="Team_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" />
             <br />
             <span style="font-size: smaller"> and/or a player: </span>
@@ -42,12 +44,14 @@
             <br />
             <asp:CheckBox ID="Tagged_CheckBox" CssClass="BigCheckBox" runat="server" Text="Tagged players." AutoPostBack="True" />
             <asp:CheckBox ID="Over70_CheckBox" CssClass="BigCheckBox" runat="server" Text="Players over80 (Vets)." AutoPostBack="True" />
-            <asp:CheckBox ID="Details_CheckBox" CssClass="BigCheckBox" runat="server" Text="Show match details." AutoPostBack="True" />
             <br />
             <br />
             <asp:Button ID="Get_Button" runat="server" Text="Show selected records" />
             <hr />
+
             <span style='color: maroon; font-size: smaller'>Touch/click a player for more detail</span>
+            <div id="PlayingRecords_Div" runat="server"></div>
+            <div id="ActiveDetailDiv" class="infoDiv" onclick="this.style.display='none';"></div>
 
         </ContentTemplate>
     </asp:UpdatePanel>

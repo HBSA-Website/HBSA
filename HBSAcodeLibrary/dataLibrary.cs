@@ -4385,21 +4385,42 @@ namespace HBSAcodeLibrary
                                                                        new SqlParameter("Player", player)});
         }
         public static DataTable GetPlayingRecords(int sectionID, int clubID, string team,
-                                                  string player, bool tagged, bool over70, bool details)
+                                                  string player, bool tagged, bool over70,
+                                                  bool forMobile, object handicap = null)
         {
-            string procedure = details ? "PlayingRecordsDetail" : "PlayingRecords";
-
-            return SQLcommands.ExecDataTable(procedure,
-                                             new List<SqlParameter> {
+            List<SqlParameter> parameters = new List<SqlParameter> {
                                                  new SqlParameter("SectionID",sectionID),
                                                  new SqlParameter("ClubID",clubID),
                                                  new SqlParameter("Team",team),
                                                  new SqlParameter("Player",player),
                                                  new SqlParameter("Tagged",tagged),
                                                  new SqlParameter("Over70",over70),
-                                             });
+                                             };
+            if (forMobile)
+                parameters.Add(new SqlParameter("ForMobile", true));
+            if (handicap != null)
+                parameters.Add(new SqlParameter("Handicap", Convert.ToInt32(handicap)));
+
+            return SQLcommands.ExecDataTable("PlayingRecords", parameters);
         }
- 
+        public static DataTable GetPlayingRecordsDetail(int sectionID, int clubID, string team,
+                                                  string player, bool tagged, bool over70,
+                                                  object handicap)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter> {
+                                                 new SqlParameter("SectionID",sectionID),
+                                                 new SqlParameter("ClubID",clubID),
+                                                 new SqlParameter("Team",team),
+                                                 new SqlParameter("Player",player),
+                                                 new SqlParameter("Tagged",tagged),
+                                                 new SqlParameter("Over70",over70),
+                                             };
+            if (handicap != null)
+                parameters.Add(new SqlParameter("Handicap", Convert.ToInt32(handicap)));
+
+            return SQLcommands.ExecDataTable("PlayingRecordsDetail", parameters);
+        }
+
         #region IDisposable support
         private bool disposedValue = false;        // To detect redundant calls
 

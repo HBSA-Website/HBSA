@@ -23,8 +23,10 @@ Public Class ActiveTableDetail
                 Return GetFineDetail(ID)
             Case "Handicap"
                 Return GetHandicapDetail(ID)
+            Case "PlayingRecord"
+                Return GetPlayingRecord(ID)
             Case Else
-                Return "ERROR:  Unknown detail type: " + DetailType
+                Return "ERROR:  Unknown detail type: " & DetailType
         End Select
 
     End Function
@@ -78,22 +80,22 @@ Public Class ActiveTableDetail
         Using FineDetail As HBSAcodeLibrary.Fines = New HBSAcodeLibrary.Fines(FineID)
             With FineDetail
                 HTML.Append("<b>Fine</b>")
-                HTML.Append("<br />" + Format(.DateImposed, "dd MMM yyyy") + ": " + .Offence)
-                HTML.Append("<br />Amount: " + Format(.Amount, "£0.00") + "&nbsp;&nbsp; ")
+                HTML.Append("<br />" & Format(.DateImposed, "dd MMM yyyy") & ": " & .Offence)
+                HTML.Append("<br />Amount: " & Format(.Amount, "£0.00") & "&nbsp;&nbsp; ")
                 If (.Amount - .AmountPaid) <= 0 Then
                     HTML.Append("<b>Paid</b>")
                 Else
-                    HTML.Append("Outstanding: " + Format(.Amount - .AmountPaid, "£0.00"))
+                    HTML.Append("Outstanding: " & Format(.Amount - .AmountPaid, "£0.00"))
                 End If
                 If .Comment <> "" Then
-                    HTML.Append("<br />" + .Comment)
+                    HTML.Append("<br />" & .Comment)
                 End If
                 If .Payments.Rows.Count = 0 Then
                     HTML.Append("<br />No payment(s) made.")
                 Else
-                    HTML.Append("<br/><b>Payment" + If(.Payments.Rows.Count > 1, "s", "") + "</b>")
+                    HTML.Append("<br/><b>Payment" & If(.Payments.Rows.Count > 1, "s", "") & "</b>")
                     For Each payment As DataRow In .Payments.Rows
-                        HTML.Append("<br/>" + Format(payment!DateTimePaid, "dd MMM yyyy") + " " & payment!PaidBy + "&nbsp; " + Format(payment!AmountPaid, "£0.00") + " " + payment!PaymentMethod)
+                        HTML.Append("<br/>" & Format(payment!DateTimePaid, "dd MMM yyyy") & " " & payment!PaidBy & "&nbsp; " & Format(payment!AmountPaid, "£0.00") & " " & payment!PaymentMethod)
                     Next
                 End If
             End With
@@ -104,10 +106,10 @@ Public Class ActiveTableDetail
     End Function
     Private Function GetHandicapDetail(ID As String) As String
 
-        Dim parms() As String = ID.Split("|")
+        Dim parms() As String = ID.Split("|") '
         Dim HTML As StringBuilder = New StringBuilder()
 
-        Using handiCaps As DataTable = HBSAcodeLibrary.PlayerData.HandicapsReportForWeb(parms(2), parms(3), True, parms(0), (parms(4) = 1))
+        Using handiCaps As DataTable = HBSAcodeLibrary.PlayerData.HandicapsReportForWeb(parms(2), parms(3), True, parms(0).Replace("~", "'"), (parms(4) = 1))
             Dim player As DataRow = handiCaps.Rows(0)
             With player
                 HTML.Append("<b>" & player("Player") & "&nbsp;H'Cap: " & player("Current Handicap") & "</b><hr />")
@@ -122,6 +124,53 @@ Public Class ActiveTableDetail
 
         Return HTML.ToString()
 
+    End Function
+    Private Function GetPlayingRecord(ID As String) As String
+
+        Dim parms() As String = ID.Split("|") 'SectionID|Player|handicap|ClubID
+        Dim HTML As StringBuilder = New StringBuilder()
+
+        Using Records As DataTable = HBSAcodeLibrary.PlayerData.GetPlayingRecords _
+                                                      (parms(0),
+                                                       parms(3),
+                                                       "",
+                                                       parms(1).Replace("~", "'"),
+                                                       False,
+                                                       False, True, parms(2))
+            Using detail As DataTable = HBSAcodeLibrary.PlayerData.GetPlayingRecordsDetail _
+                                                              (parms(0),
+                                                               parms(3),
+                                                               "",
+                                                               parms(1).Replace("~", "'"),
+                                                               False, False, parms(2))
+
+
+                Dim player As DataRow = Records.Rows(0)
+                With player
+                    HTML.Append("<b>" & player("Player") & "&nbsp;H'Cap: " & player("Handicap") &
+                                " Effective " & player("Effective") & "<br/>P:" & player("P") & " W:" & player("W") & " L:" & player("L") &
+                                " </b>Tag: " & player("Tag") & "<hr />")
+                End With
+                If detail.Rows.Count > 0 Then
+                    HTML.Append("<table>")
+                    HTML.Append("<tr><th>Match Date</th><th>Opposition</th><th>Opponent</th><th>F</th><th>A</th></tr>")
+                    For Each match As DataRow In detail.Rows
+                        HTML.Append("<tr>")
+                        HTML.Append("<td>" & match("Match Date") & "</td>")
+                        HTML.Append("<td>" & match("OpponentTeam") & "</td>")
+                        HTML.Append("<td>" & match("Opponent") & "</td>")
+                        HTML.Append("<td>" & match("ScoreFor") & "</td>")
+                        HTML.Append("<td>" & match("ScoreAgainst") & "</td>")
+                        HTML.Append("</tr>")
+                    Next
+                    HTML.Append("</table>")
+                End If
+
+            End Using
+
+        End Using
+
+        Return HTML.ToString()
     End Function
 
 End Class

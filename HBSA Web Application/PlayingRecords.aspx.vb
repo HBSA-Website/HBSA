@@ -124,16 +124,26 @@
 
     Protected Sub Get_Button_Click(sender As Object, e As EventArgs) Handles Get_Button.Click
 
-        Using PlayingRecordsTable As DataTable _
-            = HBSAcodeLibrary.PlayerData.GetPlayingRecords _
+        Dim PlayingRecordsTable As DataTable
+        If Details_CheckBox.Checked Then
+            PlayingRecordsTable = HBSAcodeLibrary.PlayerData.GetPlayingRecordsDetail _
                                                       (Section_DropDownList.SelectedValue,
                                                        Clubs_DropDownList.SelectedValue,
                                                        Team_DropDownList.SelectedValue.Replace("  ", " "),
                                                        Player_TextBox.Text.Trim,
                                                        Tagged_CheckBox.Checked,
-                                                       Over70_CheckBox.Checked,
-                                                       Details_CheckBox.Checked)
-            With Records_GridView
+                                                       Over70_CheckBox.Checked, Nothing)
+        Else
+            PlayingRecordsTable = HBSAcodeLibrary.PlayerData.GetPlayingRecords _
+                                                      (Section_DropDownList.SelectedValue,
+                                                       Clubs_DropDownList.SelectedValue,
+                                                       Team_DropDownList.SelectedValue.Replace("  ", " "),
+                                                       Player_TextBox.Text.Trim,
+                                                       Tagged_CheckBox.Checked,
+                                                       Over70_CheckBox.Checked, False)
+        End If
+
+        With Records_GridView
 
                 If PlayingRecordsTable.Rows.Count > 0 Then
                     .DataSource = PlayingRecordsTable
@@ -153,7 +163,7 @@
 
             End With
 
-        End Using
+        PlayingRecordsTable.Dispose()
 
     End Sub
 

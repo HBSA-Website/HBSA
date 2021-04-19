@@ -50,13 +50,22 @@ Partial Public Class PlayingRecords1
     Protected WithEvents Section_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Club_DropDownList control.
+    '''Clubs_DropDownList control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Club_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents Clubs_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Team_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Team_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
     '''Team_DropDownList control.
@@ -104,15 +113,6 @@ Partial Public Class PlayingRecords1
     Protected WithEvents Over70_CheckBox As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
-    '''Details_CheckBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Details_CheckBox As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
     '''Get_Button control.
     '''</summary>
     '''<remarks>
@@ -120,4 +120,13 @@ Partial Public Class PlayingRecords1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Get_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''PlayingRecords_Div control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PlayingRecords_Div As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

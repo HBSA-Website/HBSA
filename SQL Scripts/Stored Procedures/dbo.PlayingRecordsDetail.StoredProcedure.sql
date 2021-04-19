@@ -12,8 +12,8 @@ CREATE procedure PlayingRecordsDetail
 	,@Tagged bit = 0
 	,@Over70 bit = 0
 	,@Player varchar(150) = ''
+	,@Handicap int = null
 	)
-
 as
 
 set nocount on	
@@ -188,21 +188,8 @@ select Section=[League Name] + ' ' + [Section Name]
 	  and (@Tagged = 0    or @Tagged = p.Tagged)
 	  and (@Over70 = 0    or @Over70 = p.Over70)
 	  and (@Player =  ''  or dbo.FullPlayerName(p.Forename,p.Initials,p.Surname) in (select Player from @Players))
-
+	  and (@Handicap is null or @handicap = Handicap)
 	order by p.SectionID, c.[Club Name] + ' ' + p.Team, Player, Matchdate
 	 
 GO
 
-exec PlayingRecordsDetail @SectionID = 0
-	,@ClubID = 0
-	,@Team = ''
-	,@PlayerID = 1609
-	,@Tagged = 0
-	,@Over70 = 0
-
-exec PlayingRecordsDetail @SectionID = 0
-	,@ClubID = 0
-	,@Team = ''
-	,@Player = 'j skid'
-	,@Tagged = 0
-	,@Over70 = 0

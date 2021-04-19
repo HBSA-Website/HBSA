@@ -242,6 +242,9 @@ namespace HBSAcodeLibrary
         {
             //Build a table for use in mobile pages that will use the 1st supplied column
             //as an ID
+            if (table.Rows.Count == 0)
+                return "No data found for this selection.";
+                
             if (endCol == -1)
                 endCol = table.Columns.Count - 1;
                         
@@ -261,7 +264,7 @@ namespace HBSAcodeLibrary
             {
                 HTML.Append("<tr");
                 if (InfoDivID != "") 
-                    HTML.Append(" onmouseover=\"this.style.cursor = 'pointer';\" onclick=\"loadInfoDiv('" + InfoDivID + "','" + row.ItemArray[0].ToString() + "','" + DetailType + "');\"");
+                    HTML.Append(" onmouseover=\"this.style.cursor = 'pointer';\" onclick=\"loadInfoDiv('" + InfoDivID + "','" + row.ItemArray[0].ToString().Replace("'","~") + "','" + DetailType + "');\"");
                 HTML.Append(">");
 
                 for (int ix = startCol; ix <= endCol; ix++) 
