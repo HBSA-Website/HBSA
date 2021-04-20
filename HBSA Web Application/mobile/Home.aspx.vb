@@ -27,7 +27,7 @@
 
             Using FixturesData As New HBSAcodeLibrary.FixturesData(1)
 
-                If Not FixturesData.Dates Is Nothing AndAlso
+                If FixturesData.Dates IsNot Nothing AndAlso
                    FixturesData.Dates.Rows.Count > 0 AndAlso
                    HBSAcodeLibrary.Utilities.UKDateTimeNow() > DateAdd(DateInterval.Day, -7, FixturesData.Dates.Rows(0).Item("FixtureDate")) Then
                     'i.e. don't report this until a week before season's first match

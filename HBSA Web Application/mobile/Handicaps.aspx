@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/mobile/mobileMaster.Master" CodeBehind="Handicaps.aspx.vb" Inherits="HBSA_Web_Application.Handicaps1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -68,12 +69,14 @@
                     <td style="text-align: right;">and click GO</td>
                     <td>
                         <asp:TextBox ID="Player_TextBox" runat="server"></asp:TextBox>
-                        <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="Player_TextBox" DelimiterCharacters=""
+                        <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="Player_TextBox" MinimumPrefixLength="2" UseContextKey="True" OnClientPopulating="autoComplete1_OnClientPopulating" ServiceMethod="SuggestPlayers" CompletionInterval="10" CompletionSetCount="20" CompletionListCssClass="mobileCompletionList" CompletionListItemCssClass="mobileCompletionLlistItem" CompletionListHighlightedItemCssClass="mobileCompletionItemHighlighted"></ajaxToolkit:AutoCompleteExtender>
+                        <%--<ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" 
+                            TargetControlID="Player_TextBox" DelimiterCharacters=""
                             MinimumPrefixLength="2" EnableCaching="true" UseContextKey="True"
                             OnClientPopulating="autoComplete1_OnClientPopulating"
                             ServiceMethod="SuggestPlayers" CompletionInterval="10"
                             CompletionSetCount="20" CompletionListCssClass="mobileCompletionList" CompletionListItemCssClass="mobileCompletionLlistItem" CompletionListHighlightedItemCssClass="mobileCompletionItemHighlighted">
-                        </ajaxToolkit:AutoCompleteExtender>
+                        </ajaxToolkit:AutoCompleteExtender>--%>
                     </td>
                     <td style="padding: 4px;">
                         <asp:Button ID="GetByName_Button" runat="server" Text="GO" /></td>
