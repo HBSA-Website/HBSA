@@ -212,24 +212,42 @@ Public Class MatchResult1
     Protected Sub FixtureDate_DropDownList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles FixtureDate_DropDownList.SelectedIndexChanged
 
         InitBoxes()
+        Fixture_Literal.Text = ""
+        Next_Button0.Visible = False
 
-        If FixtureDate_DropDownList.SelectedIndex < 1 Then
-
-            Next_Button0.Visible = False
-
-        Else
-
-            Next_Button0.Visible = True
+        If FixtureDate_DropDownList.SelectedIndex > 0 Then
 
             Using dr As New HBSAcodeLibrary.TeamData(Section_DropDownList.SelectedValue, FixtureDate_DropDownList.SelectedValue Mod 100, HomeTeam_DropDownList.SelectedValue)
                 AwayTeam_Literal.Text = (dr.ClubName & " " & dr.Team).Trim
                 SessionAwayTeamID.Value = dr.ID
             End Using
 
-            Setup_TextBoxes()
-
             Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
+
+                ' If not an administrator ensure it is not outside the 4 week limit
+                If SessionadminDetails.Value = "" Then
+                    Dim TodaysDate As Date = Utilities.UKDateTimeNow
+                    Dim FixtureDate As Date = CDate(FixtureDate_DropDownList.SelectedItem.Text)
+                    Dim diff As Integer = DateDiff(DateInterval.Day, FixtureDate, TodaysDate)
+                    If diff > 32 Then 'cannot enter match result more than 4 weeks & 4 days (grace) after the fixture
+                        'date, allowing 2 days grace to enter it. 
+                        Fixture_Literal.Text = "<br/><span style='color:red;text-size:larger'>" &
+                      "<b>The match cannot be entered or changed more than 4 weeks before or after the fixture date.<br/><br/>" &
+                      "If you believe the match was played within within this restriction, or was sanctioned by the " &
+                      "league secretary you should send the full result to the league secretary. " &
+                      "The secretary will verify, And if OK, enter the result on your behalf.</span></b><br /><br />"
+
+                        Exit Sub
+
+                    End If
+                End If
+
+                Next_Button0.Visible = True
+
+                Setup_TextBoxes()
+
                 PopulateMatchResult(MatchResult)
+
             End Using
 
         End If
@@ -538,9 +556,11 @@ Public Class MatchResult1
             FillPlayerDetails(HomePlayer3_DropDownList, Frames.Rows(2).Item("HomePlayer"),
                               HomeScore3_TextBox, Frames.Rows(2).Item("HomeScore"),
                               HomeHcap3_TextBox, Frames.Rows(2).Item("Home H'cap"))
-            FillPlayerDetails(HomePlayer4_DropDownList, Frames.Rows(3).Item("HomePlayer"),
+            If Section_DropDownList.SelectedValue < 7 Then
+                FillPlayerDetails(HomePlayer4_DropDownList, Frames.Rows(3).Item("HomePlayer"),
                               HomeScore4_TextBox, Frames.Rows(3).Item("HomeScore"),
                               HomeHcap4_TextBox, Frames.Rows(3).Item("Home H'cap"))
+            End If
             FillPlayerDetails(AwayPlayer1_DropDownList, Frames.Rows(0).Item("AwayPlayer"),
                               AwayScore1_TextBox, Frames.Rows(0).Item("AwayScore"),
                               AwayHcap1_TextBox, Frames.Rows(0).Item("Away H'cap"))
@@ -550,9 +570,11 @@ Public Class MatchResult1
             FillPlayerDetails(AwayPlayer3_DropDownList, Frames.Rows(2).Item("AwayPlayer"),
                               AwayScore3_TextBox, Frames.Rows(2).Item("AwayScore"),
                               AwayHcap3_TextBox, Frames.Rows(2).Item("Away H'cap"))
-            FillPlayerDetails(AwayPlayer4_DropDownList, Frames.Rows(3).Item("AwayPlayer"),
+            If Section_DropDownList.SelectedValue < 7 Then
+                FillPlayerDetails(AwayPlayer4_DropDownList, Frames.Rows(3).Item("AwayPlayer"),
                               AwayScore4_TextBox, Frames.Rows(3).Item("AwayScore"),
                               AwayHcap4_TextBox, Frames.Rows(3).Item("Away H'cap"))
+            End If
 
             Recover_Button.Visible = False
             If SessionadminDetails.Value <> "" Then
@@ -605,7 +627,7 @@ Public Class MatchResult1
                     ScoreTB.Text = Score
                     ScoreTB.Enabled = (PlayerID > 0)
                     HCapTB.Text = HCap
-                    HCapTB.Visible = Section_DropDownList.SelectedValue < 7
+                    HCapTB.Visible = True
                     Exit Sub
                 End If
             Next
@@ -710,10 +732,11 @@ Public Class MatchResult1
 
             If SessionadminDetails.Value = "" Then 'not admin
                 If Math.Abs(DateAndTime.DateDiff(DateInterval.Day, matchDate, CDate(FixtureDate_DropDownList.SelectedItem.Text))) > 28 Then
-                    errMsg.Append("<b>The match date cannot be more than 4 weeks before or after the fixture date.<br/><br/>" &
-                          "If the match was actually played outside of this limitation you must send " &
-                          "the full result to the league secretary ().<br>" &
-                          "The secretary will verify, and if OK, enter the result on your behalf.</b><br>")
+                    errMsg.Append("<span style='color:red;text-size:larger'>" &
+                          "<b>The match cannot be played more than 4 weeks before or after the fixture date.<br/><br/>" &
+                          "If you believe the match was played within within this restriction, or was sanctioned by the " &
+                          "league secretary you should send the full result to the league secretary. " &
+                          "The secretary will verify, And if OK, enter the result on your behalf.</span></b><br />OR")
                 End If
             Else
                 Using Seasons As New HBSAcodeLibrary.FixturesData

@@ -122,6 +122,15 @@ Partial Public Class MatchResult1
     Protected WithEvents FixtureDate_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Fixture_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Fixture_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''AwayTeam_Literal control.
     '''</summary>
     '''<remarks>

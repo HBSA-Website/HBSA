@@ -130,14 +130,16 @@
             </tr>
             <tr>
                 <td>Fixture Date:</td>
-                <td><asp:DropDownList ID="FixtureDate_DropDownList" runat="server" AutoPostBack="True" ></asp:DropDownList></td>
+                <td><asp:DropDownList ID="FixtureDate_DropDownList" runat="server" AutoPostBack="True" ></asp:DropDownList>
+                    <asp:Literal ID="Fixture_Literal" runat="server"></asp:Literal>
+                </td>
             </tr>
             <tr>
                 <td>Away Team:</td>
                 <td><asp:textbox ID="AwayTeam_Literal" runat="server"></asp:textbox></td>
             </tr>
             <tr>
-                <td>Played Date:</td>
+                <td>Date Played:</td>
                 <td><asp:TextBox ID="matchDate_Textbox" runat="server" /></td>
             </tr>
             <tr>
