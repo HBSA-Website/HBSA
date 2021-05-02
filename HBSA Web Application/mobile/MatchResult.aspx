@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/mobile/mobileMaster.Master" ClientIDMode="Static" CodeBehind="MatchResult.aspx.vb" Inherits="HBSA_Web_Application.MatchResult1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
   <%--Set up references to JQuery libraries etc.--%>  
@@ -105,6 +106,77 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style type="text/css">
+/*Calendar Control CSS*/
+.cal_Theme1 .ajax__calendar_container   {
+background-color: #DEF1F4;
+border:solid 1px #77D5F7;
+width:600px;
+height:600px;
+}
+
+.cal_Theme1 .ajax__calendar_header  {
+background-color: #ffffff;
+margin-bottom: 4px;
+width:600px;
+height:60px;
+}
+
+.cal_Theme1 .ajax__calendar_title   {
+color: #004080;
+padding-top: 3px;
+}
+.cal_Theme1 .ajax__calendar_next,
+.cal_Theme1 .ajax__calendar_prev    {
+color: #004080;
+padding-top: 3px;
+height:60px;
+width:60px;
+}
+
+.cal_Theme1 .ajax__calendar_body    {
+background-color: #ffffff;
+border: solid 1px #77D5F7;
+width:469px;
+height:449px;
+}
+
+        .cal_Theme1 .ajax__calendar_dayname {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 4px;
+            margin-top: 2px;
+            color: #004080;
+            height: 60px;
+            width: 60px;
+        }
+
+.cal_Theme1 .ajax__calendar_day {
+color: #004080;
+text-align:center;
+height:60px;
+width:60px;
+}
+
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_day,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_month,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_year,
+.cal_Theme1 .ajax__calendar_active  {
+color: #004080;
+font-weight: bold;
+background-color: #DEF1F4;
+}
+.cal_Theme1 .ajax__calendar_today   {
+font-weight:bold;
+}
+
+.cal_Theme1 .ajax__calendar_other,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_today,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_title {
+color: #bbbbbb;
+}
+</style>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <div class="SmallHeader">
         <asp:Literal ID="MatchDetails_Literal" runat="server" />
@@ -140,7 +212,12 @@
             </tr>
             <tr>
                 <td>Date Played:</td>
-                <td><asp:TextBox ID="matchDate_Textbox" runat="server" /></td>
+                <td><asp:TextBox ID="matchDate_Textbox" runat="server" AutoCompleteType="None" TextMode="Date" />
+                    <%--<ajaxToolkit:CalendarExtender ID="matchDate_CalendarExtender" runat="server"
+                        TargetControlID="matchDate_Textbox" PopupButtonID="matchDate_Textbox"
+                        Format="dd MMM yyyy" TodaysDateFormat="d MMM yyyy" CssClass="cal_Theme1" PopupPosition="TopLeft"></ajaxToolkit:CalendarExtender>--%>
+
+                </td>
             </tr>
             <tr>
                 <td></td>

@@ -19,6 +19,10 @@ Public Class MatchResult1
             Else
                 SessionadminDetails.Value = ""
             End If
+
+            SessionadminDetails.Value = "Testing@test.com"
+            matchDate_Textbox.Attributes.Add("Type", "Date")
+
             SessionTeamID.Value = Session("TeamID")
             SessionUser.Value = Session("user")
             Delete_Result_Div.Visible = False
@@ -199,7 +203,8 @@ Public Class MatchResult1
 
             Using FixtureDates As DataTable = HBSAcodeLibrary.FixturesData.GetFixtureDatesForTeam(TeamID)
                 For Each FixtureDate As DataRow In FixtureDates.Rows
-                    .Items.Add(New ListItem(FixtureDate!Date, If(FixtureDate!Halfway, 100 + FixtureDate!WeekNo, FixtureDate!WeekNo)))
+                    .Items.Add(New ListItem(CDate(FixtureDate!Date).ToString("dd/MM/yyyy"),
+                                            If(FixtureDate!Halfway, 100 + FixtureDate!WeekNo, FixtureDate!WeekNo)))
                 Next
             End Using
 
@@ -404,6 +409,8 @@ Public Class MatchResult1
         End If
         ShowBreaks()
         EnablePanel(SubmitResult_Panel)
+        status_Literal.Text = ""
+
     End Sub
 
     Sub ShowBreaks()
@@ -427,7 +434,7 @@ Public Class MatchResult1
     Sub ShowMatch()
         MatchDetails_Literal.Text = HomeTeam_DropDownList.SelectedItem.Text.Trim & " v " & AwayTeam_Literal.Text.Trim & "<br/>" &
                                     Section_DropDownList.SelectedItem.Text.Trim & " - " &
-                                    matchDate_Textbox.Text.Trim
+                                    CDate(matchDate_Textbox.Text.Trim).ToString("dd/MM/yyyy")
     End Sub
     Sub ShowFrame(FrameNo As Integer)
         Dim PlayerLists() As DropDownList = {HomePlayer1_DropDownList, HomePlayer2_DropDownList, HomePlayer3_DropDownList, HomePlayer4_DropDownList,
@@ -540,9 +547,9 @@ Public Class MatchResult1
             Dim Match As DataRow = MatchResult.Match.Rows(0)
 
             Try
-                matchDate_Textbox.Text = Match("Match Date")
+                matchDate_Textbox.Text = CDate(Match("Match Date")).ToString("yyyy-MM-dd")
             Catch ex As Exception
-                matchDate_Textbox.Text = FixtureDate_DropDownList.SelectedItem.Text
+                matchDate_Textbox.Text = CDate(FixtureDate_DropDownList.SelectedItem.Text).ToString("yyyy-MM-dd")
             End Try
 
             Dim Frames As DataTable = MatchResult.Frames
@@ -598,7 +605,7 @@ Public Class MatchResult1
 
         Else
 
-            matchDate_Textbox.Text = FixtureDate_DropDownList.SelectedItem.Text
+            matchDate_Textbox.Text = CDate(FixtureDate_DropDownList.SelectedItem.Text).ToString("yyyy-MM-dd")
 
             Delete_Result_Div.Visible = False
             If SessionadminDetails.Value <> "" AndAlso HBSAcodeLibrary.MatchResult.DeletedExists(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value) Then
@@ -706,7 +713,7 @@ Public Class MatchResult1
         Result_Literal.Text = ""
 
         If matchDate_Textbox.Text = "" Then
-            matchDate_Textbox.Text = Format(FixtureDate_DropDownList.SelectedItem.Text, "dd mmm yyyy")
+            matchDate_Textbox.Text = Format(FixtureDate_DropDownList.SelectedItem.Text, "yyyy-MM-dd")
         End If
 
         'Calculate result and verify input
@@ -725,7 +732,7 @@ Public Class MatchResult1
 
             Try
                 matchDate = CDate(matchDate_Textbox.Text)
-                matchDate_Textbox.Text = Format(matchDate, "dd MMM yyyy")
+                matchDate_Textbox.Text = Format(matchDate, "yyyy-MM-dd")
             Catch ex As Exception
                 errMsg.Append("Invalid match date<br/>")
             End Try
@@ -904,11 +911,15 @@ showError:
 
                             If Not Send_email(MatchID) Then
 
-                                status_Literal.Text += "<br/><span style='color:blue;'>Your result card Emails have been sent.  Click Finished.</span>"
+                                status_Literal.Text += "<br/><span style='color:blue;'>Your result card Emails have been sent."
                                 Retry_Button.Visible = False
                                 Cancel_Button.Visible = False
                                 If SessionadminDetails.Value = "" Then
                                     Send_Button.Text = "Finished"
+                                    status_Literal.Text += "  Click Finished.</span>"
+                                Else
+                                    status_Literal.Text = "</span>"
+                                    Response.Redirect("MatchResult.aspx")
                                 End If
                             Else
 
@@ -976,7 +987,7 @@ showError:
 
         Try
             Dim MatchID As Integer =
-                HBSAcodeLibrary.MatchResult.InsertResultCard(matchDate_Textbox.Text,
+                HBSAcodeLibrary.MatchResult.InsertResultCard(CDate(matchDate_Textbox.Text),
                                                        HomeTeam_DropDownList.SelectedValue,
                                                        SessionAwayTeamID.Value,
                                                        HomePlayer1_DropDownList.SelectedValue.Split("|")(0),
@@ -1073,8 +1084,8 @@ showError:
         End Using
 
         MatchResult = MatchResult.Replace("|Section|", Section_DropDownList.SelectedItem.Text.Trim)
-        MatchResult = MatchResult.Replace("|FixtureDate|", FixtureDate_DropDownList.SelectedItem.Text)
-        MatchResult = MatchResult.Replace("|MatchDate|", matchDate_Textbox.Text)
+        MatchResult = MatchResult.Replace("|FixtureDate|", CDate(FixtureDate_DropDownList.SelectedItem.Text).ToString("dd MMM yyyy"))
+        MatchResult = MatchResult.Replace("|MatchDate|", CDate(matchDate_Textbox.Text).ToString("dd MMM yyyy"))
         MatchResult = MatchResult.Replace("|HomeTeam|", HomeTeam_DropDownList.SelectedItem.Text)
         MatchResult = MatchResult.Replace("|AwayTeam|", AwayTeam_Literal.Text)
         MatchResult = MatchResult.Replace("|HomeHcap1|", HomeHcap1_TextBox.Text)
