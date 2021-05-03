@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription(".NET 4.6.1")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("HBSA_Web_Application")>
-<Assembly: AssemblyCopyright("Copyright ©  2016")>
+<Assembly: AssemblyCopyright("Copyright © 2021")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -30,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("3.10.112.10501")>
-<Assembly: AssemblyFileVersion("3.10.112")>
+<Assembly: AssemblyVersion("3.10.113.10503")>
+<Assembly: AssemblyFileVersion("3.10.113")>

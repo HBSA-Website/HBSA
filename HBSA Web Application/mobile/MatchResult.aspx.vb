@@ -1,7 +1,6 @@
 Imports HBSAcodeLibrary
 Public Class MatchResult1
     Inherits System.Web.UI.Page
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         'GoDaddy will terminate the application on a 5 minute timeout
@@ -20,9 +19,6 @@ Public Class MatchResult1
                 SessionadminDetails.Value = ""
             End If
 
-            SessionadminDetails.Value = "Testing@test.com"
-            matchDate_Textbox.Attributes.Add("Type", "Date")
-
             SessionTeamID.Value = Session("TeamID")
             SessionUser.Value = Session("user")
             Delete_Result_Div.Visible = False
@@ -31,6 +27,28 @@ Public Class MatchResult1
 
         Dim adminLoggedIn As Boolean = (Not SessionadminDetails.Value = "")
         Dim userLoggedIn As Boolean = False
+
+        If Not adminLoggedIn Then
+            Dim TodaysDate As Date = Utilities.UKDateTimeNow
+            Using Season As New HBSAcodeLibrary.FixturesData
+                Dim DaySinceSeasonEnd As Integer = DateDiff(DateInterval.Day, Season.EndOfSeason, TodaysDate)
+                If DaySinceSeasonEnd > 7 Then 'cannot enter match result more than a weeks after the season end
+                    MessageDiv.InnerHtml = "<br/><span style='color:red;text-size:larger'>" &
+                          "<b>The match cannot be entered or changed more than a week after the season finishes.<br/><br/>" &
+                          "If you believe the match was played within within this restriction, or was sanctioned by the " &
+                          "league secretary you should send the full result to the league secretary. " &
+                          "The secretary will verify, And if OK, enter the result on your behalf.</span></b><br /><br />"
+
+                    MessageDiv.Visible = True
+                    Match_Panel.Visible = False
+                    Exit Sub
+
+                End If
+
+            End Using
+
+
+        End If
 
         If HBSAcodeLibrary.HBSA_Configuration.CloseSeason OrElse HBSAcodeLibrary.HBSA_Configuration.AllowLeaguesEntryForms Then
             If Not adminLoggedIn Then
@@ -229,12 +247,13 @@ Public Class MatchResult1
 
             Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
 
+
                 ' If not an administrator ensure it is not outside the 4 week limit
                 If SessionadminDetails.Value = "" Then
                     Dim TodaysDate As Date = Utilities.UKDateTimeNow
                     Dim FixtureDate As Date = CDate(FixtureDate_DropDownList.SelectedItem.Text)
-                    Dim diff As Integer = DateDiff(DateInterval.Day, FixtureDate, TodaysDate)
-                    If diff > 32 Then 'cannot enter match result more than 4 weeks & 4 days (grace) after the fixture
+                    Dim DaySinceFixture As Integer = DateDiff(DateInterval.Day, FixtureDate, TodaysDate)
+                    If DaySinceFixture > 32 Then 'cannot enter match result more than 4 weeks & 4 days (grace) after the fixture
                         'date, allowing 2 days grace to enter it. 
                         Fixture_Literal.Text = "<br/><span style='color:red;text-size:larger'>" &
                       "<b>The match cannot be entered or changed more than 4 weeks before or after the fixture date.<br/><br/>" &
@@ -245,6 +264,7 @@ Public Class MatchResult1
                         Exit Sub
 
                     End If
+
                 End If
 
                 Next_Button0.Visible = True

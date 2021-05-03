@@ -149,6 +149,15 @@ Partial Public Class MatchResult
     Protected WithEvents status_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
+    '''CardDiv control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CardDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''League_Literal control.
     '''</summary>
     '''<remarks>

@@ -28,6 +28,27 @@ Public Class MatchResult
         Dim adminLoggedIn As Boolean = (Not SessionadminDetails.Value = "")
         Dim userLoggedIn As Boolean = False
 
+        If Not adminLoggedIn Then
+            Dim TodaysDate As Date = Utilities.UKDateTimeNow
+            Using Season As New HBSAcodeLibrary.FixturesData
+                Dim DaySinceSeasonEnd As Integer = DateDiff(DateInterval.Day, Season.EndOfSeason, TodaysDate)
+                If DaySinceSeasonEnd > 7 Then 'cannot enter match result more than a weeks after the season end
+                    status_Literal.Text = "<br/><span style='color:red;text-size:larger'>" &
+                          "<b>The match cannot be entered or changed more than a week after the season finishes.<br/><br/>" &
+                          "If you believe the match was played within within this restriction, or was sanctioned by the " &
+                          "league secretary you should send the full result to the league secretary. " &
+                          "The secretary will verify, And if OK, enter the result on your behalf.</span></b><br /><br />"
+
+                    CardDiv.Visible = False
+                    Exit Sub
+
+                End If
+
+            End Using
+
+
+        End If
+
         If HBSAcodeLibrary.HBSA_Configuration.CloseSeason OrElse HBSAcodeLibrary.HBSA_Configuration.AllowLeaguesEntryForms Then
             If Not adminLoggedIn Then
                 Session("LoginCaller") = "Home.aspx"

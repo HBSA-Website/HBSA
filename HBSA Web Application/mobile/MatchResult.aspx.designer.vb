@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class MatchResult1
 
     '''<summary>
-    '''ScriptManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
-
-    '''<summary>
     '''MatchDetails_Literal control.
     '''</summary>
     '''<remarks>
@@ -84,6 +75,15 @@ Partial Public Class MatchResult1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Result_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''MessageDiv control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MessageDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''PanelsDiv control.

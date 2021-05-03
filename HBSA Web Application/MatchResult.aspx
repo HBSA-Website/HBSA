@@ -95,7 +95,7 @@
                 <--- Click the question mark for help    
         <br /><br />
    </div>
-
+<div id="CardDiv" runat="server">
   <table style="width:100%"><tr><td>
     <table>
 
@@ -346,6 +346,7 @@
         </div>
     </div>
 
+
  	<div id="divDeleteResult" style="border: 1px solid #000080; font-family: Arial, Helvetica, sans-serif; font-size: 9Pt; display:none; vertical-align: top; 
                                    text-align: left; position: fixed; background-color: #B5C7DE;
                                    width: 500px; left: 354px; top: 274px;">
@@ -384,7 +385,7 @@
                     </tr>
                 </table>
  	</div>
- 
+ </div>
     </ContentTemplate>
         </asp:UpdatePanel>
 
