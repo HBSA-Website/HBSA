@@ -8,6 +8,38 @@
     <%--//1.12.4.js"></script>--%>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"  type="text/javascript"></script>
 
+    <script type="text/javascript">
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        function DateBoxClicked(datePicker, dateBox) {
+            datePicker.hidden = false;
+            dateBox.hidden = true;
+            datePicker.value = ConvertDateString(dateBox.value);
+            datePicker.click();
+        }
+        function DatePickerChanged(dateBox, datePicker) {
+            d = new Date(datePicker.value);
+            dy = d.getDate();
+            mn = d.getMonth();
+            yy = d.getFullYear();
+            dateBox.value = dy + " " + months[mn] + " " + yy;
+            dateBox.hidden = false;
+            datePicker.hidden = true;
+        }
+        function ConvertDateString(str) {
+            var ix = str.indexOf(" ");
+            var dd = str.substring(0, ix);
+            var iy = str.indexOf(" ", ix + 1);
+            var MMM = str.substring(ix + 1, iy);
+            var MM = months.indexOf(MMM) + 1;
+            var yyyy = str.substring(iy + 1);
+            var mm = MM.toString();
+            if (MM < 10) {
+                mm = "0" + mm;
+            }
+            return yyyy + '-' + mm + '-' + dd;
+        }
+    </script>
+
   <%--prevent enter key causing postback--%>
   <script type="text/javascript">
       $(document).keypress(function(e)
@@ -144,7 +176,11 @@
             </tr>
             <tr>
                 <td>Date Played:</td>
-                <td><asp:TextBox ID="matchDate_Textbox" runat="server" AutoCompleteType="None" TextMode="Date" /></td>
+                <td>
+                    <input type="date" id="DatePicker" style="width:80px;" onchange="DatePickerChanged(MatchDate_Textbox,this);" hidden="hidden" />
+                    <asp:TextBox ID="MatchDate_Textbox" runat="server" onclick="DateBoxClicked(DatePicker,this);" Width="240px" />
+                    <span style="font-size:smaller; font-style:italic">Touch/Click to change</span>
+                </td>
             </tr>
             <tr>
                 <td></td>

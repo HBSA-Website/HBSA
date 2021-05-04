@@ -221,7 +221,7 @@ Public Class MatchResult1
 
             Using FixtureDates As DataTable = HBSAcodeLibrary.FixturesData.GetFixtureDatesForTeam(TeamID)
                 For Each FixtureDate As DataRow In FixtureDates.Rows
-                    .Items.Add(New ListItem(CDate(FixtureDate!Date).ToString("dd/MM/yyyy"),
+                    .Items.Add(New ListItem(CDate(FixtureDate!Date).ToString("dd MMM yyyy"),
                                             If(FixtureDate!Halfway, 100 + FixtureDate!WeekNo, FixtureDate!WeekNo)))
                 Next
             End Using
@@ -454,7 +454,15 @@ Public Class MatchResult1
     Sub ShowMatch()
         MatchDetails_Literal.Text = HomeTeam_DropDownList.SelectedItem.Text.Trim & " v " & AwayTeam_Literal.Text.Trim & "<br/>" &
                                     Section_DropDownList.SelectedItem.Text.Trim & " - " &
-                                    CDate(matchDate_Textbox.Text.Trim).ToString("dd/MM/yyyy")
+                                    FixtureDate_DropDownList.SelectedItem.Text
+        Try
+            If CDate(MatchDate_Textbox.Text) <> CDate(FixtureDate_DropDownList.SelectedItem.Text) Then
+                MatchDetails_Literal.Text += " Played " & MatchDate_Textbox.Text
+
+            End If
+        Catch ex As Exception
+        End Try
+
     End Sub
     Sub ShowFrame(FrameNo As Integer)
         Dim PlayerLists() As DropDownList = {HomePlayer1_DropDownList, HomePlayer2_DropDownList, HomePlayer3_DropDownList, HomePlayer4_DropDownList,
@@ -567,9 +575,9 @@ Public Class MatchResult1
             Dim Match As DataRow = MatchResult.Match.Rows(0)
 
             Try
-                matchDate_Textbox.Text = CDate(Match("Match Date")).ToString("yyyy-MM-dd")
+                matchDate_Textbox.Text = Match("Match Date")
             Catch ex As Exception
-                matchDate_Textbox.Text = CDate(FixtureDate_DropDownList.SelectedItem.Text).ToString("yyyy-MM-dd")
+                matchDate_Textbox.Text = FixtureDate_DropDownList.SelectedItem.Text
             End Try
 
             Dim Frames As DataTable = MatchResult.Frames
@@ -625,7 +633,7 @@ Public Class MatchResult1
 
         Else
 
-            matchDate_Textbox.Text = CDate(FixtureDate_DropDownList.SelectedItem.Text).ToString("yyyy-MM-dd")
+            matchDate_Textbox.Text = FixtureDate_DropDownList.SelectedItem.Text
 
             Delete_Result_Div.Visible = False
             If SessionadminDetails.Value <> "" AndAlso HBSAcodeLibrary.MatchResult.DeletedExists(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value) Then
@@ -733,7 +741,7 @@ Public Class MatchResult1
         Result_Literal.Text = ""
 
         If matchDate_Textbox.Text = "" Then
-            matchDate_Textbox.Text = Format(FixtureDate_DropDownList.SelectedItem.Text, "yyyy-MM-dd")
+            matchDate_Textbox.Text = FixtureDate_DropDownList.SelectedItem.Text
         End If
 
         'Calculate result and verify input
@@ -752,7 +760,6 @@ Public Class MatchResult1
 
             Try
                 matchDate = CDate(matchDate_Textbox.Text)
-                matchDate_Textbox.Text = Format(matchDate, "yyyy-MM-dd")
             Catch ex As Exception
                 errMsg.Append("Invalid match date<br/>")
             End Try
@@ -1104,8 +1111,8 @@ showError:
         End Using
 
         MatchResult = MatchResult.Replace("|Section|", Section_DropDownList.SelectedItem.Text.Trim)
-        MatchResult = MatchResult.Replace("|FixtureDate|", CDate(FixtureDate_DropDownList.SelectedItem.Text).ToString("dd MMM yyyy"))
-        MatchResult = MatchResult.Replace("|MatchDate|", CDate(matchDate_Textbox.Text).ToString("dd MMM yyyy"))
+        MatchResult = MatchResult.Replace("|FixtureDate|", FixtureDate_DropDownList.SelectedItem.Text)
+        MatchResult = MatchResult.Replace("|MatchDate|", matchDate_Textbox.Text)
         MatchResult = MatchResult.Replace("|HomeTeam|", HomeTeam_DropDownList.SelectedItem.Text)
         MatchResult = MatchResult.Replace("|AwayTeam|", AwayTeam_Literal.Text)
         MatchResult = MatchResult.Replace("|HomeHcap1|", HomeHcap1_TextBox.Text)

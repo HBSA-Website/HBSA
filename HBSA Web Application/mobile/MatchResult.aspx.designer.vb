@@ -149,13 +149,13 @@ Partial Public Class MatchResult1
     Protected WithEvents AwayTeam_Literal As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''matchDate_Textbox control.
+    '''MatchDate_Textbox control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents matchDate_Textbox As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents MatchDate_Textbox As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Next_Button0 control.
