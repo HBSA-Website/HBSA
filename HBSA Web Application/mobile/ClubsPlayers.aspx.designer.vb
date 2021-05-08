@@ -32,6 +32,33 @@ Partial Public Class ClubsPlayers1
     Protected WithEvents Club_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Player_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Player_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AutoCompleteExtender1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AutoCompleteExtender1 As Global.AjaxControlToolkit.AutoCompleteExtender
+
+    '''<summary>
+    '''GetByName_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents GetByName_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''ClubsAndPlayers_Div control.
     '''</summary>
     '''<remarks>

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class ClubsPlayers
-    
+
     '''<summary>
     '''ScriptManager1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class ClubsPlayers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
-    
+
     '''<summary>
     '''Update_Progress control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class ClubsPlayers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Update_Progress As Global.System.Web.UI.UpdateProgress
-    
+
     '''<summary>
     '''UpdatePanel1 control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class ClubsPlayers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
-    
+
     '''<summary>
     '''Section_DropDownList control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class ClubsPlayers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Section_DropDownList As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''Club_DropDownList control.
     '''</summary>
@@ -57,7 +57,34 @@ Partial Public Class ClubsPlayers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Club_DropDownList As Global.System.Web.UI.WebControls.DropDownList
-    
+
+    '''<summary>
+    '''Player_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Player_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AutoCompleteExtender1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AutoCompleteExtender1 As Global.AjaxControlToolkit.AutoCompleteExtender
+
+    '''<summary>
+    '''GetByName_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents GetByName_Button As Global.System.Web.UI.WebControls.Button
+
     '''<summary>
     '''ClubsAndPlayers_GridView control.
     '''</summary>
@@ -66,7 +93,7 @@ Partial Public Class ClubsPlayers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ClubsAndPlayers_GridView As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''Teams_GridView control.
     '''</summary>
@@ -75,7 +102,7 @@ Partial Public Class ClubsPlayers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Teams_GridView As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''Players_GridView control.
     '''</summary>

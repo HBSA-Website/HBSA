@@ -129,4 +129,40 @@ Public Class ClubsPlayers
         End If
 
     End Sub
+
+    <System.Web.Script.Services.ScriptMethod>
+    <System.Web.Services.WebMethod>
+    Public Shared Function SuggestPlayers(ByVal prefixText As String, ByVal count As Integer) As List(Of String)
+
+        Return HBSAcodeLibrary.PlayerData.GetSuggestedPlayers(prefixText, count, 0, 0, 0)
+
+    End Function
+
+    Protected Sub GetByName_Button_Click(sender As Object, e As EventArgs) Handles GetByName_Button.Click
+
+        ClubsAndPlayers_GridView.Visible = False
+        Teams_GridView.Visible = False
+
+        Using players As DataTable = HBSAcodeLibrary.PlayerData.GetPlayerDetailsByPlayer(,, Player_TextBox.Text, True)
+
+            With Players_GridView
+                .DataSource = players
+                .DataBind()
+                .Visible = True
+
+                For RowIx = 0 To .Rows.Count - 1
+                    Dim PlayerRow As GridViewRow = .Rows(RowIx)
+                    For ColIx = 0 To players.Columns.Count - 1
+                        If players.Columns(ColIx).ColumnName.Length > PlayerRow.Cells(ColIx).Text.Length Then
+                            PlayerRow.Cells(ColIx).HorizontalAlign = HorizontalAlign.Center
+                        End If
+                    Next
+                Next
+
+            End With
+
+        End Using
+
+    End Sub
+
 End Class

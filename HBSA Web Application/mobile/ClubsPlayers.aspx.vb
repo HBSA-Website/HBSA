@@ -61,5 +61,25 @@ Public Class ClubsPlayers1
         End If
 
     End Sub
+    <System.Web.Script.Services.ScriptMethod>
+    <System.Web.Services.WebMethod>
+    Public Shared Function SuggestPlayers(ByVal prefixText As String, ByVal count As Integer) As List(Of String)
 
+        Return HBSAcodeLibrary.PlayerData.GetSuggestedPlayers(prefixText, count, 0, 0, 0)
+
+    End Function
+
+    Protected Sub GetByName_Button_Click(sender As Object, e As EventArgs) Handles GetByName_Button.Click
+
+        ClubsAndPlayers_Div.InnerHtml = ""
+        Teams_Div.InnerHtml = ""
+        Players_Div.InnerHtml = ""
+        Team_Literal.Text = ""
+        Player_Literal.Text = ""
+
+        Using players As DataTable = HBSAcodeLibrary.PlayerData.GetPlayerDetailsByPlayer(,, Player_TextBox.Text, , True)
+            Players_Div.InnerHtml = Utilities.BuildMobileActiveTable(players, 1, , "ActiveDetailDiv", "Player")
+        End Using
+
+    End Sub
 End Class

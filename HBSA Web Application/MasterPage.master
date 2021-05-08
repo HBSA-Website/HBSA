@@ -167,11 +167,15 @@
                                              text-align:left; ">
                                             <a runat="server" href="ResultsCardDownload.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Download Results Sheets</a></td></tr>
 
-                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+                                        <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
                                              text-align:left; ">
                                             <a runat="server" href="Breaks.aspx"><img alt="" style="border-style: none" src="Images/red.jpg" /> Breaks over 25</a></td></tr>
+                                        <tr>
+                                            <td style="margin: 0px; padding: 2px; color: #006633; font-family: Verdana; font-weight: bold; text-align: left;">
+                                                <a runat="server" href="ClubsPlayers.aspx"><img alt="" style="border-style: none" src="Images/red.jpg" /> Clubs and Players</a></td>
+                                        </tr>
 
-                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                        <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
                                               text-align:left; ">
                                             <a runat="server" href="Handicaps.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Handicaps</a></td></tr>
 

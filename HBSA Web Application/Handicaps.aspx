@@ -87,12 +87,14 @@
                                 <td style="text-align:right">Select the required player, and click GO</td>
                                 <td>
                                     <asp:TextBox ID="Player_TextBox" runat="server" BackColor="#FFFFCC" Width="193px" Height="18px"></asp:TextBox>
-                                        <AjaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="Player_TextBox" DelimiterCharacters="" 
-                                             MinimumPrefixLength="1" EnableCaching="false" UseContextKey="true"
+                                        <AjaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" 
+                                            TargetControlID="Player_TextBox" DelimiterCharacters="" 
+                                             MinimumPrefixLength="2" EnableCaching="false" UseContextKey="true"
                                               ServiceMethod="SuggestPlayers" CompletionInterval="10"
                                               OnClientPopulating="autoComplete1_OnClientPopulating"
                                               CompletionSetCount="20" 
-                                             CompletionListCssClass="completionList" CompletionListItemCssClass="completionLlistItem" CompletionListHighlightedItemCssClass="completionItemHighlighted"></AjaxToolkit:AutoCompleteExtender>
+                                             CompletionListCssClass="completionList" CompletionListItemCssClass="completionLlistItem" 
+                                            CompletionListHighlightedItemCssClass="completionItemHighlighted"></AjaxToolkit:AutoCompleteExtender>
 
 
                                 </td>

@@ -54,8 +54,9 @@ Public Class ActiveTableDetail
         Dim HTML As StringBuilder = New StringBuilder()
 
         Using player As PlayerData = New PlayerData(PlayerID)
-            HTML.Append("<b>" & player.FullName & "</b><br /> ")
-            HTML.Append(player.LeagueName & "&nbsp;" & player.Team & " team<br />")
+            HTML.Append("<b>" & player.FullName & "</b> ")
+            HTML.Append(player.ClubName & "<br/>")
+            HTML.Append(player.LeagueName & "&nbsp;" & If(player.Team.Trim = "", "", player.Team & " team") & "<br />")
             HTML.Append(player.SectionName & "&nbsp;| <b>H'Cap:</b> " & player.Handicap & "<br/>")
             HTML.Append("<b>Tag:</b> " & If(player.Tagged = 0, "Seasoned",
                                          If(player.Tagged = 3, "Unseasoned",

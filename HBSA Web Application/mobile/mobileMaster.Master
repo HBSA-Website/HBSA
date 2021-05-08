@@ -150,6 +150,9 @@
                                             <a runat="server" href="Breaks.aspx"><img alt="" src="../Images/red.jpg" /> Breaks over 25</a></td></tr>
 
                                     <tr><td>
+                                            <a runat="server" href="ClubsPlayers.aspx"><img alt="" src="../Images/red.jpg" /> Clubs and Players</a></td></tr>
+
+                                    <tr><td>
                                             <a runat="server" href="Handicaps.aspx" ><img alt="" src="../Images/red.jpg" /> Handicaps</a></td></tr>
 
                                     <tr><td class="openSeason">

@@ -7,7 +7,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script> 
     <%--//1.12.4.js"></script>--%>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"  type="text/javascript"></script>
-
+    <%--HTML5 datepicker with textbox code--%>
     <script type="text/javascript">
         var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         function DateBoxClicked(datePicker, dateBox) {
@@ -39,9 +39,8 @@
             return yyyy + '-' + mm + '-' + dd;
         }
     </script>
-
-  <%--prevent enter key causing postback--%>
-  <script type="text/javascript">
+    <%--prevent enter key causing postback--%>
+    <script type="text/javascript">
       $(document).keypress(function(e)
     {
         if(e.keyCode === 13)
@@ -51,8 +50,7 @@
         }
     });
   </script>
-
-  <%--include our own code--%>
+    <%--include our own code--%>
      <script type="text/javascript"> 
         <!--#include file="~/Scripts/ResultsCardJavaScript.js"-->
          //function storePlayerID(ddList) {
@@ -123,8 +121,8 @@
          }
 
      </script>
-
-   <script type="text/javascript">
+    <%--Show handicap message--%>
+    <script type="text/javascript">
        function showHCapMsg(caller) {
            var rect = caller.getBoundingClientRect();
            var HCapMsg = document.getElementById("divHCapMsg");

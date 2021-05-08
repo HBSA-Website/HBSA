@@ -4272,13 +4272,15 @@ namespace HBSAcodeLibrary
                                                                      new SqlParameter("SectionID", SectionID > 99 ? 0 : SectionID % 100),
                                                                      new SqlParameter("ClubID", ClubID)});
         }
-        public static DataTable GetPlayerDetailsByPlayer(int SectionID = 0, int ClubID = 0, string player = "")
+        public static DataTable GetPlayerDetailsByPlayer(int SectionID = 0, int ClubID = 0, string player = "", bool basic = false, bool mobile = false)
         {
             return SQLcommands.ExecDataTable("GetPlayerDetailsByPlayer",
                                             new List<SqlParameter> { new SqlParameter("LeagueID", SectionID > 99 ? SectionID % 100 : 0),
                                                                      new SqlParameter("SectionID", SectionID > 99 ? 0 : SectionID % 100),
                                                                      new SqlParameter("ClubID", ClubID),
-                                                                     new SqlParameter("Player",player)});
+                                                                     new SqlParameter("Player",player),
+                                                                     new SqlParameter("mobile",mobile),
+                                                                     new SqlParameter("basic",basic)});
         }
         public static string ApplyNewPlayerTags()
         {

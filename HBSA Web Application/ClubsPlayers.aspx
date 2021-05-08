@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="ClubsPlayers.aspx.vb" Inherits="HBSA_Web_Application.ClubsPlayers" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -19,22 +20,47 @@
             <b>Clubs and Players</b><br />
             <br />
             
-            <table style="font-size: 11pt; width:100%">
-                <tr>
-                    <td style="text-align: right; font-size: 11pt">Select a league and section</td>
-                    <td rowspan="2" style="text-align: center; vertical-align:top; font-size: 16px; font-weight: bold">&nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;</td>
-                    <td style="text-align: left; font-size: 11pt">Select a Club</td>
+            <table style="font-size: 11pt; width: 100%; text-align: center;">
+                <tr style="font-weight:bold;">
+                    <td style="font-size: 11pt; color: black; font-style: italic;">Select a league and section</td>
+                    <td rowspan="2" style="vertical-align: middle; font-size: 16px; font-weight: bold">&nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;</td>
+                    <td style="font-size: 11pt;color:black; font-style: italic;">Select a Club</td>
+                    <td rowspan="2" style="vertical-align:middle; font-size: 16px; font-weight: bold">&nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;</td>
+                    <td style="font-size: 11pt; color: black; font-style: italic;">Find a Player</td>
                 </tr>
                 <tr>
-                    <td style="text-align: right;"><asp:DropDownList ID="Section_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" ></asp:DropDownList></td>
-                    <td style="text-align: left;"><asp:DropDownList ID="Club_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" ></asp:DropDownList></td>
-             
+                    <td><asp:DropDownList ID="Section_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" ></asp:DropDownList></td>
+                    <td><asp:DropDownList ID="Club_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" ></asp:DropDownList></td>
+                    <td>
+                        <table style="text-align: left;">
+                            <tr>
+                                <td colspan="3" style="font-size: 10pt; color:black; font-style:italic;">Start entering a player&#39;s name then:</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; font-size: 10pt;color:black; font-style: italic;">select a player and click GO</td>
+                                <td>
+                                    <asp:TextBox ID="Player_TextBox" runat="server" BackColor="#FFFFCC" Width="193px" Height="18px"></asp:TextBox>
+                                    <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="Player_TextBox" DelimiterCharacters=""
+                                        MinimumPrefixLength="1" EnableCaching="false" UseContextKey="true"
+                                        ServiceMethod="SuggestPlayers" CompletionInterval="10"
+                                        CompletionSetCount="20"
+                                        CompletionListCssClass="completionList" CompletionListItemCssClass="completionLlistItem" CompletionListHighlightedItemCssClass="completionItemHighlighted">
+                                    </ajaxToolkit:AutoCompleteExtender>
+
+
+                                </td>
+                                <td>
+                                    <asp:Button ID="GetByName_Button" runat="server" Text="GO" /></td>
+                            </tr>
+                        </table>
+
+                    </td>
                 </tr>
             </table>
 
             <br />
-            <div style="text-align: center; width: 100%">
-            <table style="width:100%">
+
+            <table style="width: auto; margin-left: auto; margin-right: auto;">
                 <tr>
                     <td style="vertical-align:top;">
                         <asp:GridView ID="ClubsAndPlayers_GridView" runat="server" BackColor="White" 
@@ -67,8 +93,6 @@
                 </tr>
             </table>
   
-    </div>
-
           </div>
 
 
