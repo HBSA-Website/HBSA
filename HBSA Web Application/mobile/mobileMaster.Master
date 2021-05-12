@@ -138,7 +138,7 @@
                                             <a runat="server" href="MatchResult.aspx" ><img alt="" src="../Images/red.jpg" /> Submit match result</a></td></tr>
 
                                     <tr><td>
-                                            <a runat="server" href="../Results.aspx" ><img alt="" src="../Images/red.jpg" /> Match Results</a></td></tr>
+                                            <a runat="server" href="Results.aspx" ><img alt="" src="../Images/red.jpg" /> Match Results</a></td></tr>
 
                                     <tr><td class="openSeason">
                                             <a runat="server" href="MissingResults.aspx" ><img alt="" src="../Images/red.jpg" /> Missing Results</a></td></tr>

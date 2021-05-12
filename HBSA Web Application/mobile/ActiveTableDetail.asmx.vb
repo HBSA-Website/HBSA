@@ -25,6 +25,8 @@ Public Class ActiveTableDetail
                 Return GetHandicapDetail(ID)
             Case "PlayingRecord"
                 Return GetPlayingRecord(ID)
+            Case "ScoreCard"
+                Return GetScoreCard(ID)
             Case Else
                 Return "ERROR:  Unknown detail type: " & DetailType
         End Select
@@ -172,6 +174,143 @@ Public Class ActiveTableDetail
         End Using
 
         Return HTML.ToString()
+    End Function
+
+    Private Function GetScoreCard(ID As String) As String
+
+        Dim HTML As StringBuilder = New StringBuilder()
+
+        Dim filePath As String = Server.MapPath("~/Mobile/ResultCard.html")
+        Dim ResultCardHTML As String = IO.File.ReadAllText(filePath)
+
+        Using MatchResult As DataSet = HBSAcodeLibrary.MatchResult.ResultCard(ID)
+
+            Dim ix As Integer = 0
+            Dim iy As Integer = -1
+            Dim cardHeader As DataRow = MatchResult.Tables(0).Rows(0)
+            Dim cardBody As DataTable = MatchResult.Tables(1)
+            Dim homeBreaksTable As DataTable = MatchResult.Tables(2)
+            Dim awayBreaksTable As DataTable = MatchResult.Tables(3)
+
+            While iy < ResultCardHTML.Length
+
+                ix = ResultCardHTML.IndexOf("|", Math.Max(0, iy + 1))
+                If ix < 0 Then  'no more words to replace - retrieve the remainder of the HTML & stop indexing
+                    HTML.Append(ResultCardHTML.Substring(iy + 1))
+                    Exit While
+                End If
+
+                'insert the HTML from the last point to the replace word
+                HTML.Append(ResultCardHTML.Substring(iy + 1, ix - iy - 1))
+
+                'find the replace word
+                iy = ResultCardHTML.IndexOf("|", ix + 1)
+                Dim replaceWord As String = ResultCardHTML.Substring(ix + 1, iy - ix - 1)
+
+                Select Case replaceWord
+                    Case "League"
+                        HTML.Append(cardHeader!League)
+                    Case "Section"
+                        HTML.Append(cardHeader!Section)
+                    Case "FixtureDate"
+                        HTML.Append(cardHeader.Item("FixtureDate"))
+                    Case "MatchDate"
+                        HTML.Append(cardHeader.Item("Match Date"))
+                    Case "HomeTeam"
+                        HTML.Append(cardHeader!Home)
+
+                    Case "AwayTeam"
+                        HTML.Append(cardHeader!Away)
+                    Case "HomeFrames"
+                        HTML.Append(cardHeader!H_Pts)
+                    Case "AwayFrames"
+                        HTML.Append(cardHeader!A_Pts)
+
+                    Case "HomeHcap1"
+                        HTML.Append(cardBody.Rows(0).Item("Home H'cap"))
+                    Case "HomePlayer1"
+                        HTML.Append(cardBody.Rows(0)!HomePlayer)
+                    Case "HomeScore1"
+                        HTML.Append(cardBody.Rows(0)!HomeScore)
+                    Case "AwayHcap1"
+                        HTML.Append(cardBody.Rows(0).Item("Away H'cap"))
+                    Case "AwayPlayer1"
+                        HTML.Append(cardBody.Rows(0)!AwayPlayer)
+                    Case "AwayScore1"
+                        HTML.Append(cardBody.Rows(0)!AwayScore)
+
+                    Case "HomeHcap2"
+                        HTML.Append(cardBody.Rows(1).Item("Home H'cap"))
+                    Case "HomePlayer2"
+                        HTML.Append(cardBody.Rows(1)!HomePlayer)
+                    Case "HomeScore2"
+                        HTML.Append(cardBody.Rows(1)!HomeScore)
+                    Case "AwayHcap2"
+                        HTML.Append(cardBody.Rows(1).Item("Away H'cap"))
+                    Case "AwayPlayer2"
+                        HTML.Append(cardBody.Rows(1)!AwayPlayer)
+                    Case "AwayScore2"
+                        HTML.Append(cardBody.Rows(1)!AwayScore)
+
+                    Case "HomeHcap3"
+                        HTML.Append(cardBody.Rows(2).Item("Home H'cap"))
+                    Case "HomePlayer3"
+                        HTML.Append(cardBody.Rows(2)!HomePlayer)
+                    Case "HomeScore3"
+                        HTML.Append(cardBody.Rows(2)!HomeScore)
+                    Case "AwayHcap3"
+                        HTML.Append(cardBody.Rows(2).Item("Away H'cap"))
+                    Case "AwayPlayer3"
+                        HTML.Append(cardBody.Rows(2)!AwayPlayer)
+                    Case "AwayScore3"
+                        HTML.Append(cardBody.Rows(2)!AwayScore)
+
+                    Case "HomeHcap4"
+                        HTML.Append(If(Not cardHeader!League.ToLower Like "*open*", "&nbsp;", cardBody.Rows(3).Item("Home H'cap")))
+                    Case "HomePlayer4"
+                        HTML.Append(If(Not cardHeader!League.ToLower Like "*open*", "&nbsp;", cardBody.Rows(3)!HomePlayer))
+                    Case "HomeScore4"
+                        HTML.Append(If(Not cardHeader!League.ToLower Like "*open*", "&nbsp;", cardBody.Rows(3)!HomeScore))
+                    Case "AwayHcap4"
+                        HTML.Append(If(Not cardHeader!League.ToLower Like "*open*", "&nbsp;", cardBody.Rows(3).Item("Away H'cap")))
+                    Case "AwayPlayer4"
+                        HTML.Append(If(Not cardHeader!League.ToLower Like "*open*", "&nbsp;", cardBody.Rows(3)!AwayPlayer))
+                    Case "AwayScore4"
+                        HTML.Append(If(Not cardHeader!League.ToLower Like "*open*", "&nbsp;", cardBody.Rows(3)!AwayScore))
+
+
+                    Case "HomeBreaks_GridView"
+                        HTML.Append(BreakTableHTML(homeBreaksTable))
+                    Case "AwayBreaks_GridView"
+                        HTML.Append(BreakTableHTML(awayBreaksTable))
+
+                    Case Else
+                        Throw New Exception("Unrecognised replace word on the result card HTML: " & replaceWord)
+                End Select
+
+            End While
+
+        End Using
+
+        Return HTML.ToString()
+
+    End Function
+
+    Private Function BreakTableHTML(BreaksTable As DataTable) As String
+
+        If BreaksTable.Rows.Count = 0 Then
+            Return ""
+        Else
+            Dim BreaksHTML As New StringBuilder("<table style='border: none;'>")
+
+            For Each row As DataRow In BreaksTable.Rows
+                BreaksHTML.Append("<tr><tdstyle='border: none;'>" & row.ItemArray(0) & "</td><tdstyle='border: none;'>&nbsp;&nbsp;&nbsp;" & row.ItemArray(1) & "</td></tr>")
+            Next
+
+            BreaksHTML.Append("</table>")
+            Return BreaksHTML.ToString
+
+        End If
     End Function
 
 End Class

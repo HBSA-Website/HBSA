@@ -267,8 +267,12 @@ namespace HBSAcodeLibrary
                     HTML.Append(" onmouseover=\"this.style.cursor = 'pointer';\" onclick=\"loadInfoDiv('" + InfoDivID + "','" + row.ItemArray[0].ToString().Replace("'","~") + "','" + DetailType + "');\"");
                 HTML.Append(">");
 
-                for (int ix = startCol; ix <= endCol; ix++) 
-                    HTML.Append("<td>" + row.ItemArray[ix].ToString() + "</td>");
+                for (int ix = startCol; ix <= endCol; ix++) {
+                    HTML.Append("<td");
+                    if (table.Columns[ix].ColumnName.Length > row.ItemArray[ix].ToString().Length)
+                        HTML.Append(" style='text-align:center'");
+                    HTML.Append(">" + row.ItemArray[ix].ToString() + "</td>");
+                }
                 HTML.Append("</tr>");
             }
              

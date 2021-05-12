@@ -2411,7 +2411,7 @@ namespace HBSAcodeLibrary
                 Address2 = DBNull.Value == ClubDetails["Address2"] ? "" : (string)ClubDetails["Address2"];
                 PostCode = DBNull.Value == ClubDetails["PostCode"] ? "" : (string)ClubDetails["PostCode"];
                 ContactName = (string)ClubDetails["ContactName"];
-                ContactEMail = (string)ClubDetails["ContactEMail"];
+                ContactEMail = DBNull.Value == ClubDetails["ContactEMail"] ? "" : (string)ClubDetails["ContactEMail"];
                 ContactTelNo = (string)ClubDetails["ContactTelNo"];
                 ContactMobNo = (string)ClubDetails["ContactMobNo"];
                 MatchTables = (int)ClubDetails["MatchTables"];

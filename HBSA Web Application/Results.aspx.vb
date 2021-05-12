@@ -13,7 +13,6 @@ Partial Class Results
         End If
 
     End Sub
-
     Protected Sub PopulateSections()
 
         Results_GridView.Visible = False
@@ -42,7 +41,6 @@ Partial Class Results
         End Using
 
     End Sub
-
     Protected Sub Section_DropDownList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Section_DropDownList.SelectedIndexChanged
 
         Selection_Literal.Text = "Select a league and section, then optionally a date and/or a team then click Show Results."
