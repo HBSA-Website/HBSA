@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class EntryFormsDownload
+Partial Public Class EntryFormsDownload1
 
     '''<summary>
     '''EntryFormType_DropDownList control.
@@ -41,31 +41,31 @@ Partial Public Class EntryFormsDownload
     Protected WithEvents Leagues_Panel As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''DownloadOpen_Button control.
+    '''HyperLink1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DownloadOpen_Button As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents HyperLink1 As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
-    '''DownloadVets_Button control.
+    '''HyperLink2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DownloadVets_Button As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents HyperLink2 As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
-    '''DownloadBilliards_Button control.
+    '''HyperLink3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DownloadBilliards_Button As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents HyperLink3 As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
     '''Competitions_Panel control.
@@ -77,29 +77,29 @@ Partial Public Class EntryFormsDownload
     Protected WithEvents Competitions_Panel As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''DownloadSnookerComps_Button control.
+    '''HyperLink4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DownloadSnookerComps_Button As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents HyperLink4 As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
-    '''DownLoadVetsComps_Button control.
+    '''HyperLink5 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DownLoadVetsComps_Button As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents HyperLink5 As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
-    '''DownLoadBilliardsComps_Button control.
+    '''HyperLink6 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DownLoadBilliardsComps_Button As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents HyperLink6 As Global.System.Web.UI.WebControls.HyperLink
 End Class

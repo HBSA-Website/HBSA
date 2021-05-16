@@ -491,6 +491,7 @@
     <Content Include="mobile\competitions.aspx" />
     <Content Include="mobile\Contact.aspx" />
     <Content Include="mobile\default.aspx" />
+    <Content Include="mobile\EntryFormsDownload.aspx" />
     <Content Include="mobile\Fines.aspx" />
     <Content Include="mobile\FixtureLists.aspx" />
     <Content Include="mobile\Handbook.aspx" />
@@ -604,6 +605,8 @@
     <Content Include="TrophiesAndPrizes.aspx" />
     <Content Include="UnderMaintenance.aspx" />
     <Content Include="UnseasonedPlayers.aspx" />
+    <Content Include="Documents\Competition_Entry_Form_Billiards.pdf" />
+    <Content Include="Documents\Competition_Entry_Form_Vets.pdf" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
@@ -1246,6 +1249,13 @@
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="mobile\EntryFormsDownload.aspx.designer.vb">
+      <DependentUpon>EntryFormsDownload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\EntryFormsDownload.aspx.vb">
+      <DependentUpon>EntryFormsDownload.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="mobile\Fines.aspx.designer.vb">
       <DependentUpon>Fines.aspx</DependentUpon>
     </Compile>
@@ -1630,7 +1640,6 @@
     <Content Include="Documents\Entry Form Snooker.pdf" />
     <Content Include="Documents\Entry Form Vets.pdf" />
     <Content Include="Documents\Competition_Entry_Form_Snooker.pdf" />
-    <Content Include="Documents\Competition_Entry_Form_Vets_Billiards.pdf" />
     <Content Include="Documents\Yorkshire Snooker Championships 2017 ENTRY FORM.pdf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

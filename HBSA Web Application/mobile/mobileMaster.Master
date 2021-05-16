@@ -108,11 +108,11 @@
                                     <tr><td>
                                             <a runat="server" href="competitions.aspx" ><img alt="" src="../Images/red.jpg" /> The draw, results, dates etc.</a></td></tr>
                                     <tr><td>
-                                            <a runat="server" href="../Contact.aspx" ><img alt="" src="../Images/red.jpg" /> Use contact us to send in a competion result</a></td></tr>
+                                            <a runat="server" href="Contact.aspx" ><img alt="" src="../Images/red.jpg" /> Send a competion result</a></td></tr>
                                     <tr><td>
                                             <a runat="server" href="../CompetitionsEntryForm.aspx" ><img alt="" src="../Images/red.jpg" /> On line entry Forms </a></td></tr>
                                     <tr><td>
-                                            <a runat="server" href="../EntryFormsDownload.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Forms Download</a></td></tr>
+                                            <a runat="server" href="EntryFormsDownload.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Forms Download</a></td></tr>
                                     </table>
                                   </div>
                 </td>
@@ -178,7 +178,7 @@
                                             <a runat="server" href="../EntryForm.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Form</a></td></tr>
 
                                     <tr><td class="closeSeason">
-                                            <a runat="server" href="../EntryFormsDownload.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Forms Download</a></td></tr>
+                                            <a runat="server" href="EntryFormsDownload.aspx" ><img alt="" src="../Images/red.jpg" /> Entry Forms Download</a></td></tr>
 
                                     </table>
                                      <br />

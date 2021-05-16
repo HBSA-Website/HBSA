@@ -1,6 +1,23 @@
 ﻿Public Class EntryFormsDownload
     Inherits System.Web.UI.Page
+    Private Sub EntryFormType_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles EntryFormType_DropDownList.SelectedIndexChanged
 
+        Select Case EntryFormType_DropDownList.SelectedValue
+            Case 0
+                Selection_Panel.Visible = True
+                Leagues_Panel.Visible = False
+                Competitions_Panel.Visible = False
+            Case 1
+                Selection_Panel.Visible = False
+                Leagues_Panel.Visible = True
+                Competitions_Panel.Visible = False
+            Case 2
+                Selection_Panel.Visible = False
+                Leagues_Panel.Visible = False
+                Competitions_Panel.Visible = True
+        End Select
+
+    End Sub
     Protected Sub Download_Button_Click(sender As Object, e As EventArgs) _
             Handles DownloadOpen_Button.Click, DownloadVets_Button.Click, DownloadBilliards_Button.Click,
                     DownloadSnookerComps_Button.Click, DownLoadVetsComps_Button.Click, DownLoadBilliardsComps_Button.Click
@@ -31,39 +48,4 @@
 
     End Sub
 
-    Protected Sub Type_RadioButtonList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Type_RadioButtonList.SelectedIndexChanged
-
-        Leagues_Panel.Visible = Type_RadioButtonList.Items(0).Selected
-        Competitions_Panel.Visible = Not Leagues_Panel.Visible
-
-    End Sub
-
-    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        If Not IsPostBack Then
-
-            With Type_RadioButtonList
-
-                If HBSAcodeLibrary.HBSA_Configuration.AllowCompetitionsEntryForms AndAlso HBSAcodeLibrary.HBSA_Configuration.CloseSeason Then
-                    ChooserTable.Visible = True
-                Else
-                    .Enabled = False
-                    ChooserTable.Visible = False
-                    If HBSAcodeLibrary.HBSA_Configuration.CloseSeason Then
-                        .Items(0).Selected = True
-                    End If
-                    If HBSAcodeLibrary.HBSA_Configuration.AllowCompetitionsEntryForms Then
-                        .Items(1).Selected = True
-                    End If
-
-                    Type_RadioButtonList_SelectedIndexChanged(sender, e)
-
-                End If
-
-
-            End With
-
-        End If
-
-    End Sub
 End Class
