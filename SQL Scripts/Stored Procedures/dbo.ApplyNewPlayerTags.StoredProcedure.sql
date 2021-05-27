@@ -11,6 +11,10 @@ as
 set nocount on
 set xact_abort on
 
+if (select count(*) from MatchResults) = 0
+	throw 50000,'No match results - No tags changed.',1;
+
+
 begin tran
 
 declare @NoOfSeasonsToUntag int
@@ -88,3 +92,4 @@ deallocate playersCursor
 commit tran
 GO
 
+exec ApplyNewPlayerTags

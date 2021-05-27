@@ -114,7 +114,7 @@
                     <asp:GridView ID="Teams_GridView" runat="server"  
                         EnableModelValidation="True" Font-Size="9pt" BackColor="White" BorderColor="#E7E7FF" 
                         BorderStyle="None" BorderWidth="1px" CellPadding="3"
-                        EmptyDataText="No data found" HeaderStyle-HorizontalAlign="Left">
+                        EmptyDataText="<span style='color:red'>No Handicaps to change (no match results).</span>" HeaderStyle-HorizontalAlign="Left">
                         <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" HorizontalAlign="Left" />
                         <RowStyle Height="18px" BackColor="#E7E7FF" ForeColor="#000044" />
                         <AlternatingRowStyle Height="18px" BackColor="#F7F7F7" />
