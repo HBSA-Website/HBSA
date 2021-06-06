@@ -1,6 +1,9 @@
 DECLARE @SchemaName sysname = 'dbo';
-DECLARE @TableName sysname  = 'Clubs';
-DECLARE @ColumnName sysname = 'ContactEMail';
+DECLARE @TableName sysname  = 'Teams';
+DECLARE @ColumnName sysname = 'ID';
+
+if exists (Select table_name from INFORMATION_SCHEMA.TABLES where TABLE_NAME='ColumnDependencies')
+	drop table ColumnDependencies
 
 SELECT
     @SchemaName + '.' + @TableName                                      AS [USED_OBJECT],
@@ -26,7 +29,7 @@ SELECT
     END                                             AS USAGE_OBJECTTYPE,
     so.[type]                                       AS USAGE_OBJECTTYPEID
 
-into ContactEmailDependencies
+into ColumnDependencies
 
 FROM sys.dm_sql_referencing_entities
     (
@@ -68,4 +71,4 @@ ORDER BY
     USAGE_OBJECTTYPE,
     USAGE_OBJECT
 
-select * from ContactEmailDependencies
+select * from ColumnDependencies

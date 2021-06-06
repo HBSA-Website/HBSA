@@ -1,4 +1,4 @@
-use HBSA_test
+use HBSA
 go
 
 if exists (select routine_name from INFORMATION_SCHEMA.ROUTINES where ROUTINE_NAME = 'ContactsReport')
@@ -259,11 +259,14 @@ select	 [Source] = 'Entry Form'
 	from Entryform_Players P
 	outer apply (select [League Name] from  Leagues where ID = LeagueID)L
 	outer apply (select [Club Name] from Entryform_Clubs C where ClubID = P.ClubID) C
-	outer apply (select TeamID from EntryForm_Teams where LeagueID=P.LeagueID and ClubID=P.ClubID and Team=P.Team) T
+	outer apply (select TeamID from EntryForm_Teams where LeagueID=P.LeagueID and ClubID=P.ClubID and Team=P.Team and TeamID is not null) T
 	where P.PlayerID > 0
 	order by isnull([Club Name],'_No Club'), LeagueID, Team, [Player Name]
 
-select * from #tmp
+select * 
+	from #tmp
+	order by Seq
+
 drop table #tmp
 
 go
