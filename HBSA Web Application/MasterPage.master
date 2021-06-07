@@ -213,10 +213,10 @@
                                              text-align:left;" class="closeSeason">
                                             <a runat="server" href="EntryForm.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Entry Form</a></td></tr>
 
-                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
+<%--                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
                                              text-align:left; " class="closeSeason">
                                             <a runat="server" href="EntryFormsDownload.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Entry Forms Download</a></td></tr>
-
+--%>
                                     </table>
                                      <br />
                                  </div>
