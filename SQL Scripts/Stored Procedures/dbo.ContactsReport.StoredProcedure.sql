@@ -110,7 +110,7 @@ select	 [Source] = 'Base'
 		,R.TeamID
 		,[Player Name] = Contact
 		,null
-	    ,Email = eMail
+	    ,Email = R.eMailAddress
 	    ,[Tel No 1] = T.Telephone
 	    ,[Tel No 2] = ''
 	
@@ -171,28 +171,6 @@ select	 [Source] = 'Entry Form'
 
 insert into #tmp
 select	 [Source] = 'Entry Form'
-	   	,Entity = 'Club Login'
-		,Club = [Club Name]
-		,ClubUsers.ClubID
-		,League=''
-		,null
-		,Section = ''
-		,null
-		,Team=''
-		,null
-		,[Player Name]=dbo.FullPlayerName(FirstName,'',Surname) 
-		,null
-	    ,Email=eMailAddress 
-	    ,[Tel No 1] = Telephone 
-	    ,[Tel No 2] = ''
-	
-	from ClubUsers
-	outer apply (select [Club Name] from EntryForm_Clubs where ClubID=ClubUsers.ClubID) C
-	where [Club Name] <> 'Bye'
-	order by [Club Name]
-
-insert into #tmp
-select	 [Source] = 'Entry Form'
 	   	,Entity = 'Team'
 		,Club = [Club Name]
 		,ClubID
@@ -215,29 +193,6 @@ select	 [Source] = 'Entry Form'
 	                   from EntryForm_Players where PlayerID=Captain)X
 
 	order by [Club Name], L.ID, Team 
-
-insert into #tmp
-select	 [Source] = 'Entry Form'
-	   	,Entity = 'Team Login'
-		,Club = [Club Name]
-		,E.ClubID
-		,League = [League Name]
-		,L.ID 
-		,Section = ''
-		,null
-		,Team = Team
-		,E.TeamID
-		,[Player Name] = dbo.FullPlayerName(FirstName,'',Surname)
-		,null
-	    ,Email = R.eMailAddress
-	    ,[Tel No 1] = R.Telephone
-	    ,[Tel No 2] = ''
-	
-	from ResultsUsers R
-	left join EntryForm_Teams E on E.TeamID=R.TeamID
-	outer apply (select ID, [League Name] from Leagues where ID=E.LeagueID)L
-	outer apply (select [Club Name] from Entryform_Clubs where ClubID = E.ClubID)C
-	order by [Club Name], L.ID, Team 	
 
 insert into #tmp
 select	 [Source] = 'Entry Form'
