@@ -37,89 +37,106 @@
 			<asp:Literal ID="Club_Selector_Literal" runat="server"></asp:Literal><br />
 		</div>
 
- 
+
+        
 		<asp:UpdatePanel ID="Club_UpdatePanel" runat="server">
 
-		<ContentTemplate>    
+            <ContentTemplate>
 
-			<asp:Panel ID="Acceptance_Panel" runat="server" Visible="true">
-				<div style="padding: 4px; border: 1px solid #000080; font-family: Arial, Helvetica, sans-serif; font-size: 12Pt; color:maroon; vertical-align: top; 
-								   text-align: left; position:absolute; left:300px; top: 300px; width:50%; color: #CC0000; background-color: #FFFF99;">
-                    <asp:Literal ID="AcceptanceCopy_Literal" runat="server"></asp:Literal><br />
-					<asp:CheckBox ID="Accept_CheckBox" runat="server" Text=" I confirm I have read the statement above and will act upon it." TextAlign="Right" ForeColor="#003399" Font-Underline="True" Font-Size="14pt" Font-Bold="True" />
-				   <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Accept_Button" runat="server" Text="OK, I accept" /><br /><br />
-				</div>
-			</asp:Panel>
+                <asp:Panel ID="Acceptance_Panel" runat="server" Visible="true">
+                    <div style="padding: 4px; border: 1px solid #000080; font-family: Arial, Helvetica, sans-serif; font-size: 12Pt; color: maroon; vertical-align: top; text-align: left; position: absolute; left: 300px; top: 300px; width: 50%; color: #CC0000; background-color: #FFFF99;">
+                        <asp:Literal ID="AcceptanceCopy_Literal" runat="server"></asp:Literal><br />
+                        <asp:CheckBox ID="Accept_CheckBox" runat="server" Text=" I confirm I have read the statement above and will act upon it." TextAlign="Right" ForeColor="#003399" Font-Underline="True" Font-Size="14pt" Font-Bold="True" />
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Accept_Button" runat="server" Text="OK, I accept" /><br />
+                        <br />
+                    </div>
+                </asp:Panel>
 
-			<asp:Panel ID="Club_Panel" runat="server" Visible="true">
-				<div style="text-align: left">
-			<span style="font-size: 11pt; font-weight: bold; color: #FF0000">
-				&nbsp;&nbsp;&nbsp;&nbsp;Club Affiliation Fee £<asp:Literal ID="Club_Fee_Literal" runat="server"></asp:Literal>
-			</span><br />
-			<asp:DropDownList ID="Club_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" style="text-align:left"></asp:DropDownList>
-			<asp:Button ID="Show_Button" runat="server" Text="Show all entry form details" visible="false"/>
-			<br />
-					<asp:Literal ID="Club_WIP_Literal" runat="server"></asp:Literal> 
+                <asp:Panel ID="Club_Panel" runat="server" Visible="true">
+                    <div style="text-align: left">
+                        <span style="font-size: 11pt; font-weight: bold; color: #FF0000">&nbsp;&nbsp;&nbsp;&nbsp;Club Affiliation Fee £<asp:Literal ID="Club_Fee_Literal" runat="server"></asp:Literal>
+                        </span>
+                        <br />
+                        <asp:DropDownList ID="Club_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" Style="text-align: left"></asp:DropDownList>
+                        <asp:Button ID="Show_Button" runat="server" Text="Show all entry form details" Visible="false" />
+                        <br />
+                        <asp:Literal ID="Club_WIP_Literal" runat="server"></asp:Literal>
 
-			  
-			<div id="PayNotice2" runat="server" visible="false">
 
-			</div>
+                        <div id="PayNotice2" runat="server" visible="false">
+                        </div>
 
-					<table id="ClubDetails_Table" runat="server">
-						<tr><th style="text-align:right">Club Name:</th>
-							<td><asp:TextBox CssClass="txtBox" ID="Club_Name_TextBox" runat="server" Width="224px" MaxLength="50"></asp:TextBox></td>
-							<th style="text-align:right" ></th>
-							<%--<td><asp:Literal ID="Club_ID" runat="server" Visible="False"></asp:Literal></td>--%>
-						</tr>
-						<tr><th style="text-align:right">Address 1:</th>
-							<td><asp:TextBox CssClass="txtBox" ID="Club_Addr1_TextBox" runat="server" Width="224px" MaxLength="50"></asp:TextBox></td>
-							<th style="text-align:right">Contact:</th>
-							<td><asp:TextBox CssClass="txtBox" ID="Club_Contact_TextBox" runat="server" MaxLength="104"></asp:TextBox></td>
-						</tr>
-						<tr><th style="text-align:right">Address 2:</th>
-							<td><asp:TextBox CssClass="txtBox" ID="Club_Addr2_TextBox" runat="server" Width="224px" MaxLength="50"></asp:TextBox></td>
-                            <th style="text-align: right">Telephone:</th>
-                            <td>
-                                <asp:TextBox CssClass="txtBox" ID="Club_Telephone_TextBox" runat="server" MaxLength="20"
-                                    onkeyup="this.value=this.value.replace(/[^1234567890 ]/g,'')"></asp:TextBox></td>
-                        </tr>
-						<tr><th style="text-align:right">Post Code:</th>
-							<td><asp:TextBox CssClass="txtBox" ID="Club_PostCode_TextBox" runat="server" Width="224px" MaxLength="10"></asp:TextBox></td>
-                            <th style="text-align: right">Mobile:</th>
-                            <td>
-                                <asp:TextBox CssClass="txtBox" ID="Club_Mobile_TextBox" runat="server" MaxLength="20"
-                                    onkeyup="this.value=this.value.replace(/[^1234567890 ]/g,'')"></asp:TextBox></td>
-                        </tr>
-						<tr><th style="text-align:right">No of Tables:</th>
-							<td><asp:TextBox CssClass="txtBox" ID="Club_NoTables_TextBox" runat="server" Width="20px" MaxLength="1"
-											 onkeyup="this.value=this.value.replace(/[^1234567890]/g,'')"></asp:TextBox></td>
-                            <th style="text-align: right">Club Login eMail:</th>
-                            <td>
-                                <asp:Label Style="padding: 2px;" ID="Club_Email_Label" runat="server" Width="224px" Font-Size="10pt" ForeColor="#666666" BackColor="White">&nbsp;</asp:Label></td>
-						</tr>
-					</table>
+                        <table id="ClubDetails_Table" runat="server">
+                            <tr>
+                                <th style="text-align: right">Club Name:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_Name_TextBox" runat="server" Width="224px" MaxLength="50"></asp:TextBox></td>
+                                <th style="text-align: right"></th>
+                                <%--<td><asp:Literal ID="Club_ID" runat="server" Visible="False"></asp:Literal></td>--%>
+                            </tr>
+                            <tr>
+                                <th style="text-align: right">Address 1:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_Addr1_TextBox" runat="server" Width="224px" MaxLength="50"></asp:TextBox></td>
+                                <th style="text-align: right">Contact:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_Contact_TextBox" runat="server" MaxLength="104"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: right">Address 2:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_Addr2_TextBox" runat="server" Width="224px" MaxLength="50"></asp:TextBox></td>
+                                <th style="text-align: right">Telephone:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_Telephone_TextBox" runat="server" MaxLength="20"
+                                        onkeyup="this.value=this.value.replace(/[^1234567890 ]/g,'')"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: right">Post Code:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_PostCode_TextBox" runat="server" Width="224px" MaxLength="10"></asp:TextBox></td>
+                                <th style="text-align: right">Mobile:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_Mobile_TextBox" runat="server" MaxLength="20"
+                                        onkeyup="this.value=this.value.replace(/[^1234567890 ]/g,'')"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: right">No of Tables:</th>
+                                <td>
+                                    <asp:TextBox CssClass="txtBox" ID="Club_NoTables_TextBox" runat="server" Width="20px" MaxLength="1"
+                                        onkeyup="this.value=this.value.replace(/[^1234567890]/g,'')"></asp:TextBox></td>
+                                <th style="text-align: right">Club Login eMail:</th>
+                                <td>
+                                    <asp:Label Style="padding: 2px;" ID="Club_Email_Label" runat="server" Width="224px" Font-Size="10pt" ForeColor="#666666" BackColor="White">&nbsp;</asp:Label></td>
+                            </tr>
+                        </table>
 
-                    <asp:Button ID="Club_Save_Button" runat="server" Text="Save Club Details" Width="168px" /><br />
-                    <asp:Literal ID="Club_Status_Literal" runat="server"></asp:Literal>
+                        <asp:Button ID="Club_Save_Button" runat="server" Text="Save Club Details" Width="168px" /><br />
+                        <asp:Literal ID="Club_Status_Literal" runat="server"></asp:Literal>
 
-                </div>
-			</asp:Panel>
-	</ContentTemplate>
+                    </div>
+                </asp:Panel>
+            </ContentTemplate>
 
-	</asp:UpdatePanel>
+        </asp:UpdatePanel>
 
-	<asp:UpdatePanel ID="Teams_UpdatePanel" runat="server">
+        <asp:UpdatePanel ID="Teams_UpdatePanel" runat="server">
 
 	<ContentTemplate>    
 		
 <script type = "text/javascript">
 
-	function autoComplete1_OnClientPopulating(sender, args) {
-		sender.set_contextKey(document.getElementById("<%=Team_League_DropDownList.ClientID%>").value);
-		}
+    function autoComplete1_OnClientPopulating(sender, args) {
+        sender.set_contextKey(document.getElementById("<%=Team_League_DropDownList.ClientID%>").value);
+    }
 
-	</script>
+</script>
+
+<style type="text/css">
+  .BigCheckBox input {width:20px; height:20px;}
+</style>
+
 <br />
 	<asp:Panel ID="Teams_Panel" runat="server">
 
@@ -250,17 +267,22 @@
                 </table>					
 			 
 				<div class="privacy">
-				<table><tr>
-					<td style="vertical-align:top; text-align:right;"><asp:CheckBox ID="privacyCheckBox" text=" " runat="server" TextAlign="Left"/></td>
-					<td class="privacy">Tick this box to indicate that you give consent for the HBSA to record personal data as shown on this form, and that you have the express permission to do so for all persons named on this form.</td>
-					  </tr></table>  
-				 </div>
-				 <br />When all teams have been checked, and are as required, click this button:
+                    <u>IMPORTANT - PLEASE READ CAREFULLY</u>
+                    <ol>
+						<li>Personal contact details as above are used only for allowing players to contact each other (e.g. when arranging competitions & for matters relating to league games) and for occasional important communication from HBSA officials</li>
+                    <li>PLEASE TICK THE BOX to confirm that all players listed above are aware that their email addresses and phone numbers (as provided above) will be permanently available on our website and their permission has been given to use their contact details for the above purposes</li>
+					<li>If any of your players DO NOT wish their personal details to be available on our website, then please EDIT their player record above and REMOVE their email addresses /phone number, as appropriate</li>
+					<li>Please note that contact details can be added, removed or changed at any point during the season in line with each player’s preferences</li>
+					</ol>
+
+                    <asp:CheckBox CssClass="BigCheckBox" ID="privacyCheckBox"
+                        Text="     Tick this box to indicate that you give consent for the HBSA to record personal data as shown on this form, and that you have the express permission to do so for all persons named on this form." runat="server" />
+				 <br /><br />When all teams have been checked, and are as required, click this button:
+				    <br />
 				 <br />
+				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				 <asp:Button ID="submitEntryForm_Button" runat="server" Text="Submit the entry form." Font-Size="Large" Width="205px" />
-				  <p class="privacy">
-					  <asp:Literal ID="submitErrorMsg" runat="server"></asp:Literal>
-				  </p>
+                    &nbsp;&nbsp;<asp:Literal ID="submitErrorMsg" runat="server"></asp:Literal>
 				</tr>
 			</table>
 		</asp:Panel>

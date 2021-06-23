@@ -512,6 +512,7 @@ form {
 .privacy {
     color:red; 
     background-color:white; 
-    font-size:12pt; 
+    font-size:10pt; 
     font-weight:bold;
+    text-align:left;
 }

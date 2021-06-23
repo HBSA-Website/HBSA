@@ -2,12 +2,13 @@ Imports HBSAcodeLibrary
 Public Class EntryForm
     Inherits System.Web.UI.Page
 
-    Protected Sub Accept_Button_Click(sender As Object, e As EventArgs) Handles Accept_Button.Click
+    Protected Sub Accept_Button_Click(sender As Object, e As EventArgs) _
+        Handles Accept_Button.Click, Accept_CheckBox.CheckedChanged
 
         If Accept_CheckBox.Checked Then
             Club_Panel.Visible = True
             Acceptance_Panel.Visible = False
-            populateClubs()
+            PopulateClubs()
         Else
             Club_Panel.Visible = False
             Acceptance_Panel.Visible = True
@@ -969,7 +970,7 @@ Public Class EntryForm
         submitErrorMsg.Text = ""
 
         If Not privacyCheckBox.Checked Then
-            submitErrorMsg.Text = "<br />You must tick the consent box above to indicate your consent to our <a href='InfoPage.aspx?Subject=Privacy Statement&Title=Privacy Policy' target='_blank'>privacy policy</a> in order to submit an entry form."
+            submitErrorMsg.Text = "&nbsp;&nbsp;You must tick the consent box above to indicate your consent to our <a href='InfoPage.aspx?Subject=Privacy Statement&Title=Privacy Policy' target='_blank'>privacy policy</a> in order to submit an entry form."
             Exit Sub
         End If
         submitErrorMsg.Text = ""
