@@ -269,14 +269,14 @@
 				<div class="privacy">
                     <u>IMPORTANT - PLEASE READ CAREFULLY</u>
                     <ol>
-						<li>Personal contact details as above are used only for allowing players to contact each other (e.g. when arranging competitions & for matters relating to league games) and for occasional important communication from HBSA officials</li>
-                    <li>PLEASE TICK THE BOX to confirm that all players listed above are aware that their email addresses and phone numbers (as provided above) will be permanently available on our website and their permission has been given to use their contact details for the above purposes</li>
-					<li>If any of your players DO NOT wish their personal details to be available on our website, then please EDIT their player record above and REMOVE their email addresses /phone number, as appropriate</li>
-					<li>Please note that contact details can be added, removed or changed at any point during the season in line with each player’s preferences</li>
+						<li>Personal contact details as above are used only for allowing players to contact each other (e.g. when arranging competitions &amp; for matters relating to league games) and for occasional important communication from HBSA officials.</li>
+                    <li>PLEASE TICK THE BOX to confirm that all players listed above are aware that their email addresses and phone numbers (as provided above) will be permanently available on our website and their permission has been given to use their contact details for the above purposes.</li>
+					<li>If any of your players DO NOT wish their personal details to be available on our website, then please EDIT their player record above and REMOVE their email addresses /phone number, as appropriate.</li>
+					<li>Please note that contact details can be added, removed or changed at any point during the season in line with each player’s preferences.</li>
 					</ol>
 
                     <asp:CheckBox CssClass="BigCheckBox" ID="privacyCheckBox"
-                        Text="     Tick this box to indicate that you give consent for the HBSA to record personal data as shown on this form, and that you have the express permission to do so for all persons named on this form." runat="server" />
+                        Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tick here to  agree / acknowledge points 1-4 above." runat="server" />
 				 <br /><br />When all teams have been checked, and are as required, click this button:
 				    <br />
 				 <br />

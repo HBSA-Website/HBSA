@@ -137,8 +137,8 @@ Public Class EntryForm
                         'neither admin nor user logged in
                         Club_Selector_Literal.Text = "&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red;'>You are not logged in.<br/><br/>" &
                                                      "&nbsp;&nbsp;&nbsp;&nbsp;<a href=""ClubLogin.aspx"" >Log in</a> with the credentials that are registered to your club,<br/><br/>" &
-                                                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or if you wish to register a new club to the league, download an entry form <a href=""EntryFormsDownload.aspx"" >(League >> Entry Forms Download)</a>,<br/>" &
-                                                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complete it and post it (the address is on the form).</span>"
+                                                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or if you wish to register a new club to the league, <a href=""Contact.aspx"" >contact the League secretary.</a>" &
+                                                     "</span>"
                         Session("LoginCaller") = "EntryForm.aspx"
                         Club_UpdatePanel.Visible = False
                     End If
@@ -970,7 +970,7 @@ Public Class EntryForm
         submitErrorMsg.Text = ""
 
         If Not privacyCheckBox.Checked Then
-            submitErrorMsg.Text = "&nbsp;&nbsp;You must tick the consent box above to indicate your consent to our <a href='InfoPage.aspx?Subject=Privacy Statement&Title=Privacy Policy' target='_blank'>privacy policy</a> in order to submit an entry form."
+            submitErrorMsg.Text = "<span style='color:red;'>&nbsp;&nbsp;You must tick the consent box above to indicate your consent to our <a href='InfoPage.aspx?Subject=Privacy Statement&Title=Privacy Policy' target='_blank'>privacy policy</a> in order to submit an entry form.</span>"
             Exit Sub
         End If
         submitErrorMsg.Text = ""

@@ -120,7 +120,7 @@ Public Class ClubLoginRegistration
 
             With ClubUser
 
-                If Request.Params("Profile") Then
+                If Not IsNothing(Request.Params("Profile")) Then
                     'If Password_TextBox.Text.Trim = "" AndAlso
                     '   ConfirmPassword_TextBox.Text.Trim = "" Then 'retain password if both textboxes are blank when updating
                     '    Password_TextBox.Text = "*********" '.Password
@@ -148,6 +148,12 @@ Public Class ClubLoginRegistration
                     If Club_DropDownList.SelectedIndex < 1 Then
                         Status_Literal.Text &= "Club name must be selected.<br/>"
                     End If
+                    If FirstName_TextBox.Text.Trim = "" AndAlso
+                       Surname_TextBox.Text.Trim = "" AndAlso
+                       Telephone_TextBox.Text.Trim = "" Then
+                        Status_Literal.Text &= "There must be at least a firstname, Surname or Telephone number.<br/>"
+                    End If
+
                     If Session("captchaString").ToString() <> captcha_Textbox.Text Then
                         Status_Literal.Text += "<br /><span style='color:red;'>Human check failed, please try again.</span>"
                     Else
@@ -157,7 +163,7 @@ Public Class ClubLoginRegistration
                     If Status_Literal.Text = "" Then
 
                         Dim oldEmail As String = ""
-                        If Request.Params("Profile") Then
+                        If Not IsNothing(Request.Params("Profile")) Then
                             'if the email address is changing need to inform both emails of the change
                             If email_TextBox.Text.Trim.ToLower <> .eMail.ToLower Then
                                 oldEmail = .eMail
@@ -196,13 +202,19 @@ Public Class ClubLoginRegistration
 
                         Catch ex As Exception
 
-                            Status_Literal.Text = "<span style='color:red;'>Error: " & ex.Message & "</span>"
+                            Status_Literal.Text = "<span style='color:red;font-size:larger;'><b>Error: "
 
+                            If ex.Message Like "*Cannot insert the value NULL into column 'Password'*" Then
+                                Status_Literal.Text += "A password must be entered."
+                            Else
+                                Status_Literal.Text += ex.Message
+                            End If
+                            Status_Literal.Text += "</b></span>"
                         End Try
 
                     Else
 
-                        Status_Literal.Text = "<span style='color:red;'>" & Status_Literal.Text & "</span>"
+                        Status_Literal.Text = "<span style='color:red;font-size:larger;'><b>" & Status_Literal.Text & "<b></span>"
 
                     End If
 
