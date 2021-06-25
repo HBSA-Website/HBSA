@@ -105,17 +105,17 @@
                     Case "Password"
                         'tb.TextMode = TextBoxMode.Password
                         tb.Text = Setting.Item("value")
-                        tb.Width = tb.Text.Length * 10
+                        tb.Width = Math.Max(1, tb.Text.Length) * 10
                     Case "Date"
                         'tb.TextMode = TextBoxMode.Date
                         tb.Text = CDate(Setting.Item("value")).ToString("dd MMM yyyy")
-                        tb.Width = tb.Text.Length * 10
+                        tb.Width = Math.Max(1, tb.Text.Length) * 10
                     Case "Integer"
                         tb.Text = Setting.Item("value")
-                        tb.Width = tb.Text.Length * 12
+                        tb.Width = Math.Max(1, tb.Text.Length) * 12
                     Case Else
                         tb.Text = Setting.Item("value")
-                        tb.Width = tb.Text.Length * 10
+                        tb.Width = Math.Max(1, tb.Text.Length) * 10
                 End Select
 
                 tb.AutoPostBack = True
@@ -205,4 +205,133 @@
 
     End Sub
 
+    Protected Sub AddSetting_Button_Click(sender As Object, e As EventArgs) Handles AddSetting_Button.Click
+
+        If AddSetting_Button.Text = "Cancel add setting" Then
+            AddSetting_Panel.Visible = False
+            AddSetting_Button.Text = "Add a new setting"
+
+        Else
+            Using AllSettings As HBSAcodeLibrary.Settings = New HBSAcodeLibrary.Settings()
+
+                With Category_DropDownList
+                    .Items.Clear()
+                    .Items.Add("**Select a Category**")
+                    .Items.Add("**Add new Category**")
+                    For Each category As DataRow In AllSettings.categories.Rows
+                        .Items.Add(category!Category)
+                    Next
+                End With
+                Category_DropDownList.Visible = True
+                NewCategory_TextBox.Text = ""
+                Category_Panel.Visible = False
+
+                Description_TextBox.Text = ""
+                ControlType_DropDownList.SelectedIndex = 0
+                ConfigKey_TextBox.Text = ""
+
+            End Using
+
+            AddSetting_Panel.Visible = True
+            AddSetting_Button.Text = "Cancel add setting"
+        End If
+
+    End Sub
+
+    Protected Sub Category_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Category_DropDownList.SelectedIndexChanged
+
+        If Category_DropDownList.SelectedIndex < 2 Then
+            Category_DropDownList.Visible = False
+            NewCategory_TextBox.Text = ""
+            Category_Panel.Visible = True
+            SettingAdded_Button.Visible = False
+        Else
+            NewCategory_TextBox.Text = Category_DropDownList.SelectedValue
+        End If
+
+    End Sub
+
+    Protected Sub SelectCategory_Button_Click(sender As Object, e As EventArgs) Handles SelectCategory_Button.Click
+
+        Category_DropDownList.Visible = True
+        Category_DropDownList.SelectedIndex = 0
+        NewCategory_TextBox.Text = ""
+        Category_Panel.Visible = False
+
+    End Sub
+
+    Protected Sub AddThisSetting_Button_Click(sender As Object, e As EventArgs) Handles AddThisSetting_Button.Click
+
+        AddSetting_Literal.Text = ""
+        SettingAdded_Button.Visible = False
+
+        If Category_DropDownList.SelectedIndex = 0 Then
+            AddSetting_Literal.Text += "<br/>Please select a category."
+        ElseIf Category_DropDownList.SelectedIndex = 1 Then
+            If NewCategory_TextBox.Text.Trim = "" Then
+                AddSetting_Literal.Text += "<br/>New category cannot be blank."
+            Else
+                Try
+                    Category_DropDownList.SelectedValue = NewCategory_TextBox.Text.Trim
+                    AddSetting_Literal.Text += "<br/>New category already exists."
+                Catch ex As Exception
+                    'not found - good
+
+                End Try
+            End If
+        Else
+            NewCategory_TextBox.Text = Category_DropDownList.SelectedValue
+        End If
+
+
+        If Description_TextBox.Text.Trim = "" Then
+            AddSetting_Literal.Text += "<br/>Description cannot be blank."
+        End If
+
+        If ControlType_DropDownList.SelectedIndex = 0 Then
+            AddSetting_Literal.Text += "<br/>Please select a control type."
+        End If
+
+        Using AllSettings As HBSAcodeLibrary.Settings = New HBSAcodeLibrary.Settings()
+
+            If ConfigKey_TextBox.Text.Trim = "" Then
+                AddSetting_Literal.Text += "<br/>Configuration Key cannot be blank."
+            Else
+                If AllSettings.settings.Select("ConfigKey = '" & ConfigKey_TextBox.Text.Trim + "'").Length > 0 Then
+                    AddSetting_Literal.Text += "<br/>This configuration key already exists"
+                End If
+
+            End If
+
+            If AddSetting_Literal.Text <> "" Then
+                AddSetting_Literal.Text = "<span style=""color:Red;"">" + AddSetting_Literal.Text.Substring(4) + "</span>"
+            Else
+                Try
+                    AllSettings.AddSetting(NewCategory_TextBox.Text.Trim,
+                                           Description_TextBox.Text.Trim,
+                                           ControlType_DropDownList.SelectedValue,
+                                           ConfigKey_TextBox.Text.Trim,
+                                           SettingValue_TextBox.Text.Trim)
+                    AddSetting_Literal.Text = "New setting added.  Click Setting Added:"
+                    SettingAdded_Button.Visible = True
+                    AddSetting_Button.Text = "Add a new setting"
+
+                Catch ex As Exception
+                    AddSetting_Literal.Text = "<span style=""color:Red;"">Database ERROR: " + ex.Message + "</span>"
+                End Try
+
+            End If
+
+        End Using
+
+    End Sub
+
+    Protected Sub SettingAdded_Button_Click(sender As Object, e As EventArgs) Handles SettingAdded_Button.Click
+
+        AddSetting_Panel.Visible = False
+        NewCategory_TextBox.Text = ""
+        Category_Panel.Visible = False
+        SettingAdded_Button.Visible = False
+
+    End Sub
 End Class

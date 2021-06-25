@@ -4602,6 +4602,10 @@ namespace HBSAcodeLibrary
         public DataTable settings;
         public Settings()
         {
+            getSettings();
+        }
+        private void getSettings() 
+        {
             DataSet allSettings = SQLcommands.ExecDataSet("GetSettings");
             categories = allSettings.Tables[0];
             settings = allSettings.Tables[1];
@@ -4610,7 +4614,21 @@ namespace HBSAcodeLibrary
         {
             return settings.Select("Category = '" + category + "'").CopyToDataTable();
         }
+        public void AddSetting (string Category, string Setting, string ControlType, String ConfigKey, string SettingValue)
+        {
+            //call stored proc to add it
+            SQLcommands.ExecNonQuery("MergeConfigSettings",
+                                     new List<SqlParameter> { new SqlParameter("Category", Category),
+                                                              new SqlParameter("Setting", Setting),
+                                                              new SqlParameter("ControlType", ControlType),
+                                                              new SqlParameter("ConfigKey", ConfigKey),
+                                                              new SqlParameter("SettingValue", SettingValue)
+                                                             });
+            //show new setting
+            getSettings();
+        }
 
+        
         #region IDisposable support
         private bool disposedValue; // To detect redundant calls
 

@@ -14,22 +14,121 @@ Option Explicit On
 Partial Public Class Settings
 
     '''<summary>
-    '''ScriptManager1 control.
+    '''AddSetting_Button control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
+    Protected WithEvents AddSetting_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''UpdatePanel1 control.
+    '''AddSetting_Panel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents AddSetting_Panel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Category_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Category_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Category_Panel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Category_Panel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''NewCategory_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NewCategory_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''SelectCategory_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SelectCategory_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Description_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Description_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''ControlType_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ControlType_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''ConfigKey_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ConfigKey_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''SettingValue_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SettingValue_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AddThisSetting_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AddThisSetting_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''AddSetting_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AddSetting_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''SettingAdded_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SettingAdded_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Settings_Table control.
