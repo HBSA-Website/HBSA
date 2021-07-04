@@ -13,7 +13,7 @@
 
             If Not IsPostBack Then
 
-                Using NotePad As New HBSAcodeLibrary.NotePad(Session("user"))
+                Using NotePad As New HBSAcodeLibrary.NotePad(Session("AdminUser"))
                     Administrator_Literal.Text = NotePad.Administrator
                     Notes_TextBox.Text = NotePad.Notes
                 End Using
@@ -26,7 +26,7 @@
 
     Protected Sub Notes_TextBox_TextChanged(sender As Object, e As EventArgs) Handles Save_Button.Click
 
-        Using NotePad As New HBSAcodeLibrary.NotePad(Session("user"))
+        Using NotePad As New HBSAcodeLibrary.NotePad(Session("AdminUser"))
             NotePad.Notes = Notes_TextBox.Text
             NotePad.update()
             Notes_Literal.Text = "<span style='color:red'>Notes saved</span>"

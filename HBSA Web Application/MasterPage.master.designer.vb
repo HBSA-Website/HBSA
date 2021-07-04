@@ -257,6 +257,15 @@ Partial Public Class MasterPage
     Protected WithEvents Covid_19_Compliance_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''AGM_Vote_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AGM_Vote_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''MatchResult_Button control.
     '''</summary>
     '''<remarks>
@@ -318,6 +327,33 @@ Partial Public Class MasterPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Login_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''AccessCode_Panel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Panel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''AccessCode_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AccessCode_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Premium_Image control.

@@ -20,7 +20,7 @@ Public Class MatchResult
                 SessionadminDetails.Value = ""
             End If
             SessionTeamID.Value = Session("TeamID")
-            SessionUser.Value = Session("user")
+            SessionUser.Value = If(Session("user") Is Nothing, Session("AdminUser"), Session("user"))
             Delete_Result_Div.Visible = False
 
         End If

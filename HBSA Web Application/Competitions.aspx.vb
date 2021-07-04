@@ -8,11 +8,11 @@ Public Class Competitions
 
         If Not IsPostBack Then
 
-            populateCompetitionsDropDown()
+            PopulateCompetitionsDropDown()
+
+            AccessCode_Panel.Visible = Not Utilities.ViewContactDetailsAccessible()
 
         End If
-
-        'End If
 
     End Sub
 
@@ -187,14 +187,21 @@ Public Class Competitions
                                             Dim HoverDiv As New HtmlGenericControl("div class='hoverDiv'")
                                             With HoverDiv
                                                 .ID = HoverDivID
-                                                If FirstEntrant.TelNo <> "" Then
-                                                    .InnerHtml = "TelNo: " & FirstEntrant.TelNo
-                                                End If
-                                                If FirstEntrant.eMail <> "" Then
+                                                If Utilities.ViewContactDetailsAccessible Then
                                                     If FirstEntrant.TelNo <> "" Then
-                                                        .InnerHtml += "<br />"
+                                                        .InnerHtml = "TelNo: " & FirstEntrant.TelNo
                                                     End If
-                                                    .InnerHtml += "email: " & FirstEntrant.eMail
+                                                    If FirstEntrant.eMail <> "" Then
+                                                        If FirstEntrant.TelNo <> "" Then
+                                                            .InnerHtml += "<br />"
+                                                        End If
+                                                        .InnerHtml += "email: " & FirstEntrant.eMail
+                                                    End If
+                                                Else
+                                                    'Need access code to view
+                                                    .InnerHtml = "<p style='color:red;font-weight:bold '>Access code Required for Players' eMail addresses and telephone numbers</p>" &
+                                                                  "<br/>Use the dialogue at the top of the page to enter this code, then try again.<br/>" &
+                                                                 "<i>Note: If the panel is not visible refresh this page.</i><br><br/>"
                                                 End If
 
                                             End With
@@ -243,14 +250,21 @@ Public Class Competitions
                                             Dim HoverDiv As New HtmlGenericControl("div class='hoverDiv'")
                                             With HoverDiv
                                                 .ID = HoverDivID
-                                                If SecondEntrant.TelNo <> "" Then
-                                                    .InnerHtml = "TelNo: " & SecondEntrant.TelNo
-                                                End If
-                                                If SecondEntrant.eMail <> "" Then
+                                                If Utilities.ViewContactDetailsAccessible Then
                                                     If SecondEntrant.TelNo <> "" Then
-                                                        .InnerHtml += "<br />"
+                                                        .InnerHtml = "TelNo: " & SecondEntrant.TelNo
                                                     End If
-                                                    .InnerHtml += "email: " & SecondEntrant.eMail
+                                                    If SecondEntrant.eMail <> "" Then
+                                                        If SecondEntrant.TelNo <> "" Then
+                                                            .InnerHtml += "<br />"
+                                                        End If
+                                                        .InnerHtml += "email: " & SecondEntrant.eMail
+                                                    End If
+                                                Else
+                                                    'Need access code to view
+                                                    .InnerHtml = "<p style='color:red;font-weight:bold '>Access code Required for Players' eMail addresses and telephone numbers</p>" &
+                                                                 "<br/>Use the dialogue at the top of the page to enter this code, then try again.<br/>" &
+                                                                 "<i>Note: If the panel is not visible refresh this page.</i><br><br/>"
                                                 End If
 
                                             End With
@@ -282,7 +296,24 @@ Public Class Competitions
         End Using
 
     End Sub
+    Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
 
+        Using cfg As New HBSA_Configuration
+
+            If AccessCode_TextBox.Text.Trim = cfg.Value("ViewPlayerDetailsAccessCode") Then
+                Session("ViewContactDetails") = "Accessible"
+                AccessCode_Panel.Visible = False
+            End If
+
+        End Using
+
+    End Sub
+
+    Protected Sub CancelAccessCode_Button_Click(sender As Object, e As EventArgs) Handles CancelAccessCode_Button.Click
+
+        AccessCode_Panel.Visible = False
+
+    End Sub
     'Function entrant(RoundIx As Integer, EntrantID As Integer, ByRef CompetitionDetails As DataSet) As String
 
     '    If RoundIx < CompetitionDetails.Tables.Count Then

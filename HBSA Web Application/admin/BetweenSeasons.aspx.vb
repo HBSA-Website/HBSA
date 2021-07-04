@@ -196,7 +196,7 @@ Public Class BetweenSeasons
 
     Protected Sub ConfirmApply_Button_Click(sender As Object, e As EventArgs) Handles ConfirmApply_Button.Click
 
-        If Session("user") Is Nothing Then
+        If Session("AdminUser") Is Nothing Then
 
             Session("Caller") = Request.Url.AbsolutePath
             Response.Redirect("adminHome.aspx")
@@ -205,7 +205,7 @@ Public Class BetweenSeasons
 
             If Confirm_Literal.Text.ToLower Like "*entry form*" Then
 
-                Dim privacyNotAcceptedClubsTable As DataTable = HBSAcodeLibrary.EntryFormData.ApplyEntryForms(Session("user"))
+                Dim privacyNotAcceptedClubsTable As DataTable = HBSAcodeLibrary.EntryFormData.ApplyEntryForms(Session("AdminUser"))
                 If Not IsNothing(privacyNotAcceptedClubsTable) AndAlso privacyNotAcceptedClubsTable.Rows.Count > 0 Then
                     ClubsWithoutPrivacyAccepted_GridView.DataSource = privacyNotAcceptedClubsTable
                     ClubsWithoutPrivacyAccepted_GridView.DataBind()
@@ -246,7 +246,7 @@ Public Class BetweenSeasons
 
     Protected Sub SetupEntryForms_Button_Click(sender As Object, e As EventArgs) Handles SetupEntryForms_Button.Click
 
-        If Session("user") Is Nothing Then
+        If Session("AdminUser") Is Nothing Then
 
             Session("Caller") = Request.Url.AbsolutePath
             Response.Redirect("adminHome.aspx")

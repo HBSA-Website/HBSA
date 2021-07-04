@@ -3126,7 +3126,6 @@ namespace HBSAcodeLibrary
                 }
             }
         }
-
         #region "IDisposable"
         private bool disposedValue = false;        // To detect redundant calls
 

@@ -151,7 +151,7 @@ Public Class PayPalConfirm
                                     TransactionId,
                                     orderTime,
                                     PaidBy,
-                                    Session("user"),
+                                    If(Session("user") Is Nothing, Session("AdminUser"), Session("user")),
                                     PaymentID
                                     )
 

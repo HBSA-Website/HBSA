@@ -44,7 +44,7 @@ Partial Class adminHome
         AndAlso Session("UserType") <> "Printer" Then
 
             Status_Literal.Text = "<span style='color:red;'>Login failed with these credentials.<br/>Correct them and try again, or click Forgotten Password.</span><br/>Make sure your email address is correct."
-            Session("user") = Nothing
+            Session("AdminUser") = Nothing
             Session("adminDetails") = Nothing
             Session("UserType") = Nothing
 
@@ -52,11 +52,11 @@ Partial Class adminHome
 
             Session("UserType") = adminDetails.Rows(0).Item("Function")
             If Session("UserType") = "Printer" Then
-                Session("user") = Nothing
+                Session("AdminUser") = Nothing
                 Session("adminDetails") = Nothing
             Else
                 Session("adminDetails") = adminDetails
-                Session("user") = adminDetails.Rows(0).Item("username")
+                Session("AdminUser") = adminDetails.Rows(0).Item("username")
                 Session("UserType") = Nothing
             End If
 

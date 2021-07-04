@@ -58,7 +58,7 @@
         }
     </script>
 
-    <form id="form1" accept-charset="UTF-8" runat="server">
+    <form id="form1" accept-charset="UTF-8" runat="server" autocomplete="off">
 
     <table style="vertical-align:top;width:100%;" >
         <tr style="height:150px">
@@ -73,7 +73,7 @@
                 <table id="Menu_Div" style=" width:100%; margin: 0px; padding: 0px; color:#006633; font-family:Verdana; font-size: 8pt;" runat="server" >
                 <tr>    
                 <td style="width:10%"></td>
-                  <%-- Menu Home --%>       
+                    <%-- Menu Home --%>       
                 <td id="Home" style="text-align:left;width:20%; margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;" >
                     <div id="Menu_Home" runat="server" onclick="loadMenuDiv('SubMenu_Home_Div','Menu_Home');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Home_Div','Menu_Home');">
                         <img alt="" style="border-style: none" src="Images/Red.jpg" />
@@ -338,6 +338,10 @@
                     BorderStyle="None" Font-Underline="True" ForeColor="#0033cc"
                     onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="225px" />
         &nbsp;
+        <asp:Button ID="AGM_Vote_Button" runat="server" Text="AGM Voting form"
+            BorderStyle="None" Font-Underline="True" ForeColor="#0033cc"
+            onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="225px" />
+            &nbsp;
         <asp:Button ID="MatchResult_Button" runat="server" Text="Enter or Change a Match Result"
                 BorderStyle="None" Font-Underline="True" ForeColor="#0033cc" 
                 onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="315px" />
@@ -361,9 +365,16 @@
         <a href="helpFAQ.aspx" runat="server" style="color:#0033CC;font-size:10pt;background-color:ButtonFace">Frequently&nbsp;Asked&nbsp;Questions</a>
 <br />
         <div style="width:100%;text-align:center;">
-            <asp:Literal ID="ClubLogin_Literal" runat="server" ></asp:Literal>
+            <asp:Literal ID="ClubLogin_Literal" runat="server" ></asp:Literal> 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Literal ID="Login_Literal" runat="server"></asp:Literal>
+            <br />
+            
+            <asp:Panel ID="AccessCode_Panel" runat="server" Visible="false">
+            Access code for viewing Players' eMail addresses and telephone numbers:&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="AccessCode_TextBox" runat="server" BorderWidth="0px" BackColor="#FFFFCC" TextMode="Password" ReadOnly="True"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="AccessCode_Button" runat="server" Text="Show access code" BorderWidth="0px" />
+            </asp:Panel>
         </div>
 
         </div>
@@ -421,8 +432,7 @@
 			
                 <%--Home page content--%>
                 <td style="vertical-align:top; background:#ffffff; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11pt;">
-                   <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-
+                    <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
 				</td>
 

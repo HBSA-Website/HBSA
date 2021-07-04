@@ -57,7 +57,7 @@ Public Class MobileMaster
         teamLoginButton.Visible = Not HBSAcodeLibrary.HBSA_Configuration.CloseSeason 'Or dbClasses.Configuration.AllowLeaguesEntryForms
         clubLoginButton.Visible = HBSAcodeLibrary.HBSA_Configuration.AllowCompetitionsEntryForms Or HBSAcodeLibrary.HBSA_Configuration.AllowLeaguesEntryForms
         finesButton.Visible = True
-        'AGMVoteButton.Visible = HBSAcodeLibrary.HBSA_Configuration.AllowAGMvote
+        AGMVoteButton.Visible = HBSAcodeLibrary.HBSA_Configuration.AllowAGMvote
 
         HandbookMenuItem.Visible = Utilities.HandbookExists
 
@@ -71,7 +71,7 @@ Public Class MobileMaster
                         Login_Literal.Text = (User.FirstName & " " & User.Surname & " of " & Team.ClubName & " " & Team.Team).Trim & " in " & Team.LeagueName & " " & Team.SectionName
                         Login_Button.Text = "Team Log out"
                         myRegistrationButton.Visible = True
-
+                        PopulateAccessCode()
                     End Using
                 End Using
             End If
@@ -84,8 +84,9 @@ Public Class MobileMaster
             clubLoginRef.InnerText = "Club Log out"
             clubLoginButton.Visible = True
             Using ClubUser As New HBSAcodeLibrary.ClubUserData(Session("ClubLoginID"))
-                Login_Literal.Text = ClubUser.FirstName & " " & ClubUser.Surname & " of " & ClubUser.ClubName
+                clubLogin_Literal.Text = ClubUser.FirstName & " " & ClubUser.Surname & " of " & ClubUser.ClubName
             End Using
+            PopulateAccessCode()
         End If
 
         'set up advert
@@ -165,8 +166,31 @@ Public Class MobileMaster
         End If
 
     End Sub
-    'Protected Sub AGM_Vote_Button_Click(sender As Object, e As EventArgs) Handles AGM_Vote_Button.Click
-    '    Response.Redirect("../AGM_Vote.aspx")
-    'End Sub
+    Protected Sub PopulateAccessCode()
+        Using cfg As New HBSA_Configuration
+
+            Dim Password = cfg.Value("ViewPlayerDetailsAccessCode")
+            If Not IsNothing(Password) AndAlso
+                Password.Trim <> "" Then
+                AccessCode_TextBox.Text = Password.Trim
+                AccessCode_Panel.Visible = True
+            Else
+                AccessCode_Panel.Visible = False
+            End If
+
+        End Using
+
+    End Sub
+    Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
+
+        If AccessCode_TextBox.TextMode = TextBoxMode.Password Then
+            AccessCode_TextBox.TextMode = TextBoxMode.SingleLine
+            AccessCode_Button.Text = "Hide Access Code"
+        Else
+            AccessCode_TextBox.TextMode = TextBoxMode.Password
+            AccessCode_Button.Text = "Show Access Code"
+        End If
+
+    End Sub
 
 End Class

@@ -17,8 +17,10 @@ Public Class ActiveTableDetail
         Select Case DetailType
             Case "Team"
                 Return GetTeamDetail(ID)
-            Case "Player"
-                Return GetPlayerDetail(ID)
+            Case "Player|Accessible"
+                Return GetPlayerDetail(ID, True)
+            Case "Player|NotAccessible"
+                Return GetPlayerDetail(ID, False)
             Case "Fine"
                 Return GetFineDetail(ID)
             Case "Handicap"
@@ -51,7 +53,7 @@ Public Class ActiveTableDetail
         Return HTML.ToString()
 
     End Function
-    Private Function GetPlayerDetail(PlayerID As String) As String
+    Private Function GetPlayerDetail(PlayerID As String, Accessible As Boolean) As String
 
         Dim HTML As StringBuilder = New StringBuilder()
 
@@ -65,11 +67,14 @@ Public Class ActiveTableDetail
                                          If(player.Tagged = 1, "1 season to go",
                                             player.Tagged & " seasons to go"))) & "<br />")
             HTML.Append("<b>Over 80(Vets)?</b> " & If(player.Over70 > 0, "Yes", "No") & " | <b>Played?</b> " & If(player.Played > 0, "Yes", "No"))
-            If player.eMail <> "" Then
-                HTML.Append("<br /><b>eMail:</b> " & player.eMail)
-            End If
-            If player.TelNo <> "" Then
-                HTML.Append("<br /><b>TelNo:</b> " & player.TelNo)
+
+            If Accessible Then
+                If player.eMail <> "" Then
+                    HTML.Append("<br /><b>eMail:</b> " & player.eMail)
+                End If
+                If player.TelNo <> "" Then
+                    HTML.Append("<br /><b>TelNo:</b> " & player.TelNo)
+                End If
             End If
         End Using
 

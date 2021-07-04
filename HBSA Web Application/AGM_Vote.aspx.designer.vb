@@ -14,6 +14,51 @@ Option Explicit On
 Partial Public Class AGM_Vote
 
     '''<summary>
+    '''ScriptManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
+
+    '''<summary>
+    '''ClubSelection control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ClubSelection As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Club_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Club_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Club_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Club_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Status_Literal2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Status_Literal2 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''VotingTables control.
     '''</summary>
     '''<remarks>
@@ -32,6 +77,78 @@ Partial Public Class AGM_Vote
     Protected WithEvents Ordinary_Resolutions As Global.System.Web.UI.HtmlControls.HtmlTable
 
     '''<summary>
+    '''Error01 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error01 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''OrdinaryResolution01_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OrdinaryResolution01_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''OrdinaryResolution01_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OrdinaryResolution01_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''OrdinaryResolution01_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OrdinaryResolution01_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Error02 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error02 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''OrdinaryResolution02_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OrdinaryResolution02_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''OrdinaryResolution02_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OrdinaryResolution02_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''OrdinaryResolution02_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OrdinaryResolution02_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
     '''Special_Resolutions control.
     '''</summary>
     '''<remarks>
@@ -41,6 +158,114 @@ Partial Public Class AGM_Vote
     Protected WithEvents Special_Resolutions As Global.System.Web.UI.HtmlControls.HtmlTable
 
     '''<summary>
+    '''Error03 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error03 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''SpecialResolution03_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution03_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''SpecialResolution03_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution03_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''SpecialResolution03_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution03_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Literal1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Literal1 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''SpecialResolution04_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution04_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''SpecialResolution04_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution04_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''SpecialResolution04_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution04_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Error04 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error04 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''SpecialResolution05_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution05_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''SpecialResolution05_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution05_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''SpecialResolution05_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SpecialResolution05_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
     '''Elections control.
     '''</summary>
     '''<remarks>
@@ -48,4 +273,238 @@ Partial Public Class AGM_Vote
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Elections As Global.System.Web.UI.HtmlControls.HtmlTable
+
+    '''<summary>
+    '''Error06 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error06 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Election06_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election06_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election06_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election06_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election076Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election076Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Error07 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error07 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Election07_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election07_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election07_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election07_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election07_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election07_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Error08 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error08 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Election08_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election08_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election08_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election08_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election08_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election08_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Error09 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error09 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Election09_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election09_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election09_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election09_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election09_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election09_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Error10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error10 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Election10_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election10_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election10_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election10_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election10_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election10_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Error11 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Error11 As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Election11_For control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election11_For As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election11_Agn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election11_Agn As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Election11_Abs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Election11_Abs As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Status_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Status_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''SubmitVote_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SubmitVote_Button As Global.System.Web.UI.WebControls.Button
 End Class

@@ -36,7 +36,7 @@ Public Class EntryFormTeamsSummary
 
     Private Sub EntryFormsClubs_GridView_SelectedIndexChanging(sender As Object, e As GridViewSelectEventArgs) Handles EntryFormsTeams_GridView.SelectedIndexChanging
 
-        'UpdateFeePaid(EntryFormsTeams_GridView.Rows(e.NewSelectedIndex).Cells(1).Text, Session("user"))
+        'UpdateFeePaid(EntryFormsTeams_GridView.Rows(e.NewSelectedIndex).Cells(1).Text, Session("AdminUser"))
 
         With EntryFormsTeams_GridView
 

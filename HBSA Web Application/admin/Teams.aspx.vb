@@ -314,9 +314,9 @@ Public Class Teams
 
                     Dim action As String
                     If .SectionID = -100 And Club_DropDownList.SelectedItem.Text.ToLower <> "bye" Then
-                        action = .Remove(Session("User"))
+                        action = .Remove(Session("AdminUser"))
                     Else
-                        action = .Merge(Session("user")) ' This will insert/update as required
+                        action = .Merge(Session("AdminUser")) ' This will insert/update as required
                     End If
 
                     If action Is Nothing Then

@@ -446,7 +446,7 @@ Public Class CompetitionsEntryForm
                     Using player As New PlayerData(EntrantID)
                         player.eMail = Email
                         player.TelNo = TelNo
-                        player.Merge(Session("user"))
+                        player.Merge(If(Session("user") Is Nothing, Session("AdminUser"), Session("user")))
                     End Using
                 End If
 

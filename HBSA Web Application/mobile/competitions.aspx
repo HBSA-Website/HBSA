@@ -6,8 +6,7 @@
             border-width: 1px; 
             padding: 5px; 
             position:absolute; 
-            margin-left: 50px; 
-            margin-top: 0px; 
+            left: 50px;
             display:none; 
             background-color: #FFFFCC;
         }
@@ -51,6 +50,25 @@
     <div style="text-align:center;">
 
         <span style="font-weight:bold;">Competitions</span>
+        <asp:Panel ID="AccessCode_Panel" Style="text-align: left; max-height: 999999px;" runat="server" Visible="false" BorderWidth="1px" BorderStyle="Solid" BackColor="White">
+            <p style="color: red; font-weight: bold">Access code required for Players' eMail addresses and telephone numbers</p>
+            <p">
+                If you wish to view Players' eMail addresses and/or telephone numbers enter the required Access code and touch/click Apply.<br />
+                Access code:
+                <asp:TextBox ID="AccessCode_TextBox" runat="server" Width="166px"></asp:TextBox>
+                &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="AccessCode_Button" runat="server" Text="Apply" Width="173px" />
+                &nbsp;&nbsp;&nbsp;&nbsp;<asp:Literal ID="AccessCode_Literal" runat="server"></asp:Literal>
+                <br />
+            </p>
+            <p>
+                If you don't know the access code contact your club representative or a team representative (who can enter match results) who will be able to log on and find this code.
+            </p>
+            <p>
+                If you wish, touch/click cancel to proceed without seeing players' contact details:
+                      &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="CancelAccessCode_Button" runat="server" Text="Cancel" />
+            </p>
+        </asp:Panel>
+
         <div style="width:100%">
             Select a competition:<br />
             <asp:DropDownList ID="Competitions_DropDownList" runat="server" CssClass="dropDown"  AutoPostBack="True" ></asp:DropDownList><br />

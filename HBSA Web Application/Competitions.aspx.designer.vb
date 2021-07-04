@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Competitions
-    
+
     '''<summary>
     '''ScriptManager1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Competitions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
-    
+
     '''<summary>
     '''Update_Progress control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Competitions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Update_Progress As Global.System.Web.UI.UpdateProgress
-    
+
     '''<summary>
     '''UpdatePanel1 control.
     '''</summary>
@@ -39,7 +39,52 @@ Partial Public Class Competitions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
-    
+
+    '''<summary>
+    '''AccessCode_Panel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Panel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''AccessCode_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AccessCode_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''AccessCode_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''CancelAccessCode_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CancelAccessCode_Button As Global.System.Web.UI.WebControls.Button
+
     '''<summary>
     '''Competitions_DropDownList control.
     '''</summary>
@@ -48,7 +93,7 @@ Partial Public Class Competitions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Competitions_DropDownList As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''Comment_Literal control.
     '''</summary>
@@ -57,7 +102,7 @@ Partial Public Class Competitions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Comment_Literal As Global.System.Web.UI.WebControls.Literal
-    
+
     '''<summary>
     '''Competition_Table control.
     '''</summary>

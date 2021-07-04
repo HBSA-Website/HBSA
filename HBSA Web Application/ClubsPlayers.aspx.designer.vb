@@ -86,6 +86,51 @@ Partial Public Class ClubsPlayers
     Protected WithEvents GetByName_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''AccessCode_Panel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Panel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''AccessCode_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AccessCode_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''AccessCode_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''CancelAccessCode_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CancelAccessCode_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''ClubsAndPlayers_GridView control.
     '''</summary>
     '''<remarks>

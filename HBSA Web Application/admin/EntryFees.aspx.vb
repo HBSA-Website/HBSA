@@ -112,16 +112,16 @@ Public Class EntryFees
             If Entity_TextBox.Text.Trim <> "" Then
                 If Edit_Literal.Text.ToLower.StartsWith("delete") Then
 
-                    HBSAcodeLibrary.EntryFormData.DeleteFee(Entity_TextBox.Text.Trim, League_DropDownList.SelectedValue, Session("user"))
+                    HBSAcodeLibrary.EntryFormData.DeleteFee(Entity_TextBox.Text.Trim, League_DropDownList.SelectedValue, Session("AdminUser"))
 
                 Else
                     If League_DropDownList.SelectedIndex > 0 Then
 
                         If Edit_Literal.Text.ToLower.StartsWith("insert") Then
 
-                            HBSAcodeLibrary.EntryFormData.InsertNewFee(Entity_TextBox.Text.Trim, League_DropDownList.SelectedValue, CDec(Fee_TextBox.Text), Session("user"))
+                            HBSAcodeLibrary.EntryFormData.InsertNewFee(Entity_TextBox.Text.Trim, League_DropDownList.SelectedValue, CDec(Fee_TextBox.Text), Session("AdminUser"))
                         Else
-                            HBSAcodeLibrary.EntryFormData.UpdateFee(Entity_TextBox.Text.Trim, League_DropDownList.SelectedValue, CDec(Fee_TextBox.Text), Session("user"))
+                            HBSAcodeLibrary.EntryFormData.UpdateFee(Entity_TextBox.Text.Trim, League_DropDownList.SelectedValue, CDec(Fee_TextBox.Text), Session("AdminUser"))
                         End If
 
                     Else

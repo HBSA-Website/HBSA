@@ -8,6 +8,8 @@ Public Class ClubsPlayers1
             'PopulateSections()
             PopulateClubs()
 
+            AccessCode_Panel.Visible = Not Utilities.ViewContactDetailsAccessible()
+
         End If
 
     End Sub
@@ -52,7 +54,8 @@ Public Class ClubsPlayers1
             Using ClubDetails As DataSet = HBSAcodeLibrary.ClubData.ClubDetails(Club_DropDownList.SelectedValue, True)
                 ClubsAndPlayers_Div.InnerHtml = Utilities.BuildMobileActiveTable(ClubDetails.Tables(0))
                 Teams_Div.InnerHtml = Utilities.BuildMobileActiveTable(ClubDetails.Tables(1), 1, 4, "ActiveDetailDiv", "Team")
-                Players_Div.InnerHtml = Utilities.BuildMobileActiveTable(ClubDetails.Tables(2), 1, 5, "ActiveDetailDiv", "Player")
+                Players_Div.InnerHtml = Utilities.BuildMobileActiveTable(ClubDetails.Tables(2), 1, 5, "ActiveDetailDiv",
+                                         If(Utilities.ViewContactDetailsAccessible, "Player|Accessible", "Player|NotAccessible"))
             End Using
 
             Team_Literal.Text = "<span style = 'color: maroon;' > Touch / click a team for more detail</span>"
@@ -78,8 +81,31 @@ Public Class ClubsPlayers1
         Player_Literal.Text = ""
 
         Using players As DataTable = HBSAcodeLibrary.PlayerData.GetPlayerDetailsByPlayer(,, Player_TextBox.Text, , True)
-            Players_Div.InnerHtml = Utilities.BuildMobileActiveTable(players, 1, , "ActiveDetailDiv", "Player")
+            Players_Div.InnerHtml = Utilities.BuildMobileActiveTable(players, 1, , "ActiveDetailDiv",
+                                         If(Utilities.ViewContactDetailsAccessible, "Player|Accessible", "Player|NotAccessible"))
         End Using
+
+    End Sub
+    Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
+
+        Using cfg As New HBSA_Configuration
+
+            If AccessCode_TextBox.Text.Trim = cfg.Value("ViewPlayerDetailsAccessCode") Then
+                Session("ViewContactDetails") = "Accessible"
+                AccessCode_Panel.Visible = False
+                Using players As DataTable = HBSAcodeLibrary.PlayerData.GetPlayerDetailsByPlayer(,, Player_TextBox.Text, , True)
+                    Players_Div.InnerHtml = Utilities.BuildMobileActiveTable(players, 1, , "ActiveDetailDiv",
+                                                 If(Utilities.ViewContactDetailsAccessible, "Player|Accessible", "Player|NotAccessible"))
+                End Using
+            End If
+
+        End Using
+
+    End Sub
+
+    Protected Sub CancelAccessCode_Button_Click(sender As Object, e As EventArgs) Handles CancelAccessCode_Button.Click
+
+        AccessCode_Panel.Visible = False
 
     End Sub
 End Class

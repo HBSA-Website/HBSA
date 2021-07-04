@@ -51,9 +51,15 @@
         </tr>
     </table>
 
-    <asp:Literal ID="Login_Literal" runat="server"></asp:Literal>
-    <asp:Literal ID="clubLogin_Literal" runat="server"></asp:Literal> 
-                
+    <div style="font-size:larger;color:black;">
+        <span style="font-weight:bold;"><asp:Literal ID="Login_Literal" runat="server"></asp:Literal>
+        <asp:Literal ID="clubLogin_Literal" runat="server"></asp:Literal></span>
+        <asp:Panel ID="AccessCode_Panel" runat="server" Visible="false">
+            Access code for viewing Players' eMail addresses and telephone numbers:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="AccessCode_TextBox" runat="server" BorderWidth="0px" BackColor="#FFFFCC" TextMode="Password" ReadOnly="True" Width="234px"></asp:TextBox>&nbsp;&nbsp;
+                <asp:Button ID="AccessCode_Button" runat="server" Text="Show access code" BorderWidth="1px" Height="49px" Width="365px" BackColor="White" ForeColor="Blue" Font-Underline="True" />
+        </asp:Panel>
+    </div>
     <div id="leftMenuDiv" class="menuDiv">
          <table id="leftMenu_Div" class="menuTable" runat="server" >
             <tr>    
@@ -269,9 +275,10 @@
             <tr><td id="clubLoginButton"><img alt="" src="../Images/red.jpg" />
                     <a id="clubLoginRef" runat="server" href="ClubLogin.aspx" >Club Login</a></td></tr>
             <tr><td id="teamLoginButton"><img alt="" src="../Images/red.jpg" />
-                    <asp:Button ID="Login_Button" runat="server" Text="Team log in" BorderStyle="None" ForeColor="Blue" BackColor="#EFF3FB" />
-                </td></tr>
-
+                    <asp:Button ID="Login_Button" runat="server" Text="Team log in" BorderStyle="None" ForeColor="Blue" BackColor="#EFF3FB" /></td>
+            </tr>
+             <tr><td id="AGMVoteButton"><img alt="" src="../Images/red.jpg" />
+                     <a id="AGMVoteRef" runat="server" href="../AGM_Vote.aspx">AGM Voting form</a></td></tr>
              <tr>
                  <td id="Covid19Button">
                      <img alt="" src="../Images/red.jpg" />

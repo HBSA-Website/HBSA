@@ -57,7 +57,7 @@ Class EntryFormClubsSummary
 
     Private Sub EntryFormsClubs_GridView_SelectedIndexChanging(sender As Object, e As GridViewSelectEventArgs) Handles EntryFormsClubs_GridView.SelectedIndexChanging
 
-        'UpdateFeePaid(EntryFormsClubs_GridView.Rows(e.NewSelectedIndex).Cells(1).Text, Session("user"))
+        'UpdateFeePaid(EntryFormsClubs_GridView.Rows(e.NewSelectedIndex).Cells(1).Text, Session("AdminUser"))
 
         With EntryFormsClubs_GridView
 
@@ -167,7 +167,7 @@ Class EntryFormClubsSummary
                                     TransactionID:=TransactionID_TextBox.Text.Trim,
                                     DateTimePaid:=CDate(DateTime__TextBox.Text),
                                     PaidBy:=PaidBy_TextBox.Text.Trim,
-                                    user:=Session("user")
+                                    user:=Session("AdminUser")
                                                             )
 
             AddPayment_Panel.Visible = False

@@ -68,6 +68,33 @@ Partial Public Class MobileMaster
     Protected WithEvents clubLogin_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
+    '''AccessCode_Panel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Panel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''AccessCode_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AccessCode_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''leftMenu_Div control.
     '''</summary>
     '''<remarks>
@@ -336,6 +363,24 @@ Partial Public Class MobileMaster
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Login_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''AGMVoteButton control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AGMVoteButton As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+    '''<summary>
+    '''AGMVoteRef control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AGMVoteRef As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
     '''<summary>
     '''Covid19Button control.

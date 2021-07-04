@@ -139,7 +139,7 @@
                                     transactionID:=TransactionID_TextBox.Text.Trim,
                                     dateTimePaid:=CDate(DateTime__TextBox.Text),
                                     paidBy:=PaidBy_TextBox.Text.Trim,
-                                    user:=Session("user")
+                                    user:=Session("AdminUser")
                                                             )
 
 

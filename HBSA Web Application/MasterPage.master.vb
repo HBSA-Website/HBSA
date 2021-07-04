@@ -1,9 +1,8 @@
 ﻿Imports HBSAcodeLibrary
 Imports System.Data.SqlClient
 
-Partial Class MasterPage
+Partial Public Class MasterPage
     Inherits System.Web.UI.MasterPage
-
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         'ensure use of ssl
@@ -81,7 +80,7 @@ Partial Class MasterPage
 
         EntryForm_Button.Visible = HBSAcodeLibrary.HBSA_Configuration.CloseSeason And HBSAcodeLibrary.HBSA_Configuration.AllowLeaguesEntryForms
         MatchResult_Button.Visible = Not HBSAcodeLibrary.HBSA_Configuration.CloseSeason
-        'AGM_Vote_Button.Visible = HBSAcodeLibrary.HBSA_Configuration.AllowAGMvote
+        AGM_Vote_Button.Visible = HBSAcodeLibrary.HBSA_Configuration.AllowAGMvote
 
         Login_button.Visible = Not HBSAcodeLibrary.HBSA_Configuration.CloseSeason 'Or dbClasses.Configuration.AllowLeaguesEntryForms
 
@@ -98,6 +97,7 @@ Partial Class MasterPage
         If Session("TeamID") Is Nothing Then
             Login_Literal.Text = ""
             Login_button.Text = "Team Log in"
+            AccessCode_TextBox.Visible = False
         Else
             Using User As New HBSAcodeLibrary.UserData(Session("Email"), Session("Password"))
                 Using Team As New TeamData(User.TeamID)
@@ -106,7 +106,7 @@ Partial Class MasterPage
                     Login_button.Text = "Team Log out"
                     Login_button.Visible = True
                     MyProfile_Button.Visible = True
-
+                    PopulateAccessCode()
                 End Using
             End Using
         End If
@@ -120,14 +120,15 @@ Partial Class MasterPage
             Using ClubUD As New HBSAcodeLibrary.ClubUserData(Session("ClubLoginID"))
                 ClubLogin_Literal.Text = ClubUD.FirstName & " " & ClubUD.Surname & " of " & ClubUD.ClubName
             End Using
+            PopulateAccessCode()
         End If
 
         'set up side adverts
         If Session("NoAdverts") Is Nothing OrElse Session("NoAdverts") < 1 Then
             Dim RandomisedAdverts As HBSAcodeLibrary.Advert.RandomAdverts = HBSAcodeLibrary.Advert.RandomiseAdverts
-            Session("NoAdverts") = RandomisedAdverts.NoAdverts
-            Session("Advertisers") = RandomisedAdverts.Advertisers
-            Session("LastAdvert") = RandomisedAdverts.LastAdvert
+            Session("NoAdverts") = RandomisedAdverts.noAdverts
+            Session("Advertisers") = RandomisedAdverts.advertisers
+            Session("LastAdvert") = RandomisedAdverts.lastAdvert
             Session("advertCounter") = RandomisedAdverts.advertCounter
         End If
 
@@ -143,8 +144,8 @@ Partial Class MasterPage
                 AdvertNo = 0
             End If
             Using ad As New HBSAcodeLibrary.Advert(Advertisers.Rows(AdvertNo)("Advertiser"))
-                adLink(ix).HRef = ad.WebURL
-                adImg(ix).Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.AdvertBinary)
+                adLink(ix).HRef = ad.webURL
+                adImg(ix).Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.advertBinary)
                 adImg(ix).Alt = ad.advertiser
                 adImg(ix).Attributes.Add("target", "_blank")
             End Using
@@ -226,9 +227,36 @@ Partial Class MasterPage
         Response.Redirect("Covid-19-Compliance.aspx")
     End Sub
 
-    'Protected Sub AGM_Vote_Button_Click(sender As Object, e As EventArgs) Handles AGM_Vote_Button.Click
-    '    Response.Redirect("AGM_Vote.aspx")
-    'End Sub
+    Protected Sub PopulateAccessCode()
+        Using cfg As New HBSA_Configuration
+
+            Dim Password = cfg.Value("ViewPlayerDetailsAccessCode")
+            If Not IsNothing(Password) AndAlso
+                Password.Trim <> "" Then
+                AccessCode_TextBox.Text = Password.Trim
+                AccessCode_Panel.Visible = True
+            Else
+                AccessCode_Panel.Visible = False
+            End If
+
+        End Using
+
+    End Sub
+    Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
+
+        If AccessCode_TextBox.TextMode = TextBoxMode.Password Then
+            AccessCode_TextBox.TextMode = TextBoxMode.SingleLine
+            AccessCode_Button.Text = "Hide Access Code"
+        Else
+            AccessCode_TextBox.TextMode = TextBoxMode.Password
+            AccessCode_Button.Text = "Show Access Code"
+        End If
+
+    End Sub
+    Protected Sub AGM_Vote_Button_Click(sender As Object, e As EventArgs) Handles AGM_Vote_Button.Click
+        Response.Redirect("AGM_Vote.aspx")
+    End Sub
+
 End Class
 
 

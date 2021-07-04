@@ -56,7 +56,7 @@ Public Class EntryForm
                 End Using
             End Using
 
-            userHiddenField.Value = Session("user")
+            userHiddenField.Value = If(Session("user") Is Nothing, Session("AdminUser"), Session("user"))
             ClubLoginIDHiddenField.Value = Session("ClubLoginID")
 
             Season_Literal.Text = CStr(Year(Today)) & " - " & CStr(Year(Today) + 1)

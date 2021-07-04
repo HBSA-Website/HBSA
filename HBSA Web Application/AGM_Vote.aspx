@@ -1,11 +1,15 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="AGM_Vote.aspx.vb" 
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="AGM_Vote.aspx.vb"
     Inherits="HBSA_Web_Application.AGM_Vote" ClientIDMode="Static" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .votingTable {
             border:1px solid black; 
             border-collapse:collapse;
+             font-weight:normal;
         }
         .votingTable th {
             font-size: 10pt;
@@ -24,38 +28,51 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <hr />
+    <br />
     <div style="font-weight: bold; font-size: 16.0pt; line-height: 107%; width: 100%; text-align: center;">VOTING for the AGM</div>
-
     <p>
-        <span style="font-size: 12pt; font-family: Aial,sans-serif;">
-            <b>The votes are in, these are the numbers.</b>
+        <span style="color:red; font-size: 12pt; font-family: Aial,sans-serif;">
+            <i>Votes entered after Tuesday the 13<sup>th</sup> July 2021 will not be considered.</i>
         </span>
     </p>
 
-<%--    <asp:UpdatePanel runat="server">
+    <div style="font-weight:normal;" id="ClubSelection" runat="server">
+        &nbsp;&nbsp;&nbsp;Select the club you wish to vote on behalf of:&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:DropDownList ID="Club_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" Style="text-align: left"></asp:DropDownList>
+    </div>
+
+    <asp:Literal ID="Club_Literal" runat="server"/><br />
+
+    <asp:UpdatePanel runat="server">
         <ContentTemplate>
 
             <script type="text/javascript">
-                function keepExclusive(caller) {
-                    if (caller.checked) {
-                        var ix = caller.id.indexOf("_");
-                        var prefix = caller.id.substr(0, ix);
-                        var suffix = caller.id.substr(ix + 1, 3);
-                        if (suffix == "For") {
-                            document.getElementById(prefix + "_Agn").checked = false;
-                            document.getElementById(prefix + "_Abs").checked = false;
-                        } else if (suffix == "Agn") {
-                            document.getElementById(prefix + "_For").checked = false;
-                            document.getElementById(prefix + "_Abs").checked = false;
-                        } else {
-                            document.getElementById(prefix + "_For").checked = false;
-                            document.getElementById(prefix + "_Agn").checked = false;
-                        }
+            function keepExclusive(caller) {
+                if (caller.checked) {
+                    var ix = caller.id.indexOf("_");
+                    var prefix = caller.id.substr(0, ix);
+                    var suffix = caller.id.substr(ix+1, 3);
+                    if (suffix == "For") {
+                        document.getElementById(prefix + "_Agn").checked = false;
+                        document.getElementById(prefix + "_Abs").checked = false;
+                    } else if (suffix == "Agn") {
+                        document.getElementById(prefix + "_For").checked = false;
+                        document.getElementById(prefix + "_Abs").checked = false;
+                    } else {
+                        document.getElementById(prefix + "_For").checked = false;
+                        document.getElementById(prefix + "_Agn").checked = false;
                     }
                 }
-            </script>--%>
+            }
+            </script>
 
-            <div id="VotingTables" runat="server" style="padding:40px">
+            <p style="color: red;">
+                <asp:Literal ID="Status_Literal2" runat="server"></asp:Literal>
+            </p>
+
+            <div id="VotingTables" runat="server">
                 <table class="votingTable" id="Ordinary_Resolutions" runat="server">
                     <tr>
                         <th style="text-align: left;">Ordinary Resolutions</th>
@@ -64,16 +81,22 @@
                         <th style="width: 120px;">Withheld</th>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">1.	Acceptance of minutes of 2018/2019 AGM</td>
-                        <td>30</td>
-                        <td>0</td>
-                        <td>3</td>
+                        <td style="text-align: left;">1.	Acceptance of minutes of 2018/2019 AGM<asp:Literal ID="Error01" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="OrdinaryResolution01_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="OrdinaryResolution01_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="OrdinaryResolution01_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">2.	Approve the Annual Report and Accounts</td>
-                        <td>30</td>
-                        <td>0</td>
-                        <td>3</td>
+                        <td style="text-align: left;">2.	Approve the Annual Report and Accounts<asp:Literal ID="Error02" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="OrdinaryResolution02_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="OrdinaryResolution02_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="OrdinaryResolution02_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                 </table>
                 <br />
@@ -86,46 +109,39 @@
                         <th style="width: 120px;">Withheld</th>
                     </tr>
                     <tr>
-                        <td style="text-align: left;"><b>1.	New qualifying criteria for entering competitions.</b><br />
-                            A minimum of 3 games in the current season OR 5 games in the current and last season combined. This does NOT apply to junior snooker competitions. With immediate effect.</td>
-                        <td>31</td>
-                        <td>1</td>
-                        <td>1</td>
+                        <td style="text-align: left;"><b>1. Qualifying criteria for entering competitions.</b><asp:Literal ID="Error03" runat="server" /><br />
+                            Competition entrants must have played a minimum of 3 games in the current season OR 5 games in the current and last season combined.  (The '3/5 rule'). This applies to all competitions, the only exception being where the entrant is under 18 years of age (and does not play in other leagues or competitions outside of HBSA). In this scenario the '3/5 rule' is waived.</td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution03_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution03_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution03_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;"><b>2.	The handbook. A smaller handbook is proposed, reducing down to around 40 pages.</b><br />
-                            To include last season’s league tables and results. 200 copies to be produced: 1 per team and 1 per premises.</td>
-                        <td>33</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td style="text-align: left;"><b>2.	AGM and meetings attendance.</b><asp:Literal ID="Literal1" runat="server" /><br />
+                            If a Club is not represented at the November or March meetings, points deductions will not apply to their Vets team(s).
+                            <br />
+                            <br />
+                            <i>{Clarification: (i) If a Club is not represented at the AGM, points deductions will continue to apply to every team in that Club, including Vets. (ii) This rule is for face to face meetings in 'normal' times } </i>
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution04_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution04_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution04_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;"><b>3.	AGM attendance.</b><br />
-                            Non-attendance at the AGM will incur a 4-point deduction, starting in 2021.</td>
-                        <td>20</td>
-                        <td>10</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><b>4.	Late Payments.</b><br />
-                            League Entry Fees not received by the November meeting will incur a 4-point deduction. Teams not paying competition entry fees by this date will be scratched. Teams not paying fines by the March meeting will incur a 4-point deduction. With immediate effect.</td>
-                        <td>27</td>
-                        <td>6</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><b>5.	Venues for the 2020/2021 Finals fortnight.</b><br />
-                            Please tick a box indicating your preferred venue:&nbsp; All at Levels, Mix of Crosland Moor Con and Marsh Lib, or a mix of Levels, Crosland Moor Con and Marsh Lib </td>
-                        <td><b>Levels</b><br />
-                            10</td>
-                        <td><b>Crosland Moor<br />
-                            / Marsh Lib</b><br />
-                            8</td>
-                        <td><b>Mix of all 3 clubs</b><br />
-                            15</td>
+                        <td style="text-align: left;"><b>3. Match postponements/cancellations.</b><asp:Literal ID="Error04" runat="server" /><br />
+                            Matches must be cancelled a minimum of 90 minutes prior to the match start time, otherwise the opposing team has the right to claim the match in full
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution05_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution05_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="SpecialResolution05_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                 </table>
                 <br />
@@ -138,42 +154,71 @@
                         <th style="width: 120px;">Withheld</th>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">1.	Secretary – B Keenan</td>
-                        <td>32</td>
-                        <td>0</td>
-                        <td>1</td>
+                        <td style="text-align: left;">1. President - Tony Clegg<asp:Literal ID="Error06" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election06_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election06_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election076Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">2.	League Secretary – J Bastow</td>
-                        <td>33</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td style="text-align: left;">2. Secretary – R Taylor<asp:Literal ID="Error07" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election07_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election07_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election07_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">3.	Competition Secretary – P Schofield</td>
-                        <td>33</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td style="text-align: left;">3.	League Secretary – J Bastow<asp:Literal ID="Error08" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election08_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election08_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election08_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">4.	Treasurer – D Poutney</td>
-                        <td>33</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td style="text-align: left;">4.	Competition Secretary – P Schofield<asp:Literal ID="Error09" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election09_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election09_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election09_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">5.  Auditors – B Keenan / R Taylor</td>
-                        <td>32</td>
-                        <td>0</td>
-                        <td>1</td>
+                        <td style="text-align: left;">5.	Treasurer – D Poutney<asp:Literal ID="Error10" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election10_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election10_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election10_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">6.  Auditors – B Keenan / R Taylor<asp:Literal ID="Error11" runat="server" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election11_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election11_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                        <td>
+                            <asp:CheckBox ID="Election11_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                 </table>
-                <br />
-                <br />
             </div>
+            <br />
+            <br />
+            <p style="text-align: center; color: red">
+                <asp:Literal ID="Status_Literal" runat="server"></asp:Literal>
+                <br />
+                <asp:Button ID="SubmitVote_Button" runat="server" Text="Click here to submit your club's vote." Font-Size="X-Large" />
+            </p>
 
-<%--        </ContentTemplate>
-    </asp:UpdatePanel>--%>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
 </asp:Content>
-

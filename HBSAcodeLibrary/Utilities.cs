@@ -294,6 +294,42 @@ namespace HBSAcodeLibrary
         {
             return (Handbook() != null); 
         }
+        public static bool ViewContactDetailsAccessible()
+        {
+            HttpContext httpContext = HttpContext.Current;
+
+            if (httpContext.ApplicationInstance.Session.Count > 0)
+            {
+                if (httpContext.ApplicationInstance.Session["ClubLoginID"] != null)
+                    return true;
+
+                if (httpContext.ApplicationInstance.Session["TeamID"] != null)
+                    return true;
+
+                if (httpContext.ApplicationInstance.Session["adminDetails"] != null &&
+                    httpContext.ApplicationInstance.Session["AdminUser"] != null)
+                    return true;
+
+                if (httpContext.ApplicationInstance.Session["ViewContactDetails"] != null &&
+                    (string)httpContext.ApplicationInstance.Session["ViewContactDetails"] == "Accessible")
+                    return true;
+
+                using (HBSA_Configuration cfg = new HBSA_Configuration())
+                {
+                    if (cfg.Value("ViewPlayerDetailsAccessCode") == null)
+                        return true;
+                    else
+                        if (cfg.Value("ViewPlayerDetailsAccessCode").Trim() == "")
+                        return true;
+                }
+
+                return false;
+
+            } else
+
+                return false;
+ 
+        }
     }
     public class HBSAencoder
     {   // private HBSA encoder/decoder to keep data non visible to the public+

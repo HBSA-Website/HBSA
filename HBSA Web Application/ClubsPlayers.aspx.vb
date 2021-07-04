@@ -8,6 +8,8 @@ Public Class ClubsPlayers
             PopulateSections()
             PopulateClubs()
 
+            AccessCode_Panel.Visible = Not Utilities.ViewContactDetailsAccessible()
+
         End If
 
     End Sub
@@ -129,7 +131,14 @@ Public Class ClubsPlayers
         End If
 
     End Sub
+    Private Sub Players_GridView_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles Players_GridView.RowDataBound
 
+        If Not Utilities.ViewContactDetailsAccessible Then
+            e.Row.Cells(e.Row.Cells.Count - 1).Visible = False
+            e.Row.Cells(e.Row.Cells.Count - 2).Visible = False
+        End If
+
+    End Sub
     <System.Web.Script.Services.ScriptMethod>
     <System.Web.Services.WebMethod>
     Public Shared Function SuggestPlayers(ByVal prefixText As String, ByVal count As Integer) As List(Of String)
@@ -164,5 +173,23 @@ Public Class ClubsPlayers
         End Using
 
     End Sub
+    Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
 
+        AccessCode_Literal.Text = ""
+        Using cfg As New HBSA_Configuration
+
+            If AccessCode_TextBox.Text.Trim = cfg.Value("ViewPlayerDetailsAccessCode") Then
+                Session("ViewContactDetails") = "Accessible"
+                AccessCode_Panel.Visible = False
+            Else
+                AccessCode_Literal.Text = "<span style='color:red'>Incorrect access code.</span>"
+            End If
+
+        End Using
+
+    End Sub
+
+    Protected Sub CancelAccessCode_Button_Click(sender As Object, e As EventArgs) Handles CancelAccessCode_Button.Click
+        AccessCode_Panel.Visible = False
+    End Sub
 End Class

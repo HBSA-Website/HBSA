@@ -16,7 +16,7 @@ Public Class Players
         Else
             If Not IsPostBack Then
                 populateSections()
-                SessionUser.Value = Session("user")
+                SessionUser.Value = Session("AdminUser")
             End If
         End If
 

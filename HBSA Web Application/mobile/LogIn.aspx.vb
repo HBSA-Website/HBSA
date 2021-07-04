@@ -81,11 +81,11 @@ Public Class LogIn1
                             Session("UserType") = adminDetails.Rows(0).Item("Function")
 
                             If Session("UserType") = "Printer" Then
-                                Session("user") = Nothing
+                                Session("AdminUser") = Nothing
                                 Session("adminDetails") = Nothing
                             Else
                                 Session("adminDetails") = adminDetails
-                                Session("user") = adminDetails.Rows(0).Item("username")
+                                Session("AdminUser") = adminDetails.Rows(0).Item("username")
                                 Session("UserType") = Nothing
                             End If
                         Catch ex As Exception

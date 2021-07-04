@@ -122,7 +122,7 @@
                                     transactionID:=FineID,
                                     dateTimePaid:=HBSAcodeLibrary.Utilities.UKDateTimeNow(),
                                     paidBy:="Mark Paid",
-                                    user:=Session("user"))
+                                    user:=Session("AdminUser"))
         Catch ex As Exception
             Status_Literal.Text = "ERROR, there was a problem saving this.<br/>" &
                                   "Please contact us and supply the details below:<br/><br/>" & ex.Message
@@ -252,7 +252,7 @@
                                     transactionID:=FineID_TextBox.Text.Trim,
                                     dateTimePaid:=CDate(DateTime__TextBox.Text),
                                     paidBy:=PaidBy_TextBox.Text.Trim,
-                                    user:=Session("user")
+                                    user:=Session("AdminUser")
                                                             )
 
 
