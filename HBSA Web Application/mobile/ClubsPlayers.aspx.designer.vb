@@ -122,6 +122,15 @@ Partial Public Class ClubsPlayers1
     Protected WithEvents AccessCode_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''AccessCode_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''CancelAccessCode_Button control.
     '''</summary>
     '''<remarks>

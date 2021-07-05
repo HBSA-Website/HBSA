@@ -90,13 +90,15 @@ Public Class ClubsPlayers1
 
         Using cfg As New HBSA_Configuration
 
-            If AccessCode_TextBox.Text.Trim = cfg.Value("ViewPlayerDetailsAccessCode") Then
+            If AccessCode_TextBox.Text.Trim.ToLower = cfg.Value("ViewPlayerDetailsAccessCode").ToLower Then
                 Session("ViewContactDetails") = "Accessible"
                 AccessCode_Panel.Visible = False
                 Using players As DataTable = HBSAcodeLibrary.PlayerData.GetPlayerDetailsByPlayer(,, Player_TextBox.Text, , True)
                     Players_Div.InnerHtml = Utilities.BuildMobileActiveTable(players, 1, , "ActiveDetailDiv",
                                                  If(Utilities.ViewContactDetailsAccessible, "Player|Accessible", "Player|NotAccessible"))
                 End Using
+            Else
+                AccessCode_Literal.Text = "<span style='color:red'>Incorrect access code.</span>"
             End If
 
         End Using

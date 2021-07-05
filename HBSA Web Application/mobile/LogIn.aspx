@@ -67,21 +67,23 @@
 
        <table>
         <tr>
-            <td>Your email address:</td>
+            <td style="vertical-align:top">Your email address:</td>
             <td>
-                <asp:TextBox ID="email_TextBox" runat="server" CssClass="textbox"></asp:TextBox></td>
+                <asp:TextBox ID="email_TextBox" runat="server" CssClass="textbox"></asp:TextBox>
+                <br /><br />
+            </td>
         </tr>
         
         <tr>
-            <td>Your Password:</td>
+            <td style="vertical-align: top">Your Password:</td>
             <td>
                 <asp:TextBox ID="password_TextBox" ClientIDMode="Static" runat="server" TextMode="Password"  CssClass="textbox"></asp:TextBox>
+                <br /><br />
             </td>
         </tr>
         <tr>
         <td>&nbsp;</td>
         <td>
-            <br />
             <asp:Button ID="Login_Button" runat="server" Text="Log in" cssclass="button" Width="374px"/></td>
         </tr>
 

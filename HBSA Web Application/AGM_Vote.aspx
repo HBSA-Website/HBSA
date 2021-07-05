@@ -31,10 +31,11 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <hr />
     <br />
-    <div style="font-weight: bold; font-size: 16.0pt; line-height: 107%; width: 100%; text-align: center;">VOTING for the AGM</div>
+    <div style="font-weight: bold; font-size: 16.0pt; line-height: 107%; width: 100%; text-align: center;">2021 AGM - VOTING FORM</div>
     <p>
         <span style="color:red; font-size: 12pt; font-family: Aial,sans-serif;">
-            <i>Votes entered after Tuesday the 13<sup>th</sup> July 2021 will not be considered.</i>
+            <i>Please reply by logging in using your &quot;Club&quot; log-in credentials and completing
+                the form on the website by 21<sup>st</sup> July 2021. POSTAL VOTES WILL NOT BE ACCEPTED.</i>
         </span>
     </p>
 
@@ -81,7 +82,7 @@
                         <th style="width: 120px;">Withheld</th>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">1.	Acceptance of minutes of 2018/2019 AGM<asp:Literal ID="Error01" runat="server" /></td>
+                        <td style="text-align: left;">1. Acceptance of minutes of the 2020 AGM<asp:Literal ID="Error01" runat="server" /></td>
                         <td>
                             <asp:CheckBox ID="OrdinaryResolution01_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
                         <td>
@@ -154,16 +155,16 @@
                         <th style="width: 120px;">Withheld</th>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">1. President - Tony Clegg<asp:Literal ID="Error06" runat="server" /></td>
+                        <td style="text-align: left;">1. Secretary – R Taylor<asp:Literal ID="Error06" runat="server" /></td>
                         <td>
                             <asp:CheckBox ID="Election06_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
                         <td>
                             <asp:CheckBox ID="Election06_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                         <td>
-                            <asp:CheckBox ID="Election076Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                            <asp:CheckBox ID="Election06_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">2. Secretary – R Taylor<asp:Literal ID="Error07" runat="server" /></td>
+                        <td style="text-align: left;">2.	League Secretary – J Bastow<asp:Literal ID="Error07" runat="server" /></td>
                         <td>
                             <asp:CheckBox ID="Election07_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
                         <td>
@@ -172,7 +173,7 @@
                             <asp:CheckBox ID="Election07_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">3.	League Secretary – J Bastow<asp:Literal ID="Error08" runat="server" /></td>
+                        <td style="text-align: left;">3.	Competition Secretary – P Schofield<asp:Literal ID="Error08" runat="server" /></td>
                         <td>
                             <asp:CheckBox ID="Election08_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
                         <td>
@@ -181,31 +182,22 @@
                             <asp:CheckBox ID="Election08_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">4.	Competition Secretary – P Schofield<asp:Literal ID="Error09" runat="server" /></td>
+                        <td style="text-align: left;">4.	Treasurer – D Poutney<asp:Literal ID="Error09" runat="server" /></td>
                         <td>
                             <asp:CheckBox ID="Election09_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
                         <td>
-                            <asp:CheckBox ID="Election09_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                            <asp:CheckBox ID="Election90_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                         <td>
-                            <asp:CheckBox ID="Election09_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
+                            <asp:CheckBox ID="Election90_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                     <tr>
-                        <td style="text-align: left;">5.	Treasurer – D Poutney<asp:Literal ID="Error10" runat="server" /></td>
+                        <td style="text-align: left;">5.  Auditors – B Keenan / R Taylor<asp:Literal ID="Error10" runat="server" /></td>
                         <td>
                             <asp:CheckBox ID="Election10_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
                         <td>
                             <asp:CheckBox ID="Election10_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                         <td>
                             <asp:CheckBox ID="Election10_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">6.  Auditors – B Keenan / R Taylor<asp:Literal ID="Error11" runat="server" /></td>
-                        <td>
-                            <asp:CheckBox ID="Election11_For" runat="server" Text=" " onclick="keepExclusive(this);" /></td>
-                        <td>
-                            <asp:CheckBox ID="Election11_Agn" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
-                        <td>
-                            <asp:CheckBox ID="Election11_Abs" runat="server" Text=" " onclick="keepExclusive(this)" /></td>
                     </tr>
                 </table>
             </div>

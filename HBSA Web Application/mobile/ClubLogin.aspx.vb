@@ -33,13 +33,13 @@
         Session("Profiling") = Nothing
 
     End Sub
-    Protected Sub Club_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Club_DropdownList.SelectedIndexChanged
-        If Club_DropdownList.SelectedValue = "" Then
-            Response.Redirect("ClubLoginRegistration.aspx")
-        Else
-            status_Literal.Text = "Enter your password and click Login or Change/Delete<br />Or Click Forgotten password."
-        End If
-    End Sub
+    'Protected Sub Club_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Club_DropdownList.SelectedIndexChanged
+    '    If Club_DropdownList.SelectedValue = "" Then
+    '        Response.Redirect("ClubLoginRegistration.aspx")
+    '    Else
+    '        status_Literal.Text = "Enter your password and click Login or Change/Delete<br />Or Click Forgotten password."
+    '    End If
+    'End Sub
     Protected Sub Login_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) _
              Handles Login_Button.Click
 
@@ -47,7 +47,7 @@
         Session("ClubLoginID") = Nothing
 
         If Club_DropdownList.SelectedIndex < 1 Then
-            status_Literal.Text = "<span style='color:red;'>Please Select a club.</span>"
+            status_Literal.Text = "<span style='color:red;'>Please Select a club, or Touch/Click Register new club login.</span>"
             Exit Sub
         End If
 
@@ -65,24 +65,12 @@
                             Session("user") = Club_DropdownList.SelectedValue
 
                             If Session("ClubLoginCaller") Is Nothing Then
-                                If Not Session("LoginCaller") Is Nothing Then
-                                    Response.Redirect(Session("LoginCaller"))
-                                Else
-                                    If HBSAcodeLibrary.HBSA_Configuration.AllowCompetitionsEntryForms Then
-                                        Response.Redirect("../CompetitionsEntryForm.aspx")
-                                    Else
-                                        Response.Redirect("../EntryForm.aspx")
-                                    End If
-
-                                End If
+                                Response.Redirect("Home.aspx") 'nowhere to go, show home page
                             Else
                                 Response.Redirect(Session("ClubLoginCaller"))
                             End If
-
                         Else
-
                             Server.Transfer("ClubLoginConfirm.aspx?ClubID=" & .ClubID)
-
                         End If
 
                     Else

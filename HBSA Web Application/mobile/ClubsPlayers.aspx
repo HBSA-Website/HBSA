@@ -40,6 +40,7 @@
             If you wish to view Players&#39; eMail addresses and/or telephone numbers enter the access code and click Apply.<br />
            Access Code:<asp:TextBox ID="AccessCode_TextBox" runat="server" TextMode="Password" Width="204px"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="AccessCode_Button" runat="server" Text="Apply" />
+            &nbsp;&nbsp;<asp:Literal ID="AccessCode_Literal" runat="server"></asp:Literal>
             <br />If you don&#39;t know the access code contact your club representative or a team representative (who can enter match results) who will be able to log on and find this access code.
             <br />If you wish to just continue click Cancel:&nbsp;&nbsp;<asp:Button ID="CancelAccessCode_Button" runat="server" Text="Cancel" />
         </p>

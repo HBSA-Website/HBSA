@@ -373,7 +373,7 @@
             <asp:Panel ID="AccessCode_Panel" runat="server" Visible="false">
             Access code for viewing Players' eMail addresses and telephone numbers:&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="AccessCode_TextBox" runat="server" BorderWidth="0px" BackColor="#FFFFCC" TextMode="Password" ReadOnly="True"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="AccessCode_Button" runat="server" Text="Show access code" BorderWidth="0px" />
+            <asp:Button ID="AccessCode_Button" runat="server" Text="Show Access Code" BorderWidth="0px" />
             </asp:Panel>
         </div>
 
