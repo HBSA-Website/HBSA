@@ -61,6 +61,9 @@ Public Class MobileMaster
 
         HandbookMenuItem.Visible = Utilities.HandbookExists
 
+        AccessCode_TextBox.Text = ""
+        AccessCode_Panel.Visible = False
+
         If Session("TeamID") Is Nothing Then
             Login_Literal.Text = ""
             Login_Button.Text = "Team Log in"
@@ -174,8 +177,6 @@ Public Class MobileMaster
                 Password.Trim <> "" Then
                 AccessCode_TextBox.Text = Password.Trim
                 AccessCode_Panel.Visible = True
-            Else
-                AccessCode_Panel.Visible = False
             End If
 
         End Using
@@ -183,7 +184,7 @@ Public Class MobileMaster
     End Sub
     Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
 
-        If AccessCode_TextBox.TextMode = TextBoxMode.Password Then
+        If AccessCode_Button.Text = "Show Access Code" Then
             AccessCode_TextBox.TextMode = TextBoxMode.SingleLine
             AccessCode_Button.Text = "Hide Access Code"
         Else

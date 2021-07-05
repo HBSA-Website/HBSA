@@ -13,15 +13,19 @@
 
        <table>
         <tr>
-            <td>Select your club:</td>
+            <td style="vertical-align: top">Select your club:</td>
             <td>
-                <asp:DropDownList ID="Club_DropdownList" runat="server" CssClass="textbox" AutoPostBack="true" style="max-width:700px"></asp:DropDownList></td>
+                <asp:DropDownList ID="Club_DropdownList" runat="server" CssClass="textbox" style="max-width:700px"></asp:DropDownList>
+                <br /><br />
+            </td>
         </tr>
         
         <tr>
-            <td>Your Password:</td>
+            <td style="vertical-align: top">Your Password:</td>
             <td>
                 <asp:TextBox ID="password_TextBox" ClientIDMode="Static" runat="server" TextMode="Password"  CssClass="textbox"></asp:TextBox>
+                <br />
+                <br />
             </td>
         </tr>
         <tr style="height:30px">
@@ -39,7 +43,7 @@
     <br />
         Not logged in before?
         <br />
-    <asp:Button ID="Register_Button" runat="server" CssClass="button" Text="Click here to register" />
+    <asp:Button ID="Register_Button" runat="server" CssClass="button" Text="Register new club login" />
 
     </asp:Panel>
 

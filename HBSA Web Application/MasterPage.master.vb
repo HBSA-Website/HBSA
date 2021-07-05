@@ -94,10 +94,12 @@ Partial Public Class MasterPage
             Admin_Button.Visible = True
         End If
 
+        AccessCode_TextBox.Text = ""
+        AccessCode_Panel.Visible = False
+
         If Session("TeamID") Is Nothing Then
             Login_Literal.Text = ""
             Login_button.Text = "Team Log in"
-            AccessCode_TextBox.Visible = False
         Else
             Using User As New HBSAcodeLibrary.UserData(Session("Email"), Session("Password"))
                 Using Team As New TeamData(User.TeamID)
@@ -235,8 +237,6 @@ Partial Public Class MasterPage
                 Password.Trim <> "" Then
                 AccessCode_TextBox.Text = Password.Trim
                 AccessCode_Panel.Visible = True
-            Else
-                AccessCode_Panel.Visible = False
             End If
 
         End Using
@@ -244,7 +244,7 @@ Partial Public Class MasterPage
     End Sub
     Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
 
-        If AccessCode_TextBox.TextMode = TextBoxMode.Password Then
+        If AccessCode_Button.Text = "Show Access Code" Then
             AccessCode_TextBox.TextMode = TextBoxMode.SingleLine
             AccessCode_Button.Text = "Hide Access Code"
         Else

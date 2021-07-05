@@ -61,7 +61,7 @@ Public Class LogIn1
                             End Using
 
                             If Session("LoginCaller") Is Nothing Then
-                                Response.Redirect("Login.aspx")
+                                Response.Redirect("Home.aspx") 'nowhere to go, show home page
                             Else
                                 Response.Redirect(Session("LoginCaller").replace("mobile/", ""))
                             End If

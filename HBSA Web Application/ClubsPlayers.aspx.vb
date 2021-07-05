@@ -178,7 +178,7 @@ Public Class ClubsPlayers
         AccessCode_Literal.Text = ""
         Using cfg As New HBSA_Configuration
 
-            If AccessCode_TextBox.Text.Trim = cfg.Value("ViewPlayerDetailsAccessCode") Then
+            If AccessCode_TextBox.Text.Trim.ToLower = cfg.Value("ViewPlayerDetailsAccessCode").ToLower Then
                 Session("ViewContactDetails") = "Accessible"
                 AccessCode_Panel.Visible = False
             Else

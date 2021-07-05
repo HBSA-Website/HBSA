@@ -57,7 +57,7 @@
         <asp:Panel ID="AccessCode_Panel" runat="server" Visible="false">
             Access code for viewing Players' eMail addresses and telephone numbers:<br />
                 &nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="AccessCode_TextBox" runat="server" BorderWidth="0px" BackColor="#FFFFCC" TextMode="Password" ReadOnly="True" Width="234px"></asp:TextBox>&nbsp;&nbsp;
-                <asp:Button ID="AccessCode_Button" runat="server" Text="Show access code" BorderWidth="1px" Height="49px" Width="365px" BackColor="White" ForeColor="Blue" Font-Underline="True" />
+                <asp:Button ID="AccessCode_Button" runat="server" Text="Show Access Code" BorderWidth="1px" Height="49px" Width="365px" BackColor="White" ForeColor="Blue" Font-Underline="True" />
         </asp:Panel>
     </div>
     <div id="leftMenuDiv" class="menuDiv">
