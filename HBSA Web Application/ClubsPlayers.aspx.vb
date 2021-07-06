@@ -8,14 +8,14 @@ Public Class ClubsPlayers
             PopulateSections()
             PopulateClubs()
 
-            AccessCode_Panel.Visible = Not Utilities.ViewContactDetailsAccessible()
-
         Else
 
             Session("ViewContactDetails") = ViewContactDetailsHidden.Value
-            AccessCode_Panel.Visible = (ViewContactDetailsHidden.Value <> "Accessible")
 
         End If
+
+        AccessCode_Panel.Visible = Not Utilities.ViewContactDetailsAccessible()
+
 
     End Sub
     Protected Sub PopulateSections()
