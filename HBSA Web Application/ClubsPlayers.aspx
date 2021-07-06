@@ -67,10 +67,11 @@
                     <td>
                         <table style="text-align: left;">
                             <tr>
-                                <td colspan="3" style="font-size: 10pt; color:black; font-style:italic;">Start entering a player&#39;s name then:</td>
+                                <td colspan="3" style="font-size: 10pt; color:black; font-style:italic;">Start entering a player&#39;s name then<br />
+                                    select a player and click GO</td>
                             </tr>
                             <tr>
-                                <td style="text-align: right; font-size: 10pt;color:black; font-style: italic;">select a player and click GO</td>
+                                <td style="text-align: right; font-size: 10pt;color:black; font-style: italic;"></td>
                                 <td>
                                     <asp:TextBox ID="Player_TextBox" runat="server" BackColor="#FFFFCC" Width="193px" Height="18px" AutoCompleteType="Disabled"></asp:TextBox>
                                     <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="Player_TextBox" DelimiterCharacters=""
