@@ -1,10 +1,41 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="ClubsPlayers.aspx.vb" Inherits="HBSA_Web_Application.ClubsPlayers" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="ClubsPlayers.aspx.vb"
+    Inherits="HBSA_Web_Application.ClubsPlayers" ClientIDMode="Static" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        function checkAccessCode(AccessCode, msgSpan) {
+            var elAccessCode = document.getElementById(AccessCode);
+            HBSA_Web_Application.AccessCode.CheckAccessCode(elAccessCode.value, Completed, Errored, msgSpan); 
+        }
+        function Completed(outcome, msgSpan) {
+            if (outcome != "good") {
+                document.getElementById(msgSpan).innerHTML = "Incorrect access code";
+                document.getElementById("ViewContactDetailsHidden").value = "";
+            } else {
+                document.getElementById("ViewContactDetailsHidden").value = "Accessible";
+                var dd = document.getElementById("Club_DropDownList")
+                if (dd.selectedIndex != 0) {  //need to force rebuild of players table
+                    dd.selectedIndex = 0;     // restart the club dd
+                    __doPostBack("Club_DropDownList"); //force code behind to build playerts table
+                } else {
+                    var panel = document.getElementById("AccessCode_Panel");
+                    panel.style.display = "none"
+                }
+            }
+        }
+        function Errored(result) {
+            alert("Error: " + result.get_message());
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <Services>
+                <asp:ServiceReference Path="~/AccessCode.asmx" />
+            </Services>
+        </asp:ScriptManager>
+
        <asp:UpdateProgress runat="server" id="Update_Progress" DisplayAfter="10">
             <ProgressTemplate>
                 <div id="Loading" style="position: fixed; left:440px;top:260px">
@@ -12,6 +43,8 @@
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
+
+    <input id="ViewContactDetailsHidden" type="hidden" runat="server" />
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server"> 
          <ContentTemplate>
@@ -39,7 +72,7 @@
                             <tr>
                                 <td style="text-align: right; font-size: 10pt;color:black; font-style: italic;">select a player and click GO</td>
                                 <td>
-                                    <asp:TextBox ID="Player_TextBox" runat="server" BackColor="#FFFFCC" Width="193px" Height="18px"></asp:TextBox>
+                                    <asp:TextBox ID="Player_TextBox" runat="server" BackColor="#FFFFCC" Width="193px" Height="18px" AutoCompleteType="Disabled"></asp:TextBox>
                                     <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="Player_TextBox" DelimiterCharacters=""
                                         MinimumPrefixLength="1" EnableCaching="false" UseContextKey="true"
                                         ServiceMethod="SuggestPlayers" CompletionInterval="10"
@@ -61,9 +94,11 @@
               <asp:Panel ID="AccessCode_Panel" style="text-align:left" runat="server" Visible="false" BorderWidth="1px" BorderStyle="Solid" BackColor="White">
                   <p style="color:red;font-weight:bold ">Access code required for Players' eMail addresses and telephone numbers</p>
                   <p>If you wish to view Players' eMail addresses and/or telephone numbers enter the required Access code and click Apply.<br/> 
-                      Access code: <asp:TextBox ID="AccessCode_TextBox" runat="server" ></asp:TextBox>
-                      &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="AccessCode_Button" runat="server" Text="Apply" />
-                      &nbsp;&nbsp;&nbsp;&nbsp;<asp:Literal ID="AccessCode_Literal" runat="server"></asp:Literal>
+                      Access code: 
+                      <input id="AccessCode_Text" type="password" style="width: 180px;" autocomplete="new-password" />
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span id="ApplyCode" style="color: blue; text-decoration: underline"
+                            onmouseover="this.style.cursor = 'pointer';" onclick="checkAccessCode('AccessCode_Text','AccessCodeMsg')">Apply </span>
+                      &nbsp;&nbsp;<span id="AccessCodeMsg" style="color: red"></span>
                       <br />
                   </p>
                   <p>

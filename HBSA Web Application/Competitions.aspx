@@ -1,6 +1,11 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="Competitions.aspx.vb" Inherits="HBSA_Web_Application.Competitions" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="Competitions.aspx.vb"
+    Inherits="HBSA_Web_Application.Competitions" ClientIDMode="Static" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<style type="text/css">
        .hoverDiv {
             border-style: solid;
             border-width: 1px; 
@@ -13,11 +18,33 @@
         }
 
     </style>
-</asp:Content>
+    <script type="text/javascript">
+        function checkAccessCode(AccessCode, msgSpan) {
+            var elAccessCode = document.getElementById(AccessCode);
+            HBSA_Web_Application.AccessCode.CheckAccessCode(elAccessCode.value, Completed, Errored, msgSpan);
+        }
+        function Completed(outcome, msgSpan) {
+            if (outcome != "good") {
+                document.getElementById(msgSpan).innerHTML = "Incorrect access code";
+                document.getElementById("ViewContactDetailsHidden").value = "";
+            } else {
+                document.getElementById("ViewContactDetailsHidden").value = "Accessible";
+                var dd = document.getElementById("Competitions_DropDownList")
+                if (dd.selectedIndex != 0) {  //need to force rebuild of players table
+                    dd.selectedIndex = 0;     // restart the club dd
+                    __doPostBack("Competitions_DropDownList"); //force code behind to build playerts table
+                } else {
+                    var panel = document.getElementById("AccessCode_Panel");
+                    panel.style.display = "none"
+                }
+            }
+        }
+        function Errored(result) {
+            alert("Error: " + result.get_message());
+        }
+    </script>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-<script type="text/javascript">
+    <script type="text/javascript">
     function loadHoverDiv(DivID) {
 
         document.getElementById(DivID).style.display = "block";
@@ -30,14 +57,20 @@
     }
 </script>
 
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="~/AccessCode.asmx" />
+        </Services>
+    </asp:ScriptManager>
        <asp:UpdateProgress runat="server" id="Update_Progress" DisplayAfter="10">
             <ProgressTemplate>
                 <div id="Loading" style="position: fixed; left:440px;top:260px">
                     <asp:Image ID="loadingImage" runat="server" ImageUrl="~/images/AjaxLoading.gif" Width="100px" />
                 </div>
             </ProgressTemplate>
-        </asp:UpdateProgress>
+        </asp:UpdateProgress> 
+
+    <input id="ViewContactDetailsHidden" type="hidden" runat="server" />
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
          <ContentTemplate>
@@ -51,9 +84,10 @@
             <p>
                 If you wish to view Players' eMail addresses and/or telephone numbers enter the required Access code and click Apply.<br />
                 Access code:
-                <asp:TextBox ID="AccessCode_TextBox" runat="server"></asp:TextBox>
-                &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="AccessCode_Button" runat="server" Text="Apply" />
-                &nbsp;&nbsp;&nbsp;&nbsp;<asp:Literal ID="AccessCode_Literal" runat="server"></asp:Literal>
+                <input id="AccessCode_Text" type="password" style="width: 180px;" autocomplete="new-password" />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span id="ApplyCode" style="color: blue; text-decoration: underline"
+                                                       onmouseover="this.style.cursor = 'pointer';" onclick="checkAccessCode('AccessCode_Text','AccessCodeMsg')">Apply </span>
+                &nbsp;&nbsp;<span id="AccessCodeMsg" style="color: red"></span>
                 <br />
             </p>
             <p>

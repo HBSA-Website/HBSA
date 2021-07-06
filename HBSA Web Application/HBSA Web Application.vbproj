@@ -480,6 +480,7 @@
     <Content Include="images\warning.png" />
     <Content Include="images\YBSA.png" />
     <Content Include="LoginReset.aspx" />
+    <Content Include="AccessCode.asmx" />
     <Content Include="mobile\ActiveTableDetail.asmx" />
     <Content Include="mobile\Adverts.aspx" />
     <Content Include="mobile\Breaks.aspx" />
@@ -607,6 +608,7 @@
     <Content Include="UnseasonedPlayers.aspx" />
     <Content Include="Documents\Competition_Entry_Form_Billiards.pdf" />
     <Content Include="Documents\Competition_Entry_Form_Vets.pdf" />
+    <Content Include="Documents\AGM PAPERS 2021.pdf" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
@@ -1174,6 +1176,10 @@
     <Compile Include="LoginReset.aspx.vb">
       <DependentUpon>LoginReset.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccessCode.asmx.vb">
+      <DependentUpon>AccessCode.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="mobile\ActiveTableDetail.asmx.vb">
       <DependentUpon>ActiveTableDetail.asmx</DependentUpon>

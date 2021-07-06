@@ -44,8 +44,9 @@
         <asp:DropDownList ID="Club_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" Style="text-align: left"></asp:DropDownList>
     </div>
 
-    <asp:Literal ID="Club_Literal" runat="server"/><br />
+    <asp:Literal ID="Club_Literal" runat="server"/><br /><br />
 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Documents/AGM PAPERS 2021.pdf" >Click here to get the AGM Papers 2021</a>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
 

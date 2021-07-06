@@ -32,6 +32,15 @@ Partial Public Class Competitions
     Protected WithEvents Update_Progress As Global.System.Web.UI.UpdateProgress
 
     '''<summary>
+    '''ViewContactDetailsHidden control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ViewContactDetailsHidden As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+
+    '''<summary>
     '''UpdatePanel1 control.
     '''</summary>
     '''<remarks>
@@ -48,33 +57,6 @@ Partial Public Class Competitions
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents AccessCode_Panel As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''AccessCode_TextBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AccessCode_TextBox As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''AccessCode_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AccessCode_Button As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''AccessCode_Literal control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AccessCode_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
     '''CancelAccessCode_Button control.

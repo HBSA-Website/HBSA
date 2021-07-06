@@ -9,9 +9,16 @@ Public Class competitions1
         If Not IsPostBack Then
 
             PopulateCompetitionsDropDown()
-            AccessCode_Panel.Visible = Not Utilities.ViewContactDetailsAccessible()
+
+        Else
+
+            If Session("ViewContactDetails") <> "Accessible" Then
+                Session("ViewContactDetails") = ViewContactDetailsHidden.Value
+            End If
 
         End If
+
+        AccessCode_Panel.Visible = Not Utilities.ViewContactDetailsAccessible()
 
     End Sub
 
@@ -322,20 +329,20 @@ Public Class competitions1
         Return Cell
 
     End Function
-    Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
+    'Protected Sub AccessCode_Button_Click(sender As Object, e As EventArgs) Handles AccessCode_Button.Click
 
-        Using cfg As New HBSA_Configuration
+    '    Using cfg As New HBSA_Configuration
 
-            If AccessCode_TextBox.Text.Trim.ToLower = cfg.Value("ViewPlayerDetailsAccessCode").ToLower Then
-                Session("ViewContactDetails") = "Accessible"
-                AccessCode_Panel.Visible = False
-            Else
-                AccessCode_Literal.Text = "<span style='color:red'>Incorrect access code.</span>"
-            End If
+    '        If AccessCode_TextBox.Text.Trim.ToLower = cfg.Value("ViewPlayerDetailsAccessCode").ToLower Then
+    '            Session("ViewContactDetails") = "Accessible"
+    '            AccessCode_Panel.Visible = False
+    '        Else
+    '            AccessCode_Literal.Text = "<span style='color:red'>Incorrect access code.</span>"
+    '        End If
 
-        End Using
+    '    End Using
 
-    End Sub
+    'End Sub
 
     Protected Sub CancelAccessCode_Button_Click(sender As Object, e As EventArgs) Handles CancelAccessCode_Button.Click
 
