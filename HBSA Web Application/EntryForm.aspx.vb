@@ -580,7 +580,11 @@ Public Class EntryForm
 
         If e.Row.Cells.Count > 2 Then
             If e.Row.RowType = DataControlRowType.Header Then
-                e.Row.Cells(e.Row.Cells.Count - 5).Text = If(leagueIDHiddenField.Value = 2, "Over80", "Over70")
+                If leagueIDHiddenField.Value = 2 Then
+                    e.Row.Cells(e.Row.Cells.Count - 5).Text = "Over80"
+                Else
+                    e.Row.Cells(e.Row.Cells.Count - 5).Visible = False
+                End If
             End If
 
             If e.Row.RowType = DataControlRowType.DataRow Then
@@ -597,6 +601,10 @@ Public Class EntryForm
                         e.Row.Cells(ix).ForeColor = Drawing.Color.DarkGray
                     End If
                 Next
+
+                If leagueIDHiddenField.Value <> 2 Then
+                    e.Row.Cells(e.Row.Cells.Count - 5).Visible = False
+                End If
             End If
 
             'hide the columns that the user does not need to see
@@ -629,6 +637,13 @@ Public Class EntryForm
         End If
 
         Player_Over70_CheckBox.Checked = gvRow.Cells(1).Text IsNot ""
+
+        If Team_League_DropDownList.SelectedValue = 2 Then
+            Player_Over70_CheckBox.Text = "Over 80"
+            Player_Over70_CheckBox.Visible = True
+        Else
+            Player_Over70_CheckBox.Visible = False
+        End If
         Player_email_TextBox.Text = gvRow.Cells(10).Text.Replace("&nbsp;", " ").Replace("&#39;", "'")
         Player_TelNo_TextBox.Text = gvRow.Cells(11).Text.Replace("&nbsp;", " ").Replace("&#39;", "'")
         Player_Handicap_Text.Value = gvRow.Cells(8).Text.Replace("&nbsp;", " ").Replace("&#39;", "'")
@@ -740,6 +755,7 @@ Public Class EntryForm
         Team_Save_Button.Visible = Not Show
         Player_Add_Button.Visible = Not Show
         Player_Find_Button.Visible = Not Show
+
         If Show Then
             Player_Transfer_Panel.Visible = False
         Else

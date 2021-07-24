@@ -320,7 +320,8 @@
 										<td><asp:TextBox ID="Player_Inits_TextBox" runat="server" BackColor="#FFFFCC" style="text-align:center;" Width="32px" MaxLength="4"></asp:TextBox></td>
 										<td><asp:TextBox ID="Player_Surname_TextBox" runat="server" BackColor="#FFFFCC" style="text-align:center;" Width="140px" MaxLength="50"></asp:TextBox></td>
 										<td>
-                                            <input id="Player_Handicap_Text" type="text" runat="server" style="text-align:center;background-color:#FFFFCC;width: 32px" />
+                                            <input id="Player_Handicap_Text" type="text" runat="server" style="text-align: center; background-color: #FFFFCC; width: 32px"
+                                                readonly onclick="loadDiv('divHCapMsg');" onmouseover="this.style.cursor='pointer';" />
 										</td>
 								 </tr>
              					 <tr>
@@ -338,9 +339,9 @@
 								 <tr><th>Tag</th>
 									   <td style="vertical-align:top" >
                                            <input id="Player_Tag_Value" type="hidden" runat="server" />
-										   <input id="Player_Tag_Text" type="text" runat="server" style="text-align:center;background-color:#FFFFCC;"
-												   onclick="loadDiv('divHCapMsg');" onmouseover="this.style.cursor='pointer';"/>
-									   <td><asp:CheckBox ID="Player_Over70_CheckBox" runat="server" Text="Over 70 (80 for Vets)" Font-Bold="True" TextAlign="Left" /></td>
+										   <input id="Player_Tag_Text" type="text" runat="server" style="text-align: center; background-color: #FFFFCC;"
+                                               readonly onclick="loadDiv('divHCapMsg');" onmouseover="this.style.cursor='pointer';" />
+									   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:CheckBox ID="Player_Over70_CheckBox" runat="server" Text="Over 80" Font-Bold="True" TextAlign="Left" /></td>
 
 								 </tr>
 							</table>
