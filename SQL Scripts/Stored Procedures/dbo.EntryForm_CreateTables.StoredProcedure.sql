@@ -2,10 +2,10 @@ USE HBSA
 GO
 
 if exists (select ROUTINE_NAME from INFORMATION_SCHEMA.ROUTINES where ROUTINE_NAME='EntryForm_CreateTables')
-	DROP procedure EntryForm_CreateTables
+	DROP procedure dbo.EntryForm_CreateTables
 GO
 
-create procedure EntryForm_CreateTables
+create procedure dbo.EntryForm_CreateTables
 
 as
 
@@ -77,21 +77,23 @@ insert EntryForm_Teams
 				where [Club Name]<>'bye'
 
 insert EntryForm_Players
-			select   Players.ID 
-					,ClubID
-					,LeagueID
-					,Team
-			        ,Forename 
-					,Initials 
-					,Surname 
-					,Handicap 
-					,email
-					,TelNo
-					,Tagged
-					,Over70
-					,0 --set ReRegister off (until set on at the entry form)
-				from Players 
-				where ID > 0
+	select P.ID 
+   		  ,ClubID
+		  ,LeagueID
+		  ,Team
+          ,Forename 
+		  ,Initials 
+		  ,Surname 
+		  ,Handicap 
+		  ,email
+		  ,TelNo
+		  ,Tagged
+		  ,Over70
+		  ,ISNULL(Reregister,0)
+		from Players P
+		outer apply (Select ReRegister = case when Captain = P.ID then 1 else 0 end 
+						from Teams where Captain=P.ID)R
+		where P.ID > 0 and P.ClubID <> 0 
 
 if not exists (select TABLE_NAME from INFORMATION_SCHEMA.TABLES where TABLE_NAME='PaymentsHistory')
 	select top 0 * into PaymentsHistory from Payments

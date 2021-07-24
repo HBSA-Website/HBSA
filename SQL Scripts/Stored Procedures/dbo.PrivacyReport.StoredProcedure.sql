@@ -39,7 +39,9 @@ if @type = 0
 	      ,[No of League Teams]=teamsCount
 
 	from EntryForm_ClubsDetails EntryForm_Clubs
-	outer apply (select playersCount=count(*) from EntryForm_Players where ClubID=EntryForm_Clubs.ClubID)Players
+	outer apply (select playersCount=count(*) from EntryForm_Players E
+											  where E.ClubID=EntryForm_Clubs.ClubID 
+											    and ReRegister=1)Players
 	outer apply (select teamsCount=count(*) from EntryForm_Teams where ClubID=EntryForm_Clubs.ClubID)Teams
 	outer apply (Select Telephone from ClubUsers where ClubID = EntryForm_Clubs.ClubID)Users
 	where PrivacyAccepted=(case when @Privacy is NULL then PrivacyAccepted
@@ -75,4 +77,3 @@ else
 
 GO
 
-exec PrivacyReport @Type=1

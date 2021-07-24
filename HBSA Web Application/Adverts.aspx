@@ -53,7 +53,7 @@
                         <tr style="vertical-align:top;">
                             <td colspan="2">
                                 <a id="snapshot_link" runat="server" href="~/Advert.ashx" target="_blank">
-                                    <img id="snapshot_img" src="data:image/JPEG;base64," runat="server" style="border: 1px solid black" />
+                                    <img id="snapshot_img" src="data:image/JPEG;base64," runat="server" style="border: 1px solid black; max-width: 90%;" />
                                 </a>
                             </td>
                         </tr>

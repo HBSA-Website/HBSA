@@ -68,8 +68,9 @@ Public Class Adverts
                                     AdvertBinary = PictureBinaryReader.ReadBytes(PictureBinaryStream.Length)
 
                                     Message_Literal.Text = "<span style='color:DarkGreen;'>" & UploadFile.FileName & " has been uploaded as " &
-                                                                If(UpOrDownLoad.Items(0).Selected, Left(IO.Path.GetFileNameWithoutExtension(UploadFile.FileName), 31),
-                                                                                                   Adverts_DropDownList.SelectedItem.Text) & ".</span>"
+                                                                If(Adverts_DropDownList.SelectedIndex = 1, 'new advert
+                                                                    Left(IO.Path.GetFileNameWithoutExtension(UploadFile.FileName), 31),
+                                                                    Adverts_DropDownList.SelectedItem.Text) & ".</span>"
                                 Catch ex As Exception
 
                                     Message_Literal.Text = "<span style='color:red;'>An error occurred: " & ex.Message & ".</span>"
@@ -112,8 +113,9 @@ Public Class Adverts
                     ad.advertBinary = AdvertBinary
                     ad.Merge()
 
-                    snapshot_image.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
-                    snapshot_image.AlternateText = Adverts_DropDownList.SelectedItem.Text
+                    snapshot_img.Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.advertBinary)
+                    snapshot_img.Alt = Adverts_DropDownList.SelectedItem.Text
+                    snapshot_img.Attributes.Add("target", "_blank")
                     Advertiser_Literal.Text = ad.advertiser
                     Advertiser_TextBox.Text = ad.advertiser
                     Advertiser_TextBox.Enabled = False
@@ -135,39 +137,30 @@ Public Class Adverts
 
     End Sub
 
-    Protected Sub Adverts__DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Adverts_DropDownList.SelectedIndexChanged
+    Protected Sub Adverts_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Adverts_DropDownList.SelectedIndexChanged
 
-        UpOrDownLoad.Visible = Adverts_DropDownList.SelectedIndex > 0
+        actionButtons.Visible = Adverts_DropDownList.SelectedIndex > 1
+        Download_Panel.Visible = actionButtons.Visible
         UpLoad_Panel.Visible = False
-        Download_Button.Visible = False
         Delete_Panel.Visible = False
 
         Message_Literal.Text = ""
         Advertiser_Literal.Text = ""
         WebURL_TextBox.Text = ""
 
-        If Adverts_DropDownList.SelectedIndex = 1 Then
-            UpOrDownLoad.Items(0).Selected = True
-            UpOrDownLoad.Items(1).Selected = False
-            UpOrDownLoad.Items(2).Selected = False
-            UpOrDownLoad.Items(0).Text = "Insert"
-            UpOrDownLoad.Enabled = False
+        If Adverts_DropDownList.SelectedIndex = 1 Then 'insert new advert
             UpLoad_Panel.Visible = True
             Advertiser_TextBox.Enabled = True
             Advertiser_TextBox.Text = ""
+            UpLoad_Button.Text = "Upload chosen advert"
         Else
-            UpOrDownLoad.Items(0).Selected = False
-            UpOrDownLoad.Items(1).Selected = False
-            UpOrDownLoad.Items(2).Selected = False
-            UpOrDownLoad.Items(0).Text = "Change"
-            UpOrDownLoad.Enabled = True
-            ChangingRadioList = True
-            Download_Panel.Visible = True
             Advertiser_TextBox.Enabled = False
 
             Using ad As New HBSAcodeLibrary.Advert(Adverts_DropDownList.SelectedValue)
-                snapshot_image.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
-                snapshot_image.AlternateText = Adverts_DropDownList.SelectedItem.Text
+                snapshot_img.Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.advertBinary)
+                snapshot_img.Alt = Adverts_DropDownList.SelectedItem.Text
+                snapshot_img.Attributes.Add("target", "_blank")
+
                 Advertiser_Literal.Text = ad.advertiser
                 Advertiser_TextBox.Text = ad.advertiser
                 WebURL_TextBox.Text = ad.webURL
@@ -181,59 +174,58 @@ Public Class Adverts
 
     Dim ChangingRadioList As Boolean
 
-    Protected Sub UpOrDownLoad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles UpOrDownLoad.SelectedIndexChanged
+    'Protected Sub UpOrDownLoad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles UpOrDownLoad.SelectedIndexChanged
 
-        Download_Button.Visible = False
-        Delete_Panel.Visible = False
+    '    Download_Button.Visible = False
+    '    Delete_Panel.Visible = False
 
-        If Not UpOrDownLoad.Items(0).Selected Then 'selected download or delete
+    '    If Not UpOrDownLoad.Items(0).Selected Then 'selected download or delete
 
-            Download_Panel.Visible = True
+    '        Download_Panel.Visible = True
 
-            Using ad As New HBSAcodeLibrary.Advert(Adverts_DropDownList.SelectedValue)
-                snapshot_image.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
-                snapshot_image.AlternateText = Adverts_DropDownList.SelectedItem.Text
-                Advertiser_Literal.Text = ad.advertiser
+    '        Using ad As New HBSAcodeLibrary.Advert(Adverts_DropDownList.SelectedValue)
+    '            snapshot_img.Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.advertBinary) '.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
+    '            snapshot_img.Alt = Adverts_DropDownList.SelectedItem.Text
+    '            snapshot_img.Attributes.Add("target", "_blank")
+    '            Advertiser_Literal.Text = ad.advertiser
 
-                If UpOrDownLoad.Items(1).Selected Then 'delete
-                    'ask for confirmation to delete
-                    Delete_Literal.Text = "Do you really want to delete the advert for " & ad.advertiser
-                    Delete_Panel.Visible = True
-                Else 'offer download
-                    Download_Button.Visible = True
-                    Download_Button.Text = "Download " & Adverts_DropDownList.SelectedValue & " now."
-                End If
-            End Using
+    '            If UpOrDownLoad.Items(1).Selected Then 'delete
+    '            Else 'offer download
+    '            End If
+    '        End Using
 
-        Else 'selected upload/change
-            Download_Panel.Visible = True
-            If Not ChangingRadioList Then
+    '    Else 'selected upload/change
+    '        Download_Panel.Visible = True
+    '        If Not ChangingRadioList Then
 
-                UpLoad_Panel.Visible = True
-                If UpOrDownLoad.Items(0).Text = "Change" Then
+    '            UpLoad_Panel.Visible = True
+    '            If UpOrDownLoad.Items(0).Text = "Change" Then
 
-                    Using ad As New HBSAcodeLibrary.Advert(Adverts_DropDownList.SelectedValue)
-                        snapshot_image.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
-                        snapshot_image.AlternateText = Adverts_DropDownList.SelectedItem.Text
-                        Advertiser_Literal.Text = ad.advertiser
-                        Advertiser_TextBox.Text = ad.advertiser
-                        WebURL_TextBox.Text = ad.webURL
-                    End Using
+    '                Using ad As New HBSAcodeLibrary.Advert(Adverts_DropDownList.SelectedValue)
+    '                    'snapshot_image.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
+    '                    'snapshot_image.AlternateText = Adverts_DropDownList.SelectedItem.Text
+    '                    snapshot_img.Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.advertBinary) '.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
+    '                    snapshot_img.Alt = Adverts_DropDownList.SelectedItem.Text
+    '                    snapshot_img.Attributes.Add("target", "_blank")
+    '                    Advertiser_Literal.Text = ad.advertiser
+    '                    Advertiser_TextBox.Text = ad.advertiser
+    '                    WebURL_TextBox.Text = ad.webURL
+    '                End Using
 
-                Else
-                    Advertiser_Literal.Text = ""
-                    Advertiser_TextBox.Text = ""
-                End If
+    '            Else
+    '                Advertiser_Literal.Text = ""
+    '                Advertiser_TextBox.Text = ""
+    '            End If
 
-            Else
-                ChangingRadioList = False 'x
-            End If
+    '        Else
+    '            ChangingRadioList = False 'x
+    '        End If
 
-        End If
+    '    End If
 
-        Message_Literal.Text = ""
+    '    Message_Literal.Text = ""
 
-    End Sub
+    'End Sub
 
     Protected Sub Download_Button_Click(sender As Object, e As EventArgs) Handles Download_Button.Click
 
@@ -273,12 +265,49 @@ Public Class Adverts
 
         End Using
 
-        populate_Adverts_DropDownList()
+        Populate_Adverts_DropDownList()
         Adverts_DropDownList.SelectedIndex = 0
-        
+
         Cancel_Button_Click(sender, e)
 
     End Sub
 
+    Protected Sub Change_Button_Click(sender As Object, e As EventArgs) Handles Change_Button.Click
 
+        UpLoad_Panel.Visible = True
+
+        Using ad As New HBSAcodeLibrary.Advert(Adverts_DropDownList.SelectedValue)
+            snapshot_img.Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.advertBinary) '.ImageUrl = "~/Advert.ashx?Advertiser=" & ad.advertiser
+            snapshot_img.Alt = Adverts_DropDownList.SelectedItem.Text
+            snapshot_img.Attributes.Add("target", "_blank")
+            Advertiser_Literal.Text = ad.advertiser
+            Advertiser_TextBox.Text = ad.advertiser
+            WebURL_TextBox.Text = ad.webURL
+            UpLoad_Button.Text = "Change this advert"
+        End Using
+
+    End Sub
+
+    Protected Sub Delete_Button_Click(sender As Object, e As EventArgs) Handles Delete_Button.Click
+
+        'ask for confirmation to delete
+        Using ad As New HBSAcodeLibrary.Advert(Adverts_DropDownList.SelectedValue)
+            snapshot_img.Src = "data:image/JPEG;base64," & Convert.ToBase64String(ad.advertBinary)
+            snapshot_img.Alt = Adverts_DropDownList.SelectedItem.Text
+            snapshot_img.Attributes.Add("target", "_blank")
+            Advertiser_Literal.Text = ad.advertiser
+            Advertiser_TextBox.Text = ad.advertiser
+            WebURL_TextBox.Text = ad.webURL
+            Delete_Literal.Text = "Do you really want to delete the advert for " & ad.advertiser
+            Delete_Panel.Visible = True
+        End Using
+
+    End Sub
+
+    Protected Sub Add_Button_Click(sender As Object, e As EventArgs) Handles Add_Button.Click
+
+        Adverts_DropDownList.SelectedIndex = 1
+        Adverts_DropDownList_SelectedIndexChanged(sender, e)
+
+    End Sub
 End Class

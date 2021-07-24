@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Adverts
 
     '''<summary>
+    '''Add_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Add_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Adverts_DropDownList control.
     '''</summary>
     '''<remarks>
@@ -23,13 +32,31 @@ Partial Public Class Adverts
     Protected WithEvents Adverts_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''UpOrDownLoad control.
+    '''actionButtons control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpOrDownLoad As Global.System.Web.UI.WebControls.RadioButtonList
+    Protected WithEvents actionButtons As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+    '''<summary>
+    '''Change_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Change_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Delete_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Delete_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Download_Button control.
@@ -113,13 +140,13 @@ Partial Public Class Adverts
     Protected WithEvents Advertiser_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''snapshot_image control.
+    '''snapshot_img control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents snapshot_image As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents snapshot_img As Global.System.Web.UI.HtmlControls.HtmlImage
 
     '''<summary>
     '''Files_Literal control.

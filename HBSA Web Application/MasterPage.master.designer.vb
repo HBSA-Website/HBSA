@@ -248,15 +248,6 @@ Partial Public Class MasterPage
     Protected WithEvents Login_button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Covid_19_Compliance_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Covid_19_Compliance_Button As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''AGM_Vote_Button control.
     '''</summary>
     '''<remarks>

@@ -5,10 +5,10 @@ Public Class MobileMaster
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        'ensure use of ssl
-        If Not Request.IsSecureConnection AndAlso Request.Url.DnsSafeHost.ToLower <> "localhost" Then
-            Response.Redirect(Request.Url.ToString.Replace("http", "https"))
-        End If
+        ''ensure use of ssl
+        'If Not Request.IsSecureConnection AndAlso Request.Url.DnsSafeHost.ToLower <> "localhost" Then
+        '    Response.Redirect(Request.Url.ToString.Replace("http", "https"))
+        'End If
 
         Using cfg As New HBSAcodeLibrary.HBSA_Configuration
             If CBool(cfg.Value("UnderMaintenance")) Then

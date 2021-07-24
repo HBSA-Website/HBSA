@@ -5,10 +5,10 @@ Partial Public Class MasterPage
     Inherits System.Web.UI.MasterPage
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        'ensure use of ssl
-        If Not Request.IsSecureConnection AndAlso Request.Url.DnsSafeHost.ToLower <> "localhost" Then
-            Response.Redirect(Request.Url.ToString.Replace("http", "https"))
-        End If
+        ''ensure use of ssl
+        'If Not Request.IsSecureConnection AndAlso Request.Url.DnsSafeHost.ToLower <> "localhost" Then
+        '    Response.Redirect(Request.Url.ToString.Replace("http", "https"))
+        'End If
 
         Using cfg As New HBSAcodeLibrary.HBSA_Configuration
             If CBool(cfg.Value("UnderMaintenance")) Then
@@ -225,9 +225,9 @@ Partial Public Class MasterPage
         Response.Redirect("Fines.aspx")
     End Sub
 
-    Protected Sub Covid_19_Compliance_Button_Click(sender As Object, e As EventArgs) Handles Covid_19_Compliance_Button.Click
-        Response.Redirect("Covid-19-Compliance.aspx")
-    End Sub
+    'Protected Sub Covid_19_Compliance_Button_Click(sender As Object, e As EventArgs) Handles Covid_19_Compliance_Button.Click
+    '    Response.Redirect("Covid-19-Compliance.aspx")
+    'End Sub
 
     Protected Sub PopulateAccessCode()
         Using cfg As New HBSA_Configuration

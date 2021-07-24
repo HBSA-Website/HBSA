@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/admin/adminMasterPage.master" CodeBehind="Adverts.aspx.vb" Inherits="HBSA_Web_Application.Adverts" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/admin/adminMasterPage.master" CodeBehind="Adverts.aspx.vb" 
+        Inherits="HBSA_Web_Application.Adverts" ClientIDMode="Static" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script type="text/javascript">
@@ -27,11 +28,26 @@
             setTimeout('document.images["imgupdating"].src="Images/loading.gif"', 200);
         }
     }
-
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <h2 style="text-align: left">Adverts Management.</h2>
+
+    <script type="text/javascript">
+        function showFilename() {
+
+            var ddList = document.getElementById('<%=Adverts_DropDownList.ClientID%>');
+            var ix = ddList.selectedIndex;
+
+            if (ix == "1") {
+                var fileName = document.getElementById('<%=UploadFile.ClientID%>').value;
+                var startIx = fileName.lastIndexOf('\\');
+                var endIx   = fileName.lastIndexOf('.');
+                fileName = fileName.substring(startIx + 1, endIx);
+                document.getElementById('<%=Advertiser_TextBox.ClientID%>').value = fileName;
+            }
+        }
+    </script>
 
     <table>
         <tr>
@@ -44,17 +60,14 @@
                     They can also be downloaded.<br /><br /> 
                     <table>
                         <tr style="vertical-align:top">
-                            <td>Select an advert<br />&nbsp;&nbsp;&nbsp;(or choose to insert a new one):</td>
+                            <td style="text-align:right" >Select an advert:<br /><b> OR </b>
+                                <asp:Button ID="Add_Button" runat="server" Text="Add a new one" /></td>
                             <td><asp:DropDownList ID="Adverts_DropDownList" runat="server" AutoPostBack="true" max-width="600px"/></td>
-                            <td rowspan="2"><asp:RadioButtonList ID="UpOrDownLoad" runat="server" RepeatLayout="Flow" visible="false" AutoPostBack="true" Font-Size="10pt">
-                                                <asp:ListItem>Upload</asp:ListItem>
-                                                <asp:ListItem>Delete</asp:ListItem>
-                                                <asp:ListItem>DownLoad</asp:ListItem>
-                                            </asp:RadioButtonList> 
+                            <td rowspan="2" id="actionButtons" runat="server" visible="false"> 
+                                <asp:Button ID="Change_Button" runat="server" Text="Change" Width="124px" /><br />
+                                <asp:Button ID="Delete_Button" runat="server" Text="Delete" Width="124px" /><br />
+                                <asp:Button ID="Download_Button" runat="server" Text="Download" Width="124px" />
                             </td>
-                        </tr>
-                        <tr>
-                            <td></td><td><asp:Button ID="Download_Button" runat="server" Visible="false" /></td>
                         </tr>
                         <tr>
                             <td colspan="4">
@@ -65,19 +78,6 @@
                     <asp:Literal ID="Message_Literal" runat="server"></asp:Literal>
 
                 <asp:Panel ID="UpLoad_Panel" runat="server" Visible="false">
-                    
-                    <script type="text/javascript">
-                        function showFilename() {
-
-                            var fileName = document.getElementById('<%=UploadFile.ClientID%>').value;
-                            var startIx = fileName.lastIndexOf('\\');
-                            var endIx   = fileName.lastIndexOf('.');
-
-                            fileName = fileName.substring(startIx + 1, endIx);
-
-                            document.getElementById('<%=Advertiser_TextBox.ClientID%>').value = fileName;
-                        }
-                   </script>
                     
                     Click Browse and locate the file you wish to upload (if this is left blank only the advertiser and/or the WebURL will be changed):<br />
                     <asp:FileUpload ID="UploadFile" runat="server" Width="651px" onchange="showFilename();"/>
@@ -93,7 +93,8 @@
 
                                 <asp:panel id="Download_Panel" runat="server" Visible="false" EnableViewState="false">
                                     <asp:Literal ID="Advertiser_Literal" runat="server"></asp:Literal><br />
-                                    <asp:image ID="snapshot_image" AlternateText="" runat="server" EnableViewState="False" width="260" BorderStyle="Solid" BorderColor="Black" BorderWidth="1px"></asp:image>
+                                    <%--<asp:image ID="snapshot_image" AlternateText="" runat="server" EnableViewState="False" width="260" BorderStyle="Solid" BorderColor="Black" BorderWidth="1px"></asp:image>--%>
+                                    <img id="snapshot_img" src="data:image/JPEG;base64," runat="server" style="border: 1px solid black; width:260px;" />
                                 </asp:panel>
             </div>
 

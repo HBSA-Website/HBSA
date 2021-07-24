@@ -13,7 +13,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>HBSA_Web_Application</RootNamespace>
     <AssemblyName>HBSA Web Application</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MyType>WindowsForm</MyType>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44371</IISExpressSSLPort>
@@ -96,10 +96,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Code\" />
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -466,7 +463,6 @@
     <Content Include="ckeditor\skins\kama\templates.css" />
     <Content Include="ckeditor\themes\default\theme.js" />
     <Content Include="ClubLoginReset.aspx" />
-    <Content Include="Covid-19-Compliance.aspx" />
     <Content Include="Fines.aspx" />
     <Content Include="helpFAQ.aspx" />
     <Content Include="images\AjaxLoadingSave.gif" />
@@ -609,6 +605,7 @@
     <Content Include="Documents\Competition_Entry_Form_Billiards.pdf" />
     <Content Include="Documents\Competition_Entry_Form_Vets.pdf" />
     <Content Include="Documents\AGM PAPERS 2021.pdf" />
+    <Content Include="App_Data\HBSA.dat" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
@@ -1114,13 +1111,6 @@
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Covid-19-Compliance.aspx.designer.vb">
-      <DependentUpon>Covid-19-Compliance.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Covid-19-Compliance.aspx.vb">
-      <DependentUpon>Covid-19-Compliance.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="CreateAndDownloadFile.aspx.designer.vb">
       <DependentUpon>CreateAndDownloadFile.aspx</DependentUpon>
     </Compile>
@@ -1514,6 +1504,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>

@@ -104,6 +104,15 @@ Partial Public Class ClubsPlayers
     Protected WithEvents AccessCode_Panel As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
+    '''AccessCode_input control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AccessCode_input As Global.System.Web.UI.HtmlControls.HtmlInputPassword
+
+    '''<summary>
     '''CancelAccessCode_Button control.
     '''</summary>
     '''<remarks>
