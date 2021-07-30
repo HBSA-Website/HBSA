@@ -285,7 +285,7 @@ Public Class MatchResult
 
                 .Items.Add(New ListItem("** No Opponent **", "-2|0"))
                 .Items.Add(New ListItem("** No Show **", "-1|0"))
-                .Items.Add(New ListItem("** Frame Not Played **", "-3|0"))
+                '.Items.Add(New ListItem("** Frame Not Played **", "-3|0"))
 
                 For Each TeamPlayer As DataRow In TeamPlayers.Rows
                     .Items.Add(New ListItem(TeamPlayer!Player & If(TeamPlayer!OtherTeam = 1, " (Not played yet)", If(TeamPlayer!OtherTeam = 2, " (deRegistered)", "")),

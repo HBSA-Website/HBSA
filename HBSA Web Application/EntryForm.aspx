@@ -261,7 +261,7 @@
                             </Columns>
                             <HeaderStyle BackColor="#006600" Font-Bold="True" ForeColor="#FFFFCC" />
                             <RowStyle BackColor="White" ForeColor="#006600" HorizontalAlign="Left" />
-                            <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />
+                            <%--<SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />--%>
                         </asp:GridView></td>
                 </tr>
                 </table>					
