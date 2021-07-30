@@ -465,6 +465,7 @@ Public Class EntryForm
                 Team_Add_Button.Click
 
         submitErrorMsg.Text = ""
+        Team_Save_Button.Visible = False
 
         Dim _ClubID As Integer = Club_DropDownList.SelectedValue
 
@@ -491,6 +492,7 @@ Public Class EntryForm
                 Teams_Literal.Text = "<span style='color:red; font-size:larger;color:navy;'>Enter the team details to the right, then click Save Team.</span>"
                 Team_ContactCaptain_Label.Text = "Don't forget to choose a captain from the players when added."
                 Team_ContactCaptain_PlayerID_HiddenField.Value = 0
+                Team_Save_Button.Visible = True
 
             Else
 
@@ -567,12 +569,12 @@ Public Class EntryForm
                 Team_Literal.Text &= "<br/>Don't forget to choose a captain from the players before submitting the entry form."
             End If
             Team_Literal.Text &= "</span>"
+
         Else
 
             Team_Literal.Text = "<span style='color:red;'>" & errMsg & "</span>"
 
         End If
-
 
     End Sub
 

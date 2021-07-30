@@ -166,7 +166,7 @@
 									</Columns>
 									<AlternatingRowStyle BackColor="#F7F7F7" HorizontalAlign="Left" />
 									<RowStyle BackColor="White" ForeColor="#006600" HorizontalAlign="Left" Font-Size="12pt" />
-									<SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" Font-Size="12pt"  />
+									<%--<SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" Font-Size="12pt"  />--%>
 								</asp:GridView>
 					<div id="divConfirmDeleteTeam" runat="server" style="display:none;border:1px solid black; background-color:white; color:red;">
 						Do really want to delete <asp:Literal ID="DeleteTeam_Literal" runat="server"></asp:Literal> ?<br />
@@ -207,7 +207,7 @@
 						<tr>
 							<td></td>
 							<td >
-								<asp:Button ID="Team_Save_Button" runat="server" Text="Save this team" />
+								<asp:Button ID="Team_Save_Button" runat="server" Text="Save this team" Visible="false" />
 							</td>
 						</tr>
 						<tr>
