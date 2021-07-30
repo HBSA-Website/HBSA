@@ -14,9 +14,10 @@
                 </div>
 
     <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12pt; font-weight: bold; color: #006000; text-align: center;">
-            <br /><br />
-            This web site is undergoing essential maintenance.<br /><br />
-            Please try again later
+            <br />
+<%--            This web site is undergoing essential maintenance.<br /><br />
+            Please try again later--%>
+            We are in the process of changing our web hosting provider.<br />Please try again in a day or two
     </div>
     </form>
 </body>

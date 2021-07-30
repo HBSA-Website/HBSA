@@ -12,7 +12,7 @@ Public Class MobileMaster
 
         Using cfg As New HBSAcodeLibrary.HBSA_Configuration
             If CBool(cfg.Value("UnderMaintenance")) Then
-                Response.Redirect("UnderMaintenance.aspx")
+                Response.Redirect("~/UnderMaintenance.aspx")
                 Exit Sub
             End If
         End Using

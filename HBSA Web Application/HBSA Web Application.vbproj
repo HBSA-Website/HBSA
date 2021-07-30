@@ -606,6 +606,7 @@
     <Content Include="Documents\Competition_Entry_Form_Vets.pdf" />
     <Content Include="Documents\AGM PAPERS 2021.pdf" />
     <Content Include="App_Data\HBSA.dat" />
+    <Content Include="Documents\League rules.pdf" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
