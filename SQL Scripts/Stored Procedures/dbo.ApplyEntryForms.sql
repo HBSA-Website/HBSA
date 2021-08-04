@@ -160,13 +160,14 @@ merge
 	on target.ID=source.PlayerID
 
 	when matched then
-		update set ClubID		= source.clubID 
-				  ,SectionID    = case when source.ClubID=0 or ReRegister=0 then 0 
+		update set ClubID		= case when source.ClubID=0 then target.ClubID else source.clubID end --If Club id is zero leave club alone.
+				  ,SectionID    = case when source.ClubID=0 or ReRegister=0 then 0 -- set deleted if not register or deleted in entry form (clubid=0)
 				                       else --calculate the section from the matching team
-									        (select SectionID from teams 
-									            where ClubID=source.ClubID 
-												  and SectionID in (select ID from Sections where LeagueID=source.LeagueID) 
-												  and Team=source.team)
+									        (isnull((select SectionID from teams 
+														where ClubID=source.ClubID 
+														  and SectionID in (select ID from Sections where LeagueID=source.LeagueID) 
+														  and Team=source.team),
+		                                            (select max(ID) from Sections where LeagueID=source.LeagueID)))
                                   end  -- if ClubId is zero = entry form deleted.  If ReRegister is zero(false) flag the the player deleted
 				  ,LeagueID		= source.LeagueID
 				  ,Team			= case when source.ClubID=0 then '' else source.Team end
@@ -202,13 +203,17 @@ merge
 			,source.Surname
 			,source.Handicap
 			,source.LeagueID
-			,case when ReRegister=0 or ClubID = 0 then 0
-			--calculate the section from the matching team
-	 	         else (select SectionID from teams 
-							where ClubID=source.ClubID 
-							  and SectionID in (select ID from Sections where LeagueID=source.LeagueID) 
-							  and Team=source.team)
-			 end
+			,case when ReRegister=0 or ClubID = 0 
+					then 0
+					--calculate the section from the matching team
+					else
+						(isnull((select SectionID from teams 
+									where ClubID=source.ClubID 
+									  and SectionID in (select ID from Sections where LeagueID=source.LeagueID) 
+									    and Team=source.team),
+		                        (select max(ID) from Sections where LeagueID=source.LeagueID)))
+             end  -- if ClubId is zero = entry form deleted.  If ReRegister is zero(false) flag the the player deleted
+
 			,source.ClubID
 			,source.Team
 			,source.email

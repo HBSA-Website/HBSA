@@ -78,8 +78,7 @@
         To start, choose a section or league to work with. This will show the fixtures grid with a row for each week. Each row will show the home and away team numbers for each fixture. The 2nd half of the season is shown but locked as each fixture is the same as the 1st half with the home and away teams reversed. The teams can be changed by selecting a different team number from the drop down list. When this is done, the same team in the 2nd half in the same week number plus half the number of weeks in the season, is also changed. This can be repeated as often as required until the fixtures are all changed. 
     </p>
     <p>
-        If it is required that the 2nd half of the season is not the reverse of the 1st half, tick the box named Unlock 2nd half.  Then when changes are made, 
-        they are not refelcted in the 2nd half.  Changes must be made manually as required to the 2nd half.
+        If it is required that the 2nd half of the season is not the reverse of the 1st half, tick the box named Unlock 2nd half. Then when changes are made, they are not reflected in the 2nd half.  Changes must be made manually as required to the 2nd half.
     </p>
     <p>
         Changes made here are not put into the database until the Save button is clicked.  Therefore the grid can be manipulated until it is ready.  When it is 
