@@ -372,15 +372,17 @@ namespace HBSAcodeLibrary
                                                              ,new SqlParameter("Against",Against)
                                                              ,new SqlParameter("Withheld",Withheld) });
         }
-        public static DataTable ReportAGM_Vote(int ClubID = 0)
+        public static DataTable ReportAGM_Vote(int ClubID = 0, int Type = 0)
         {
             return SQLcommands.ExecDataTable("ReportAGM_Vote",
-                                     new List<SqlParameter> { new SqlParameter("ClubID", ClubID) });
+                                     new List<SqlParameter> { new SqlParameter("ClubID", ClubID),
+                                                              new SqlParameter("Type", Type) });
         }
-        public static DataTable FullReportAGM_Vote(int ClubID = 0)
+        public static DataTable FullReportAGM_Vote(int ClubID = 0, int Type = 0)
         {
             return SQLcommands.ExecDataTable("FullReportAGM_Vote",
-                                         new List<SqlParameter> { new SqlParameter("ClubID", ClubID) });
+                                     new List<SqlParameter> { new SqlParameter("ClubID", ClubID),
+                                                              new SqlParameter("Type", Type) });
         }
         public static DataTable ContactsReport()
         {

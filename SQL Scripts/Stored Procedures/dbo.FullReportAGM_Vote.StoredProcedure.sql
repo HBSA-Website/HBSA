@@ -5,8 +5,9 @@ if exists (select routine_Name from INFORMATION_SCHEMA.ROUTINES where ROUTINE_NA
 GO
 
 CREATE procedure dbo.FullReportAGM_Vote
-	@ClubID int = 0
-
+	(@ClubID int = 0
+	,@Type int = 0 --0 = all votes, 1 = Votes Against, 2 = Votes For, 3 = Votes Witheld 
+	)
 as
 
 set nocount on
@@ -32,8 +33,11 @@ declare c cursor fast_forward for
 	from ClubsDetails C
 	join AGM_Votes_Cast V on V.ClubID=ID
 	cross apply (select top 1 * from Clubusers where ClubID=ID) U
-	where @ClubID = 0
-	   or @ClubID = ID
+	where (@ClubID = 0 or @ClubID = ID)
+      and (@Type = 0 or (case when @Type = 1 then Against
+                              when @Type = 2 then [For]
+ 		      			                     else Withheld
+                         end) = 1)
 open c
 fetch c into @ID, @ClubName, @ContactDetails
 while @@FETCH_STATUS=0
@@ -51,7 +55,12 @@ while @@FETCH_STATUS=0
 		left join AGM_Votes_Resolutions R on R.ID = ResolutionID
 		cross apply (select * from Clubs where ID=ClubID) C
 		cross apply (select * from Clubusers where ClubID=V.ClubID) U
-		where @ID = V.ClubID
+		where (@ID = V.ClubID)
+  	      and (@Type = 0 or (case when @Type = 1 then Against
+	                              when @Type = 2 then [For]
+				      			                  else Withheld
+                             end) = 1)
+
 	insert #tmp select '','','','','' 	
 
 	fetch c into @ID, @ClubName, @ContactDetails
@@ -65,4 +74,4 @@ select * from #tmp
 drop table #tmp
 
 GO
-exec FullReportAGM_Vote
+exec FullReportAGM_Vote 0, 3

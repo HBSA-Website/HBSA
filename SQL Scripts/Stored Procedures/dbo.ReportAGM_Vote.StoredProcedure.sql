@@ -5,8 +5,9 @@ if exists (select routine_Name from INFORMATION_SCHEMA.ROUTINES where ROUTINE_NA
 GO
 
 CREATE procedure dbo.ReportAGM_Vote
-	@ClubID int = 0
-
+	(@ClubID int = 0
+	,@Type int = 0 --0 = all votes, 1 = Votes Against, 2 = Votes For, 3 = Votes Witheld 
+	)
 as
 
 set nocount on
@@ -15,9 +16,12 @@ select Resolution, VotesFor=sum(convert(int,[For])), VotesAgainst=sum(convert(in
 	from AGM_Votes_Cast V
 	left join AGM_Votes_Resolutions R
 	    on R.ID = ResolutionID
-	where @ClubID = 0
-	   or @ClubID = ClubID
+	where (@ClubID = 0 or @ClubID = ClubID)
+	  and (@Type = 0 or (case when @Type = 1 then Against
+	                         when @Type  = 2 then [For]
+							                 else Withheld
+                         end) = 1)
 	group by ResolutionID,Resolution
 	order by ResolutionID
 GO
-exec ReportAGM_Vote 51
+exec ReportAGM_Vote 0, 3

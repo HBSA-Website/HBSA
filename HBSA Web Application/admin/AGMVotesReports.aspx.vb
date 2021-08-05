@@ -45,7 +45,7 @@
     End Sub
 
     Protected Sub ShowReport(sender As Object, e As EventArgs) _
-        Handles Club_DropDownList.SelectedIndexChanged, Report_DropDownList.SelectedIndexChanged
+        Handles Club_DropDownList.SelectedIndexChanged, Report_DropDownList.SelectedIndexChanged, Type_DropDownList.SelectedIndexChanged
 
         Err_Literal.Text = ""
 
@@ -56,10 +56,10 @@
                 Dim AGMvoteReport As DataTable
 
                 If Report_DropDownList.SelectedValue = 0 Then
-                    AGMvoteReport = HBSAcodeLibrary.SharedRoutines.ReportAGM_Vote(Club_DropDownList.SelectedValue)
+                    AGMvoteReport = HBSAcodeLibrary.SharedRoutines.ReportAGM_Vote(Club_DropDownList.SelectedValue, Type_DropDownList.SelectedValue)
                     .ShowHeader = True
                 Else
-                    AGMvoteReport = HBSAcodeLibrary.SharedRoutines.FullReportAGM_Vote(Club_DropDownList.SelectedValue)
+                    AGMvoteReport = HBSAcodeLibrary.SharedRoutines.FullReportAGM_Vote(Club_DropDownList.SelectedValue, Type_DropDownList.SelectedValue)
                     .ShowHeader = False
                 End If
 

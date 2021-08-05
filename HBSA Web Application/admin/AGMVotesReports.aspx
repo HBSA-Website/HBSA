@@ -29,8 +29,19 @@
                                             <td>Select a report</td>
                                             <td>
                                                 <asp:DropDownList ID="Report_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True">
-                                                    <asp:ListItem Value="0" Text="AGM Votes per resolution" />
+                                                    <asp:ListItem Value="0" Text="Votes per resolution" />
                                                     <asp:ListItem Value="1" Text="Full Report of Votes cast" />
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Select vote type</td>
+                                            <td>
+                                                <asp:DropDownList ID="Type_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True">
+                                                    <asp:ListItem Value="0" Text="All Votes" />
+                                                    <asp:ListItem Value="1" Text="Votes Against" />
+                                                    <asp:ListItem Value="2" Text="Votes For" />
+                                                    <asp:ListItem Value="3" Text="Votes Witheld" />
                                                 </asp:DropDownList>
                                             </td>
                                         </tr>
@@ -47,7 +58,7 @@
                 <asp:GridView ID="AGMvoteReport_GridView" runat="server"
                     Font-Size="9pt" BackColor="White" BorderColor="Black"
                     BorderStyle="Solid" BorderWidth="1px" CellPadding="3"
-                    EmptyDataText="No data found" ShowHeader="false">
+                    EmptyDataText="No votes found for the given criteria" ShowHeader="false">
                     <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
                     <RowStyle Height="18px" BackColor="#E7E7FF" ForeColor="#000044" />
                     <AlternatingRowStyle Height="18px" BackColor="#F7F7F7" />
