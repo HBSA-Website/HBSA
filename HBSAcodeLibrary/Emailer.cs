@@ -21,9 +21,12 @@ namespace HBSAcodeLibrary
             {
                 using (System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage())
                 {
-
+                    MimeKit.MimeMessage mimeMessage = new MimeKit.MimeMessage();
+                    
                     // set up the message
                     message.From = new System.Net.Mail.MailAddress(cfg.Value("WebFromAddress"), "HBSA Website");
+                    mimeMessage.From.Add(new MimeKit.MailboxAddress("HBSA Website", cfg.Value("WebFromAddress")));
+
 
                     string[] addressList = new string[0];
                     int ix;
@@ -31,9 +34,10 @@ namespace HBSAcodeLibrary
                     // set the list of recipients
                     foreach (string address in toAddress.Split(semiColon))
                         AddressList_Add(ref addressList, address);
-                    for (ix = 0; ix <= addressList.Count() - 1; ix++)
+                    for (ix = 0; ix <= addressList.Count() - 1; ix++) { 
                         message.To.Add(addressList[ix]);
-
+                        mimeMessage.To.Add(new MimeKit.MailboxAddress("", addressList[ix]));
+                    }
                     // set the list of cc addresses
                     if (ccAddress != "")
                     {
@@ -41,49 +45,53 @@ namespace HBSAcodeLibrary
                             AddressList_Add(ref addressList, address);
                     }
                     AddressList_Add(ref addressList, cfg.Value("WebAdministratorEmail"));
-                    for (int iy = ix; iy <= addressList.Count() - 1; iy++)
+                    for (int iy = ix; iy <= addressList.Count() - 1; iy++) {
                         message.CC.Add(addressList[iy]);
+                        mimeMessage.Cc.Add(new MimeKit.MailboxAddress("", addressList[iy]));
+                    }
 
                     // set the reply address if needed
                     if (IsValidEmailAddress(ReplyTo))
                     {
-                        if (ReplyTo != "")
+                        if (ReplyTo != "") { 
                             message.ReplyToList.Add(ReplyTo.Replace(";", ","));
+                            mimeMessage.To.Add(new MimeKit.MailboxAddress("", ReplyTo.Replace(";", ",")));
+                        }
                     }
-
                     message.IsBodyHtml = true;
                     message.Body = body + Footer;
                     message.Subject = subject;
 
-                    // setup the SMTP client
-                    System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(cfg.Value("SMTPServer"), System.Convert.ToInt32(cfg.Value("SMTPport")))
-                    {
-                        Credentials = new System.Net.NetworkCredential(cfg.Value("SMTPServerUsername"), cfg.Value("SMTPServerPassword")),
-                        EnableSsl = System.Convert.ToBoolean(cfg.Value("SMTPssl")),
-                        DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network
-                    };
+                    mimeMessage.Body = new MimeKit.TextPart("html") { Text = body + Footer };
+                    mimeMessage.Subject = subject;
 
                     if (!EmailIsDuplicate(message, Footer))
                     {
 
                         // store the email
-                        StoreTheEmail(message, MatchResultID, Footer, UserID, smtp);
+                        StoreTheEmail(message, MatchResultID, Footer, UserID, cfg.Value("SMTPport"), cfg.Value("SMTPport"));
 
-                        if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
+                        //if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
+                        //{
+                        try
                         {
-                            try
+                            using (MailKit.Net.Smtp.SmtpClient smtpClient = new MailKit.Net.Smtp.SmtpClient())
                             {
-                                smtp.Send(message);
+                                smtpClient.Connect(cfg.Value("SMTPServer"),
+                                                   System.Convert.ToInt32(cfg.Value("SMTPport")),
+                                                   System.Convert.ToBoolean(cfg.Value("SMTPssl")));
+                                smtpClient.Authenticate(cfg.Value("SMTPServerUsername"), cfg.Value("SMTPServerPassword"));
+                                smtpClient.Send(mimeMessage);
+                                smtpClient.Disconnect(true);
                             }
-                            catch (Exception ex)
-                            {
-                                message.Body = "ERROR OCCURRED sending this: " + ex.Message + "<hr/>" + message.Body;
-                                throw new Exception(ex.Message, ex);
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            message.Body = "ERROR OCCURRED sending this: " + ex.Message + "<hr/>" + message.Body;
+                            throw new Exception(ex.Message, ex);
                         }
                     }
 
-                    smtp.Dispose();
                 }
             }
         }
@@ -114,7 +122,8 @@ namespace HBSAcodeLibrary
         {
             try
             {
-                System.Net.Mail.MailAddress m = new System.Net.Mail.MailAddress(email);
+                MimeKit.MailboxAddress m = new MimeKit.MailboxAddress("", email);
+//                System.Net.Mail.MailAddress m = new System.Net.Mail.MailAddress(email);
                 return true;
             }
             catch (Exception)
@@ -138,7 +147,7 @@ namespace HBSAcodeLibrary
             }
 
         }
-        public static void StoreTheEmail(System.Net.Mail.MailMessage Message, int MatchResultID, string Footer, string UserID, System.Net.Mail.SmtpClient smtp)
+        public static void StoreTheEmail(System.Net.Mail.MailMessage Message, int MatchResultID, string Footer, string UserID, string SMTPHost, string SMTPPort)
         {
             List<SqlParameter> parameters = new List<SqlParameter>()
             {
@@ -151,8 +160,8 @@ namespace HBSAcodeLibrary
                 new SqlParameter("Body", Message.Body.Replace(Footer, "")),
                 new SqlParameter("MatchResultID", MatchResultID),
                 new SqlParameter("UserID", UserID),
-                new SqlParameter("SMTPServer", smtp.Host),
-                new SqlParameter("SMTPPort", smtp.Port),
+                new SqlParameter("SMTPServer", SMTPHost),
+                new SqlParameter("SMTPPort", SMTPPort),
         };
 
             try { SQLcommands.ExecNonQuery("insertEMailLog", parameters); }

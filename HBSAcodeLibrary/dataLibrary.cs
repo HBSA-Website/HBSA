@@ -4603,9 +4603,9 @@ namespace HBSAcodeLibrary
         public DataTable settings;
         public Settings()
         {
-            getSettings();
+            GetSettings();
         }
-        private void getSettings() 
+        private void GetSettings() 
         {
             DataSet allSettings = SQLcommands.ExecDataSet("GetSettings");
             categories = allSettings.Tables[0];
@@ -4626,7 +4626,7 @@ namespace HBSAcodeLibrary
                                                               new SqlParameter("SettingValue", SettingValue)
                                                              });
             //show new setting
-            getSettings();
+            GetSettings();
         }
 
         

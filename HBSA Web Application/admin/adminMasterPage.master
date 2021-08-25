@@ -199,6 +199,7 @@
                                     <asp:MenuItem NavigateUrl="EmailTemplates.aspx" Text="Email Templates" />
                                     <asp:MenuItem NavigateUrl="NotePad.aspx" Text="Note Pad" />
                                     <asp:MenuItem NavigateUrl="FAQ.aspx" Text="FAQ" />
+                                    <asp:MenuItem NavigateUrl="SMTPTester.aspx" Text="SMTP Client Tester" />
                                 </asp:MenuItem>
 
                                 <asp:MenuItem NavigateUrl="adminLogoff.aspx" Text=" |Log out" />

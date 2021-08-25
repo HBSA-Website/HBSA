@@ -70,7 +70,7 @@
 
                 <br />
              
-                <table id="Menu_Div" style=" width:100%; margin: 0px; padding: 0px; color:#006633; font-family:Verdana; font-size: 8pt;" runat="server" >
+            <table id="Menu_Div" style=" width:100%; margin: 0px; padding: 0px; color:#006633; font-family:Verdana; font-size: 8pt;" runat="server" >
                 <tr>    
                 <td style="width:10%"></td>
                     <%-- Menu Home --%>       
@@ -265,7 +265,7 @@
                                                     <a  runat="server">Rolls of Honour >></a>
                                         
                                                     <div id="SubMenu_ROH_Div" runat="server" style="position: relative; left:50px;">
-                                                        <table id='SubMenu_ROH_Table' runat="server">
+                                            <table id='SubMenu_ROH_Table' runat="server">
                                                 <tr><td style="color:#006633;  text-align:left;">
                                                         <a runat="server" href="InfoPage.aspx?Subject=ROH_Snooker&Title=Roll of Honour for Snooker" >Snooker</a></td></tr>
                                                 <tr><td style="color:#006633;  text-align:left;">
@@ -298,7 +298,7 @@
                                             <a runat="server" href="InfoPage.aspx?Subject=Veterans Snooker League Supplementary Rules&Title=Veterans Snooker League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Veterans Snooker League Supplementary Rules</a></td></tr>
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
                                               text-align:left; ">
-                                            <a runat="server" href="Inf--%>oPage.aspx?Subject=Open Billiards League Supplementary Rules&Title=Open Billiards League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Open Billiards League Supplementary Rules</a></td></tr>
+                                            <a runat="server" href="InfoPage.aspx?Subject=Open Billiards League Supplementary Rules&Title=Open Billiards League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Open Billiards League Supplementary Rules</a></td></tr>--%>
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
                                               text-align:left; ">
                                             <a runat="server" href="InfoPage.aspx?Subject=Yorkshire Association Rules&Title=Yorkshire Association Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Yorkshire Association Rules</a></td></tr>
