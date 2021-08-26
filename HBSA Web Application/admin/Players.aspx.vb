@@ -394,7 +394,7 @@ Public Class Players
 
             Try
 
-                Using player As PlayerData = New PlayerData(CInt(PlayerID_Label.Text))
+                Using player = New PlayerData(CInt(PlayerID_Label.Text))
                     player.Delete(SessionUser.Value)
                 End Using
 
@@ -406,7 +406,7 @@ Public Class Players
 
                 Dim msg As String = ex.Message
                 Dim exc As Exception = ex.InnerException
-                While Not exc Is Nothing
+                While exc IsNot Nothing
                     msg += "<br/>" + exc.Message
                     exc = exc.InnerException
                 End While
@@ -556,8 +556,8 @@ Public Class Players
 
                             Dim msg As String = ex.Message
                             Dim exc As Exception = ex.InnerException
-                            While Not exc Is Nothing
-                                msg += "<br/>" + exc.Message
+                        While exc IsNot Nothing
+                            msg += "<br/>" + exc.Message
                                 exc = exc.InnerException
                             End While
                             Status_Literal.Text = "<strong><span style='color:red;font-size:large'>Exception updating the database." &
