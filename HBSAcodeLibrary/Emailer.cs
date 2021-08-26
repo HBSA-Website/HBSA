@@ -71,27 +71,27 @@ namespace HBSAcodeLibrary
                         // store the email
                         StoreTheEmail(message, MatchResultID, Footer, UserID, cfg.Value("SMTPport"), cfg.Value("SMTPport"));
 
-                        //if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
-                        //{
-                        try
+                        if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
                         {
-                            using (MailKit.Net.Smtp.SmtpClient smtpClient = new MailKit.Net.Smtp.SmtpClient())
+                            try
                             {
-                                smtpClient.Connect(cfg.Value("SMTPServer"),
-                                                   System.Convert.ToInt32(cfg.Value("SMTPport")),
-                                                   System.Convert.ToBoolean(cfg.Value("SMTPssl")));
-                                smtpClient.Authenticate(cfg.Value("SMTPServerUsername"), cfg.Value("SMTPServerPassword"));
-                                smtpClient.Send(mimeMessage);
-                                smtpClient.Disconnect(true);
+                                using (MailKit.Net.Smtp.SmtpClient smtpClient = new MailKit.Net.Smtp.SmtpClient())
+                                {
+                                    smtpClient.Connect(cfg.Value("SMTPServer"),
+                                                       System.Convert.ToInt32(cfg.Value("SMTPport")),
+                                                       System.Convert.ToBoolean(cfg.Value("SMTPssl")));
+                                    smtpClient.Authenticate(cfg.Value("SMTPServerUsername"), cfg.Value("SMTPServerPassword"));
+                                    smtpClient.Send(mimeMessage);
+                                    smtpClient.Disconnect(true);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                message.Body = "ERROR OCCURRED sending this: " + ex.Message + "<hr/>" + message.Body;
+                                throw new Exception(ex.Message, ex);
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            message.Body = "ERROR OCCURRED sending this: " + ex.Message + "<hr/>" + message.Body;
-                            throw new Exception(ex.Message, ex);
-                        }
                     }
-
                 }
             }
         }

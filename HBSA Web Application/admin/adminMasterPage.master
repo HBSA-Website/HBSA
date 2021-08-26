@@ -153,7 +153,7 @@
                                         <asp:MenuItem NavigateUrl="LookForTooManyHomeFixtures.aspx" Text="Look for too many home fixtures" Value="closeSeason" />
                                     </asp:MenuItem>
                                     <asp:MenuItem NavigateUrl="Money.aspx" Text="Debts and Payments" />
-
+                                    <asp:MenuItem NavigateUrl="NewPlayers.aspx" Text="New Player Handicaps" />
                                 </asp:MenuItem>
                                 <asp:MenuItem Text=" |Leagues">
                                     <asp:MenuItem NavigateUrl="../MatchResult.aspx" Text="Results Cards" />

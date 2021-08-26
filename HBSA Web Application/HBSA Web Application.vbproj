@@ -198,6 +198,7 @@
     <Content Include="admin\LookForTooManyHomeFixtures.aspx" />
     <Content Include="admin\Menu.aspx" />
     <Content Include="admin\Money.aspx" />
+    <Content Include="admin\NewPlayers.aspx" />
     <Content Include="admin\NotePad.aspx" />
     <Content Include="admin\PictureGalleryManager.aspx" />
     <Content Include="admin\PlayByDates.aspx" />
@@ -972,6 +973,13 @@
     </Compile>
     <Compile Include="admin\Money.aspx.vb">
       <DependentUpon>Money.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="admin\NewPlayers.aspx.designer.vb">
+      <DependentUpon>NewPlayers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\NewPlayers.aspx.vb">
+      <DependentUpon>NewPlayers.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="admin\NotePad.aspx.designer.vb">

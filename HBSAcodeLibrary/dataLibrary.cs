@@ -4423,6 +4423,10 @@ namespace HBSAcodeLibrary
 
             return SQLcommands.ExecDataTable("PlayingRecordsDetail", parameters);
         }
+        public static DataTable NewPlayers()
+        {
+            return SQLcommands.ExecDataTable("NewPlayers");
+        }
 
         #region IDisposable support
         private bool disposedValue = false;        // To detect redundant calls
