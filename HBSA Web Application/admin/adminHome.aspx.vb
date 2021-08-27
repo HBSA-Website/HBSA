@@ -21,7 +21,8 @@ Partial Class adminHome
                 End If
             End Using
 
-            If Session("Caller") Is Nothing Then
+            If Session("Caller") Is Nothing OrElse
+              (Request.QueryString("NoCaller") IsNot Nothing AndAlso Request.QueryString("NoCaller").ToString = "Yes") Then
                 Dim adminDetails As System.Data.DataRow = Session("adminDetails").rows(0)
                 Welcome_Literal.Text = "Welcome " & adminDetails!Forename & " " & adminDetails!Surname
                 LoggedIn_Panel.Visible = True

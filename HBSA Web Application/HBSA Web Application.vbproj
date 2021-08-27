@@ -196,7 +196,6 @@
     <Content Include="admin\LastSixMatches.aspx" />
     <Content Include="admin\Leagues.aspx" />
     <Content Include="admin\LookForTooManyHomeFixtures.aspx" />
-    <Content Include="admin\Menu.aspx" />
     <Content Include="admin\Money.aspx" />
     <Content Include="admin\NewPlayers.aspx" />
     <Content Include="admin\NotePad.aspx" />
@@ -960,13 +959,6 @@
     <Compile Include="admin\LookForTooManyHomeFixtures.aspx.vb">
       <DependentUpon>LookForTooManyHomeFixtures.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\Menu.aspx.designer.vb">
-      <DependentUpon>Menu.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\Menu.aspx.vb">
-      <DependentUpon>Menu.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="admin\Money.aspx.designer.vb">
       <DependentUpon>Money.aspx</DependentUpon>

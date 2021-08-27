@@ -6,12 +6,7 @@
 <head runat="server">
     <title>HBSA Web Administration</title>
     <link href="../styles/global.css" rel="stylesheet" type="text/css" />
-
     <style type="text/css">
-        td {
-            padding: 4px;
-        }
-
         .normal {
             text-align: center;
             color: #0000FF;
@@ -34,47 +29,92 @@
             border-bottom-color: #C0C0C0;
             background-color: #F7F8FA;
         }
-
-        /* TAB MENU   
-----------------------------------------------------------*/
-
-        div.hideSkiplink {
-            background-color: #3a4f63;
+        .MenuDiv {
+            max-height: 99999px; 
+            width: auto; 
+            margin: 0px; 
+            padding: 2px; 
+            color: #0000FF;
+            font-family: Calibri;
+            font-size: 12pt;
+        }
+        .InLineMenuDiv{
+            display: none; 
+            margin-left: 100px;
+            position: fixed; 
+        }
+        .SubMenuDiv{
+            position: fixed; 
+            display: none; 
+            margin-left: 10px;
         }
 
-        div.menu {
-            padding: 4px 0px 4px 8px;
+        .MenuTable {
+            padding: 15px;
+            border: thin solid #000000;
+            border-collapse: collapse;
+            background-color: #B5C7DE;
+            color: #284E98;
+        }
+        .MenuTd{
+            padding: 2px;
+            background-color: #B5C7DE;
+            color: #284E98;
+            font-family: Calibri;
+            font-size: 12pt;
+        }
+        a {
+            background-color: #B5C7DE;
+            color: #284E98;
+            text-decoration: none;
         }
 
-            div.menu ul {
-                list-style: none;
-                width: auto;
+            a:hover {
+                text-decoration: underline;
+                background-color: #284E98;
+                color: white;
             }
-
-                div.menu ul li a, div.menu ul li a:visited {
-                    background-color: #465c71;
-                    border: 1px #bbbbbb solid;
-                    color: #dde4ec;
-                    display: block;
-                    text-decoration: none;
-                    white-space: nowrap;
-                    font-size: 12pt;
-                }
-
-                    div.menu ul li a:hover {
-                        background-color: #bfcbd6;
-                        color: #465c71;
-                        text-decoration: none;
-                        font-size: 12pt;
-                    }
-
-                    div.menu ul li a:active {
-                        background-color: #465c71;
-                        color: #cfdbe6;
-                        text-decoration: none;
-                        font-size: 12pt;
-                    }
     </style>
+
+    <script type="text/javascript">
+        function loadMenuDiv(divID, ContainerDivID) {
+            hideMenuDiv();
+            if (divID != "") {
+                document.getElementById(divID).style.display = "block";
+                document.getElementById(ContainerDivID).style.display = "block";
+            }
+        }
+
+        function loadMenu_InLineDiv(divID, ContainerDivID) {
+            hideMenu_InLineDiv();
+            if (divID != "") {
+                if (document.getElementById(divID).style.display == "block")
+                    document.getElementById(divID).style.display = "none";
+                else
+                    document.getElementById(divID).style.display = "block";
+                document.getElementById(ContainerDivID).style.display = "block";
+            }
+        }
+
+        function hideMenuDiv() {
+            hideMenu_InLineDiv();
+            var divs = document.getElementsByTagName("div");
+            for (var i = 0; i < divs.length; i++) {
+                if (divs[i].id.length > 8)
+                    if (divs[i].id.substr(0, 8) == "SubMenu_")
+                        divs[i].style.display = "none";
+            }
+        }
+
+        function hideMenu_InLineDiv() {
+            var divs = document.getElementsByTagName("div");
+            for (var i = 0; i < divs.length; i++) {
+                if (divs[i].id.length > 8)
+                    if (divs[i].id.substr(0, 15) == "SubMenu_InLine_")
+                        divs[i].style.display = "none";
+            }
+        }
+    </script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -95,130 +135,213 @@
             </tr>
             <tr>
                 <td>
-                    <div style="width: auto; text-align: left; font-size: 12pt;">
-                        <asp:Menu ID="NavigationMenu" runat="server"
-                            EnableViewState="False" BackColor="#B5C7DE" DynamicHorizontalOffset="2"
-                            Font-Names="Verdana" ForeColor="#284E98" StaticSubMenuIndent="10px"
-                            BorderColor="#000099" BorderStyle="Solid" BorderWidth="1px" Font-Size="12pt"
-                            Orientation="Horizontal" DisappearAfter="200">
-                            <DynamicHoverStyle CssClass="menu" BackColor="#284E98" ForeColor="White" />
-                            <DynamicMenuItemStyle CssClass="menu" HorizontalPadding="28px" VerticalPadding="2px" Font-Names="Verdana" Font-Size="12pt" />
-                            <DynamicMenuStyle BackColor="#B5C7DE" />
-                            <DynamicSelectedStyle BackColor="#507CD1" />
-                            <Items>
-                                <asp:MenuItem Text=" |Home Pages">
-                                    <asp:MenuItem NavigateUrl="../Home.aspx" Text="Main Site" />
-                                    <asp:MenuItem NavigateUrl="adminHome.aspx" Text="Admin Home" />
-                                </asp:MenuItem>
-                                <asp:MenuItem Text=" |Web content">
-                                    <asp:MenuItem NavigateUrl="EditHomePage.aspx" Text="Manage Home Page" />
-                                    <asp:MenuItem NavigateUrl="ContentManager.aspx" Text="Manage Content" />
-                                    <asp:MenuItem NavigateUrl="PictureGalleryManager.aspx" Text="Picture Gallery Manager" />
-                                    <asp:MenuItem NavigateUrl="DocumentManager.aspx" Text="Documents Manager" />
-                                    <asp:MenuItem NavigateUrl="Adverts.aspx" Text="Advertisements" />
-                                </asp:MenuItem>
-                                <asp:MenuItem Text=" |Reports">
-                                    <asp:MenuItem NavigateUrl="TaggedPlayers.aspx" Text=" Tagged Players" />
-                                    <asp:MenuItem NavigateUrl="EmailMonitor.aspx" Text=" Email Monitor" />
-                                    <asp:MenuItem NavigateUrl="LastSixMatches.aspx" Text=" Last Six Matches" />
-                                    <asp:MenuItem NavigateUrl="~/TrophiesAndPrizes.aspx" Text=" Trophies and Prizes" />
-                                    <asp:MenuItem NavigateUrl="ActivityLog.aspx" Text=" Activity Log" />
-                                    <asp:MenuItem NavigateUrl="PrivacyReports.aspx" Text=" Privacy acceptance reports" />
-                                    <asp:MenuItem NavigateUrl="ClubsWithoutClubLogin.aspx" Text=" Clubs Without Club Login report" />
-                                    <asp:MenuItem NavigateUrl="EntryFormsNewPlayers.aspx" Text=" Entry Forms New Players report" />
-                                    <asp:MenuItem NavigateUrl="AGMVotesReports.aspx" Text=" AGM Votes" />
-                                    <asp:MenuItem NavigateUrl="C19Compliance.aspx" Text=" Covid 19 Compliance report" />
-                                    <asp:MenuItem NavigateUrl="ContactsReport.aspx" Text=" Contacts Report (Download)" Value="ContactsReport" />
-
-                                </asp:MenuItem>
-                                <asp:MenuItem Text=" |Maintenance">
-                                    <asp:MenuItem NavigateUrl="Clubs.aspx" Text="Clubs" />
-                                    <asp:MenuItem NavigateUrl="Players.aspx" Text="Players" />
-                                    <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Leagues / Handicap limits" />
-                                    <asp:MenuItem NavigateUrl="Sections.aspx" Text="Divisions/Sections" />
-                                    <asp:MenuItem NavigateUrl="Teams.aspx" Text="Teams" />
-                                    <asp:MenuItem NavigateUrl="EmailAddresses.aspx" Text="Email addresses and Telephone Nos" />
-                                    <asp:MenuItem Text="Awards (Trophies, Prizes etc.)" Value="">
-                                        <asp:MenuItem NavigateUrl="Awards.aspx" Text="Awards Recipients" Value="" />
-                                        <asp:MenuItem NavigateUrl="AwardsTypes.aspx" Text="Awards types and their names etc." Value="" />
-                                        <asp:MenuItem NavigateUrl="AwardsTemplate.aspx" Text="Awards templates - Competitions, Trophies & Prizes" Value="" />
-                                        <asp:MenuItem NavigateUrl="BreaksCategories.aspx" Text="Maintain Breaks Categories for High Break awards" Value="" />
-                                        <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Handicap limits (Leagues)" />
-                                    </asp:MenuItem>
-                                    <asp:MenuItem Text="Close Season" Value="">
-                                        <asp:MenuItem NavigateUrl="BetweenSeasons.aspx" Text="Between Seasons" Value="" />
-                                        <asp:MenuItem NavigateUrl="FixtureDates.aspx" Text="Fixture Dates" Value="closeSeason" />
-                                        <asp:MenuItem NavigateUrl="FixtureGrids.aspx" Text="Fixture Grids" Value="closeSeason" />
-                                        <asp:MenuItem NavigateUrl="ArrangeTeamsInSections.aspx" Text="Arrange Teams In Sections" Value="closeSeason" />
-                                        <asp:MenuItem NavigateUrl="LookForTooManyHomeFixtures.aspx" Text="Look for too many home fixtures" Value="closeSeason" />
-                                    </asp:MenuItem>
-                                    <asp:MenuItem NavigateUrl="Money.aspx" Text="Debts and Payments" />
-                                    <asp:MenuItem NavigateUrl="NewPlayers.aspx" Text="New Player Handicaps" />
-                                </asp:MenuItem>
-                                <asp:MenuItem Text=" |Leagues">
-                                    <asp:MenuItem NavigateUrl="../MatchResult.aspx" Text="Results Cards" />
-                                    <asp:MenuItem NavigateUrl="PointsAdjuster.aspx" Text="Adjust League Points" />
-                                    <asp:MenuItem Text="Entry Forms Maintenance">
-                                        <asp:MenuItem NavigateUrl="../EntryForm.aspx" Text="Entry Form" />
-                                        <asp:MenuItem NavigateUrl="EntryFees.aspx" Text="Entry Form Fees" />
-                                        <asp:MenuItem NavigateUrl="EntryFormClubsSummary.aspx" Text="Entry Forms - Clubs Summary" />
-                                        <asp:MenuItem NavigateUrl="EntryFormTeamsSummary.aspx" Text="Entry Forms - Teams Summary" />
-                                        <asp:MenuItem NavigateUrl="EntryFormFullReport.aspx" Text="Entry Forms - Full Reports" />
-                                        <asp:MenuItem NavigateUrl="PrivacyReports.aspx" Text=" Privacy acceptance reports" />
-                                        <asp:MenuItem NavigateUrl="ClubsWithoutClubLogin.aspx" Text=" Clubs Without Club Login report" />
-                                        <asp:MenuItem NavigateUrl="EntryFormsNewPlayers.aspx" Text=" Entry Forms New Players report" />
-                                    </asp:MenuItem>
-                                    <asp:MenuItem NavigateUrl="../FixtureLists.aspx" Text="Fixture Lists" />
-                                    <asp:MenuItem NavigateUrl="BreaksCategories.aspx" Text="Maintain Breaks Categories for High Break awards" Value="" />
-                                    <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Handicap limits (Leagues)" />
-                                </asp:MenuItem>
-                                <asp:MenuItem Text=" |Competitions">
-                                    <asp:MenuItem NavigateUrl="CompetitionsMaintenance.aspx" Text="Set up and maintenance" />
-                                    <asp:MenuItem NavigateUrl="CompetitionsEntries.aspx" Text="Entrants" />
-                                    <asp:MenuItem NavigateUrl="ArrangeEntrantsInCompetition.aspx" Text="Re-arrange Entrants in a competition" />
-                                    <asp:MenuItem NavigateUrl="PlayByDates.aspx" Text="Play By Dates and Round comments" />
-                                    <asp:MenuItem NavigateUrl="Competitionsresults.aspx" Text="Results and progress" />
-                                    <asp:MenuItem NavigateUrl="JuniorsResults.aspx" Text="Enter Juniors Division Results" />
-                                    <asp:MenuItem Text="Competitions Entry Forms Maintenance">
-                                        <asp:MenuItem NavigateUrl="../CompetitionsEntryForm.aspx" Text="On line entry forms" />
-                                        <asp:MenuItem NavigateUrl="CompetitionsEntryFormClubsSummary.aspx" Text="Entry Forms - Clubs Summary" />
-                                        <asp:MenuItem NavigateUrl="CompetitionEntrantsReport.aspx" Text="Entry Forms - Entrants reports by competition" />
-                                        <asp:MenuItem NavigateUrl="../EntryFormShowDetail.aspx?ClubID=0&Form=Competition" Text="Entry Forms - Full Reports on all clubs" />
-                                        <asp:MenuItem NavigateUrl="ClearCompetitionsEntryForms.aspx" Text="Clear all entry forms." ToolTip="Clear out ALL entry forms and any associated data" />
-                                    </asp:MenuItem>
-                                    <asp:MenuItem NavigateUrl="BreaksCategories.aspx" Text="Maintain Breaks Categories for High Break awards" Value="" />
-                                    <asp:MenuItem NavigateUrl="Leagues.aspx" Text="Handicap limits (Leagues)" />
-                                    <asp:MenuItem NavigateUrl="PrivacyReports.aspx" Text=" Privacy acceptance reports" />
-                                </asp:MenuItem>
-                                <asp:MenuItem Text=" |Admin">
-                                    <asp:MenuItem NavigateUrl="Administrators.aspx" Text="Administrators" />
-                                    <asp:MenuItem NavigateUrl="UserDetails.aspx" Text="User Details" />
-                                    <asp:MenuItem NavigateUrl="Settings.aspx" Text="Settings" />
-                                    <asp:MenuItem NavigateUrl="Fines.aspx" Text="Fines" />
-                                    <asp:MenuItem NavigateUrl="Money.aspx" Text="Debts and Payments" />
-                                    <asp:MenuItem NavigateUrl="EmailTemplates.aspx" Text="Email Templates" />
-                                    <asp:MenuItem NavigateUrl="NotePad.aspx" Text="Note Pad" />
-                                    <asp:MenuItem NavigateUrl="FAQ.aspx" Text="FAQ" />
-                                    <asp:MenuItem NavigateUrl="SMTPTester.aspx" Text="SMTP Client Tester" />
-                                </asp:MenuItem>
-
-                                <asp:MenuItem NavigateUrl="adminLogoff.aspx" Text=" |Log out" />
-
-                            </Items>
-
-                            <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
-                            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2" Font-Names="Verdana" Font-Size="10pt" />
-                            <StaticSelectedStyle BackColor="#507CD1" />
-                        </asp:Menu>
-                    </div>
-                </td>
-            </tr>
+        <div class="MenuDiv">
+            <table id="Menu_Div" class="MenuTable" >
+                <tr>
+                    <td class="MenuTd">
+                        <div id="Menu_Home" 
+                            onclick="loadMenuDiv('SubMenu_Home_Div','Menu_Home');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Home_Div','Menu_Home');">
+                            &nbsp;Home,&nbsp;Pages >> &nbsp;|
+                        </div>
+                        <div id="SubMenu_Home_Div" class="SubMenuDiv">
+                            <table class="MenuTable">
+                                <tr><td class="MenuTd"><a href="~/Home.aspx" runat="server">Main site</a></td></tr>
+                                <tr><td class="MenuTd"><a href="adminHome.aspx?Nocaller=Yes" runat="server">Admin Home</a></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="MenuTd">
+                        <div id="Menu_Content"
+                            onclick="loadMenuDiv('SubMenu_Content_Div','Menu_Content');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Content_Div','Menu_Content');">
+                            &nbsp;Web&nbsp;Content >> &nbsp;|
+                        </div>
+                        <div id="SubMenu_Content_Div" class="SubMenuDiv">
+                            <table class="MenuTable">
+                                <tr><td class="MenuTd"><a href="EditHomePage.aspx" runat="server">Manage Home Page</a></td></tr>
+                                <tr><td class="MenuTd"><a href="ContentManager.aspx" runat="server">Manage Content</a></td></tr>
+                                <tr><td class="MenuTd"><a href="PictureGalleryManager.aspx" runat="server">Picture Gallery Manager</a></td></tr>
+                                <tr><td class="MenuTd"><a href="DocumentManager.aspx" runat="server">Documents Manager</a></td></tr>
+                                <tr><td class="MenuTd"><a href="Adverts.aspx" runat="server">Advertisements</a></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="MenuTd">
+                        <div id="Menu_Reports"
+                            onclick="loadMenuDiv('SubMenu_Reports_Div','Menu_Reports');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Reports_Div','Menu_Reports');">
+                            &nbsp;Reports >> &nbsp;|
+                        </div>
+                        <div id="SubMenu_Reports_Div" class="SubMenuDiv">
+                            <table class="MenuTable">
+                                <tr><td class="MenuTd"><a href="TaggedPlayers.aspx">Tagged Players</a></td></tr>
+                                <tr><td class="MenuTd"><a href="EmailMonitor.aspx">Email Monitor</a></td></tr>
+                                <tr><td class="MenuTd"><a href="LastSixMatches.aspx">Last Six Matches</a></td></tr>
+                                <tr><td class="MenuTd"><a href="../TrophiesAndPrizes.aspx">Trophies and Prizes</a></td></tr>
+                                <tr><td class="MenuTd"><a href="ActivityLog.aspx">Activity Log</a></td></tr>
+                                <tr><td class="MenuTd"><a href="PrivacyReports.aspx">Privacy acceptance reports</a></td></tr>
+                                <tr><td class="MenuTd"><a href="ClubsWithoutClubLogin.aspx">Clubs Without Club Login report</a></td></tr>
+                                <tr><td class="MenuTd"><a href="EntryFormsNewPlayers.aspx">Entry Forms New Players report</a></td></tr>
+                                <tr><td class="MenuTd"><a href="AGMVotesReports.aspx">AGM Votes</a></td></tr>
+                                <tr><td class="MenuTd"><a href="C19Compliance.aspx">Covid 19 Compliance report</a></td></tr>
+                                <tr><td class="MenuTd"><a href="ContactsReport.aspx">Contacts Report (Download)</a></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="MenuTd">
+                        <div id="Menu_Maintenance"
+                            onclick="loadMenuDiv('SubMenu_Maintenance_Div','Menu_Maintenance');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Maintenance_Div','Menu_Maintenance');">
+                            &nbsp;Maintenance >> &nbsp;|
+                        </div>
+                        <div id="SubMenu_Maintenance_Div" class="SubMenuDiv">
+                            <table class="MenuTable">
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Clubs.aspx">Clubs</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Players.aspx">Players</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Leagues.aspx">Leagues / Handicap limits</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Sections.aspx">Divisions/Sections</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Teams.aspx">Teams</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="EmailAddresses.aspx">Email addresses and Telephone Nos</a></td></tr>
+                                <tr><td class="MenuTd">
+                                        <div id="Menu_InLine_Awards_Div"
+                                            onclick="loadMenu_InLineDiv('SubMenu_InLine_Awards_Div','Menu_Maintenance');"
+                                            onmouseover="this.style.cursor='pointer'; loadMenu_InLineDiv('SubMenu_InLine_Awards_Div','Menu_Maintenance');">
+                                            <a>Awards (Trophies, Prizes etc.) >> &nbsp;</a>
+                                        </div>
+                                        <div id="SubMenu_InLine_Awards_Div" class="InLineMenuDiv">
+                                            <table class="MenuTable">
+                                                <tr><td class="MenuTd"><a href="Awards.aspx">Awards Recipients</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="AwardsTypes.aspx">Awards types and their names etc.</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="AwardsTemplate.aspx">Awards templates - Competitions, Trophies & Prizes</a></td></tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td class="MenuTd"><a href="BreaksCategories.aspx">Maintain Breaks Categories for High Break awards</a></td></tr>
+                                <tr><td class="MenuTd"><a href="Leagues.aspx">Handicap limits (Leagues)</a></td></tr>
+                                <tr>
+                                    <td class="MenuTd">
+                                        <div id="Menu_InLine_CloseSeason_Div"
+                                            onclick =                               "loadMenu_InLineDiv('SubMenu_InLine_CloseSeason_Div','Menu_InLine_CloseSeason_Div');" 
+                                            onmouseover="this.style.cursor='pointer';loadMenu_InLineDiv('SubMenu_InLine_CloseSeason_Div','Menu_InLine_CloseSeason_Div');">
+                                            <a>Close Season >> &nbsp;</a>
+                                        </div>
+                                        <div  id="SubMenu_InLine_CloseSeason_Div" class="InLineMenuDiv">
+                                            <table class="MenuTable" id="CloseSeasonMenu" runat="server">
+                                                <tr><td class="MenuTd"><a href="BetweenSeasons.aspx">Between Seasons</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="FixtureDates.aspx" runat="server" id="CloseFixtureDates">Fixture Dates </a></td></tr>
+                                                <tr><td class="MenuTd"><a href="FixtureGrids.aspx" runat="server" id="CloseFixtureGrids">Fixture Grids </a></td></tr>
+                                                <tr><td class="MenuTd"><a href="ArrangeTeamsInSections.aspx" runat="server" id="CloseTeams">Arrange Teams In Sections </a></td></tr>
+                                                <tr><td class="MenuTd"><a href="LookForTooManyHomeFixtures.aspx" runat="server" id="CloseLook">Look for too many home fixtures </a></td></tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Money.aspx">Debts and Payments</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="NewPlayers.aspx">New Player Handicaps</a></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="MenuTd">
+                        <div id="Menu_Leagues"
+                            onclick="loadMenuDiv('SubMenu_Leagues_Div','Menu_Leagues');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Leagues_Div','Menu_Leagues');">
+                            &nbsp;Leagues >> &nbsp;|
+                        </div>
+                        <div id="SubMenu_Leagues_Div" class="SubMenuDiv">
+                            <table class="MenuTable">
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="../MatchResult.aspx">Results Cards</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="PointsAdjuster.aspx">Adjust League Points</a></td></tr>
+                                <tr><td class="MenuTd">
+                                        <div id="Menu_InLine_EntryForms_Div"
+                                            onclick="loadMenu_InLineDiv('SubMenu_InLine_EntryForms_Div','Menu_InLine_EntryForms_Div');"
+                                            onmouseover="this.style.cursor='pointer';loadMenu_InLineDiv('SubMenu_InLine_EntryForms_Div','Menu_InLine_EntryForms_Div');">
+                                            <a>Entry Forms Maintenance >> &nbsp;</a>
+                                        </div>
+                                        <div id="SubMenu_InLine_EntryForms_Div" class="InLineMenuDiv">
+                                            <table class="MenuTable">
+                                                <tr><td class="MenuTd"><a href="../EntryForm.aspx">Entry Forms</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="EntryFees.aspx">Entry Form Fees</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="EntryFormClubsSummary.aspx">Entry Forms - Clubs Summary</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="EntryFormTeamsSummary.aspx">Entry Forms - Teams Summary</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="EntryFormFullReport.aspx">Entry Forms - Full Reports</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="PrivacyReports.aspx">Privacy acceptance reports</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="ClubsWithoutClubLogin.aspx">Clubs Without Club Login report</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="EntryFormsNewPlayers.aspx">Entry Forms New Players report</a></td></tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="../FixtureLists.aspx">Fixture Lists</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="BreaksCategories.aspx">Maintain Breaks Categories for High Break awards</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Leagues.aspx">Handicap limits (Leagues)</a></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="MenuTd">
+                        <div id="Menu_Competitions"
+                            onclick="loadMenuDiv('SubMenu_Competitions_Div','Menu_Competitions');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Competitions_Div','Menu_Competitions');">
+                            &nbsp;Competitions >> &nbsp;|
+                        </div>
+                        <div id="SubMenu_Competitions_Div" class="SubMenuDiv">
+                            <table class="MenuTable">
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="CompetitionsMaintenance.aspx">Set up and maintenance</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="CompetitionsEntries.aspx">Entrants</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="ArrangeEntrantsInCompetition.aspx">Re-arrange Entrants in a competition</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="PlayByDates.aspx">Play By Dates and Round comments</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Competitionsresults.aspx">Results and progress</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="JuniorsResults.aspx">Enter Juniors Division Results</a></td></tr>
+                                <tr>
+                                    <td class="MenuTd">
+                                        <div id="Menu_InLine_CompEntryForms_Div"
+                                            onclick =                               "loadMenu_InLineDiv('SubMenu_InLine_CompEntryForms_Div','Menu_InLine_CompEntryForms_Div');" 
+                                            onmouseover="this.style.cursor='pointer';loadMenu_InLineDiv('SubMenu_InLine_CompEntryForms_Div','Menu_InLine_CompEntryForms_Div');">
+                                            <a>Competitions Entry Forms Maintenance >> &nbsp;</a>
+                                        </div>
+                                        <div id="SubMenu_InLine_CompEntryForms_Div" class="InLineMenuDiv">
+                                            <table class="MenuTable">
+                                                <tr><td class="MenuTd"><a href="../CompetitionsEntryForm.aspx">On line entry forms</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="CompetitionsEntryFormClubsSummary.aspx">Entry Forms - Clubs Summary</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="CompetitionEntrantsReport.aspx">Entry Forms - Entrants reports by competition</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="../EntryFormShowDetail.aspx?ClubID=0&Form=Competition">Entry Forms - Full Reports on all clubs</a></td></tr>
+                                                <tr><td class="MenuTd"><a href="ClearCompetitionsEntryForms.aspx" title="Clear out ALL entry forms and any associated data">Clear all entry forms</a></td></tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="PrivacyReports.aspx"> Privacy acceptance reports</a></td></tr>
+                            </table>
+                        </div>
+                     </td>			    	
+                    <td class="MenuTd">
+                        <div id="Menu_Admin"
+                            onclick="loadMenuDiv('SubMenu_Admin_Div','Menu_Admin');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Admin_Div','Menu_Admin');">
+                            &nbsp;Admin >> &nbsp;|
+                        </div>
+                        <div id="SubMenu_Admin_Div" class="SubMenuDiv">
+                            <table class="MenuTable">
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Administrators.aspx">Administrators</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="UserDetails.aspx">User Details</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Settings.aspx">Settings</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Fines.aspx">Fines</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Money.aspx">Debts and Payments</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="EmailTemplates.aspx">Email Templates</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="NotePad.aspx">Note Pad</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="FAQ.aspx">FAQ</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="SMTPTester.aspx">SMTP Client Tester</a></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="MenuTd"  onmouseover="hideMenuDiv();"">
+                        <a href="adminLogoff.aspx">Log Out &nbsp;&nbsp;</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </td>
+        </tr>
         </table>
 
         <span style="font-size: 12pt; font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: #FF0000">
             <asp:Literal ID="UnderMaintLiteral" runat="server"></asp:Literal></span>
 
-        <div class="normal" style="text-align: left">
+        <div  onmouseover="hideMenuDiv();" class="normal" style="text-align: left">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
 
             </asp:ContentPlaceHolder>

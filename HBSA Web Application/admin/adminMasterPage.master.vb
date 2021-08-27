@@ -30,31 +30,12 @@ Partial Class admin_adminMasterPage
 
         End If
 
+        Dim CloseSeason As Boolean = HBSAcodeLibrary.HBSA_Configuration.CloseSeason
+        CloseFixtureDates.Visible = CloseSeason
+        CloseFixtureGrids.Visible = CloseSeason
+        CloseLook.Visible = CloseSeason
+        CloseTeams.Visible = CloseSeason
 
-        If Not IsPostBack Then
-
-            For Each mI As MenuItem In NavigationMenu.Items
-                processMenuItem(mI)
-            Next
-        End If
-
-    End Sub
-
-    Sub processMenuItem(mI As MenuItem)
-
-        If mI.Value.ToLower Like "*season*" Then
-            If mI.Value.ToLower Like "*close*" AndAlso Not HBSAcodeLibrary.HBSA_Configuration.CloseSeason Then
-                mI.Enabled = False
-                mI.Text += " (disabled)"
-            End If
-        End If
-
-        If mI.ChildItems.Count > 0 Then
-            Dim smis As MenuItemCollection = mI.ChildItems
-            For Each smi As MenuItem In smis
-                processMenuItem(smi)
-            Next
-        End If
     End Sub
 
 End Class

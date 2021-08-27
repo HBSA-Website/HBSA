@@ -31,7 +31,9 @@ set nocount on
 	LEFT JOIN EntryForm_Players c
 	  ON c.PlayerID=Captain
 	where P.Handicap=(select convert(int,[value]) from [Configuration] where [key]='EntryFormNewRegStartHCap')
+	  and P.SectionID > 0
 	order by [Club Name]
 GO 
 
 exec NewPlayers
+

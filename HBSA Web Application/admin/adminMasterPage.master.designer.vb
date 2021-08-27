@@ -32,13 +32,49 @@ Partial Public Class admin_adminMasterPage
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''NavigationMenu control.
+    '''CloseSeasonMenu control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NavigationMenu As Global.System.Web.UI.WebControls.Menu
+    Protected WithEvents CloseSeasonMenu As Global.System.Web.UI.HtmlControls.HtmlTable
+
+    '''<summary>
+    '''CloseFixtureDates control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CloseFixtureDates As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+    '''<summary>
+    '''CloseFixtureGrids control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CloseFixtureGrids As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+    '''<summary>
+    '''CloseTeams control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CloseTeams As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+    '''<summary>
+    '''CloseLook control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CloseLook As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
     '''<summary>
     '''UnderMaintLiteral control.
