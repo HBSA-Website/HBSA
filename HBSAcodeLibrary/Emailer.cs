@@ -245,7 +245,7 @@ namespace HBSAcodeLibrary
                     {
                         string err = "Team:|Team|, Player:|Player|, new handicap:|new handicap|, Section:|Section|.";
                         err = err.Replace("|Team|", TeamName).Replace("|Date|", DateTime.Today.ToLongDateString()).Replace("|Player|", PlayerName).Replace("|new handicap|", NewHandicap).Replace("|Section|", SectionName) + Microsoft.VisualBasic.Constants.vbCrLf + eMex.Message;
-                        SendHandicapChangeEmailResult += "<br/><font color=red><strong>Error sending an email:<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>") + ".</font>";
+                        SendHandicapChangeEmailResult += "<br/><font color=red><strong>Error sending an email:<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>") + ".</strong></font>";
                         Emailer.LogEmailfailure(toAddress, err, "handicap change");
                     }
                 }

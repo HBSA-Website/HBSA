@@ -10,6 +10,7 @@
         .normal {
             text-align: center;
             color: #0000FF;
+            background-color:white;
             font-family: Calibri;
             font-size: 12pt;
         }
@@ -63,17 +64,16 @@
             font-family: Calibri;
             font-size: 12pt;
         }
-        a {
+        .MenuTd a{
+            text-decoration: none;
             background-color: #B5C7DE;
             color: #284E98;
-            text-decoration: none;
         }
-
-            a:hover {
+        .MenuTd a:hover{
                 text-decoration: underline;
                 background-color: #284E98;
                 color: white;
-            }
+        }
     </style>
 
     <script type="text/javascript">
@@ -214,8 +214,8 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr><td class="MenuTd"><a href="BreaksCategories.aspx">Maintain Breaks Categories for High Break awards</a></td></tr>
-                                <tr><td class="MenuTd"><a href="Leagues.aspx">Handicap limits (Leagues)</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="BreaksCategories.aspx">Maintain Breaks Categories for High Break awards</a></td></tr>
+                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="Leagues.aspx">Handicap limits (Leagues)</a></td></tr>
                                 <tr>
                                     <td class="MenuTd">
                                         <div id="Menu_InLine_CloseSeason_Div"
