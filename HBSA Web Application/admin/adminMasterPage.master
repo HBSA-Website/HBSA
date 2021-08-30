@@ -74,6 +74,11 @@
                 background-color: #284E98;
                 color: white;
         }
+        .MenuTd a:visited {
+            text-decoration: none;
+            background-color: #B5C7DE;
+            color: #284E98;
+        }
     </style>
 
     <script type="text/javascript">
