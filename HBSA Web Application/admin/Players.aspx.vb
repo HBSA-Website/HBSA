@@ -15,19 +15,19 @@ Public Class Players
 
         Else
             If Not IsPostBack Then
-                populateSections()
+                PopulateLeagueSections()
                 SessionUser.Value = Session("AdminUser")
             End If
         End If
 
     End Sub
-    Protected Sub PopulateSections()
+    Protected Sub PopulateLeagueSections()
 
-        Section_DropDownList.Items.Clear()
+        LeagueSection_DropDownList.Items.Clear()
 
         Using sectionsList As DataTable = LeagueData.GetSections(0)
 
-            With Section_DropDownList
+            With LeagueSection_DropDownList
                 .Items.Clear()
                 .Visible = True
                 .DataSource = sectionsList
@@ -54,7 +54,7 @@ Public Class Players
 
         End Using
 
-        populateClubs(Section_DropDownList.SelectedValue)
+        PopulateClubs(LeagueSection_DropDownList.SelectedValue)
 
     End Sub
     Protected Sub PopulateClubs(SectionID As Integer)
@@ -79,19 +79,19 @@ Public Class Players
 
     End Sub
     Protected Sub Section_DropDownList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) _
-            Handles Section_DropDownList.SelectedIndexChanged
+            Handles LeagueSection_DropDownList.SelectedIndexChanged
 
-        populateClubs(Section_DropDownList.SelectedValue)
+        PopulateClubs(LeagueSection_DropDownList.SelectedValue)
 
     End Sub
     Sub FillGrid(sType As Integer)
 
         Dim players As DataTable
         If sType = SearchType.ByClub Then
-            players = PlayerData.GetPlayerDetails(Section_DropDownList.SelectedValue,
+            players = PlayerData.GetPlayerDetails(LeagueSection_DropDownList.SelectedValue,
                                                   Club_DropDownList.SelectedValue)
         Else
-            players = PlayerData.GetPlayerDetailsByPlayer(Section_DropDownList.SelectedValue,
+            players = PlayerData.GetPlayerDetailsByPlayer(LeagueSection_DropDownList.SelectedValue,
                                                           Club_DropDownList.SelectedValue,
                                                           Player_TextBox.Text.Trim)
         End If
@@ -130,17 +130,19 @@ Public Class Players
                 Inits_TextBox.Text = .Cells(2).Text.Replace("&nbsp;", "")
                 Surname_TextBox.Text = .Cells(3).Text
                 Handicap_TextBox.Text = .Cells(4).Text
-                populateEditLeagues()
+                PopulateEditLeagues()
                 editLeague_DropDownList.SelectedValue = .Cells(14).Text
-                populateEditSections()
-                editSection_DropDownList.SelectedValue = .Cells(15).Text
-                populateEditClubs(True)
+                If .Cells(15).Text > 0 Then
+                    editSection_DropDownList.SelectedValue = .Cells(15).Text
+                End If
+                PopulateEditClubs(True)
                 Try
                     editClubs_DropDownList.SelectedValue = .Cells(16).Text
                 Catch ex As Exception  'club probably been deleted so force selection
                     editClubs_DropDownList.SelectedIndex = 0
                 End Try
                 Team_DropDownList.SelectedValue = .Cells(6).Text
+                Populate_EditSectionDropdownListWithTeam()
                 Played_CheckBox.Checked = DirectCast(.Cells(7).Controls(0), CheckBox).Checked
                 Tagged_DropDownList.SelectedValue = .Cells(8).Text
                 Over70_CheckBox.Checked = DirectCast(.Cells(9).Controls(0), CheckBox).Checked
@@ -158,6 +160,9 @@ Public Class Players
                     SubmitPlayer_Button.Visible = True
                     SubmitPlayer_Button.Text = "Delete Player"
                 End If
+
+                ShowHideEditControls(False)
+
             End With
 
             Edit_Panel.Visible = True
@@ -165,6 +170,20 @@ Public Class Players
         End If
 
     End Sub
+    Sub ShowHideEditControls(Show As Boolean)
+
+        For Each row As HtmlTableRow In Controls_Table.Rows
+            For Each cell As HtmlTableCell In row.Cells
+                For Each ctl In cell.Controls
+                    If Not ctl.ToString.ToLower Like "*literal*" Then
+                        ctl.enabled = Show
+                    End If
+                Next
+            Next
+        Next
+
+    End Sub
+
     Private Sub Players_GridView_RowEditing(sender As Object, e As GridViewEditEventArgs) Handles Players_GridView.RowEditing
 
         Dim PlayerRow As GridViewRow = Players_GridView.Rows(e.NewEditIndex)
@@ -172,6 +191,7 @@ Public Class Players
 
         ErrorTeam_Literal.Text = ""
         ErrorTeamRow.Visible = False
+        ShowHideEditControls(True)
 
         If PlayerRow.RowType = DataControlRowType.DataRow Then
 
@@ -182,16 +202,16 @@ Public Class Players
                 Inits_TextBox.Text = .Cells(2).Text.Replace("&nbsp;", "").Replace("&#39;", "'")
                 Surname_TextBox.Text = .Cells(3).Text.Replace("&nbsp;", "").Replace("&#39;", "'")
                 Handicap_TextBox.Text = .Cells(4).Text
-                populateEditLeagues()
+                PopulateEditLeagues()
                 editLeague_DropDownList.SelectedValue = .Cells(14).Text
-                populateEditSections()
-                If .Cells(15).Text <> 0 Then 'Not a Deleted player! i.e. sectionID is not zero
-                    editSection_DropDownList.SelectedValue = .Cells(15).Text
-                End If
-
-                populateEditClubs(True)
+                PopulateEditClubs(True)
                 editClubs_DropDownList.SelectedValue = .Cells(16).Text
                 Team_DropDownList.SelectedValue = .Cells(6).Text
+                Populate_EditSectionDropdownListWithTeam()
+                If editSection_DropDownList.Items.Count > 0 AndAlso
+                    .Cells(15).Text > 0 Then
+                    editSection_DropDownList.SelectedValue = .Cells(15).Text
+                End If
                 Played_CheckBox.Checked = DirectCast(.Cells(7).Controls(0), CheckBox).Checked
                 Tagged_DropDownList.SelectedValue = .Cells(8).Text
                 Over70_CheckBox.Checked = DirectCast(.Cells(9).Controls(0), CheckBox).Checked
@@ -209,6 +229,7 @@ Public Class Players
             SubmitPlayer_Button.Visible = True
             Edit_Panel.Visible = True
             SubmitPlayer_Button.Text = "Change Player Details"
+            editLeague_DropDownList.Enabled = False
 
         End If
 
@@ -226,11 +247,11 @@ Public Class Players
                 .DataBind()
                 .Items.Insert(0, New ListItem("**Select a League**", 0))
 
-                If Section_DropDownList.SelectedItem.Text.ToLower Like "*billiards*" Then
+                If LeagueSection_DropDownList.SelectedItem.Text.ToLower Like "*billiards*" Then
                     .SelectedValue = 3
-                ElseIf Section_DropDownList.SelectedItem.Text.ToLower Like "*veterans*" Then
+                ElseIf LeagueSection_DropDownList.SelectedItem.Text.ToLower Like "*veterans*" Then
                     .SelectedValue = 2
-                ElseIf Section_DropDownList.SelectedItem.Text.ToLower Like "*open*" Then
+                ElseIf LeagueSection_DropDownList.SelectedItem.Text.ToLower Like "*open*" Then
                     .SelectedValue = 1
                 Else
                     .SelectedValue = 0
@@ -255,13 +276,13 @@ Public Class Players
                 .Items.Insert(0, New ListItem("**Select a division/section**", 0))
 
                 If editLeague_DropDownList.SelectedItem.Text.ToLower Like "*billiards*" OrElse
-                   Section_DropDownList.SelectedItem.Text.ToLower Like "*billiards*" Then 'its billiards with no sections
+                   LeagueSection_DropDownList.SelectedItem.Text.ToLower Like "*billiards*" Then 'its billiards with no sections
                     .SelectedIndex = 1
                     .SelectedItem.Text = "Billiards"
                     .Enabled = False
                 Else
-                    If Section_DropDownList.SelectedValue < 100 Then
-                        .SelectedValue = Section_DropDownList.SelectedValue
+                    If LeagueSection_DropDownList.SelectedValue < 100 Then
+                        .SelectedValue = LeagueSection_DropDownList.SelectedValue
                     Else
                         .SelectedValue = 0
                     End If
@@ -306,81 +327,100 @@ Public Class Players
     End Sub
     Protected Sub EditLeague_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles editLeague_DropDownList.SelectedIndexChanged
 
-        PopulateEditSections()
-        EditSection_DropDownList_SelectedIndexChanged(sender, e)
+        Populate_EditSectionDropdownListWithTeam()
+        'EditSection_DropDownList_SelectedIndexChanged(sender, e)
 
     End Sub
-    Protected Sub EditSection_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles editSection_DropDownList.SelectedIndexChanged
+    'Protected Sub EditSection_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles editSection_DropDownList.SelectedIndexChanged
 
-        Dim oldValue As Integer = editClubs_DropDownList.SelectedValue
-        PopulateEditClubs()
-        Try
-            editClubs_DropDownList.SelectedValue = oldValue
-        Catch ex As Exception
-            editClubs_DropDownList.SelectedIndex = 0
-        End Try
-        If editClubs_DropDownList.SelectedIndex = 0 Then
-            Try
-                editClubs_DropDownList.SelectedValue = Club_DropDownList.SelectedValue
-            Catch ex As Exception
-                editClubs_DropDownList.SelectedIndex = 0
-            End Try
-        End If
+    '    'Dim oldValue As Integer = editClubs_DropDownList.SelectedValue
+    '    'PopulateEditClubs()
+    '    'Try
+    '    '    editClubs_DropDownList.SelectedValue = oldValue
+    '    'Catch ex As Exception
+    '    '    editClubs_DropDownList.SelectedIndex = 0
+    '    'End Try
+    '    'If editClubs_DropDownList.SelectedIndex = 0 Then
+    '    '    Try
+    '    '        editClubs_DropDownList.SelectedValue = Club_DropDownList.SelectedValue
+    '    '    Catch ex As Exception
+    '    '        editClubs_DropDownList.SelectedIndex = 0
+    '    '    End Try
+    '    'End If
 
-        CheckTeam()
+    '    CheckTeam()
 
-    End Sub
+    'End Sub
     Private Sub EditClubs_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles editClubs_DropDownList.SelectedIndexChanged
 
         If editClubs_DropDownList.SelectedValue = -9 Then
             PopulateEditClubs(True)
         ElseIf editClubs_DropDownList.SelectedValue > 0 Then
-            CheckTeam()
+            Populate_EditSectionDropdownListWithTeam()
         End If
 
     End Sub
     Private Sub Team_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Team_DropDownList.SelectedIndexChanged
 
-        CheckTeam()
+        Populate_EditSectionDropdownListWithTeam()
 
     End Sub
-    Protected Sub CheckTeam(Optional KeepStatus As Boolean = False)
+    Protected Sub Populate_EditSectionDropdownListWithTeam()
+
+        ErrorTeamRow.Visible = False
+        Using TeamLetters = HBSAcodeLibrary.TeamData.TeamLetters(0, editClubs_DropDownList.SelectedValue, editLeague_DropDownList.SelectedValue)
+            With editSection_DropDownList
+                .Items.Clear()
+                For Each team In TeamLetters.Rows
+                    If Team_DropDownList.SelectedValue = team!Team Then
+                        .Items.Add(New ListItem(team!Section, team!SectionID))
+                    End If
+                Next
+                If .Items.Count > 1 Then
+                    .Items.Insert(0, New ListItem("** Select a Section ** ", 0))
+                    .Enabled = True
+                ElseIf .Items.Count = 1 Then
+                    .Enabled = False
+                Else
+                    ErrorTeam_Literal.Text = "This team does not exist in this League/Division/Section for this Club."
+                    ErrorTeamRow.Visible = True
+                    .Enabled = False
+                End If
+            End With
+        End Using
+
+    End Sub
+    Protected Sub CheckTeam()
 
         ErrorTeam_Literal.Text = ""
         ErrorTeamRow.Visible = False
-        If Not KeepStatus Then
-            Status_Literal.Text = ""
-        End If
 
-        If editClubs_DropDownList.SelectedValue > 0 AndAlso
-           editSection_DropDownList.SelectedValue > 0 Then
+        'check is valid for section/club
 
-            'check is valid for section/club
+        Using TeamLetters = HBSAcodeLibrary.TeamData.TeamLetters(editSection_DropDownList.SelectedValue, editClubs_DropDownList.SelectedValue)
 
-            Using TeamLetters = HBSAcodeLibrary.TeamData.TeamLetters(editSection_DropDownList.SelectedValue, editClubs_DropDownList.SelectedValue)
-                Dim teams As String = ""
-                For Each TeamLetter As DataRow In TeamLetters.Rows
-                    teams += "'" + TeamLetter!Team + "', "
-                    If Team_DropDownList.SelectedValue = TeamLetter!Team Then
-                        Exit Sub
-                    End If
-                Next
-
-                ErrorTeam_Literal.Text = "This team does not exist in this League/Division/Section for this Club.<br/>"
-                If TeamLetters.Rows.Count = 1 Then
-                    ErrorTeam_Literal.Text += "Can only be the " & Left(teams, teams.Length - 2) & " team."
-                ElseIf TeamLetters.Rows.Count > 1 Then
-                    ErrorTeam_Literal.Text += "Can only be one of " & Left(teams, teams.Length - 2) & " team."
+            Dim teams As String = ""
+            For Each TeamLetter As DataRow In TeamLetters.Rows
+                teams += "'" + TeamLetter!Team + "', "
+                If Team_DropDownList.SelectedValue = TeamLetter!Team Then
+                    Exit Sub
                 End If
-                ErrorTeam_Literal.Text += "<br/>You may need to select a different club and/or League/Division/Section as well as the team."
+            Next
 
-                ErrorTeamRow.Visible = True
+            ErrorTeam_Literal.Text = "This team does not exist in this League/Division/Section for this Club.<br/>"
+            If TeamLetters.Rows.Count = 1 Then
+                ErrorTeam_Literal.Text += "Can only be the " & Left(teams, teams.Length - 2) & " team."
+            ElseIf TeamLetters.Rows.Count > 1 Then
+                ErrorTeam_Literal.Text += "Can only be one of " & Left(teams, teams.Length - 2) & " team."
+            End If
+            ErrorTeam_Literal.Text += "<br/>You may need to select a different club and/or League/Division/Section as well as the team."
 
-            End Using
+            ErrorTeamRow.Visible = True
 
-        End If
+        End Using
 
     End Sub
+
     Protected Sub CancelPlayer_Button_Click(sender As Object, e As EventArgs) Handles CancelPlayer_Button.Click
 
         Edit_Panel.Visible = False
@@ -421,11 +461,19 @@ Public Class Players
 
         Else
 
-            If editLeague_DropDownList.SelectedIndex = 0 Then
-                Status_Literal.Text += "Please select a League.<br/>"
+            If editLeague_DropDownList.Items.Count = 1 Then
+                editLeague_DropDownList.SelectedIndex = 0
+            Else
+                If editLeague_DropDownList.SelectedIndex = 0 Then
+                    Status_Literal.Text += "Please select a League.<br/>"
+                End If
             End If
-            If editSection_DropDownList.SelectedIndex = 0 Then
-                Status_Literal.Text += "Please Select a division/section.<br/>"
+            If editSection_DropDownList.Items.Count = 1 Then
+                editSection_DropDownList.SelectedIndex = 0
+            Else
+                If editSection_DropDownList.SelectedIndex <= 0 Then
+                    Status_Literal.Text += "Please Select a division/section.<br/>"
+                End If
             End If
             If editClubs_DropDownList.SelectedIndex = 0 Then
                 Status_Literal.Text += "Please select a Club.<br/>"
@@ -450,59 +498,66 @@ Public Class Players
                 Status_Literal.Text += "There must be a Surame.<br/>"
             End If
 
-            CheckTeam(True)
+            If Status_Literal.Text = "" Then
+                CheckTeam()  'belt & braces - should not happen!
+            End If
+
             Status_Literal.Text += ErrorTeam_Literal.Text
-            ErrorTeam_Literal.Text = ""
-            ErrorTeamRow.Visible = False
+                ErrorTeam_Literal.Text = ""
+                ErrorTeamRow.Visible = False
 
             If Status_Literal.Text = "" AndAlso SubmitPlayer_Button.Text = "Add Player" Then
 
-                    Using OtherPlayer As New PlayerData(1, Surname_TextBox.Text.Trim, 1, Forename_TextBox.Text.Trim, editLeague_DropDownList.SelectedValue)
+                Using OtherPlayer As New PlayerData(1, Surname_TextBox.Text.Trim, 1, Forename_TextBox.Text.Trim, editLeague_DropDownList.SelectedValue)
 
-                        With OtherPlayer
+                    With OtherPlayer
 
-                            If .PlayersTable.Rows.Count <> 0 Then
+                        If .PlayersTable.Rows.Count <> 0 Then
 
-                                SubmitPlayer_Button.Text = "Confirm"
+                            SubmitPlayer_Button.Text = "Confirm"
 
-                                If .SectionID = 0 Or .ClubID = 0 Then
-                                    Status_Literal.Text = "WARNING:<br/>" &
+                            If .SectionID = 0 Or .ClubID = 0 Then
+                                Status_Literal.Text = "WARNING:<br/>" &
                                                                "This player is deleted, but appears to have been registered before with a handicap of " & .Handicap & ".<br/>" &
                                                                "Click Confirm to re-register him/her to your team, otherwise click Cancel."
-                                    Handicap_TextBox.Text = .Handicap
-                                    PlayerID_Label.Text = .PlayersTable.Rows(0)!ID
-                                Else
-                                    If .PlayersTable.Rows.Count = 1 Then
+                                Handicap_TextBox.Text = .Handicap
+                                PlayerID_Label.Text = .PlayersTable.Rows(0)!ID
+                            Else
+                                If .PlayersTable.Rows.Count = 1 Then
                                     Status_Literal.Text = "WARNING:<br/>" &
                                                                "There is a player already registered to " & .ClubName & " " & .Team &
                                                                ", with the same name and with a handicap of " & .Handicap & ".<br/>" &
                                                                "Click Confirm to register him/her as a NEW player with the same name, otherwise click Cancel.<br/>" &
                                                                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To transfer this player, locate him/her and edit his/her details."
                                 Else
-                                        Status_Literal.Text = "WARNING:<br/>" &
+                                    Status_Literal.Text = "WARNING:<br/>" &
                                                                "There are " & .PlayersTable.Rows.Count & " players already registered with the same name.<br/>" &
                                                                "Click Confirm to register him/her as a new player with the same name, otherwise click Cancel.<br/>" &
                                                                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To transfer this player, locate him/her and edit his/her details."
-                                    End If
-
-                                    'Handicap_TextBox.Text = .Handicap  
                                 End If
 
+                                'Handicap_TextBox.Text = .Handicap  
                             End If
 
-                        End With
+                        End If
 
-                    End Using
+                    End With
 
-                End If
+                End Using
 
-                If Status_Literal.Text <> "" Then
-                    Status_Literal.Text = "<span style='color:red;background: white;'>" + Status_Literal.Text + "</span>"
-                Else
+            End If
+
+            If Status_Literal.Text <> "" Then
+                Status_Literal.Text = "<span style='color:red;background: white;'>" + Status_Literal.Text + "</span>"
+            Else
+
+                Try
+
+                    Dim handicap As Integer
+                    Dim PrevHandicap As Integer
 
                     Using Player As New PlayerData(CInt(PlayerID_Label.Text))
 
-                        Dim handicap As Integer
                         Try
                             handicap = CInt(Handicap_TextBox.Text)
                         Catch ex As Exception
@@ -515,7 +570,7 @@ Public Class Players
                         Player.Forename = Forename_TextBox.Text
                         Player.Initials = Inits_TextBox.Text
                         Player.Surname = Surname_TextBox.Text
-                        Dim PrevHandicap As Integer = Player.Handicap
+                        PrevHandicap = Player.Handicap
                         Player.Handicap = handicap
                         Player.LeagueID = editLeague_DropDownList.SelectedValue
                         Player.SectionID = editSection_DropDownList.SelectedValue
@@ -527,59 +582,59 @@ Public Class Players
                         Player.eMail = email_TextBox.Text
                         Player.TelNo = TelNo_TextBox.Text
 
-                        Try
-
-                            Player.Merge(SessionUser.Value)
-
-                            FillGrid(Session("sType"))
-
-                            If SubmitPlayer_Button.Text = "Change Player Details" AndAlso
-                                       handicap <> PrevHandicap Then
-
-                                Status_Literal.Text = HBSAcodeLibrary.Emailer.SendHandicapChangeEmail(
-                                                                                             Player.ClubEmail,
-                                                                                             Player.TeamEMail,
-                                                                                             Player.eMail,
-                                                                                             Player.FullName,
-                                                                                             (Player.ClubName & " " & Player.Team).Trim,
-                                                                                             PrevHandicap,
-                                                                                             handicap,
-                                                                                             (Player.LeagueName & " " & Player.SectionName).Trim
-                                                                                                                  )
-                            End If
-
-                            If Status_Literal.Text = "" Then
-                                Edit_Panel.Visible = False
-                            End If
-
-                        Catch ex As Exception
-
-                            Dim msg As String = ex.Message
-                            Dim exc As Exception = ex.InnerException
-                        While exc IsNot Nothing
-                            msg += "<br/>" + exc.Message
-                                exc = exc.InnerException
-                            End While
-                            Status_Literal.Text = "<strong><span style='color:red;font-size:large'>Exception updating the database." &
-                                                      "Please inform support with the following:<br/><br/>" & msg &
-                                                      "</strong></span>"
-
-                        End Try
+                        Player.Merge(SessionUser.Value)
 
                     End Using
 
-                    SubmitPlayer_Button.Text = "Submit"
+                    FillGrid(Session("sType"))
 
-                End If
+                    If SubmitPlayer_Button.Text = "Change Player Details" AndAlso
+                                       handicap <> PrevHandicap Then
+
+                            Using NewPlayer As New PlayerData(CInt(PlayerID_Label.Text))
+
+                                Status_Literal.Text = HBSAcodeLibrary.Emailer.SendHandicapChangeEmail(
+                                                                                             NewPlayer.ClubEmail,
+                                                                                             NewPlayer.TeamEMail,
+                                                                                             NewPlayer.eMail,
+                                                                                             NewPlayer.FullName,
+                                                                                             (NewPlayer.ClubName & " " & NewPlayer.Team).Trim,
+                                                                                             PrevHandicap,
+                                                                                             handicap,
+                                                                                             (NewPlayer.LeagueName & " " & NewPlayer.SectionName).Trim
+                                                                                                                  )
+                            End Using
+                        End If
+
+                        If Status_Literal.Text = "" Then
+                            Edit_Panel.Visible = False
+                        End If
+
+                    Catch ex As Exception
+
+                    Dim msg As String = ex.Message
+                    Dim exc As Exception = ex.InnerException
+                    While exc IsNot Nothing
+                        msg += "<br/>" + exc.Message
+                        exc = exc.InnerException
+                    End While
+                    Status_Literal.Text = "<strong><span style='color:red;font-size:large'>Exception updating the database." &
+                                                      "Please inform support with the following:<br/><br/>" & msg &
+                                                      "</strong></span>"
+
+                End Try
+
+                SubmitPlayer_Button.Text = "Submit"
 
             End If
+
+        End If
 
     End Sub
     Protected Sub Add_Button_Click(sender As Object, e As EventArgs) Handles Add_Button.Click
 
         populateEditLeagues()
-        populateEditSections()
-        populateEditClubs(True)
+        PopulateEditClubs(True)
 
         Status_Literal.Text = ""
         ErrorTeam_Literal.Text = ""
@@ -589,10 +644,17 @@ Public Class Players
         Inits_TextBox.Text = ""
         Surname_TextBox.Text = ""
         Handicap_TextBox.Text = ""
-        ' editClubs_DropDownList.SelectedIndex = 0
+        editClubs_DropDownList.SelectedValue = Club_DropDownList.SelectedValue
         Team_DropDownList.SelectedIndex = 0
-        'editSection_DropDownList.SelectedIndex = 0
-        'editLeague_DropDownList.SelectedIndex = 0
+        editSection_DropDownList.Items.Clear()
+
+        For ix As Integer = 0 To LeagueSection_DropDownList.Items.Count - 1
+            If LeagueSection_DropDownList.SelectedItem.Text.StartsWith(editLeague_DropDownList.Text) Then
+                editLeague_DropDownList.SelectedIndex = ix
+            End If
+        Next
+
+        editLeague_DropDownList.Enabled = True
         Played_CheckBox.Checked = False
         Tagged_DropDownList.SelectedValue = 3
         Over70_CheckBox.Checked = False
@@ -604,6 +666,7 @@ Public Class Players
         Edit_Panel.Visible = True
         SubmitPlayer_Button.Visible = True
         SubmitPlayer_Button.Text = "Add Player"
+        ShowHideEditControls(True)
 
     End Sub
     Private Sub Players_GridView_Sorting(sender As Object, e As GridViewSortEventArgs) Handles Players_GridView.Sorting

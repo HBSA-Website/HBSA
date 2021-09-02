@@ -4095,7 +4095,7 @@ namespace HBSAcodeLibrary
                 LeagueName = (string)player.Rows[0]["League Name"];
                 SectionName = (string)player.Rows[0]["Section Name"];
                 DateRegistered = Convert.ToDateTime(player.Rows[0]["DateRegistered"]);
-                ClubEmail = (string)player.Rows[0]["ClubEmail"];
+                ClubEmail = player.Rows[0]["ClubEmail"] == DBNull.Value ? "" : (string)player.Rows[0]["ClubEmail"];
                 TeamEMail = player.Rows[0]["TeamEMail"] == DBNull.Value ? "" : (string)player.Rows[0]["TeamEMail"];
             }
         }
@@ -4843,11 +4843,12 @@ namespace HBSAcodeLibrary
             SQLcommands.ExecNonQuery("SequenceTeamsInSection", 
                                       new List<SqlParameter> { new SqlParameter("SectionID", SectionID) });
         }
-        public static DataTable TeamLetters(int SectionID, int ClubID)
+        public static DataTable TeamLetters(int SectionID, int ClubID, int LeagueID = 0)
         {
             return SQLcommands.ExecDataTable("GetTeamLetters",
                                       new List<SqlParameter> { new SqlParameter("SectionID", SectionID),
-                                                               new SqlParameter("ClubID", ClubID) });
+                                                               new SqlParameter("ClubID", ClubID),
+                                                               new SqlParameter("LeagueID", LeagueID)});
         }
         public static DataTable LookForTooManyHomeFixtures (int leagueID)
         {

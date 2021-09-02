@@ -50,13 +50,13 @@ Partial Public Class Players
     Protected WithEvents SessionUser As Global.System.Web.UI.HtmlControls.HtmlInputHidden
 
     '''<summary>
-    '''Section_DropDownList control.
+    '''LeagueSection_DropDownList control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Section_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents LeagueSection_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Club_DropDownList control.
@@ -158,6 +158,15 @@ Partial Public Class Players
     Protected WithEvents PlayerID_Label As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Controls_Table control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Controls_Table As Global.System.Web.UI.HtmlControls.HtmlTable
+
+    '''<summary>
     '''editLeague_DropDownList control.
     '''</summary>
     '''<remarks>
@@ -165,6 +174,24 @@ Partial Public Class Players
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents editLeague_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''editClubs_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents editClubs_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Team_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Team_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''editSection_DropDownList control.
@@ -228,24 +255,6 @@ Partial Public Class Players
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Handicap_TextBox As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''editClubs_DropDownList control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents editClubs_DropDownList As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Team_DropDownList control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Team_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''email_TextBox control.
