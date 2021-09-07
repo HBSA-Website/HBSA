@@ -205,7 +205,11 @@ Public Class Players
                 PopulateEditLeagues()
                 editLeague_DropDownList.SelectedValue = .Cells(14).Text
                 PopulateEditClubs(True)
-                editClubs_DropDownList.SelectedValue = .Cells(16).Text
+                Try
+                    editClubs_DropDownList.SelectedValue = .Cells(16).Text
+                Catch ex As Exception
+                    editClubs_DropDownList.SelectedIndex = 0
+                End Try
                 Team_DropDownList.SelectedValue = .Cells(6).Text
                 Populate_EditSectionDropdownListWithTeam()
                 If editSection_DropDownList.Items.Count > 0 AndAlso
