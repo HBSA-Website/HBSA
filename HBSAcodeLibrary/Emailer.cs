@@ -123,7 +123,7 @@ namespace HBSAcodeLibrary
             try
             {
                 MimeKit.MailboxAddress m = new MimeKit.MailboxAddress("", email);
-//                System.Net.Mail.MailAddress m = new System.Net.Mail.MailAddress(email);
+                System.Net.Mail.MailAddress m2 = new System.Net.Mail.MailAddress(email);
                 return true;
             }
             catch (Exception)

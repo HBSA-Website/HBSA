@@ -4153,6 +4153,32 @@ namespace HBSAcodeLibrary
 
             return suggestions;
         }
+        public static List<string> RequestRegistration_SuggestPlayers(string prefixText, int count, int LeagueId)
+        {
+            List<string> suggestions = new List<string>();
+            string[] TextWords = prefixText.Split(" ".ToCharArray());
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                new SqlParameter("LeagueId", LeagueId),
+                new SqlParameter("count", count),
+                new SqlParameter("word1", TextWords[0])
+            };
+            if (TextWords.Count() > 1)
+            {
+                parameters.Add(new SqlParameter("word2", TextWords[1]));
+                if (TextWords.Count() > 2)
+                    parameters.Add(new SqlParameter("word3", TextWords[2]));
+            }
+
+            DataTable players = SQLcommands.ExecDataTable("RequestRegistration_SuggestPlayers", parameters);
+            foreach (DataRow player in players.Rows)
+            {
+                suggestions.Add((string)player["Player"]);
+            }
+
+            return suggestions;
+
+        }
         public static List<string> GetSuggestedEntrants(string prefixText, int count, int CompetitionID)
         {
             List<string> suggestions = new List<string>();

@@ -521,6 +521,7 @@
     <Content Include="mobile\MatchResult.aspx" />
     <Content Include="mobile\MissingResults.aspx" />
     <Content Include="mobile\NewRegistrations.aspx" />
+    <Content Include="mobile\PlayerRegistrationRequest.aspx" />
     <Content Include="mobile\PlayingRecords.aspx" />
     <Content Include="mobile\ResultCard.html" />
     <Content Include="mobile\Results.aspx" />
@@ -588,6 +589,7 @@
     <Content Include="NewRegistrations.aspx" />
     <Content Include="PictureGallery.aspx" />
     <Content Include="PlayerRecords.aspx" />
+    <Content Include="PlayerRegistrationRequest.aspx" />
     <Content Include="PlayingRecords.aspx" />
     <Content Include="Results.aspx" />
     <Content Include="MatchResult.aspx" />
@@ -626,7 +628,6 @@
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="WebForm1.aspx" />
     <Content Include="WeeklyResultsReport.aspx" />
     <Content Include="YorkshireLeague.aspx" />
   </ItemGroup>
@@ -1395,6 +1396,13 @@
       <DependentUpon>NewRegistrations.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="mobile\PlayerRegistrationRequest.aspx.designer.vb">
+      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\PlayerRegistrationRequest.aspx.vb">
+      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="mobile\PlayingRecords.aspx.designer.vb">
       <DependentUpon>PlayingRecords.aspx</DependentUpon>
     </Compile>
@@ -1568,6 +1576,13 @@
       <DependentUpon>PlayerRecords.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PlayerRegistrationRequest.aspx.designer.vb">
+      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerRegistrationRequest.aspx.vb">
+      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PlayingRecords.aspx.designer.vb">
       <DependentUpon>PlayingRecords.aspx</DependentUpon>
     </Compile>
@@ -1629,13 +1644,6 @@
     </Compile>
     <Compile Include="UnseasonedPlayers.aspx.vb">
       <DependentUpon>UnseasonedPlayers.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.vb">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.vb">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WeeklyResultsReport.aspx.designer.vb">
