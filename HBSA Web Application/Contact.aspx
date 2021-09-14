@@ -99,7 +99,7 @@
                         <ContentTemplate>
                             &nbsp;&nbsp;&nbsp;&nbsp;Enter the code below in the box: <em>(Note it&#39;s case sensitive)</em><br />
                            &nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox runat="server" ID="captcha_Textbox" Width="90px" Height="20px"/>
-                           <img id="captcha_Image" runat="server" src="data:image/GIF;base64," style="height: 25px; width: 200px; vertical-align: -8px;" alt="Captcha Image" class="auto-style2" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <img id="captcha_Image" runat="server" src="data:image/GIF;base64," style="height: 25px; width: 200px; vertical-align: -8px;" alt="Captcha Image" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               <asp:Button ID="captchaRefresh_Button" runat="server" Text="Click for new code" BackColor="#CCFFCC" BorderStyle="None" Font-Underline="True" ForeColor="#0066FF" />
                        </ContentTemplate>
                     </asp:UpdatePanel>

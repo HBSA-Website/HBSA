@@ -358,7 +358,7 @@ Public Class MatchResult
 
         If matchDate_Textbox.Text = "" Then
             matchDate_CalendarExtender.SelectedDate = FixtureDate_DropDownList.SelectedItem.Text
-            matchDate_Textbox.Text = Format(matchDate_CalendarExtender.SelectedDate, "dd mmm yyyy")
+            matchDate_Textbox.Text = FixtureDate_DropDownList.SelectedItem.Text
         End If
 
         'Calculate result and verify input
@@ -378,7 +378,6 @@ Public Class MatchResult
             Try
                 matchDate = CDate(matchDate_Textbox.Text)
                 matchDate_CalendarExtender.SelectedDate = matchDate
-                matchDate_Textbox.Text = Format(matchDate, "dd MMM yyyy")
             Catch ex As Exception
                 errMsg.Append("Invalid match date<br/>")
             End Try

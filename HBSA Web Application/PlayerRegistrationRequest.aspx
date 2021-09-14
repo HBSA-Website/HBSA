@@ -106,7 +106,8 @@
                 <td>Prove you're human:</td>
                 <td>
                             Enter the code below in the box: <br /><em>(Note it&#39;s case sensitive)</em><br />
-                            <img id="captcha_Image" runat="server" src="data:image/GIF;base64," style="height:76px;" alt="Captcha Image" /><br />
+                            <img id="captcha_Image" runat="server" src="data:image/GIF;base64," style="height: 25px; width: 200px; vertical-align: -8px;" alt="Captcha Image" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br />
                             <asp:TextBox runat="server" ID="captcha_Textbox" /><br />
                             <asp:Button ID="captchaRefresh_Button" runat="server" Text="Click for new code" BorderStyle="None" Font-Underline="True" ForeColor="#0066FF" BackColor="White" />
                 </td>
