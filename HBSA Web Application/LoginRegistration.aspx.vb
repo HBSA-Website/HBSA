@@ -39,17 +39,18 @@ Partial Class LoginRegistration
                 .DataTextField = "Section Name"
                 .DataValueField = "ID"
                 .DataBind()
-                .Items.Insert(0, New ListItem("**Select a division/section**", 0))
-                If sectionsInfo.Rows.Count < 2 Then
+                If .Items.Count = 1 Then
                     .Enabled = False
+                    .SelectedIndex = 0
+                    .SelectedItem.Text = "Billiards"
                     Section_DropDownList_SelectedIndexChanged(sender, e)
+                    Club_DropDownList.Visible = True
                 Else
+                    .Items.Insert(0, New ListItem("**Select a division/section**", 0))
                     .Enabled = True
+                    Club_DropDownList.Visible = False
                 End If
 
-                .SelectedIndex = 0
-
-                Club_DropDownList.Visible = False
                 TeamLetter_DropDownList.Visible = False
 
             End With

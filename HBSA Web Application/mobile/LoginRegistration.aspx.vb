@@ -110,19 +110,14 @@ Public Class LoginRegistration1
                 End If
             Next
 
-            If sections.Rows.Count < 2 Then
+            If .Items.Count = 1 Then
                 .Enabled = False
+                .SelectedIndex = 0
+                .SelectedItem.Text = "Billiards"
                 SectionDropDownList_SelectedIndexChanged(sender, e)
             Else
-                If profiling.Value = True Then
-                    .SelectedIndex = ix
-                    .Enabled = False
-                    SectionDropDownList_SelectedIndexChanged(sender, e)
-                Else
-                    .Enabled = True
-                    .SelectedIndex = 0
-                End If
-
+                .Items.Insert(0, New ListItem("**Select a division/section**", 0))
+                .Enabled = True
             End If
 
         End With
@@ -133,7 +128,7 @@ Public Class LoginRegistration1
         clubsDropDownList.Items.Clear()
         teamDropDownList.Items.Clear()
 
-        If sectionDropDownList.SelectedIndex < 1 Then Exit Sub
+        If sectionDropDownList.SelectedItem.Text.StartsWith("**") Then Exit Sub
 
         Dim clubs As DataTable = HBSAcodeLibrary.ClubData.GetClubs(sectionDropDownList.SelectedValue)
         Dim userRow As DataRow
