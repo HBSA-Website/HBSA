@@ -16,10 +16,8 @@ set xact_abort on
 declare phoneColumns cursor fast_forward for
 select C.Table_name,Column_Name
 		from Information_schema.columns C
-		left join INFORMATION_SCHEMA.VIEWS V on V.TABLE_NAME = C.TABLE_NAME
 		where (column_name like '%phone%' or column_name like '%telno%' or column_name like '%mobno%' )
 		  and not column_name = 'isMobileDevice'
-		  and V.TABLE_NAME is null	
 		  and C.TABLE_NAME not like '%entry%'	
 
 declare @Table_Name varchar(255)

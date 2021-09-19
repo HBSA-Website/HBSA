@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.IO;
 
 namespace HBSAcodeLibrary
 {
@@ -19,83 +20,73 @@ namespace HBSAcodeLibrary
 
             using (HBSAcodeLibrary.HBSA_Configuration cfg = new HBSAcodeLibrary.HBSA_Configuration())
             {
-                using (System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage())
+                MimeKit.MimeMessage MimeMessage = new MimeKit.MimeMessage();
+
+                // set up the sender(s)
+                MimeMessage.From.Add(new MimeKit.MailboxAddress("HBSA Website", cfg.Value("WebFromAddress")));
+
+                List<string> addressList = new List<string>();
+                int ix;
+
+                // set the list of recipients
+                foreach (string address in toAddress.Split(semiColon))
+                    AddressList_Add(ref addressList, address);
+                for (ix = 0; ix <= addressList.Count() - 1; ix++)
+                    MimeMessage.To.Add(new MimeKit.MailboxAddress("", addressList[ix]));
+
+                // set the list of cc addresses
+                AddressList_Add(ref addressList, cfg.Value("WebAdministratorEmail"));
+                if (ccAddress != "")
                 {
-                    MimeKit.MimeMessage mimeMessage = new MimeKit.MimeMessage();
-                    
-                    // set up the message
-                    message.From = new System.Net.Mail.MailAddress(cfg.Value("WebFromAddress"), "HBSA Website");
-                    mimeMessage.From.Add(new MimeKit.MailboxAddress("HBSA Website", cfg.Value("WebFromAddress")));
-
-
-                    string[] addressList = new string[0];
-                    int ix;
-
-                    // set the list of recipients
-                    foreach (string address in toAddress.Split(semiColon))
+                    addressList.Clear();
+                    foreach (string address in ccAddress.Split(semiColon))
                         AddressList_Add(ref addressList, address);
-                    for (ix = 0; ix <= addressList.Count() - 1; ix++) { 
-                        message.To.Add(addressList[ix]);
-                        mimeMessage.To.Add(new MimeKit.MailboxAddress("", addressList[ix]));
-                    }
-                    // set the list of cc addresses
-                    if (ccAddress != "")
+                for (int iy = ix; iy <= addressList.Count() - 1; iy++)
+                    MimeMessage.Cc.Add(new MimeKit.MailboxAddress("", addressList[iy]));
+                }
+
+                // set the reply address if needed
+                if (IsValidEmailAddress(ReplyTo))
+                    if (ReplyTo != "")
+                        MimeMessage.ReplyTo.Add(new MimeKit.MailboxAddress("", ReplyTo.Replace(";", ",")));
+
+                // set the message
+                MimeMessage.Body = new MimeKit.TextPart("html") { Text = body + Footer };
+                MimeMessage.Subject = subject;
+
+                if (!EmailIsDuplicate(MimeMessage, Footer))
+                {
+
+                    // store the email
+                    StoreTheEmail(MimeMessage, MatchResultID, Footer, UserID, cfg.Value("SMTPport"), cfg.Value("SMTPport"));
+
+                    if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
                     {
-                        foreach (string address in ccAddress.Split(semiColon))
-                            AddressList_Add(ref addressList, address);
-                    }
-                    AddressList_Add(ref addressList, cfg.Value("WebAdministratorEmail"));
-                    for (int iy = ix; iy <= addressList.Count() - 1; iy++) {
-                        message.CC.Add(addressList[iy]);
-                        mimeMessage.Cc.Add(new MimeKit.MailboxAddress("", addressList[iy]));
-                    }
-
-                    // set the reply address if needed
-                    if (IsValidEmailAddress(ReplyTo))
-                    {
-                        if (ReplyTo != "") { 
-                            message.ReplyToList.Add(ReplyTo.Replace(";", ","));
-                            mimeMessage.To.Add(new MimeKit.MailboxAddress("", ReplyTo.Replace(";", ",")));
-                        }
-                    }
-                    message.IsBodyHtml = true;
-                    message.Body = body + Footer;
-                    message.Subject = subject;
-
-                    mimeMessage.Body = new MimeKit.TextPart("html") { Text = body + Footer };
-                    mimeMessage.Subject = subject;
-
-                    if (!EmailIsDuplicate(message, Footer))
-                    {
-
-                        // store the email
-                        StoreTheEmail(message, MatchResultID, Footer, UserID, cfg.Value("SMTPport"), cfg.Value("SMTPport"));
-
-                        if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
+                        try
                         {
-                            try
+                            using (MailKit.Net.Smtp.SmtpClient smtpClient = new MailKit.Net.Smtp.SmtpClient())
                             {
-                                using (MailKit.Net.Smtp.SmtpClient smtpClient = new MailKit.Net.Smtp.SmtpClient())
-                                {
-                                    smtpClient.Connect(cfg.Value("SMTPServer"),
-                                                       System.Convert.ToInt32(cfg.Value("SMTPport")),
-                                                       System.Convert.ToBoolean(cfg.Value("SMTPssl")));
-                                    smtpClient.Authenticate(cfg.Value("SMTPServerUsername"), cfg.Value("SMTPServerPassword"));
-                                    smtpClient.Send(mimeMessage);
-                                    smtpClient.Disconnect(true);
-                                }
+                                smtpClient.Connect(cfg.Value("SMTPServer"),
+                                                   System.Convert.ToInt32(cfg.Value("SMTPport")),
+                                                   System.Convert.ToBoolean(cfg.Value("SMTPssl")));
+                                smtpClient.Authenticate(cfg.Value("SMTPServerUsername"), cfg.Value("SMTPServerPassword"));
+                                smtpClient.Send(MimeMessage);
+                                smtpClient.Disconnect(true);
                             }
-                            catch (Exception ex)
-                            {
-                                message.Body = "ERROR OCCURRED sending this: " + ex.Message + "<hr/>" + message.Body;
-                                throw new Exception(ex.Message, ex);
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            string BodyContent = GetMimeMessageContent(MimeMessage);
+                            MimeMessage.Body = new MimeKit.TextPart("html") 
+                                { Text = "ERROR OCCURRED sending this: " + 
+                                            ex.Message + "<hr/>" + BodyContent.ToString() };
+                            throw new Exception(ex.Message, ex);
                         }
                     }
                 }
             }
         }
-        public static void AddressList_Add(ref string[] AddressList, string address)
+        public static void AddressList_Add(ref List<string> AddressList, string address)
         {
 
             // only add another address if it is not already in
@@ -103,19 +94,11 @@ namespace HBSAcodeLibrary
             if (IsValidEmailAddress(address))
             {
                 foreach (string addr in AddressList)
-                {
                     if (address == addr)
                         return;
-                }
 
                 if (address != "")
-                {
-                    var oldAddressList = AddressList;
-                    AddressList = new string[AddressList.Length + 1];
-                    if (oldAddressList != null)
-                        Array.Copy(oldAddressList, AddressList, Math.Min(AddressList.Length + 1, oldAddressList.Length));
-                    AddressList[AddressList.Length - 1] = address;
-                }
+                    AddressList.Add(address);
             }
         }
         public static bool IsValidEmailAddress(string email)
@@ -123,7 +106,6 @@ namespace HBSAcodeLibrary
             try
             {
                 MimeKit.MailboxAddress m = new MimeKit.MailboxAddress("", email);
-                System.Net.Mail.MailAddress m2 = new System.Net.Mail.MailAddress(email);
                 return true;
             }
             catch (Exception)
@@ -147,57 +129,76 @@ namespace HBSAcodeLibrary
             }
 
         }
-        public static void StoreTheEmail(System.Net.Mail.MailMessage Message, int MatchResultID, string Footer, string UserID, string SMTPHost, string SMTPPort)
+        public static void StoreTheEmail(MimeKit.MimeMessage MimeMessage, int MatchResultID, string Footer, string UserID, string SMTPHost, string SMTPPort)
         {
-            List<SqlParameter> parameters = new List<SqlParameter>()
+            var parameters = new List<SqlParameter>()
             {
-                new SqlParameter("Sender", Message.From.Address),
-                new SqlParameter("ReplyTo", AddressList(Message.ReplyToList)),
-                new SqlParameter("ToAddresses", AddressList(Message.To)),
-                new SqlParameter("CCAddresses", AddressList(Message.CC)),
-                new SqlParameter("BCCAddresses", AddressList(Message.Bcc)),
-                new SqlParameter("Subject", Message.Subject),
-                new SqlParameter("Body", Message.Body.Replace(Footer, "")),
+                new SqlParameter("Sender",AddressList(MimeMessage.From)),     
+                new SqlParameter("ReplyTo", AddressList(MimeMessage.ReplyTo)),
+                new SqlParameter("ToAddresses", AddressList(MimeMessage.To)),
+                new SqlParameter("CCAddresses", AddressList(MimeMessage.Cc)),
+                new SqlParameter("BCCAddresses", AddressList(MimeMessage.Bcc)),
+                new SqlParameter("Subject", MimeMessage.Subject),
+                new SqlParameter("Body", GetMimeMessageContent(MimeMessage).Replace(Footer, "")),
                 new SqlParameter("MatchResultID", MatchResultID),
                 new SqlParameter("UserID", UserID),
                 new SqlParameter("SMTPServer", SMTPHost),
                 new SqlParameter("SMTPPort", SMTPPort),
-        };
+            };
 
             try { SQLcommands.ExecNonQuery("insertEMailLog", parameters); }
             catch (Exception) { };
         }
-        public static string AddressList(System.Net.Mail.MailAddressCollection AddressCollection)
+        public static string AddressList(MimeKit.InternetAddressList AddressCollection)
         {
             string addresses = "";
-            foreach (System.Net.Mail.MailAddress address in AddressCollection)
-                addresses += address.Address + ";";
-
-            return addresses;
+            foreach (MimeKit.InternetAddress address in AddressCollection)
+                addresses += address.ToString() + ";";
+             if (addresses.Length < 1)
+                return "";
+            else
+                return addresses.Substring(0, addresses.Length - 1);
         }
-        public static bool EmailIsDuplicate(System.Net.Mail.MailMessage Message, string Footer)
+        public static bool EmailIsDuplicate(MimeKit.MimeMessage MimeMessage, string Footer)
         {
             string addressees = "";
-            foreach (System.Net.Mail.MailAddress address in Message.To)
-                addressees += address.Address + ";";
+            foreach (MimeKit.InternetAddress address in MimeMessage.To)
+                addressees += address.ToString() + ";";
+            
             if (addressees.Length < 1)
                 return false;
             else
                 addressees = addressees.Substring(0, addressees.Length - 1);
-            
+
             List<SqlParameter> parameters = new List<SqlParameter>()
             {
-                new SqlParameter("Sender", Message.From.Address),
-                new SqlParameter("ToAddresses", addressees),
-                new SqlParameter("Subject", Message.Subject),
-                new SqlParameter("Body", Message.Body.Replace(Footer, ""))
+                new SqlParameter("Sender",AddressList(MimeMessage.From)),
+                new SqlParameter("ToAddresses", AddressList(MimeMessage.To)),
+                new SqlParameter("Subject", MimeMessage.Subject),
+                new SqlParameter("Body", GetMimeMessageContent(MimeMessage).Replace(Footer, ""))
             };
 
             string result = SQLcommands.ExecScalar("CheckForDuplicateEmail", parameters).ToString();
 
             return HBSA_Configuration.ConvertConfigurationValueToBoolean(result);
         }
-        public static string SendHandicapChangeEmail(string ClubEmail, string TeamEMail, 
+        private static string GetMimeMessageContent(MimeKit.MimeMessage msg)
+        {
+            //Get rid of MIME header(s)  these are bound by CrLf's (\r\n)
+
+            string Content = msg.Body.ToString();
+            int ix = 0;
+            while (Content.StartsWith("\r\n"))
+            {
+                Content = Content.Substring(2);
+
+                ix = Content.IndexOf("\r\n", 0);
+                if (ix != -1)
+                    Content = Content.Substring(ix + 2);
+            }
+            return Content;
+        }
+        public static string SendHandicapChangeEmail(string ClubEmail, string TeamEMail,
                                                      string PlayerEmail, string PlayerName, string TeamName, 
                                                      string OldHandicap, string NewHandicap, string SectionName)        // League name + SectionName
             {

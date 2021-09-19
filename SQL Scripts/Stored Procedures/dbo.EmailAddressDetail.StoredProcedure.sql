@@ -21,4 +21,5 @@ exec (@SQL)
 
 GO
 
-exec EmailAddressDetail 'resultsUsers','eMailAddress','gilbertp@outlook.com'
+exec EmailAddressDetail 'resultsUsers','eMailAddress','petegilbert7@gmail.Com'
+exec EmailAddressDetail 'Players','eMail','petegilbert7@gmail.Com'

@@ -16,9 +16,7 @@ set xact_abort on
 declare eMailColumns cursor fast_forward for
 select C.Table_name,Column_Name
 		from Information_schema.columns C
-		left join INFORMATION_SCHEMA.VIEWS V on V.TABLE_NAME = C.TABLE_NAME
 		where column_name like '%email%'
-		  and V.TABLE_NAME is null
 		  and C.TABLE_NAME not like '%entry%'	
 
 declare @Table_Name varchar(255)
@@ -50,4 +48,3 @@ drop table #EmailColumns
 
 GO
 
-exec FindEmailAddress 'johnwilson556@virginmedia.com'
