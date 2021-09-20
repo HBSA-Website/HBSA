@@ -479,6 +479,7 @@
     <Content Include="ckeditor\skins\kama\templates.css" />
     <Content Include="ckeditor\themes\default\theme.js" />
     <Content Include="ClubLoginReset.aspx" />
+    <Content Include="ContactUsTest.aspx" />
     <Content Include="Fines.aspx" />
     <Content Include="helpFAQ.aspx" />
     <Content Include="images\AjaxLoadingSave.gif" />
@@ -521,7 +522,6 @@
     <Content Include="mobile\MatchResult.aspx" />
     <Content Include="mobile\MissingResults.aspx" />
     <Content Include="mobile\NewRegistrations.aspx" />
-    <Content Include="mobile\PlayerRegistrationRequest.aspx" />
     <Content Include="mobile\PlayingRecords.aspx" />
     <Content Include="mobile\ResultCard.html" />
     <Content Include="mobile\Results.aspx" />
@@ -589,7 +589,6 @@
     <Content Include="NewRegistrations.aspx" />
     <Content Include="PictureGallery.aspx" />
     <Content Include="PlayerRecords.aspx" />
-    <Content Include="PlayerRegistrationRequest.aspx" />
     <Content Include="PlayingRecords.aspx" />
     <Content Include="Results.aspx" />
     <Content Include="MatchResult.aspx" />
@@ -1143,6 +1142,13 @@
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ContactUsTest.aspx.designer.vb">
+      <DependentUpon>ContactUsTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContactUsTest.aspx.vb">
+      <DependentUpon>ContactUsTest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="CreateAndDownloadFile.aspx.designer.vb">
       <DependentUpon>CreateAndDownloadFile.aspx</DependentUpon>
     </Compile>
@@ -1396,13 +1402,6 @@
       <DependentUpon>NewRegistrations.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="mobile\PlayerRegistrationRequest.aspx.designer.vb">
-      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="mobile\PlayerRegistrationRequest.aspx.vb">
-      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="mobile\PlayingRecords.aspx.designer.vb">
       <DependentUpon>PlayingRecords.aspx</DependentUpon>
     </Compile>
@@ -1575,13 +1574,6 @@
     <Compile Include="PlayerRecords.aspx.vb">
       <DependentUpon>PlayerRecords.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PlayerRegistrationRequest.aspx.designer.vb">
-      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PlayerRegistrationRequest.aspx.vb">
-      <DependentUpon>PlayerRegistrationRequest.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PlayingRecords.aspx.designer.vb">
       <DependentUpon>PlayingRecords.aspx</DependentUpon>

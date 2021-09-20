@@ -43,6 +43,7 @@
                             <asp:TextBox runat="server" ID="captcha_Textbox" />
                             <img id="captcha_Image" runat="server" src="data:image/GIF;base64," style="height:76px;" alt="Captcha Image" />
                             <asp:Button ID="captchaRefresh_Button" runat="server" Text="Click for new code" BorderStyle="None" Font-Underline="True" ForeColor="#0066FF" />
+                            <br />
                 </td>
             </tr>
             <tr>
