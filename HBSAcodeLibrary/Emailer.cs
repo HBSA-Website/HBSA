@@ -35,10 +35,9 @@ namespace HBSAcodeLibrary
                     MimeMessage.To.Add(new MimeKit.MailboxAddress("", addressList[ix]));
 
                 // set the list of cc addresses
-                AddressList_Add(ref addressList, cfg.Value("WebAdministratorEmail"));
                 if (ccAddress != "")
                 {
-                    addressList.Clear();
+                    AddressList_Add(ref addressList, cfg.Value("WebAdministratorEmail"));
                     foreach (string address in ccAddress.Split(semiColon))
                         AddressList_Add(ref addressList, address);
                 for (int iy = ix; iy <= addressList.Count() - 1; iy++)

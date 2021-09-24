@@ -26,6 +26,16 @@
                 End Using
             End With
 
+            With League_DropDownList
+                .Items.Clear()
+                .Items.Add(New ListItem("** Select a League **", 0))
+                Using Leagues As DataTable = HBSAcodeLibrary.LeagueData.GetLeagues
+                    For Each League As DataRow In Leagues.Rows
+                        .Items.Add(New ListItem(League.Item("League Name"), League!ID))
+                    Next
+                End Using
+            End With
+
         End If
 
     End Sub
@@ -56,6 +66,7 @@
         HcapRow3.Visible = show
         HcapRow4.Visible = show
         HcapRow5.Visible = show
+        HcapRow6.Visible = show
 
     End Sub
     Sub PopulateCompetitionsDropDown()
@@ -97,8 +108,8 @@
         If Email_TextBox.Text.Trim = "" OrElse
            Name_TextBox.Text.Trim = "" OrElse
            body_TextBox.Text.Trim = "" OrElse
-           Clubs_DropDownList.SelectedIndex < 1 OrElse
-           captcha_Textbox.Text.Trim = "" Then
+           (Destination_DropDownList.SelectedItem.Text.ToLower Like "*handicap*" AndAlso
+                        Clubs_DropDownList.SelectedIndex < 1) Then
             status_Literal.Text += "<br /><span style='color:red;'>Please ensure all required boxes are completed</span>"
         End If
 
@@ -117,64 +128,106 @@
                 status_Literal.Text += "<br /><span style='color:red;'>Please select a competition or choose 'Not competition related'.</span>"
             End If
         ElseIf Destination_DropDownList.SelectedItem.Text.ToLower Like "*handicap*" Then
-            If Phone_TextBox.Text.Trim = "" Then
-                status_Literal.Text += "<br /><span style='color:red;'>Please enter a telephone number for Handicap/Registration requests.</span>"
+            Dim TelNo = HBSAcodeLibrary.SharedRoutines.CheckValidPhoneNoForHuddersfield(Phone_TextBox.Text)
+            If TelNo.StartsWith("ERROR: ") Then
+                status_Literal.Text += "<br /><span style='color:red;'>Invalid Phone No. " & TelNo.Substring(7) & "</span>"
             Else
-                Dim TelNo = HBSAcodeLibrary.SharedRoutines.CheckValidPhoneNoForHuddersfield(Phone_TextBox.Text.Trim)
+                Phone_TextBox.Text = TelNo
+            End If
+            If Player_TextBox.Text.Trim = "" Then
+                status_Literal.Text += "<br /><span style='color:red;'>Please enter the Player's name for Handicap/Registration requests.</span>"
+            End If
+            If League_DropDownList.SelectedIndex < 1 Then
+                status_Literal.Text += "<br /><span style='color:red;'>Please select a league for Handicap/Registration requests.</span>"
+            Else
+                Using LeagueData = New HBSAcodeLibrary.LeagueData(League_DropDownList.SelectedValue)
+                    Try
+                        Dim HCap = CInt(Handicap_TextBox.Text.Trim)
+                        If HCap < LeagueData.MinHandicap Then
+                            status_Literal.Text += "<br /><span style='color:red;'>The handicap must be greater than " &
+                                           LeagueData.MinHandicap & " for the " &
+                                           League_DropDownList.SelectedItem.Text & " League.</span>"
+                        ElseIf HCap > LeagueData.MaxHandicap Then
+                            status_Literal.Text += "<br /><span style='color:red;'>The handicap must be less than " &
+                                               LeagueData.MaxHandicap & " for the " &
+                                               League_DropDownList.SelectedItem.Text & " League.</span>"
+                        End If
+
+                    Catch ex As Exception
+                        status_Literal.Text += "<br /><span style='color:red;'>" &
+                            "Please enter a numeric handicap"
+
+                        If LeagueData.MinHandicap = -2147483648 Then
+                            If LeagueData.MaxHandicap <> 2147483647 Then
+                                status_Literal.Text += " lower than " & LeagueData.MaxHandicap
+                            End If
+                        End If
+                        If LeagueData.MaxHandicap = 2147483647 Then
+                            If LeagueData.MinHandicap <> -2147483648 Then
+                                status_Literal.Text += " greater than " & LeagueData.MinHandicap
+                            End If
+                        End If
+                        status_Literal.Text += ".</span>"
+                    End Try
+                End Using
+            End If
+            If Team_DropDownList.SelectedIndex < 1 Then
+                status_Literal.Text += "<br /><span style='color:red;'>Please select a team letter.</span>"
+            End If
+            If PlayerPhone_TextBox.Text.Trim <> "" Then
+                TelNo = HBSAcodeLibrary.SharedRoutines.CheckValidPhoneNoForHuddersfield(PlayerPhone_TextBox.Text)
                 If TelNo.StartsWith("ERROR: ") Then
-                    status_Literal.Text += "<br /><span style='color:red;'>Invalid Phone No. " & TelNo.Substring(7) & "</span>"
+                    status_Literal.Text += "<br /><span style='color:red;'>Invalid Player's Phone No. " & TelNo.Substring(7) & "</span>"
                 Else
-                    Phone_TextBox.Text = TelNo
+                    PlayerPhone_TextBox.Text = TelNo
                 End If
-                If Player_TextBox.Text.Trim = "" Then
-                    status_Literal.Text += "<br /><span style='color:red;'>Please enter the Player's name for Handicap/Registration requests.</span>"
-                End If
-                If League_DropDownList.SelectedIndex < 1 Then
-                    status_Literal.Text += "<br /><span style='color:red;'>Please select a league for Handicap/Registration requests.</span>"
-                End If
-                If Team_TextBox.Text.Trim = "" Then
-                    status_Literal.Text += "<br /><span style='color:red;'>Please enter the Player's Club and Team for Handicap/Registration requests.</span>"
-                End If
-                If Handicap_TextBox.Text.Trim = "" Then
-                    status_Literal.Text += "<br /><span style='color:red;'>Please enter a suggested handicap.</span>"
-                End If
-                If Reasons_TextBox.Text.Trim = "" Then
+            End If
+
+            If Reasons_TextBox.Text.Trim = "" Then
                     status_Literal.Text += "<br /><span style='color:red;'>Please enter the reasoning for the handicap..</span>"
                 End If
             End If
-        End If
 
-        If status_Literal.Text = "" Then
+            If status_Literal.Text = "" Then
 
             Using cfg As New HBSAcodeLibrary.HBSA_Configuration
                 Dim toAddress As String = Destination_DropDownList.SelectedValue
-                Dim ccAddress As String = cfg.Value("WebAdministratorEmail")
                 Dim subject As String
                 Dim body As String
 
                 subject = "Web contact"
-                body = "Message from HBSA website contact page: <br /><br />" &
-                                 "From: " & Email_TextBox.Text.Trim & "<br />" &
-                                 "Name: " & Name_TextBox.Text.Trim & "<br />" &
-                                 "Club: " & Clubs_DropDownList.SelectedItem.Text & "<br /><br />"
+                body = "<b><u>Message from HBSA website contact page:</u></b> <br /><br />" &
+                                 "<table>" &
+                                 "<tr><td>From:</td><td>" & Email_TextBox.Text.Trim & "</td></tr>" &
+                                 "<tr><td>Name:</td><td>" & Name_TextBox.Text.Trim & "</td></tr>" &
+                                 "<tr><td>Club:</td><td>" & Clubs_DropDownList.SelectedItem.Text & "</td></tr>" &
+                                 "<tr><td></td><td></td?</tr>"
 
                 If Destination_DropDownList.SelectedItem.Text.ToLower Like "*competition*" Then
-                    body += "Competition: " & Competitions_DropDownList.SelectedItem.Text & "<br /><br />"
+                    body += "<tr><td>Competition:</td><td>" & Competitions_DropDownList.SelectedItem.Text & "</td></tr>" &
+                                 "<tr><td></td><td></td?</tr>"
                 End If
 
                 If Destination_DropDownList.SelectedItem.Text.ToLower Like "*handicap*" Then
-                    body += "<u><b>Handicap/Registration Request:</b></u><br />" &
-                                        "Player's Name: " & Player_TextBox.Text & "<br />" &
-                                        "League: " & League_DropDownList.SelectedItem.Text & "<br />" &
-                                        "Club / Team: " & Team_TextBox.Text & "<br />" &
-                                        "Suggested Handicap: " & Handicap_TextBox.Text & "<br />" &
-                                        "Reasons for Handicap: " & Reasons_TextBox.Text.Replace(vbLf, "<br />") & "<br /><br />"
+                    body += "<tr><td colspan='2'><u><b>Handicap/Registration Request:</b></u></td></tr>" &
+                                        "<tr><td>Player's Name:</td><td>" & Player_TextBox.Text & "</td></tr>" &
+                                        "<tr><td>Player's Phone No:</td><td>" & PlayerPhone_TextBox.Text & "</td></tr>" &
+                                        "<tr><td>League:</td><td>" & League_DropDownList.SelectedItem.Text & "</td></tr>" &
+                                        "<tr><td>Team:</td><td>" & Team_DropDownList.SelectedValue & "</td></tr>" &
+                                        "<tr><td>Suggested Handicap:</td><td>" & Handicap_TextBox.Text & "</td></tr>" &
+                                        "<tr><td style='vertical-align: top;'>Reasons for Handicap:</td><td>" & Reasons_TextBox.Text.Replace(vbLf, "<br />") & "</td></tr>" &
+                                 "<tr><td></td><td></td?</tr>"
                 End If
 
-                body += "Body: " & body_TextBox.Text.Trim.Replace(vbLf, "<br />")
+                body += "<tr><td style='vertical-align: top;'>Message:</td><td>" &
+                        body_TextBox.Text.Trim.Replace(vbLf, "<br />") &
+                        "</td></tr></table>	"
 
                 Try
-                    HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body,, Email_TextBox.Text.Trim)
+                    HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body,
+                                                        If(Copy_CheckBox.Checked, Email_TextBox.Text.Trim, ""),
+                                                        Email_TextBox.Text.Trim)
+
                     status_Literal.Text = "<span style='color:blue;'>Your message has been sent to the " & Destination_DropDownList.SelectedItem.Text & ".</span>"
 
                 Catch ex As Exception

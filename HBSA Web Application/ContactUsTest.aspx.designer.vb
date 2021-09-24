@@ -122,6 +122,24 @@ Partial Public Class ContactUsTest
     Protected WithEvents Player_TextBox As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''HcapRow6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow6 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''PlayerPhone_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PlayerPhone_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''HcapRow2 control.
     '''</summary>
     '''<remarks>
@@ -149,13 +167,13 @@ Partial Public Class ContactUsTest
     Protected WithEvents HcapRow3 As Global.System.Web.UI.HtmlControls.HtmlTableRow
 
     '''<summary>
-    '''Team_TextBox control.
+    '''Team_DropDownList control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Team_TextBox As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents Team_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''HcapRow4 control.
@@ -237,6 +255,15 @@ Partial Public Class ContactUsTest
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents captchaRefresh_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Copy_CheckBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Copy_CheckBox As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
     '''Send_Button control.

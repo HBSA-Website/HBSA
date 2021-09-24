@@ -168,49 +168,33 @@
                                         <asp:Button ID="Close_Button" runat="server" Text="Close this window" /></td>
                                 </tr>
                             </table>
-                            <table>
-                                <tr>
-                                    <td style="width: 56px; text-align: right">To:</td>
-                                    <td>
-                                        <asp:Literal ID="To_Literal" runat="server"></asp:Literal></td>
-                                </tr>
-                            </table>
 
                             <table>
                                 <tr>
-                                    <td style="width: 56px; text-align: right">From:</td>
-                                    <td>
-                                        <asp:Literal ID="From_Literal" runat="server"></asp:Literal></td>
-                                    <td>Reply To:</td>
-                                    <td>
-                                        <asp:Literal ID="Reply_To_Literal" runat="server"></asp:Literal></td>
+                                    <td style="text-align: right">To:</td>
+                                    <td><asp:Literal ID="To_Literal" runat="server"></asp:Literal></td>
                                 </tr>
-
+                                <tr>
+                                    <td style="text-align: right">From:</td>
+                                    <td><asp:Literal ID="From_Literal" runat="server"></asp:Literal>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reply To: 
+			<asp:Literal ID="Reply_To_Literal" runat="server"></asp:Literal></td>
+                                </tr>
                                 <tr>
                                     <td style="text-align: right">CC:</td>
-                                    <td>
-                                        <asp:Literal ID="CC_Literal" runat="server"></asp:Literal></td>
-                                    <td>BCC:</td>
-                                    <td>
-                                        <asp:Literal ID="BCC_Literal" runat="server"></asp:Literal></td>
-                                </tr>
-                            </table>
-
-                            <table>
-                                <tr>
-                                    <td style="width: 56px; text-align: right">Subject:</td>
-                                    <td>
-                                        <asp:Literal ID="Subject_Literal" runat="server"></asp:Literal></td>
+                                    <td><asp:Literal ID="CC_Literal" runat="server"></asp:Literal>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BCC:
+	                                      <asp:Literal ID="BCC_Literal" runat="server"></asp:Literal></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 56px; text-align: right">Sent:</td>
-                                    <td>
-                                        <asp:Literal ID="Sent_Literal" runat="server"></asp:Literal></td>
+                                    <td style="text-align: right">Subject:</td>
+                                    <td><asp:Literal ID="Subject_Literal" runat="server"></asp:Literal></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 56px; text-align: right; vertical-align: top;">Body:</td>
-                                    <td>
-                                        <asp:Literal ID="Body_Literal" runat="server"></asp:Literal></td>
+                                    <td style="text-align: right">Sent:</td>
+                                    <td><asp:Literal ID="Sent_Literal" runat="server"></asp:Literal></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right; vertical-align: top;">Body:</td>
+                                    <td><asp:Literal ID="Body_Literal" runat="server"></asp:Literal></td>
                                 </tr>
                             </table>
                         </div>
