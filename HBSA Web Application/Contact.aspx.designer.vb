@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Contact
-    
+
     '''<summary>
     '''ScriptManager1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
-    
+
     '''<summary>
     '''Update_Progress control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Update_Progress As Global.System.Web.UI.UpdateProgress
-    
+
     '''<summary>
     '''UpdatePanel1 control.
     '''</summary>
@@ -39,34 +39,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
-    
-    '''<summary>
-    '''from_TextBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents from_TextBox As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''name_TextBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents name_TextBox As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''club_TextBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents club_TextBox As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''Destination_DropDownList control.
     '''</summary>
@@ -75,7 +48,34 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Destination_DropDownList As Global.System.Web.UI.WebControls.DropDownList
-    
+
+    '''<summary>
+    '''Name_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Name_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Email_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Email_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Phone_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Phone_TextBox As Global.System.Web.UI.WebControls.TextBox
+
     '''<summary>
     '''CompsRow control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents CompsRow As Global.System.Web.UI.HtmlControls.HtmlTableRow
-    
+
     '''<summary>
     '''Competitions_DropDownList control.
     '''</summary>
@@ -93,7 +93,124 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Competitions_DropDownList As Global.System.Web.UI.WebControls.DropDownList
-    
+
+    '''<summary>
+    '''HcapRow1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow1 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''Player_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Player_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''HcapRow6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow6 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''PlayerPhone_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PlayerPhone_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''HcapRow2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow2 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''League_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents League_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Clubs_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Clubs_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''HcapRow3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow3 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''Team_DropDownList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Team_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''HcapRow4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow4 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''Handicap_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Handicap_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''HcapRow5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow5 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''Reasons_TextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Reasons_TextBox As Global.System.Web.UI.WebControls.TextBox
+
     '''<summary>
     '''body_TextBox control.
     '''</summary>
@@ -102,7 +219,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents body_TextBox As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''captchaPanel control.
     '''</summary>
@@ -111,7 +228,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents captchaPanel As Global.System.Web.UI.UpdatePanel
-    
+
     '''<summary>
     '''captcha_Textbox control.
     '''</summary>
@@ -120,7 +237,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents captcha_Textbox As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''captcha_Image control.
     '''</summary>
@@ -129,7 +246,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents captcha_Image As Global.System.Web.UI.HtmlControls.HtmlImage
-    
+
     '''<summary>
     '''captchaRefresh_Button control.
     '''</summary>
@@ -138,7 +255,16 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents captchaRefresh_Button As Global.System.Web.UI.WebControls.Button
-    
+
+    '''<summary>
+    '''Copy_CheckBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Copy_CheckBox As Global.System.Web.UI.WebControls.CheckBox
+
     '''<summary>
     '''Send_Button control.
     '''</summary>
@@ -147,7 +273,7 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Send_Button As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''status_Literal control.
     '''</summary>

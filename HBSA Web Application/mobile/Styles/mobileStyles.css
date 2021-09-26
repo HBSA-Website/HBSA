@@ -25,6 +25,7 @@ td {
     border: 2px solid black;
     max-height: 999999px; /*prevent chrome resizing font*/
     font-size: 40px;
+    padding 10px;
 }
 .formatTable {
     width: auto;

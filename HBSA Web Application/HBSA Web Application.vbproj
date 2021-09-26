@@ -479,7 +479,6 @@
     <Content Include="ckeditor\skins\kama\templates.css" />
     <Content Include="ckeditor\themes\default\theme.js" />
     <Content Include="ClubLoginReset.aspx" />
-    <Content Include="ContactUsTest.aspx" />
     <Content Include="Fines.aspx" />
     <Content Include="helpFAQ.aspx" />
     <Content Include="images\AjaxLoadingSave.gif" />
@@ -1141,13 +1140,6 @@
     <Compile Include="Contact.aspx.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ContactUsTest.aspx.designer.vb">
-      <DependentUpon>ContactUsTest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ContactUsTest.aspx.vb">
-      <DependentUpon>ContactUsTest.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="CreateAndDownloadFile.aspx.designer.vb">
       <DependentUpon>CreateAndDownloadFile.aspx</DependentUpon>

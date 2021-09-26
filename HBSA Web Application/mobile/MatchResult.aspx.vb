@@ -1152,7 +1152,7 @@ showError:
 
         Using cfg As New HBSAcodeLibrary.HBSA_Configuration
 
-            Dim toAddress As String = cfg.Value("LeagueSecretaryEmail")
+            Dim toAddress As String = HBSAcodeLibrary.MatchResult.MatchTeamUsers(MatchID) 'cfg.value("LeagueSecretaryEmail")
             Dim subject As String
             Dim body As String
             subject = "Match result from " & HomeTeam_DropDownList.SelectedItem.Text.Trim

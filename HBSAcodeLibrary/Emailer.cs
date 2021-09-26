@@ -10,7 +10,7 @@ namespace HBSAcodeLibrary
 {
     public class Emailer
     {
-        public static void Send_eMail(string toAddress, string subject, string body, string ccAddress = "", string ReplyTo = "", int MatchResultID = 0, string UserID = "")
+        public static void Send_eMail(string toAddress, string subject, string Body, string ccAddress = "", string ReplyTo = "", int MatchResultID = 0, string UserID = "")
         {
             string Footer = "<br/><br/><i>Please do not reply to this email because it sent from an automatic sender, and the mail box is not monitored.<br>" + 
                             "If you wish to contact the league please use the web site and go to the contact page, or <a href='" + 
@@ -50,14 +50,14 @@ namespace HBSAcodeLibrary
                         MimeMessage.ReplyTo.Add(new MimeKit.MailboxAddress("", ReplyTo.Replace(";", ",")));
 
                 // set the message
-                MimeMessage.Body = new MimeKit.TextPart("html") { Text = body + Footer };
+                MimeMessage.Body = new MimeKit.TextPart("html") { Text = Body + Footer };
                 MimeMessage.Subject = subject;
 
-                if (!EmailIsDuplicate(MimeMessage, Footer))
+                if (!EmailIsDuplicate(MimeMessage, Body, Footer))
                 {
 
                     // store the email
-                    StoreTheEmail(MimeMessage, MatchResultID, Footer, UserID, cfg.Value("SMTPport"), cfg.Value("SMTPport"));
+                    StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
 
                     if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
                     {
@@ -75,10 +75,9 @@ namespace HBSAcodeLibrary
                         }
                         catch (Exception ex)
                         {
-                            string BodyContent = GetMimeMessageContent(MimeMessage);
                             MimeMessage.Body = new MimeKit.TextPart("html") 
                                 { Text = "ERROR OCCURRED sending this: " + 
-                                            ex.Message + "<hr/>" + BodyContent.ToString() };
+                                            ex.Message + "<hr/>" + Body };
                             throw new Exception(ex.Message, ex);
                         }
                     }
@@ -128,7 +127,7 @@ namespace HBSAcodeLibrary
             }
 
         }
-        public static void StoreTheEmail(MimeKit.MimeMessage MimeMessage, int MatchResultID, string Footer, string UserID, string SMTPHost, string SMTPPort)
+        public static void StoreTheEmail(MimeKit.MimeMessage MimeMessage, string Body, int MatchResultID, string Footer, string UserID, string SMTPHost, string SMTPPort)
         {
             var parameters = new List<SqlParameter>()
             {
@@ -138,7 +137,7 @@ namespace HBSAcodeLibrary
                 new SqlParameter("CCAddresses", AddressList(MimeMessage.Cc)),
                 new SqlParameter("BCCAddresses", AddressList(MimeMessage.Bcc)),
                 new SqlParameter("Subject", MimeMessage.Subject),
-                new SqlParameter("Body", GetMimeMessageContent(MimeMessage).Replace(Footer, "")),
+                new SqlParameter("Body", Body.Replace(Footer, "")),
                 new SqlParameter("MatchResultID", MatchResultID),
                 new SqlParameter("UserID", UserID),
                 new SqlParameter("SMTPServer", SMTPHost),
@@ -158,7 +157,7 @@ namespace HBSAcodeLibrary
             else
                 return addresses.Substring(0, addresses.Length - 1);
         }
-        public static bool EmailIsDuplicate(MimeKit.MimeMessage MimeMessage, string Footer)
+        public static bool EmailIsDuplicate(MimeKit.MimeMessage MimeMessage, string Body, string Footer)
         {
             string addressees = "";
             foreach (MimeKit.InternetAddress address in MimeMessage.To)
@@ -174,7 +173,7 @@ namespace HBSAcodeLibrary
                 new SqlParameter("Sender",AddressList(MimeMessage.From)),
                 new SqlParameter("ToAddresses", AddressList(MimeMessage.To)),
                 new SqlParameter("Subject", MimeMessage.Subject),
-                new SqlParameter("Body", GetMimeMessageContent(MimeMessage).Replace(Footer, ""))
+                new SqlParameter("Body", Body.Replace(Footer, ""))
             };
 
             string result = SQLcommands.ExecScalar("CheckForDuplicateEmail", parameters).ToString();
