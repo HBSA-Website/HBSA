@@ -32,13 +32,22 @@ Partial Public Class Contact
     Protected WithEvents Update_Progress As Global.System.Web.UI.UpdateProgress
 
     '''<summary>
-    '''UpdatePanel1 control.
+    '''Update_Panel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents Update_Panel As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
+    '''Contact_Panel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Contact_Panel As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
     '''Destination_DropDownList control.
@@ -282,4 +291,40 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents status_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''MessageSent_Panel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MessageSent_Panel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''MessageSent_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MessageSent_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Home_HyperLink control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Home_HyperLink As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''Contact_HyperLink control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Contact_HyperLink As Global.System.Web.UI.WebControls.HyperLink
 End Class

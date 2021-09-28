@@ -201,7 +201,6 @@
                 body += "<table>"
 
                 body += "<tr><td>From:</td><td>" & Email_TextBox.Text.Trim & "</td></tr>" &
-                       "<tr><td>From:</td><td>" & Email_TextBox.Text.Trim & "</td></tr>" &
                        "<tr><td>Name:</td><td>" & name_TextBox.Text.Trim & "</td></tr>" &
                        "<tr><td>Phone:</td><td>" & Phone_TextBox.Text.Trim & "</td></tr>" &
                        "<tr><td>Club:</td><td>" & Clubs_DropDownList.SelectedItem.Text & "</td></tr>" &
@@ -232,7 +231,16 @@
                                                         If(Copy_CheckBox.Checked, Email_TextBox.Text.Trim, ""),
                                                         Email_TextBox.Text.Trim)
 
-                    status_Literal.Text = "<span style='color:blue;'>Your message has been sent to the " & Destination_DropDownList.SelectedItem.Text & ".</span>"
+                    MessageSent_Literal.Text = "<span style='color:blue;'>Your message has been sent to the "
+                    If Destination_DropDownList.SelectedValue = cfg.Value("HandicapCommittee") Then
+                        MessageSent_Literal.Text &= " Handicap Committee (" & Destination_DropDownList.SelectedItem.Text & ")"
+                    Else
+                        MessageSent_Literal.Text &= Destination_DropDownList.SelectedItem.Text
+                    End If
+
+                    MessageSent_Literal.Text &= ".</span>"
+                    Contact_Panel.Visible = False
+                    MessageSent_Panel.Visible = True
 
                 Catch ex As Exception
                     Dim errorMessage As String

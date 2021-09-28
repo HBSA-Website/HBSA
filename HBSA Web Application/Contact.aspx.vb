@@ -234,7 +234,9 @@ Partial Class Contact
                                                         If(Copy_CheckBox.Checked, Email_TextBox.Text.Trim, ""),
                                                         Email_TextBox.Text.Trim)
 
-                    status_Literal.Text = "<span style='color:blue;'>Your message has been sent to the " & Destination_DropDownList.SelectedItem.Text & ".</span>"
+                    MessageSent_Literal.Text = "<span style='color:blue;'>Your message has been sent to the " & Destination_DropDownList.SelectedItem.Text & ".</span>"
+                    Contact_Panel.Visible = False
+                    MessageSent_Panel.Visible = True
 
                 Catch ex As Exception
                     Dim errorMessage As String

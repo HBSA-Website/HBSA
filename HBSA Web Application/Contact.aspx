@@ -15,9 +15,9 @@
             </ProgressTemplate>
         </asp:UpdateProgress>
 
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="Update_Panel" runat="server">
         <ContentTemplate>
-
+            <asp:Panel ID="Contact_Panel" runat="server">
     <style type="text/css">
         .col1 {
             /*width: 180px;*/
@@ -53,7 +53,6 @@
         }
 }
     </style>
-
 
     <table style="width:auto; margin-left:auto; margin-right:auto;border-collapse:collapse;background-color: #CCFFCC; ">
             <tr><td class="col2" style="width:100%; font-size:12pt; text-align:center; background-color:white;" colspan="3" >
@@ -168,6 +167,23 @@
 
             <span><asp:Literal ID="status_Literal" runat="server" Mode="PassThrough"></asp:Literal></span>
             <br /><br />
+    </asp:Panel>
+
+        <style type="text/css">
+            .ThisPanel{
+                width:100%;
+                text-align:center;
+            }
+        </style>
+
+    <asp:Panel ID="MessageSent_Panel" runat="server" CssClass="ThisPanel" Visible="false">
+        <br /><br />
+        <asp:Literal ID="MessageSent_Literal" runat="server"></asp:Literal><br /><br />
+        <asp:HyperLink ID="Home_HyperLink" runat="server" NavigateUrl="~/Home.aspx">Return to the homepage</asp:HyperLink>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:HyperLink ID="Contact_HyperLink" runat="server" NavigateUrl="~/Contact.aspx">Submit another message</asp:HyperLink>
+        <br /><br />
+    </asp:Panel> 
 
         </ContentTemplate>
     </asp:UpdatePanel>

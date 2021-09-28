@@ -6,10 +6,6 @@
     <div class="PageHeader">
         Contact
     </div>
-    <div style="width:100%; text-align:center;">
-    To email us please enter your details, select where email should go,  enter the &quot;Prove you&#39;re human&quot; code, then click "Send your message".
-    </div>
-    <br />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
         <asp:UpdateProgress runat="server" id="Update_Progress" DisplayAfter="10">
@@ -23,6 +19,11 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
 
+        <asp:Panel ID="Contact_Panel" runat="server">
+    <div style="width:100%; text-align:center;">
+    To email us please enter your details, select where email should go,  enter the &quot;Prove you&#39;re human&quot; code, then click "Send your message".
+    </div>
+    <br />
         <table>
             <tr>
                 <td>Select where the email should be sent:</td>
@@ -129,6 +130,23 @@
     <span><asp:Literal ID="status_Literal" runat="server" Mode="PassThrough"></asp:Literal></span>
     <br />
     <br />
+    </asp:Panel>
+
+        <style type="text/css">
+            .ThisPanel{
+                width:100%;
+                text-align:center;
+            }
+        </style>
+
+    <asp:Panel ID="MessageSent_Panel" runat="server" CssClass="ThisPanel" Visible="false">
+        <br /><br />
+        <asp:Literal ID="MessageSent_Literal" runat="server"></asp:Literal><br /><br />
+        <asp:HyperLink ID="Home_HyperLink" runat="server" NavigateUrl="Home.aspx">Return to the homepage</asp:HyperLink>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:HyperLink ID="Contact_HyperLink" runat="server" NavigateUrl="Contact.aspx">Submit another message</asp:HyperLink>
+        <br /><br />
+    </asp:Panel> 
 
       </ContentTemplate>
     </asp:UpdatePanel>
