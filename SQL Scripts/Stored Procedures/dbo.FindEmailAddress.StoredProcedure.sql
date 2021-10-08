@@ -7,7 +7,7 @@ GO
 
 CREATE procedure dbo.FindEmailAddress
 	(@eMailAddress varchar(255)
-	)
+	,@fromReplace bit = 0)
 as
 
 set nocount on
@@ -16,8 +16,10 @@ set xact_abort on
 declare eMailColumns cursor fast_forward for
 select C.Table_name,Column_Name
 		from Information_schema.columns C
+		left join Information_schema.tables T on T.table_name = C.TABLE_NAME
 		where column_name like '%email%'
 		  and C.TABLE_NAME not like '%entry%'	
+		  and TABLE_TYPE <> 'VIEW'
 
 declare @Table_Name varchar(255)
        ,@Column_Name varchar (255)
@@ -34,7 +36,7 @@ while @@fetch_status=0
 		insert #EmailColumns
 		  select Table_name = ''' + @Table_Name + ''', Column_Name = ''' + @Column_Name + '''
 			from [' + @Table_Name + ']
-			where ' + @Column_Name + ' = ''' + @eMailAddress + ''''  
+			where ' + @Column_Name + ' like ''%' + @eMailAddress + '%'''  
     exec (@SQL)
 	fetch eMailColumns into @Table_Name, @Column_Name
 	end
@@ -48,3 +50,7 @@ drop table #EmailColumns
 
 GO
 
+exec FindEmailAddress 'weir'
+select * from PlayerDetails where email like '%weir%'
+select * from ResultsUsers where eMailAddress like '%weir%'
+select * from TeamsDetails where email like '%weir%'

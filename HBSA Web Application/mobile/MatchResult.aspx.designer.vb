@@ -761,13 +761,13 @@ Partial Public Class MatchResult1
     Protected WithEvents SessionUserName As Global.System.Web.UI.HtmlControls.HtmlInputHidden
 
     '''<summary>
-    '''SessionadminDetails control.
+    '''SessionAdminEmail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SessionadminDetails As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    Protected WithEvents SessionAdminEmail As Global.System.Web.UI.HtmlControls.HtmlInputHidden
 
     '''<summary>
     '''SessionTeamID control.

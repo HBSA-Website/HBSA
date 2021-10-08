@@ -425,7 +425,7 @@
     <input type="hidden" id="SessionPassword" name = "SessionPassword" runat="server" />
     <input type="hidden" id="SessionUserID" name = "SessionUserID" runat="server" />
     <input type="hidden" id="SessionUserName" name = "SessionUserName" runat="server" />
-    <input type="hidden" id="SessionadminDetails" name = "SessionadminDetails" runat="server" />
+    <input type="hidden" id="SessionAdminEmail" name = "SessionAdminEmail" runat="server" />
     <input type="hidden" id="SessionTeamID" name = "SessionTeamID" runat="server" />
     <input type="hidden" id="SessionAwayTeamID" name = "SessionAwayTeamID" runat="server" />
     <input type="hidden" id="SessionMatchResultID" name = "SessionMatchResultID" runat="server" />

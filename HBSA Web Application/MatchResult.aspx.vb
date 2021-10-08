@@ -15,9 +15,9 @@ Public Class MatchResult
             SessionUserID.Value = Session("UserID")
             SessionUserName.Value = Session("UserName")
             If Not IsNothing(Session("adminDetails")) AndAlso Session("adminDetails").Rows.count > 0 Then
-                SessionadminDetails.Value = Session("adminDetails").rows(0).item("email")
+                SessionAdminEmail.Value = Session("adminDetails").rows(0).item("email")
             Else
-                SessionadminDetails.Value = ""
+                SessionAdminEmail.Value = ""
             End If
             SessionTeamID.Value = Session("TeamID")
             SessionUser.Value = If(Session("user") Is Nothing, Session("AdminUser"), Session("user"))
@@ -25,7 +25,7 @@ Public Class MatchResult
 
         End If
 
-        Dim adminLoggedIn As Boolean = (Not SessionadminDetails.Value = "")
+        Dim adminLoggedIn As Boolean = (Not SessionAdminEmail.Value = "")
         Dim userLoggedIn As Boolean = False
 
         If Not adminLoggedIn Then
@@ -219,7 +219,7 @@ Public Class MatchResult
             ScoresBoxes(ix).Visible = True
             PlayerLists(ix).Visible = True
 
-            If SessionadminDetails.Value <> "" Then
+            If SessionAdminEmail.Value <> "" Then
                 HCapTextBoxes(ix).Enabled = True
                 HCapImgs(ix).Visible = False
             Else
@@ -382,7 +382,7 @@ Public Class MatchResult
                 errMsg.Append("Invalid match date<br/>")
             End Try
 
-            If SessionadminDetails.Value = "" Then 'not admin
+            If SessionAdminEmail.Value = "" Then 'not admin
                 If Math.Abs(DateAndTime.DateDiff(DateInterval.Day, matchDate, CDate(FixtureDate_DropDownList.SelectedItem.Text))) > 28 Then
                     errMsg.Append("<br/><span style='color:red;text-size:larger'>" &
                           "<b>The match cannot be played more than 4 weeks before or after the fixture date.<br/><br/>" &
@@ -540,7 +540,7 @@ showError:
                         status_Literal.Text += "<br/><span style='color:red;'>Cannot update or submit a result as the season is closed.</span>"
                         Retry_Button.Visible = False
                         Cancel_Button.Visible = False
-                        If SessionadminDetails.Value = "" Then
+                        If SessionAdminEmail.Value = "" Then
                             Send_Button.Text = "Finished"
                         End If
 
@@ -555,7 +555,7 @@ showError:
                                 status_Literal.Text += "<br/><span style='color:blue;'>Your result card Emails have been sent.  Click Finished.</span>"
                                 Retry_Button.Visible = False
                                 Cancel_Button.Visible = False
-                                If SessionadminDetails.Value = "" Then
+                                If SessionAdminEmail.Value = "" Then
                                     Send_Button.Text = "Finished"
                                 End If
                             Else
@@ -564,7 +564,7 @@ showError:
                                 Retry_Button.Visible = True
                                 Retry_Button.Text = "Re-send Emails"
                                 Cancel_Button.Visible = False
-                                If SessionadminDetails.Value = "" Then
+                                If SessionAdminEmail.Value = "" Then
                                     Send_Button.Text = "Finished"
                                 End If
                             End If
@@ -678,16 +678,16 @@ showError:
             End If
 
             PopulateBreaksPlayers(False) 'Home
-                PopulateBreaksPlayers(True)  'Away
+            PopulateBreaksPlayers(True)  'Away
 
-                status_Literal.Text = "<br/>This match has already been recorded.<br />Make any required changes and click 'Check your results card', or click 'Cancel'."
+            status_Literal.Text = "<br/>This match has already been recorded.<br />Make any required changes and click 'Check your results card', or click 'Cancel'."
 
-                Recover_Button.Visible = False
-                If SessionadminDetails.Value <> "" Then
-                    Delete_Result_Div.Visible = True
-                Else
-                    Delete_Result_Div.Visible = False
-                End If
+            Recover_Button.Visible = False
+            If SessionAdminEmail.Value <> "" Then
+                Delete_Result_Div.Visible = True
+            Else
+                Delete_Result_Div.Visible = False
+            End If
 
             status_Literal.Text = "<br />To submit your match results enter the details, then click 'Check your results card'"
 
@@ -695,7 +695,7 @@ showError:
             matchDate_Textbox.Text = Format(matchDate_CalendarExtender.SelectedDate, "dd MMM yyyy")
 
             Delete_Result_Div.Visible = False
-            If SessionadminDetails.Value <> "" AndAlso HBSAcodeLibrary.MatchResult.DeletedExists(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value) Then
+            If SessionAdminEmail.Value <> "" AndAlso HBSAcodeLibrary.MatchResult.DeletedExists(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value) Then
                 Recover_Button.Visible = True
             Else
                 Recover_Button.Visible = False
@@ -719,7 +719,7 @@ showError:
                     ScoreTB.Text = Score
                     ScoreTB.Enabled = (PlayerID > 0)
                     HCapTB.Text = HCap
-                    HCapTB.Visible = true'Section_DropDownList.SelectedValue < 7
+                    HCapTB.Visible = True 'Section_DropDownList.SelectedValue < 7
                     Exit Sub
                 End If
             Next
@@ -798,7 +798,7 @@ showError:
 
         Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
             'If not an administrator ensure it is not outside the 4 week limit
-            If SessionadminDetails.Value = "" Then
+            If SessionAdminEmail.Value = "" Then
                 Dim TodaysDate As Date = Utilities.UKDateTimeNow
                 Dim FixtureDate As Date = CDate(FixtureDate_DropDownList.SelectedItem.Text)
                 Dim diff As Integer = DateDiff(DateInterval.Day, FixtureDate, TodaysDate)
@@ -993,14 +993,15 @@ showError:
         Using cfg As New HBSAcodeLibrary.HBSA_Configuration
 
             Dim toAddress As String = HBSAcodeLibrary.MatchResult.MatchTeamUsers(MatchID) 'cfg.value("LeagueSecretaryEmail")
-            Dim ccAddr As String = SessionadminDetails.Value 'copy to administrator if logged in as admin
+            Dim ccAddr As String = SessionAdminEmail.Value 'copy to administrator (if logged in)
+            Dim replyAddr As String = SessionEmail.Value 'reply to team login (if logged in)
             Dim subject As String
             Dim body As String
             subject = "Match result from " & HomeTeam_DropDownList.SelectedItem.Text.Trim
             body = "Result Card from " & HomeTeam_DropDownList.SelectedItem.Text.Trim & "<br />" &
                             MatchResult & "<br/><br/>"
             Try
-                HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body, ccAddr, , MatchID, SessionUser.Value)
+                HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body, ccAddr, replyAddr, MatchID, SessionUser.Value)
                 Send_email = False 'indicates success
 
             Catch ex As Exception
@@ -1104,7 +1105,7 @@ showError:
     Sub CheckHandicapBoxes()
 
         'if non administrator use the drop down handicap value 
-        If SessionadminDetails.Value = "" Then
+        If SessionAdminEmail.Value = "" Then
             HomeHcap1_TextBox.Text = HomePlayer1_DropDownList.SelectedValue.Split("|")(1)
             HomeHcap2_TextBox.Text = HomePlayer2_DropDownList.SelectedValue.Split("|")(1)
             HomeHcap3_TextBox.Text = HomePlayer3_DropDownList.SelectedValue.Split("|")(1)

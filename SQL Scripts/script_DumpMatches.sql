@@ -1,11 +1,76 @@
---select * from MatchResultsDetails M order by ID
---select * from Breaks
+--creat trable of breaks by frame
+create table #BreaksByFrame
+	(MatchResultID int
+	,PlayerID int
+	,Break1 varchar(6)
+	,Break2 varchar(6)
+	,Break3 varchar(6)
+	,Break4 varchar(6)
+	,Break5 varchar(6)
+	,Break6 varchar(6)
+	,Break7 varchar(6)
+	,Break8 varchar(6)
+	)
+insert #BreaksByFrame
+	select distinct MatchResultID, PlayerID, '', '', '', '', '', '', '', ''
+	 from Breaks
+	 order by MatchresultID, PlayerID
+declare @MatchResultID int
+	   ,@PlayerID int
+	   ,@prevMatchResultID int
+	   ,@prevPlayerID int
+	   ,@Break int
+	   ,@Count int
+	   ,@SQL varchar(max)
+
+declare BreaksCursor cursor fast_forward for
+	select MatchResultID, PlayerID, [Break]
+		 from Breaks
+		order by MatchresultID, PlayerID
+
+set @prevMatchResultID=0
+set @prevPlayerID=0
+
+open BreaksCursor
+
+fetch BreaksCursor into  @MatchResultID, @PlayerID, @Break
+while @@fetch_status = 0
+	begin
+	if @MatchResultID <> @prevMatchResultID
+	or @PlayerID <> @prevPlayerID
+		begin
+		set @Count=1
+		set @prevMatchResultID = @MatchResultID
+		set @prevPlayerID = @PlayerID
+		end
+	else
+		set @Count = @Count + 1
+
+	set @SQL = 
+		'update #BreaksByFrame ' +
+		 	'set Break' + convert(varchar,@count) + ' = ''' + convert(varchar,@Break) + '''' +
+		 ' where PlayerID = ' + convert(varchar,@PlayerID) +
+		 '  and MatchResultID = ' + convert(varchar,@MatchResultID) 
+
+	exec(@SQL)		
+
+	fetch BreaksCursor into  @MatchResultID, @PlayerID, @Break
+	end
+
+close BreaksCursor
+deallocate BreaksCursor
+
+--select * from #BreaksByFrame
+--	 order by MatchresultID, PlayerID
+
+--calculate this season
 declare @ThisSeason int
        ,@Season char(7)
 select @ThisSeason=Datepart(year,convert(date,[value]))
    from Configuration where [key] = 'CloseSeasonEndDate'
 select @Season=Convert(char(4),@ThisSeason) + '/' + Convert(char(2),(@ThisSeason+1) % 100)
 
+--get the remaining data by frames
 select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],SectionID=S.ID, Section=replace([Section Name],'League','Billiards')
       ,FixtureDate=convert(varchar(11),FixtureDate,13),MatchDate=convert(varchar(11),MatchDate,13)
 	  ,HomeTeamID=H.ID,HomeTeam=HC.[Club Name]+' '+ H.Team
@@ -16,8 +81,22 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	  ,AwayScore=AwayPlayer1Score
 	  ,HomePlayerHcap=HomeHandicap1
 	  ,AwayPlayerHCap=AwayHandicap1
-	  ,HomeBreaks = dbo.BreaksInMatchForPlayer(M.ID, HomePlayer1ID)
-	  ,AwayBreaks = dbo.BreaksInMatchForPlayer(M.ID, AwayPlayer1ID)
+	  ,HomeBreak1 = isnull(HB.Break1,'')
+	  ,AwayBreak1 = isnull(AB.Break1,'')
+	  ,HomeBreak2 = isnull(HB.Break2,'')
+	  ,AwayBreak2 = isnull(AB.Break2,'')
+	  ,HomeBreak3 = isnull(HB.Break3,'')
+	  ,AwayBreak3 = isnull(AB.Break3,'')
+	  ,HomeBreak4 = isnull(HB.Break4,'')
+	  ,AwayBreak4 = isnull(AB.Break4,'')
+	  ,HomeBreak5 = isnull(HB.Break5,'')
+	  ,AwayBreak5 = isnull(AB.Break5,'')
+	  ,HomeBreak6 = isnull(HB.Break6,'')
+	  ,AwayBreak6 = isnull(AB.Break6,'')
+	  ,HomeBreak7 = isnull(HB.Break7,'')
+	  ,AwayBreak7 = isnull(AB.Break7,'')
+	  ,HomeBreak8 = isnull(HB.Break8,'')
+	  ,AwayBreak8 = isnull(AB.Break8,'')
     from MatchResultsDetails2 M
     join Teams H on H.ID = HomeTeamID
     join Teams A on A.ID = AwayTeamID
@@ -25,6 +104,8 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	join Leagues L on L.ID = LeagueID
 	join Clubs HC on HC.ID=H.ClubID
 	join Clubs AC on AC.ID=A.ClubID
+	left join #BreaksByFrame HB on HB.MatchResultID = M.ID and HB.PlayerID = M.HomePlayer1ID
+	left join #BreaksByFrame AB on HB.MatchResultID = M.ID and HB.PlayerID = M.AwayPlayer1ID
 
 union all
 
@@ -38,8 +119,22 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	  ,AwayScore=AwayPlayer2Score
 	  ,HomePlayerHcap=HomeHandicap2
 	  ,AwayPlayerHCap=AwayHandicap2
-	  ,HomeBreaks = dbo.BreaksInMatchForPlayer(M.ID, HomePlayer2ID)
-	  ,AwayBreaks = dbo.BreaksInMatchForPlayer(M.ID, AwayPlayer2ID)
+	  ,HomeBreak1 = isnull(HB.Break1,'')
+	  ,AwayBreak1 = isnull(AB.Break1,'')
+	  ,HomeBreak2 = isnull(HB.Break2,'')
+	  ,AwayBreak2 = isnull(AB.Break2,'')
+	  ,HomeBreak3 = isnull(HB.Break3,'')
+	  ,AwayBreak3 = isnull(AB.Break3,'')
+	  ,HomeBreak4 = isnull(HB.Break4,'')
+	  ,AwayBreak4 = isnull(AB.Break4,'')
+	  ,HomeBreak5 = isnull(HB.Break5,'')
+	  ,AwayBreak5 = isnull(AB.Break5,'')
+	  ,HomeBreak6 = isnull(HB.Break6,'')
+	  ,AwayBreak6 = isnull(AB.Break6,'')
+	  ,HomeBreak7 = isnull(HB.Break7,'')
+	  ,AwayBreak7 = isnull(AB.Break7,'')
+	  ,HomeBreak8 = isnull(HB.Break8,'')
+	  ,AwayBreak8 = isnull(AB.Break8,'')
     from MatchResultsDetails2 M
     join Teams H on H.ID = HomeTeamID
     join Teams A on A.ID = AwayTeamID
@@ -47,6 +142,8 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	join Leagues L on L.ID = LeagueID
 	join Clubs HC on HC.ID=H.ClubID
 	join Clubs AC on AC.ID=A.ClubID
+	left join #BreaksByFrame HB on HB.MatchResultID = M.ID and HB.PlayerID = M.HomePlayer2ID
+	left join #BreaksByFrame AB on HB.MatchResultID = M.ID and HB.PlayerID = M.AwayPlayer2ID
 
 union all
 
@@ -60,8 +157,22 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	  ,AwayScore=AwayPlayer3Score
 	  ,HomePlayerHcap=HomeHandicap3
 	  ,AwayPlayerHCap=AwayHandicap3
-	  ,HomeBreaks = dbo.BreaksInMatchForPlayer(M.ID, HomePlayer3ID)
-	  ,AwayBreaks = dbo.BreaksInMatchForPlayer(M.ID, AwayPlayer3ID)
+	  ,HomeBreak1 = isnull(HB.Break1,'')
+	  ,AwayBreak1 = isnull(AB.Break1,'')
+	  ,HomeBreak2 = isnull(HB.Break2,'')
+	  ,AwayBreak2 = isnull(AB.Break2,'')
+	  ,HomeBreak3 = isnull(HB.Break3,'')
+	  ,AwayBreak3 = isnull(AB.Break3,'')
+	  ,HomeBreak4 = isnull(HB.Break4,'')
+	  ,AwayBreak4 = isnull(AB.Break4,'')
+	  ,HomeBreak5 = isnull(HB.Break5,'')
+	  ,AwayBreak5 = isnull(AB.Break5,'')
+	  ,HomeBreak6 = isnull(HB.Break6,'')
+	  ,AwayBreak6 = isnull(AB.Break6,'')
+	  ,HomeBreak7 = isnull(HB.Break7,'')
+	  ,AwayBreak7 = isnull(AB.Break7,'')
+	  ,HomeBreak8 = isnull(HB.Break8,'')
+	  ,AwayBreak8 = isnull(AB.Break8,'')
     from MatchResultsDetails2 M
     join Teams H on H.ID = HomeTeamID
     join Teams A on A.ID = AwayTeamID
@@ -69,6 +180,8 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	join Leagues L on L.ID = LeagueID
 	join Clubs HC on HC.ID=H.ClubID
 	join Clubs AC on AC.ID=A.ClubID
+	left join #BreaksByFrame HB on HB.MatchResultID = M.ID and HB.PlayerID = M.HomePlayer3ID
+	left join #BreaksByFrame AB on HB.MatchResultID = M.ID and HB.PlayerID = M.AwayPlayer3ID
 
 union all
 
@@ -82,8 +195,22 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	  ,AwayScore=AwayPlayer4Score
 	  ,HomePlayerHcap=HomeHandicap4
 	  ,AwayPlayerHCap=AwayHandicap4
-	  ,HomeBreaks = dbo.BreaksInMatchForPlayer(M.ID, HomePlayer4ID)
-	  ,AwayBreaks = dbo.BreaksInMatchForPlayer(M.ID, AwayPlayer4ID)
+	  ,HomeBreak1 = isnull(HB.Break1,'')
+	  ,AwayBreak1 = isnull(AB.Break1,'')
+	  ,HomeBreak2 = isnull(HB.Break2,'')
+	  ,AwayBreak2 = isnull(AB.Break2,'')
+	  ,HomeBreak3 = isnull(HB.Break3,'')
+	  ,AwayBreak3 = isnull(AB.Break3,'')
+	  ,HomeBreak4 = isnull(HB.Break4,'')
+	  ,AwayBreak4 = isnull(AB.Break4,'')
+	  ,HomeBreak5 = isnull(HB.Break5,'')
+	  ,AwayBreak5 = isnull(AB.Break5,'')
+	  ,HomeBreak6 = isnull(HB.Break6,'')
+	  ,AwayBreak6 = isnull(AB.Break6,'')
+	  ,HomeBreak7 = isnull(HB.Break7,'')
+	  ,AwayBreak7 = isnull(AB.Break7,'')
+	  ,HomeBreak8 = isnull(HB.Break8,'')
+	  ,AwayBreak8 = isnull(AB.Break8,'')
     from MatchResultsDetails2 M
     join Teams H on H.ID = HomeTeamID
     join Teams A on A.ID = AwayTeamID
@@ -91,7 +218,14 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	join Leagues L on L.ID = LeagueID
 	join Clubs HC on HC.ID=H.ClubID
 	join Clubs AC on AC.ID=A.ClubID
+	left join #BreaksByFrame HB on HB.MatchResultID = M.ID and HB.PlayerID = M.HomePlayer4ID
+	left join #BreaksByFrame AB on HB.MatchResultID = M.ID and HB.PlayerID = M.AwayPlayer4ID
+
 	where LeagueID < 3 
 
 order by FixtureID
+
+drop table #BreaksByFrame
+
 GO
+
