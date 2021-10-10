@@ -19,7 +19,7 @@ select C.Table_name,Column_Name
 		left join Information_schema.tables T on T.table_name = C.TABLE_NAME
 		where column_name like '%email%'
 		  and C.TABLE_NAME not like '%entry%'	
-		  and TABLE_TYPE <> 'VIEW'
+		  and (@fromReplace = 0 OR TABLE_TYPE <> 'VIEW')
 
 declare @Table_Name varchar(255)
        ,@Column_Name varchar (255)
@@ -50,7 +50,5 @@ drop table #EmailColumns
 
 GO
 
-exec FindEmailAddress 'weir'
-select * from PlayerDetails where email like '%weir%'
-select * from ResultsUsers where eMailAddress like '%weir%'
-select * from TeamsDetails where email like '%weir%'
+exec FindEmailAddress 'bastow',1
+exec FindEmailAddress 'bastow',0

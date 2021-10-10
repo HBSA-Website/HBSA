@@ -7,7 +7,7 @@ GO
 
 CREATE procedure dbo.FindPhoneNumber
 	(@phoneAddress varchar(255)
-	)
+	,@fromReplace bit = 0)
 as
 
 set nocount on
@@ -16,9 +16,11 @@ set xact_abort on
 declare phoneColumns cursor fast_forward for
 select C.Table_name,Column_Name
 		from Information_schema.columns C
+		left join Information_schema.tables T on T.table_name = C.TABLE_NAME
 		where (column_name like '%phone%' or column_name like '%telno%' or column_name like '%mobno%' )
 		  and not column_name = 'isMobileDevice'
 		  and C.TABLE_NAME not like '%entry%'	
+ 		  and (@fromReplace = 0 OR TABLE_TYPE <> 'VIEW')
 
 declare @Table_Name varchar(255)
        ,@Column_Name varchar (255)
@@ -50,3 +52,4 @@ drop table #phoneColumns
 GO
 
 exec FindPhoneNumber '07772000147'
+exec FindPhoneNumber '07772000147',1

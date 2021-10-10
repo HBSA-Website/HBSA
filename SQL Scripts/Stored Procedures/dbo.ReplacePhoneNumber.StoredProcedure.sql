@@ -21,7 +21,7 @@ create table #phoneColumns
 	,Column_Name varchar(255)
 	)
 insert #phoneColumns
-	exec FindPhoneNumber @OldPhoneNumber
+	exec FindPhoneNumber @OldPhoneNumber, 1
 
 if (select count(*) from #phoneColumns) < 1
 	raiserror('Current phone number does not exist',17,0) -- severity 17 should avoid any more processing
@@ -57,5 +57,6 @@ commit tran
 
 GO
 
-exec ReplacePhoneNumber '07772 000147','07772000147'
+exec ReplacePhoneNumber '07772 000147','07772000146'
 exec FindPhoneNumber '07772 000147'
+exec FindPhoneNumber '07772 000146'

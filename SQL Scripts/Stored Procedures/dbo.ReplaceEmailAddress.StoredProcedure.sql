@@ -21,7 +21,7 @@ create table #EmailColumns
 	,Column_Name varchar(255)
 	)
 insert #EmailColumns
-	exec FindEmailAddress @OldEmailAddress
+	exec FindEmailAddress @OldEmailAddress, 1
 
 if (select count(*) from #EmailColumns) < 1
 	raiserror('Current eMail address does not exist',17,0) -- severity 17 should avoid any more processing
@@ -59,3 +59,4 @@ GO
 exec ReplaceEmailAddress 'gilbertp@outlook.com','gilbertp@outlook.com'
 exec FindEmailAddress 'petegilbert7@gmail.com'
 exec FindEmailAddress 'gilbertp@outlook.com'
+
