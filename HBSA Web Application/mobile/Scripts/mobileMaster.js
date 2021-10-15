@@ -1,27 +1,5 @@
 ﻿function loadDiv(divID) {
-    if ((divID != 'loading') && (divID != 'updating')) {
-        var perCent
-        if (divID == 'cfgHelp1') {
-            perCent = 8 / 100;
-        }
-        else {
-            perCent = 15 / 100;
-        }
-        // calc left as 15 % of page width
-        var divLeft = document.documentElement.clientWidth * perCent;
-        // calc top as 15 % of page height
-        var divTop = document.documentElement.clientHeight * perCent;
-        document.getElementById(divID).style.top = divTop;
-        document.getElementById(divID).style.left = divLeft;
-    }
     document.getElementById(divID).style.display = "block";
-    if (divID == 'loading') {
-        //ensure animated loading gif runs after post back
-        setTimeout('document.images["imgLoading"].src="Images/loading.gif"', 200);
-    }
-    else if (divID == 'updating') {
-        setTimeout('document.images["imgupdating"].src="Images/loading.gif"', 200);
-    }
 }
 
 function hideDiv(divID) {

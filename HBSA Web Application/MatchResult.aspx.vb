@@ -4,10 +4,10 @@ Public Class MatchResult
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        'GoDaddy will terminate the application on a 5 minute timeout
-        'despite and web.config settings. It has become apparent that some users are
+        'Shared hosting providers may terminate or recycle the application on a short timeout
+        'despite Control panel and/or web.config settings. It has become apparent that some users are
         'experiencing this so:
-        'preserve session user values in the client page
+        '       preserve session user values in the client page
         If Not IsPostBack Then
 
             SessionEmail.Value = Session("Email")
@@ -19,9 +19,9 @@ Public Class MatchResult
             Else
                 SessionAdminEmail.Value = ""
             End If
+
             SessionTeamID.Value = Session("TeamID")
             SessionUser.Value = If(Session("user") Is Nothing, Session("AdminUser"), Session("user"))
-            Delete_Result_Div.Visible = False
 
         End If
 
@@ -45,7 +45,6 @@ Public Class MatchResult
                 End If
 
             End Using
-
 
         End If
 
@@ -694,7 +693,8 @@ showError:
             matchDate_CalendarExtender.SelectedDate = FixtureDate_DropDownList.SelectedItem.Text
             matchDate_Textbox.Text = Format(matchDate_CalendarExtender.SelectedDate, "dd MMM yyyy")
 
-            Delete_Result_Div.Visible = False
+        Else
+
             If SessionAdminEmail.Value <> "" AndAlso HBSAcodeLibrary.MatchResult.DeletedExists(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value) Then
                 Recover_Button.Visible = True
             Else

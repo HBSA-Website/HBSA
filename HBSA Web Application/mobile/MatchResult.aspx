@@ -150,7 +150,8 @@
     <div id="MessageDiv" runat="server" visible="false">
 
     </div>
-    <div id="PanelsDiv" runat="server">
+
+  <div id="PanelsDiv" runat="server">
 
     <asp:Panel ID="Match_Panel" runat="server" Visible="true">
         <table>
@@ -386,54 +387,12 @@
        </table>
     </asp:Panel>
  
-    <asp:Panel ID="SubmitResult_Panel" runat="server" Visible="false">
-
-        <table>
-             <tr> 
-                <td style="text-align:center;"><asp:Button ID="Prev_Button6" runat="server" Text="< Prev" Visible="true"/></td>
-                <td></td>
-                <td>&nbsp;&nbsp;</td>
-            </tr>
-       </table>
-
-            <div  style="text-align:center;">
-                <asp:Literal ID="status_Literal" runat="server"></asp:Literal><br />
-
-                <asp:Button ID="Send_Button" runat="server" Text="Check your results card" />
-                <br />
-                <asp:Button ID="Cancel_Button" runat="server" Text="Cancel" />
-                <br />
-                <asp:Button ID="Retry_Button" runat="server" Visible="false" Text="Resend the emails" />
-                <br />
-                <asp:Button ID="Recover_Button" runat="server" Text="Recover result for the requested match." visible="false"/>
-                <br />
-                <div id="Delete_Result_Div" style="" runat="server" visible="false">
-                    <input id="Delete_Result_Button" type="button" value="Delete this result" 
-                           onclick="loadDiv('divDeleteResult');" onmouseover="this.style.cursor='pointer';" />
-                </div>
-                <br />
-           
-            </div>
-
-      </asp:Panel>
-  
-</div>
-
-    <%--preserve session variables as GoDaddy may kill the application after 5 minutes timeout--%>
-    <input type="hidden" id="SessionUser" name = "SessionUser" runat="server" />
-    <input type="hidden" id="SessionEmail" name = "SessionEmail" runat="server" />
-    <input type="hidden" id="SessionPassword" name = "SessionPassword" runat="server" />
-    <input type="hidden" id="SessionUserID" name = "SessionUserID" runat="server" />
-    <input type="hidden" id="SessionUserName" name = "SessionUserName" runat="server" />
-    <input type="hidden" id="SessionAdminEmail" name = "SessionAdminEmail" runat="server" />
-    <input type="hidden" id="SessionTeamID" name = "SessionTeamID" runat="server" />
-    <input type="hidden" id="SessionAwayTeamID" name = "SessionAwayTeamID" runat="server" />
-    <input type="hidden" id="SessionMatchResultID" name = "SessionMatchResultID" runat="server" />
-    <input type="hidden" id="HomeFrames" name = "HomeFrames" runat="server" />
-    <input type="hidden" id="AwayFrames" name = "AwayFrames" runat="server" />
-    <input type="hidden" id="SessionBreaksTable" name = "SessionBreaksTable" runat="server" />
-
- 	<div id="divDeleteResult" style="display:none;">
+    <div id="AdminActionsDiv" runat="server" class="CentredDiv">
+        <div id="Delete_Result_Div" style="" runat="server" visible="false">
+            <input id="Delete_Result_Button" type="button" value="Delete this result" 
+                onclick="loadDiv('divDeleteResult');" onmouseover="this.style.cursor='pointer';" />
+        </div>
+ 	    <div id="divDeleteResult" style="display:none;">
                 
                 <table>
                     <tr>
@@ -454,8 +413,49 @@
                     </tr>
                 </table>
  	</div>
+        <asp:Button ID="Recover_Button" runat="server" Text="Recover result for the requested match." visible="false"/>
+    </div>
 
-<div id="divHCapMsg" style="display:none; color: #000000; background-color: #FFFFFF; font-size: 24px;" onclick="this.style.display='none';" onmouseover="this.style.cursor='pointer';" ">
+
+    <asp:Panel ID="SubmitResult_Panel" runat="server" Visible="false">
+
+        <table>
+             <tr> 
+                <td style="text-align:center;"><asp:Button ID="Prev_Button6" runat="server" Text="< Prev" Visible="true"/></td>
+                <td></td>
+                <td>&nbsp;&nbsp;</td>
+            </tr>
+       </table>
+
+            <div  style="text-align:center;">
+                <asp:Literal ID="status_Literal" runat="server"></asp:Literal><br />
+
+                <asp:Button ID="Send_Button" runat="server" Text="Check your results card" />
+                <br />
+                <asp:Button ID="Cancel_Button" runat="server" Text="Cancel" />
+                <br />
+                <asp:Button ID="Retry_Button" runat="server" Visible="false" Text="Resend the emails" />
+            </div>
+
+      </asp:Panel>
+  
+  </div>
+
+    <%--preserve session variables as GoDaddy may kill the application after 5 minutes timeout--%>
+    <input type="hidden" id="SessionUser" name = "SessionUser" runat="server" />
+    <input type="hidden" id="SessionEmail" name = "SessionEmail" runat="server" />
+    <input type="hidden" id="SessionPassword" name = "SessionPassword" runat="server" />
+    <input type="hidden" id="SessionUserID" name = "SessionUserID" runat="server" />
+    <input type="hidden" id="SessionUserName" name = "SessionUserName" runat="server" />
+    <input type="hidden" id="SessionAdminEmail" name = "SessionAdminEmail" runat="server" />
+    <input type="hidden" id="SessionTeamID" name = "SessionTeamID" runat="server" />
+    <input type="hidden" id="SessionAwayTeamID" name = "SessionAwayTeamID" runat="server" />
+    <input type="hidden" id="SessionMatchResultID" name = "SessionMatchResultID" runat="server" />
+    <input type="hidden" id="HomeFrames" name = "HomeFrames" runat="server" />
+    <input type="hidden" id="AwayFrames" name = "AwayFrames" runat="server" />
+    <input type="hidden" id="SessionBreaksTable" name = "SessionBreaksTable" runat="server" />
+
+    <div id="divHCapMsg" style="display:none; color: #000000; background-color: #FFFFFF; font-size: 24px;" onclick="this.style.display='none';" onmouseover="this.style.cursor='pointer';" ">
                 <table>
                     <tr>
                         <td background-image: url(Images/menuBarBG.gif);">

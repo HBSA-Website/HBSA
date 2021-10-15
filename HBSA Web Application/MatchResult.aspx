@@ -87,7 +87,7 @@
     <input type="hidden" id="Home_Player_IDs" name = "HomePlayerIDs" runat="server" />
     <input type="hidden" id="Away_Player_IDs" name = "AwayPlayerIDs" runat="server" />
 
-    <div style="font-family: Verdana; font-size: small; color:navy; width:100%; text-align:center; padding 5px;" >
+    <div style="font-family: Verdana; font-size: small; color:navy; width:100%; text-align:center; padding: 5px;" >
         <h3>Match Result</h3>
         <asp:Literal ID="status_Literal" runat="server" Mode="PassThrough"  
             Text="To submit or change your match results enter the details, then click 'Check your results card' " /> &nbsp;&nbsp;&nbsp;&nbsp;

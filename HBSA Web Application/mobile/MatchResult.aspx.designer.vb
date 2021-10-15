@@ -644,6 +644,60 @@ Partial Public Class MatchResult1
     Protected WithEvents Next_Button5 As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''AdminActionsDiv control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminActionsDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Delete_Result_Div control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Delete_Result_Div As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''DeleteResult_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DeleteResult_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Remove_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Remove_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Cancel_Delete_Result_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Cancel_Delete_Result_Button As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''Recover_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Recover_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''SubmitResult_Panel control.
     '''</summary>
     '''<remarks>
@@ -696,24 +750,6 @@ Partial Public Class MatchResult1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Retry_Button As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Recover_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Recover_Button As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Delete_Result_Div control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Delete_Result_Div As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''SessionUser control.
@@ -822,31 +858,4 @@ Partial Public Class MatchResult1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SessionBreaksTable As Global.System.Web.UI.HtmlControls.HtmlInputHidden
-
-    '''<summary>
-    '''DeleteResult_Literal control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DeleteResult_Literal As Global.System.Web.UI.WebControls.Literal
-
-    '''<summary>
-    '''Remove_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Remove_Button As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Cancel_Delete_Result_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Cancel_Delete_Result_Button As Global.System.Web.UI.HtmlControls.HtmlInputButton
 End Class

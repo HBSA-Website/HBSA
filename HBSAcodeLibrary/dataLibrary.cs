@@ -4715,7 +4715,7 @@ namespace HBSAcodeLibrary
         public DataTable Players;
         public TeamData(int TeamID)
         {
-            // Given a section, week and home team ID get the away team details
+            // Given a team ID, get that team's details
 
             DataSet teamData = SQLcommands.ExecDataSet("TeamDetails",
                                                             new List<SqlParameter> {

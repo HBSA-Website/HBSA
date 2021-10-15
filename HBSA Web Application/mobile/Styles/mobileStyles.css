@@ -7,6 +7,12 @@ div {
     color: darkgreen;
     font-size:40px;
 }
+.CentredDiv{
+    text-align:center;
+    width:auto;
+    margin-left:auto;
+    margin-right:auto;
+}
 table {
     width: 100%;
     border-collapse: collapse;

@@ -15,13 +15,14 @@ Public Class MatchResult1
             SessionUserName.Value = Session("UserName")
             If Not IsNothing(Session("adminDetails")) AndAlso Session("adminDetails").Rows.count > 0 Then
                 SessionAdminEmail.Value = Session("adminDetails").rows(0).item("email")
+                AdminActionsDiv.Visible = True
             Else
                 SessionAdminEmail.Value = ""
+                AdminActionsDiv.Visible = False
             End If
 
             SessionTeamID.Value = Session("TeamID")
             SessionUser.Value = If(Session("user") Is Nothing, Session("AdminUser"), Session("user"))
-            Delete_Result_Div.Visible = False
 
         End If
 
