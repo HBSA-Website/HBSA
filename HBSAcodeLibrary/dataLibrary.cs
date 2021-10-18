@@ -4711,63 +4711,63 @@ namespace HBSAcodeLibrary
         public string Contact;
         public string eMail;
         public string TelNo;
-        public int Captain; 
+        public int Captain;
         public DataTable Players;
+        private void FillTeamDataDetails(DataSet TeamData)
+        {
+            if (TeamData.Tables[0].Rows.Count > 0)
+            {
+                var team = TeamData.Tables[0].Rows[0];
+                ID = (int)team["TeamID"];
+                LeagueID = (int)team["LeagueID"];
+                LeagueName = (string)team["League Name"];
+                SectionID = (int)team["SectionID"];
+                SectionName = (string)team["Section Name"];
+                ClubID = (int)team["ClubID"];
+                ClubName = (string)team["Club Name"];
+                Team = (string)team["team"];
+                FixtureNo = (int)team["FixtureNo"];
+                Contact = (string)team["Contact"];
+                eMail = (string)team["eMail"];
+                TelNo = (string)team["TelNo"];
+                Captain = DBNull.Value == team["Captain"] ? 0 : (int)team["Captain"];
+            }
+            else
+                ID = 0;  //indicates no team with these selection criteria
+
+            Players = TeamData.Tables[1];
+        }
         public TeamData(int TeamID)
         {
             // Given a team ID, get that team's details
-
-            DataSet teamData = SQLcommands.ExecDataSet("TeamDetails",
+            FillTeamDataDetails(SQLcommands.ExecDataSet("TeamDetails",
                                                             new List<SqlParameter> {
                                                                 new SqlParameter("TeamID", TeamID)
-                                                            });
-            if (teamData.Tables[0].Rows.Count > 0)
+                                                            }));
+        }
+        public TeamData(int SectionID, int ClubID, string team)
+        {
+            //Given Section, Club & team letter find team details
+            using (SectionData S = new SectionData(SectionID))
             {
-                var team = teamData.Tables[0].Rows[0];
-                ID          = (int)team["TeamID"];
-                LeagueID    = (int)team["LeagueID"];
-                LeagueName  = (string)team["League Name"];
-                SectionID   = (int)team["SectionID"];
-                SectionName = (string)team["Section Name"];
-                ClubID      = (int)team["ClubID"];
-                ClubName    = (string)team["Club Name"];
-                Team        = (string)team["team"];
-                FixtureNo   = (int)team["FixtureNo"];
-                Contact     = (string)team["Contact"];
-                eMail       = (string)team["eMail"];
-                TelNo       = (string)team["TelNo"];
-                Captain     = DBNull.Value == team["Captain"] ? 0 : (int)team["Captain"];
+                FillTeamDataDetails(SQLcommands.ExecDataSet("TeamDetails",
+                                                           new List<SqlParameter> {
+                                                                new SqlParameter("LeagueID", S.LeagueID),
+                                                                new SqlParameter("ClubID", ClubID),
+                                                                new SqlParameter("team", team)
+                                                           }));
             }
-            Players = teamData.Tables[1];
         }
         public TeamData(int sectionID, int WeekNo, int HomeTeamID)
         {
             // Given a section, week and home team ID get the away team details
 
-            DataSet awayTeamData = SQLcommands.ExecDataSet("GetAwayTeam",
-                                                            new List<SqlParameter> {
-                                                                new SqlParameter("SectionID", sectionID),
-                                                                new SqlParameter("HomeTeamID", HomeTeamID),
-                                                                new SqlParameter("WeekNo", WeekNo)
-                                                            });
-            if (awayTeamData.Tables[0].Rows.Count > 0)
-            {
-                var awayTeam = awayTeamData.Tables[0].Rows[0];
-                ID          = (int)awayTeam["TeamID"];
-                LeagueID    = (int)awayTeam["LeagueID"];
-                LeagueName  = (string)awayTeam["League Name"];
-                SectionID   = (int)awayTeam["SectionID"];
-                SectionName = (string)awayTeam["Section Name"];
-                ClubID      = (int)awayTeam["ClubID"];
-                ClubName    = (string)awayTeam["Club Name"];
-                Team        = (string)awayTeam["Team"];
-                FixtureNo   = (int)awayTeam["FixtureNo"];
-                Contact     = (string)awayTeam["Contact"];
-                eMail       = (string)awayTeam["eMail"];
-                TelNo       = (string)awayTeam["TelNo"];
-                Captain     = DBNull.Value == awayTeam["Captain"] ? 0 : (int)awayTeam["Captain"];
-            }
-            Players = awayTeamData.Tables[1];
+            FillTeamDataDetails(SQLcommands.ExecDataSet("GetAwayTeam",
+                                                                new List<SqlParameter> {
+                                                                    new SqlParameter("SectionID", sectionID),
+                                                                    new SqlParameter("HomeTeamID", HomeTeamID),
+                                                                    new SqlParameter("WeekNo", WeekNo)
+                                                                                         }));
         }
         public string Merge(string User = "")
         {

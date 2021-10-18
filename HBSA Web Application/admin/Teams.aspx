@@ -74,16 +74,17 @@
                                   <div>
                                 <table">
                                     <tr>
-                                        <th style="text-align:right;">Club/Team</th><td style="height:22px"><asp:DropDownList ID="Club_DropDownList"  CssClass="txtBox" runat="server" AutoPostBack="true" Height="20px" ></asp:DropDownList>
-                                                                                   <asp:DropDownList ID="Team_DropDownList"  CssClass="txtBox" runat="server" Height="20px">
-                                                                                        <asp:ListItem Value=" "> </asp:ListItem>
-                                                                                        <asp:ListItem Value="A">A</asp:ListItem>
-                                                                                        <asp:ListItem Value="B">B</asp:ListItem>
-                                                                                        <asp:ListItem Value="C">C</asp:ListItem>
-                                                                                        <asp:ListItem Value="D">D</asp:ListItem>
-                                                                                        <asp:ListItem Value="E">E</asp:ListItem>
-                                                                                        <asp:ListItem Value="F">F</asp:ListItem>
-                                                                                   </asp:DropDownList></td>
+                                        <th style="text-align:right;">Club/Team</th>
+                                        <td style="height:22px"><asp:DropDownList ID="Club_DropDownList"  CssClass="txtBox" runat="server" AutoPostBack="true" Height="20px" ></asp:DropDownList>
+                                                                <asp:DropDownList ID="Team_DropDownList"  CssClass="txtBox" runat="server" AutoPostBack="true" Height="20px">
+                                                                    <asp:ListItem Value=" "> </asp:ListItem>
+                                                                    <asp:ListItem Value="A">A</asp:ListItem>
+                                                                    <asp:ListItem Value="B">B</asp:ListItem>
+                                                                    <asp:ListItem Value="C">C</asp:ListItem>
+                                                                    <asp:ListItem Value="D">D</asp:ListItem>
+                                                                    <asp:ListItem Value="E">E</asp:ListItem>
+                                                                    <asp:ListItem Value="F">F</asp:ListItem>
+                                                                </asp:DropDownList></td>
                                         <th style="text-align:right;">Captain</th><td><asp:DropDownList ID="Captain_DropDownList" runat="server" Width="300px"></asp:DropDownList></td>
                                     </tr>
                                     <tr>

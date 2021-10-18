@@ -13,7 +13,6 @@ Public Class Teams
         Else
             If Not IsPostBack Then
                 populateSections()
-                populateClubs()
             End If
         End If
 
@@ -22,16 +21,6 @@ Public Class Teams
     Protected Sub PopulateSections()
 
         Using sectionsList As DataTable = LeagueData.GetSections(0)
-
-            With editSection_DropDownList
-                .Items.Clear()
-                .DataSource = sectionsList
-                .DataTextField = "Section Name"
-                .DataValueField = "ID"
-                .DataBind()
-                .Items.Insert(0, New ListItem("**All leagues**", 0))
-                .Items.Add(New ListItem("**Competitions only**", -1))
-            End With
 
             With Section_DropDownList
                 .Items.Clear()
@@ -64,10 +53,9 @@ Public Class Teams
         End Using
 
     End Sub
+    Sub PopulateClubs(LeagueID As Integer)
 
-    Sub PopulateClubs()
-
-        Using clubsAndByes As DataTable = ClubData.GetClubs(0, True)
+        Using clubsAndByes As DataTable = ClubData.GetClubs(100 + LeagueID, False)
 
             With Club_DropDownList
                 .Items.Clear()
@@ -194,8 +182,24 @@ Public Class Teams
                 End If
             End With
 
+            PopulateClubs(Team.LeagueID)
+
             Club_DropDownList.SelectedValue = .ClubID
+
+            Using sectionsList As DataTable = LeagueData.GetSections(Team.LeagueID)
+                With editSection_DropDownList
+                    .Items.Clear()
+                    .DataSource = sectionsList
+                    .DataTextField = "Section Name"
+                    .DataValueField = "ID"
+                    .DataBind()
+                    .Items.Insert(0, New ListItem("**All leagues**", 0))
+                    .Items.Add(New ListItem("**Competitions only**", -1))
+                End With
+            End Using
+
             editSection_DropDownList.SelectedValue = .SectionID
+
             Team_DropDownList.SelectedValue = .Team
             If .SectionID = -1 Then 'competitions only
                 FixtureNo_TextBox.Text = ""
@@ -251,6 +255,16 @@ Public Class Teams
 
         Err_Literal.Text = ""
         Edit_Literal.Text = ""
+
+        Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
+            If newTeam.ID > 0 Then  'shows no team in this league with the new credentials, so is OK to use.
+                FillEditTextBoxes(New TeamData(ID_TextBox.Text))
+                Edit_Literal.Text = "<span style='color:red;'>Error:  Cannot submit.  The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
+                                    " already exists in " & newTeam.SectionName & "<br/>" &
+                                    "Choose an alternative or Cancel.</span>"
+                Exit Sub
+            End If
+        End Using
 
         Using Team As New TeamData(CInt(ID_TextBox.Text))
             With Team
@@ -321,7 +335,7 @@ Public Class Teams
 
                     If action Is Nothing Then
 
-                        Edit_Literal.Text = "<span style='color:red;'>Error: Cannot delete/insert/update this Team with ID=" & CInt(ID_TextBox.Text) & "<br/><br/>Please contact support.</span>"
+                        Edit_Literal.Text = "<span style='color:red;'>Error: Cannot delete/insert/update this Team with ID = " & CInt(ID_TextBox.Text) & "<br/><br/>Please contact support.</span>"
 
                     Else
 
@@ -338,15 +352,33 @@ Public Class Teams
 
     End Sub
 
-    Private Sub Club_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Club_DropDownList.SelectedIndexChanged
+    Private Sub Club_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles Club_DropDownList.SelectedIndexChanged,
+                Team_DropDownList.SelectedIndexChanged
 
-        If Club_DropDownList.SelectedItem.Text = "Bye" Then
-            Captain_DropDownList.SelectedValue = 0
-            Captain_DropDownList.Enabled = False
-        Else
-            Captain_DropDownList.SelectedValue = 0
-            Captain_DropDownList.Enabled = True
-        End If
+        'If the club and/or team letter changes, need to ensure the new team doesn't exist
+        Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
+
+            If newTeam.ID = 0 Then  'shows no team in this league with the new credentials, so is OK to use.
+                With Captain_DropDownList
+                    If Club_DropDownList.SelectedItem.Text = "Bye" Then
+                        .Items.Clear()
+                        .Items.Add(New ListItem("", 0))
+                        .SelectedIndex = 0
+                        .Enabled = False
+                    Else
+                        .Enabled = True
+                    End If
+                End With
+            Else
+                FillEditTextBoxes(New TeamData(ID_TextBox.Text))
+                Edit_Literal.Text = "<span style='color:red;'>The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
+                                " already exists in " & newTeam.SectionName & "<br/>" &
+                                "Choose an alternative or Cancel. </span>"
+
+            End If
+
+        End Using
 
     End Sub
 
@@ -359,7 +391,7 @@ Public Class Teams
 
     End Sub
 
-    Private Sub EditSection_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles editSection_DropDownList.SelectedIndexChanged
+    Protected Sub editSection_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles editSection_DropDownList.SelectedIndexChanged
 
         If editSection_DropDownList.SelectedValue = -1 Then 'competitions only
             FixtureNo_TextBox.Text = ""
@@ -369,5 +401,4 @@ Public Class Teams
         End If
 
     End Sub
-
 End Class

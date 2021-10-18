@@ -186,7 +186,7 @@
                         HBSAcodeLibrary.HBSA_Configuration.update(ConfigKey, txt)
 
                     Case "Date"
-                        HBSAcodeLibrary.HBSA_Configuration.update(ConfigKey, CDate(txt).ToShortDateString)
+                        HBSAcodeLibrary.HBSA_Configuration.Update(ConfigKey, CDate(txt).ToString("dd MMM yyyy"))
 
                     Case "Integer"
                         HBSAcodeLibrary.HBSA_Configuration.update(ConfigKey, CInt(txt).ToString)

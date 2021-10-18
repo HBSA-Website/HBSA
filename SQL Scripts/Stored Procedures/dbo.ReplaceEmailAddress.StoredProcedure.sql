@@ -52,11 +52,12 @@ else
 
 drop table #EmailColumns
 
+--Clean up any email keys (the admin may have replaced with blank)
+
+delete from Resultsusers where eMailAddress=''
+delete from Clubusers where eMailAddress=''
+
+
 commit tran
 
 GO
-
-exec ReplaceEmailAddress 'gilbertp@outlook.com','gilbertp@outlook.com'
-exec FindEmailAddress 'petegilbert7@gmail.com'
-exec FindEmailAddress 'gilbertp@outlook.com'
-

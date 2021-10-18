@@ -114,13 +114,15 @@
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
                                              text-align:left; ">
                                             <a runat="server" href="Competitions.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> The draw, results, dates etc.</a></td></tr>
-
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
                                              text-align:left; ">
                                             <a runat="server" href="Contact.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Use contact us to send in a competion result</a></td></tr>
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
                                              text-align:left; ">
                                             <a runat="server" href="CompetitionsEntryForm.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> On line entry Forms </a></td></tr>
+                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
+                                              text-align:left; ">
+                                            <a runat="server" href="InfoPage.aspx?Subject=Competitions Rules&Title=Competitions Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Competitions Rules</a></td></tr>
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
                                              text-align:left; ">
                                             <a runat="server" href="EntryFormsDownload.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Entry Forms Download</a></td></tr>
@@ -286,19 +288,6 @@
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
                                               text-align:left; ">
                                             <a runat="server" href="InfoPage.aspx?Subject=Competitions Rules&Title=Competitions Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Competitions Rules</a></td></tr>
-                                    
-<%--                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
-                                              text-align:left; ">
-                                            <a runat="server" href="InfoPage.aspx?Subject=Handicap Leagues Supplementary Rules&Title=Snooker and Billiards  Handicap Leagues Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Snooker and Billiards Handicap Leagues Supplementary Rules</a></td></tr>
-                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
-                                              text-align:left; ">
-                                            <a runat="server" href="InfoPage.aspx?Subject=Open Snooker League Supplementary Rules&Title=Open Snooker League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Open Snooker League Supplementary Rules</a></td></tr>
-                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
-                                              text-align:left; ">
-                                            <a runat="server" href="InfoPage.aspx?Subject=Veterans Snooker League Supplementary Rules&Title=Veterans Snooker League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Veterans Snooker League Supplementary Rules</a></td></tr>
-                                    <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
-                                              text-align:left; ">
-                                            <a runat="server" href="InfoPage.aspx?Subject=Open Billiards League Supplementary Rules&Title=Open Billiards League Supplementary Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Open Billiards League Supplementary Rules</a></td></tr>--%>
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold; 
                                               text-align:left; ">
                                             <a runat="server" href="InfoPage.aspx?Subject=Yorkshire Association Rules&Title=Yorkshire Association Rules" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Yorkshire Association Rules</a></td></tr>

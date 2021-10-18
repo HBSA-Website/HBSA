@@ -791,7 +791,7 @@ showError:
 
         InitBoxes()
 
-        Using dr As New HBSAcodeLibrary.TeamData(Section_DropDownList.SelectedValue, FixtureDate_DropDownList.SelectedValue Mod 100, HomeTeam_DropDownList.SelectedValue)
+        Using dr As New HBSAcodeLibrary.TeamData(CInt(Section_DropDownList.SelectedValue), CInt(FixtureDate_DropDownList.SelectedValue) Mod 100, CInt(HomeTeam_DropDownList.SelectedValue))
             AwayTeam_Literal.Text = (dr.ClubName & " " & dr.Team).Trim
             SessionAwayTeamID.Value = dr.ID
         End Using
