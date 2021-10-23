@@ -30,6 +30,9 @@ else
 	if (select Played from Players where ID=@ID)=1
 		raiserror ('Cannot delete a player classed as having played.',17,0)	
 	else	
+	if exists(select ID from Teams where Captain=@ID)
+		raiserror ('Cannot delete a player who is a Team captain. Try changing the team captain first.',17,0)	
+	else	
 		begin
 		begin tran
 		update Players 
@@ -41,3 +44,6 @@ else
 
 
 GO
+exec DeletePlayer 1109
+select * from Players where id=1109
+select * from Teams where captain=1109

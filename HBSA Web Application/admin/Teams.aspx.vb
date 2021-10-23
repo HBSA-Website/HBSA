@@ -177,7 +177,13 @@ Public Class Teams
                         .Items.Insert(0, New ListItem("Select a team player as captain.", 0))
                         .SelectedValue = 0
                     Else
-                        .SelectedValue = Team.Captain
+                        Try
+                            .SelectedValue = Team.Captain
+                        Catch ex As Exception
+                            'Captain is not in list of players, ask for on eto be assigned.
+                            .Items.Insert(0, New ListItem("Select a team player as captain.", 0))
+                            .SelectedValue = 0
+                        End Try
                     End If
                 End If
             End With
@@ -256,20 +262,12 @@ Public Class Teams
         Err_Literal.Text = ""
         Edit_Literal.Text = ""
 
-        Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
-            If newTeam.ID > 0 Then  'shows no team in this league with the new credentials, so is OK to use.
-                FillEditTextBoxes(New TeamData(ID_TextBox.Text))
-                Edit_Literal.Text = "<span style='color:red;'>Error:  Cannot submit.  The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
-                                    " already exists in " & newTeam.SectionName & "<br/>" &
-                                    "Choose an alternative or Cancel.</span>"
-                Exit Sub
-            End If
-        End Using
-
         Using Team As New TeamData(CInt(ID_TextBox.Text))
             With Team
                 If SubmitTeam_Button.Text = "Delete" Then
+
                     .SectionID = -100
+
                 Else
 
                     If Edit_Literal.Text <> "" Then
@@ -330,6 +328,18 @@ Public Class Teams
                     If .SectionID = -100 And Club_DropDownList.SelectedItem.Text.ToLower <> "bye" Then
                         action = .Remove(Session("AdminUser"))
                     Else
+
+                        Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
+                            If newTeam.ID > 0 AndAlso newTeam.ID <> CInt(ID_TextBox.Text) Then  'shows no team in this league with the new credentials, so is OK to use.
+                                Edit_Literal.Text = "<span style='color:red;'>Error:  Cannot submit.  The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
+                                    " already exists in " & newTeam.SectionName & "<br/>" &
+                                    "Choose an alternative or Cancel.</span>"
+
+                                Exit Sub
+
+                            End If
+                        End Using
+
                         action = .Merge(Session("AdminUser")) ' This will insert/update as required
                     End If
 
@@ -356,6 +366,7 @@ Public Class Teams
         Handles Club_DropDownList.SelectedIndexChanged,
                 Team_DropDownList.SelectedIndexChanged
 
+        Edit_Literal.Text = ""
         'If the club and/or team letter changes, need to ensure the new team doesn't exist
         Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
 
@@ -371,7 +382,7 @@ Public Class Teams
                     End If
                 End With
             Else
-                FillEditTextBoxes(New TeamData(ID_TextBox.Text))
+                'FillEditTextBoxes(New TeamData(ID_TextBox.Text))
                 Edit_Literal.Text = "<span style='color:red;'>The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
                                 " already exists in " & newTeam.SectionName & "<br/>" &
                                 "Choose an alternative or Cancel. </span>"
