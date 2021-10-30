@@ -362,7 +362,7 @@
     <Content Include="Documents\AGM PAPERS 2021.pdf" />
     <Content Include="App_Data\HBSA.dat" />
     <Content Include="Documents\League rules.pdf" />
-    <Content Include="Documents\2020 Trophies and Prizes.pdf" />
+    <Content Include="Documents\Trophies and Prizes.pdf" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
