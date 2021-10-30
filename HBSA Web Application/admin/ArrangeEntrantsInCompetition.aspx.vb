@@ -46,21 +46,28 @@ Public Class ArrangeEntrantsInCompetition
 
             Using Comp As New HBSAcodeLibrary.CompetitionRounds(Competitions_DropDownList.SelectedValue)
 
-                If Comp.CompetitionDetailsData.Tables(1).Rows.Count > 1 Then
+                If Comp.CompetitionDetailsData.Tables.Count > 1 Then
 
                     Dim CompName As String = New CompetitionData(Competitions_DropDownList.SelectedValue).Name
-                    Confirm_Literal.Text = "This competition (" & CompName &
-                                                         ") has matches already recorded (could be byes).  <br /><br />If you need to rearrange entries Click Confirm.  " &
-                                                         "This will remove any results and take the competition back to the first round. <br/><br/> " &
-                                                         "After having done this and/or having made any rearrangements go to the competitions results page and promote any byes/winners.<br/><br/>Otherwise Click Cancel"
+
+                    If Comp.CompetitionDetailsData.Tables(1).Rows.Count > 1 Then
+
+                        Confirm_Literal.Text = "This competition (" & CompName &
+                                                             ") has matches already recorded (could be byes).  <br /><br />If you need to rearrange entries Click Confirm.  " &
+                                                             "This will remove any results and take the competition back to the first round. <br/><br/> " &
+                                                             "After having done this and/or having made any rearrangements go to the competitions results page and promote any byes/winners.<br/><br/>Otherwise Click Cancel"
+                    Else
+                        Confirm_Literal.Text = "This competition (" & CompName &
+                                                             ") has not been drawn.<br/><br/> Click Cancel"
+                    End If
 
                     Confirm_Panel.Visible = True
 
-                    Session("Confirm") = "Confirm Baseline"
+                    Session("Confirm") = "Not drawn"
 
                 Else
 
-                    Session("CompetitionRound1Entries") = HBSAcodeLibrary.CompetitionRounds.GetCompetitionRound1Data(Competitions_DropDownList.SelectedValue)
+                        Session("CompetitionRound1Entries") = HBSAcodeLibrary.CompetitionRounds.GetCompetitionRound1Data(Competitions_DropDownList.SelectedValue)
                     Session("ChangesPending") = False
 
                     PopulateEntries()

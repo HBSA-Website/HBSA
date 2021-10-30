@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
     <title>HBSA Web Administration</title>
+    <script src="ckeditor/ckeditor.js"></script>
     <link href="../styles/global.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .normal {

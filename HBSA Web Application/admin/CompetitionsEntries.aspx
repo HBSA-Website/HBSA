@@ -251,7 +251,7 @@
 
    <asp:Panel ID="ClubsWithoutPrivacyAccepted_Panel" runat="server" Visible="false">
 
-        <div style="padding: 8px; border: thin solid #0000FF; background-color: #CCFFFF; position:absolute; top:140px; left:10%; width:60%">
+        <div style="padding: 8px; border: thin solid #0000FF; background-color: #CCFFFF; position:absolute; top:140px; left:10%; width:60%; display:none">
             <br />
             <span style="color:red;">The following clubs have competitions entries and have not accepted the Privacy Policy, therefore any teams and players registered with them have not been entered 
             into the competitions.</span>

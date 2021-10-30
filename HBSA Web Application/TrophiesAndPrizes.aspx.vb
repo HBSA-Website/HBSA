@@ -1,67 +1,67 @@
 ﻿Public Class TrophiesAndPrizes
     Inherits System.Web.UI.Page
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    'Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Not IsPostBack Then
-            populateReports(sender, e)
-        Else
-            'WinnerCell_TextBox.Text = ""
-        End If
+    '    If Not IsPostBack Then
+    '        populateReports(sender, e)
+    '    Else
+    '        'WinnerCell_TextBox.Text = ""
+    '    End If
 
-    End Sub
+    'End Sub
 
-    Sub PopulateReports(ByVal sender As Object, ByVal e As System.EventArgs)
+    'Sub PopulateReports(ByVal sender As Object, ByVal e As System.EventArgs)
 
-        With Report_DropDownList
+    '    With Report_DropDownList
 
-            Dim AwardTypes As DataTable = HBSAcodeLibrary.AwardsTemplate.AwardTypes
+    '        Dim AwardTypes As DataTable = HBSAcodeLibrary.AwardsTemplate.AwardTypes
 
-            .Items.Clear()
+    '        .Items.Clear()
 
-            .DataSource = AwardTypes
-            .DataTextField = "Description"
-            .DataValueField = "AwardType"
-            .DataBind()
+    '        .DataSource = AwardTypes
+    '        .DataTextField = "Description"
+    '        .DataValueField = "AwardType"
+    '        .DataBind()
 
-            .Items.Insert(0, New ListItem("All awards", "0"))
+    '        .Items.Insert(0, New ListItem("All awards", "0"))
 
-            .SelectedIndex = 0
-            Report_DropDownList_SelectedIndexChanged(sender, e)
+    '        .SelectedIndex = 0
+    '        Report_DropDownList_SelectedIndexChanged(sender, e)
 
-        End With
+    '    End With
 
-    End Sub
+    'End Sub
 
-    Private Sub Report_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) _
-            Handles Report_DropDownList.SelectedIndexChanged
+    'Private Sub Report_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) _
+    '        Handles Report_DropDownList.SelectedIndexChanged
 
-        Status_Literal.Text = ""
+    '    Status_Literal.Text = ""
 
-        With Awards_GridView
-            Using _Awards As New HBSAcodeLibrary.AwardsObj
+    '    With Awards_GridView
+    '        Using _Awards As New HBSAcodeLibrary.AwardsObj
 
-                Dim AwardsReport As DataTable = _Awards.Report(Report_DropDownList.SelectedValue)
+    '            Dim AwardsReport As DataTable = _Awards.Report(Report_DropDownList.SelectedValue)
 
-                .DataSource = AwardsReport
-                .DataBind()
+    '            .DataSource = AwardsReport
+    '            .DataBind()
 
-                ExportCells.Visible = AwardsReport.Rows.Count > 0
+    '            ExportCells.Visible = AwardsReport.Rows.Count > 0
 
-                Session("TrophiesAndPrizes") = AwardsReport
+    '            Session("TrophiesAndPrizes") = AwardsReport
 
-            End Using
+    '        End Using
 
-        End With
+    '    End With
 
-    End Sub
+    'End Sub
 
-    Private Sub Awards_GridView_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles Awards_GridView.RowDataBound
+    'Private Sub Awards_GridView_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles Awards_GridView.RowDataBound
 
-        For ix = 5 To e.Row.Cells.Count - 1
-            e.Row.Cells(ix).Visible = False
-        Next
+    '    For ix = 5 To e.Row.Cells.Count - 1
+    '        e.Row.Cells(ix).Visible = False
+    '    Next
 
-    End Sub
+    'End Sub
 
 End Class

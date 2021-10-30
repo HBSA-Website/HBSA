@@ -57,7 +57,8 @@
                             </tr>
                         </table>
               
-            <asp:GridView ID="Entrants_GridView" runat="server" Font-Size="9pt" BackColor="White" BorderColor="Black" 
+            <asp:GridView ID="Entrants_GridView" runat="server" Font-Size="9pt" BackColor="White" 
+                                      BorderColor="Black" 
                                       BorderStyle="Solid" BorderWidth="1px" CellPadding="3"
                                       AllowSorting="True" EmptyDataText="No entrants forms in this competition">
                 <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />

@@ -1,4 +1,7 @@
---creat trable of breaks by frame
+USE HBSA
+GO
+
+--create trable of breaks by frame
 create table #BreaksByFrame
 	(MatchResultID int
 	,PlayerID int
@@ -71,6 +74,7 @@ select @ThisSeason=Datepart(year,convert(date,[value]))
 select @Season=Convert(char(4),@ThisSeason) + '/' + Convert(char(2),(@ThisSeason+1) % 100)
 
 --get the remaining data by frames
+
 select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],SectionID=S.ID, Section=replace([Section Name],'League','Billiards')
       ,FixtureDate=convert(varchar(11),FixtureDate,13),MatchDate=convert(varchar(11),MatchDate,13)
 	  ,HomeTeamID=H.ID,HomeTeam=HC.[Club Name]+' '+ H.Team
@@ -97,7 +101,10 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	  ,AwayBreak7 = isnull(AB.Break7,'')
 	  ,HomeBreak8 = isnull(HB.Break8,'')
 	  ,AwayBreak8 = isnull(AB.Break8,'')
-    from MatchResultsDetails2 M
+
+	into #TempReport
+    
+	from MatchResultsDetails2 M
     join Teams H on H.ID = HomeTeamID
     join Teams A on A.ID = AwayTeamID
 	join Sections S on S.ID = H.sectionID
@@ -107,7 +114,7 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	left join #BreaksByFrame HB on HB.MatchResultID = M.ID and HB.PlayerID = M.HomePlayer1ID
 	left join #BreaksByFrame AB on HB.MatchResultID = M.ID and HB.PlayerID = M.AwayPlayer1ID
 
-union all
+insert into #TempReport
 
 select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],SectionID=S.ID, Section=replace([Section Name],'League','Billiards')
       ,FixtureDate=convert(varchar(11),FixtureDate,13),MatchDate=convert(varchar(11),MatchDate,13)
@@ -145,7 +152,7 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	left join #BreaksByFrame HB on HB.MatchResultID = M.ID and HB.PlayerID = M.HomePlayer2ID
 	left join #BreaksByFrame AB on HB.MatchResultID = M.ID and HB.PlayerID = M.AwayPlayer2ID
 
-union all
+insert into #TempReport
 
 select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],SectionID=S.ID, Section=replace([Section Name],'League','Billiards')
       ,FixtureDate=convert(varchar(11),FixtureDate,13),MatchDate=convert(varchar(11),MatchDate,13)
@@ -183,7 +190,7 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 	left join #BreaksByFrame HB on HB.MatchResultID = M.ID and HB.PlayerID = M.HomePlayer3ID
 	left join #BreaksByFrame AB on HB.MatchResultID = M.ID and HB.PlayerID = M.AwayPlayer3ID
 
-union all
+insert into #TempReport
 
 select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],SectionID=S.ID, Section=replace([Section Name],'League','Billiards')
       ,FixtureDate=convert(varchar(11),FixtureDate,13),MatchDate=convert(varchar(11),MatchDate,13)
@@ -223,9 +230,11 @@ select FixtureID=M.ID, Season=@Season, LeagueID=L.ID, League = L.[League Name],S
 
 	where LeagueID < 3 
 
-order by FixtureID
+select * from #TempReport
+	order by SectionID, convert(date,MatchDate), FixtureID
 
 drop table #BreaksByFrame
+drop table #TempReport
 
 GO
 

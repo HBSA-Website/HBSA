@@ -83,8 +83,8 @@ Public Class Awards
             TrophyCell.InnerText = .Cells(3).Text.Replace("&nbsp;", "").Replace("&amp;", "&")
             AwardCell.InnerText = .Cells(5).Text
             AwardType_HiddenField.Value = .Cells(6).Text
-            AwardID_HiddenField.Value = .Cells(7).Text
-            SubID_HiddenField.Value = .Cells(8).Text
+            AwardID_HiddenField.Value = If(.Cells(7).Text = "&nbsp;", "", .Cells(7).Text)
+            SubID_HiddenField.Value = If(.Cells(8).Text = "&nbsp;", "", .Cells(8).Text)
             LeagueID_HiddenField.Value = .Cells(9).Text
         End With
 

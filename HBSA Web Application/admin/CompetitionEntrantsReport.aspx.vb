@@ -55,11 +55,4 @@
 
     End Sub
 
-    Private Sub Entrants_GridView_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles Entrants_GridView.RowDataBound
-
-        If e.Row.RowType = DataControlRowType.DataRow Then
-            e.Row.Cells(0).Visible = False
-        End If
-
-    End Sub
 End Class

@@ -465,7 +465,7 @@ Public Class CompetitionsEntries
         With Entrants_DropDownList
 
             For ix = 0 To .Items.Count - 1
-                If .Items(ix).Text.Trim.ToLower = Entrant_TextBox.Text.Trim.ToLower Then
+                If .Items(ix).Text.Trim.ToLower.StartsWith(Entrant_TextBox.Text.Trim.ToLower) Then
                     .SelectedIndex = ix
                     Exit For
                 End If
@@ -523,5 +523,9 @@ Public Class CompetitionsEntries
 
     Protected Sub ClubsWithoutPrivacyAccepted_Button_Click(sender As Object, e As EventArgs) Handles ClubsWithoutPrivacyAccepted_Button.Click
         ClubsWithoutPrivacyAccepted_Panel.Visible = False
+    End Sub
+
+    Private Sub Entrant_TextBox_DataBinding(sender As Object, e As EventArgs) Handles Entrant_TextBox.DataBinding
+
     End Sub
 End Class
