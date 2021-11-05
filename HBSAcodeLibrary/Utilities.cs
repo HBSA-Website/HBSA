@@ -219,7 +219,7 @@ namespace HBSAcodeLibrary
             DateTime now = DateTime.UtcNow;
             //get 1st and last dates of BST
             startOfBST = new DateTime(now.Year, 3, 31);
-            endOfBST = new DateTime(now.Year, 10, 30);
+            endOfBST = new DateTime(now.Year, 10, 31);
             //get last Sunday of the month 
             while (startOfBST.DayOfWeek != DayOfWeek.Sunday)
                 startOfBST = startOfBST.AddDays(-1);

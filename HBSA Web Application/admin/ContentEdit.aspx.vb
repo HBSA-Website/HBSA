@@ -19,7 +19,8 @@
                     End If
                 Else
                     ContentName_HiddenField.Value = Request.QueryString("Content").ToString
-                    populatePage()
+
+                    PopulatePage()
                 End If
             End If
         End If

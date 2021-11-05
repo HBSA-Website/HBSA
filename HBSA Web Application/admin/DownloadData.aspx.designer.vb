@@ -11,41 +11,32 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ContactsReport
+Partial Public Class DownloadData
 
     '''<summary>
-    '''ScriptManager1 control.
+    '''Status_Literal control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
+    Protected WithEvents Status_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''Update_Progress control.
+    '''DownloadContactsReport_Button control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Update_Progress As Global.System.Web.UI.UpdateProgress
+    Protected WithEvents DownloadContactsReport_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''UpdatePanel1 control.
+    '''MatchResults_Button control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
-
-    '''<summary>
-    '''Export_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Export_Button As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents MatchResults_Button As Global.System.Web.UI.WebControls.Button
 End Class

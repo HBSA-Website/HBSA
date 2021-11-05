@@ -11,7 +11,10 @@ as
 
 set nocount on
 
-create table #tmp
+if exists(SELECT TABLE_NAME from INFORMATION_SCHEMA.TABLES where TABLE_NAME='ContactsReportTable' )
+	truncate table dbo.ContactsReportTable
+else
+	create table dbo.ContactsReportTable
 	(Seq      int identity (1,1)
 	,[Source] varchar(16)
 	,Entity   varchar(16)
@@ -30,7 +33,7 @@ create table #tmp
     ,[Tel No 2] varchar(20)
 	)
 
-insert #tmp
+insert ContactsReportTable
 select	 [Source] = 'Base'
 	   	,Entity = 'Club'
 		,Club = [Club Name]
@@ -50,7 +53,7 @@ select	 [Source] = 'Base'
 	where [Club Name] <> 'Bye'
 	order by [Club Name]
 
-insert into #tmp
+insert ContactsReportTable
 select	 [Source] = 'Base'
 	   	,Entity = 'Club Login'
 		,Club = [Club Name]
@@ -72,7 +75,7 @@ select	 [Source] = 'Base'
 	where [Club Name] <> 'Bye'
 	order by [Club Name]
 
-insert into #tmp
+insert ContactsReportTable
 select	 [Source] = 'Base'
 	   	,Entity = 'Team'
 		,Club = [Club Name]
@@ -97,7 +100,7 @@ select	 [Source] = 'Base'
 	where [Club Name] <> 'Bye'
 	order by [Club Name], L.ID, Team 
 
-insert into #tmp
+insert ContactsReportTable
 select	 [Source] = 'Base'
 	   	,Entity = 'Team Login'
 		,Club = [Club Name]
@@ -123,7 +126,7 @@ select	 [Source] = 'Base'
 	outer apply (select [Club Name] from Clubs where ID = ClubID)C
 	order by [Club Name], L.ID, Team 
 
-insert into #tmp
+insert ContactsReportTable
 select	 [Source] = 'Base'
 	   	,Entity = 'Player'
 		,Club = isnull([Club Name],'_No Club')
@@ -148,7 +151,7 @@ select	 [Source] = 'Base'
 	where P.ID > 0
 	order by isnull([Club Name],'_No Club'), L.ID, Team, [Player Name]
 
-insert into #tmp
+insert ContactsReportTable
 select	 [Source] = 'Entry Form'
 	   	,Entity = 'Club'
 		,Club = [Club Name]
@@ -169,7 +172,7 @@ select	 [Source] = 'Entry Form'
 	where [Club Name] <> 'Bye'
 	order by [Club Name]
 
-insert into #tmp
+insert ContactsReportTable
 select	 [Source] = 'Entry Form'
 	   	,Entity = 'Team'
 		,Club = [Club Name]
@@ -194,7 +197,7 @@ select	 [Source] = 'Entry Form'
 
 	order by [Club Name], L.ID, Team 
 
-insert into #tmp
+insert ContactsReportTable
 select	 [Source] = 'Entry Form'
 	   	,Entity = 'Player'
 		,Club = isnull([Club Name],'_No Club')
@@ -219,10 +222,8 @@ select	 [Source] = 'Entry Form'
 	order by isnull([Club Name],'_No Club'), LeagueID, Team, [Player Name]
 
 select * 
-	from #tmp
+	from ContactsReportTable
 	order by Seq
-
-drop table #tmp
 
 go
 

@@ -388,6 +388,10 @@ namespace HBSAcodeLibrary
         {
             return SQLcommands.ExecDataTable("ContactsReport");
         }
+        public static DataTable DataForDownload(string SPname)
+        {
+            return SQLcommands.ExecDataTable(SPname);
+        }
     }
     public class Administrator : IDisposable 
     {
