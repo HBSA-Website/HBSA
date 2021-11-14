@@ -4296,6 +4296,22 @@ namespace HBSAcodeLibrary
 
             return ApplyTaggedPlayersHandicapsRet == "" ? TaggedPlayersTable.Rows.Count.ToString() : ApplyTaggedPlayersHandicapsRet;
         }
+        public static DataTable GetPlayersByClubAndTeam(int ClubID, int SectionID = -1, string Team = "")
+        {
+            if (SectionID == -1) {
+                return SQLcommands.ExecDataTable("GetPlayersByClub",
+                                               new List<SqlParameter> { 
+                                                   new SqlParameter("ClubID", ClubID)
+                                                                      });
+            } else {
+                return SQLcommands.ExecDataTable("GetPlayersByClubAndTeam",
+                                            new List<SqlParameter> {
+                                                new SqlParameter("SectionID", SectionID),
+                                                new SqlParameter("ClubID", ClubID),
+                                                new SqlParameter("Team", Team) 
+                                                                    });
+            }
+        }
         public static DataTable GetPlayerDetails (int SectionID = 0, int ClubID = 0)
         {
             return SQLcommands.ExecDataTable("GetPlayerDetails",
@@ -4501,7 +4517,13 @@ namespace HBSAcodeLibrary
         }
         public SectionData(int SectionID)
         {
-            GetSectionData(SectionID);
+            if (SectionID == -1) { 
+                // special case for competitions only teams
+                ID = -1;
+                LeagueID = -1;
+                SectionName = "**Competitions only**";
+            } else
+                GetSectionData(SectionID);
         }
         public void GetSectionData(int SectionID)
         {
@@ -4741,6 +4763,10 @@ namespace HBSAcodeLibrary
 
             Players = TeamData.Tables[1];
         }
+        public TeamData()
+        {
+
+        }
         public TeamData(int TeamID)
         {
             // Given a team ID, get that team's details
@@ -4828,27 +4854,11 @@ namespace HBSAcodeLibrary
                 try
                 {
                     // get rid of DBNnulls
-                    for (int row = 0, loopTo = TeamsTables.Tables[0].Rows.Count - 1; row <= loopTo; row++)
-                    {
-                        for (int col = 0, loopTo1 = TeamsTables.Tables[0].Rows[row].ItemArray.Length - 1; col <= loopTo1; col++)
-                        {
-                            if (DBNull.Value == TeamsTables.Tables[0].Rows[row][col])
-                            {
-                                TeamsTables.Tables[0].Rows[row][col] = "";
-                            }
-                        }
-                    }
-
-                    for (int row = 0, loopTo2 = TeamsTables.Tables[1].Rows.Count - 1; row <= loopTo2; row++)
-                    {
-                        for (int col = 0, loopTo3 = TeamsTables.Tables[1].Rows[row].ItemArray.Length - 1; col <= loopTo3; col++)
-                        {
-                            if (DBNull.Value == TeamsTables.Tables[1].Rows[row][col])
-                            {
-                                TeamsTables.Tables[1].Rows[row][col] = 0;
-                            }
-                        }
-                    }
+                    for (int tbl = 0; tbl < TeamsTables.Tables.Count; tbl++)
+                        for (int row = 0; row < TeamsTables.Tables[tbl].Rows.Count; row++)
+                            for (int col = 0; col < TeamsTables.Tables[tbl].Rows[row].ItemArray.Length; col++)
+                                if (DBNull.Value == TeamsTables.Tables[tbl].Rows[row][col])
+                                    TeamsTables.Tables[0].Rows[row][col] = "";
                 }
                 catch (Exception)
                 {

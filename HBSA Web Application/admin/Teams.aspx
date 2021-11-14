@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/admin/adminMasterPage.master" CodeBehind="Teams.aspx.vb" Inherits="HBSA_Web_Application.Teams" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -67,12 +72,9 @@
                                     <div style="width:100%; text-align:center; font-size: 10pt; color: #000099;">
                                         <asp:Literal ID="Edit_Literal" runat="server"></asp:Literal><br/><br/>
                                     </div>
-                                    <div style="width:100%;">
-                                      <asp:TextBox ID="ID_TextBox" runat="server" Visible="false"></asp:TextBox>
-                                  </div>  
-
-                                  <div>
-                                <table">
+                                    <asp:TextBox ID="ID_TextBox" runat="server" Visible="false"></asp:TextBox>
+                                <div>
+                                <table>
                                     <tr>
                                         <th style="text-align:right;">Club/Team</th>
                                         <td style="height:22px"><asp:DropDownList ID="Club_DropDownList"  CssClass="txtBox" runat="server" AutoPostBack="true" Height="20px" ></asp:DropDownList>
@@ -85,12 +87,12 @@
                                                                     <asp:ListItem Value="E">E</asp:ListItem>
                                                                     <asp:ListItem Value="F">F</asp:ListItem>
                                                                 </asp:DropDownList></td>
-                                        <th style="text-align:right;">Captain</th><td><asp:DropDownList ID="Captain_DropDownList" runat="server" Width="300px"></asp:DropDownList></td>
+                                        <th style="text-align:right;">Captain</th><td><asp:DropDownList ID="Captain_DropDownList" runat="server" ></asp:DropDownList></td>
                                     </tr>
                                     <tr>
                                         <th style="text-align:right;">League/Section</th><td><asp:DropDownList ID="editSection_DropDownList" runat="server" AutoPostBack="true"></asp:DropDownList></td>
                                     </tr>
-                                    <tr>
+                                    <tr id="FixtureRow" runat="server">
                                         <th style="text-align:right;">Fixture Number</th><td><asp:TextBox ID="FixtureNo_TextBox" runat="server" Width="20px" />(if left blank set to next available)</td>
                                     </tr>
                                </table>

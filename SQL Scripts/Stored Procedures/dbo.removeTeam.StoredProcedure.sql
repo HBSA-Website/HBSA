@@ -21,53 +21,70 @@ set xact_abort on
 begin tran
 
 	declare @TeamName varchar (256)
+	declare @SectionID int
 	select @TeamName = rtrim([Club Name] + ' ' + Team)
+	      ,@SectionID = SectionID
 		from Teams 
 		cross apply (select [Club Name]
 						from clubs where ID = ClubID) C
 		where ID=@TeamID
-	
-	--disassociate the players
-	update Players set SectionID=0, Team=''
-		from Teams T
-		join Players P on P.ClubID=T.ClubID
-			          and P.SectionID=T.SectionID
-		where T.ID=@TeamID
 
-	--remove recorded breaks
-	delete Breaks
-		from MatchResults 
-		join Breaks on MatchResultID=MatchResults.ID
-		where HomeTeamID=@TeamID or AwayTeamID=@TeamID
+    if @SectionID > 0
+		--Normal team in a league
+		begin
+		--disassociate the players
+		update Players set SectionID=0, Team=''
 
-	--remove match results
-	delete 
-		from MatchResults 
-		where HomeTeamID=@TeamID
-		   or AwayTeamID=@TeamID
+			from Teams T
+			join Players P on P.ClubID=T.ClubID
+				          and P.SectionID=T.SectionID
+			where T.ID=@TeamID
 
-	--remove adjustments
-	delete 
-		from LeaguePointsAdjustment 
-		where TeamID=@TeamID
+		--remove recorded breaks
+		delete Breaks
+			from MatchResults 
+			join Breaks on MatchResultID=MatchResults.ID
+			where HomeTeamID=@TeamID or AwayTeamID=@TeamID
 
-	--remove the team keeping details in Teams_Removed
-	select * From Teams where ID=@TeamID
+		--remove match results
+		delete 
+			from MatchResults 
+			where HomeTeamID=@TeamID
+			   or AwayTeamID=@TeamID
+
+		--remove adjustments
+		delete 
+			from LeaguePointsAdjustment 
+			where TeamID=@TeamID
+
+		--remove logins for this team
+		delete 
+			from ResultsUsers 
+			where TeamID=@TeamID
 		
-	--Change the team to a bye to retain the fixture structure
-	update Teams 
-		set ClubID=8, 
-		    Captain=0
-		where ID=@TeamID
+		--Change the team to a bye to retain the fixture structure
+		update Teams 
+			set ClubID=8, 
+				Captain=0
+			where ID=@TeamID
 
-	--remove logins for this team
-	delete 
-		from ResultsUsers 
-		where TeamID=@TeamID
+		--log it
+		insert Activitylog values (dbo.UKdateTime(getUTCdate()),'Team removed(' + @TeamName + ')',@TeamID,isnull(@User,original_login()))
+		end
 
-	--log it
-	insert Activitylog values (dbo.UKdateTime(getUTCdate()),'Team removed(' + @TeamName + ')',@TeamID,isnull(@User,original_login()))
+	else
+		--competitions only team - just remove it
+		begin
+		delete Teams 
+			where ID=@TeamID
+
+		--log it
+		insert Activitylog values (dbo.UKdateTime(getUTCdate()),'Competitions Team removed(' + @TeamName + ')',@TeamID,isnull(@User,original_login()))
+		end
+
 	
 commit tran
 
 GO
+
+

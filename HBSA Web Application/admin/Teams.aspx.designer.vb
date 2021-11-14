@@ -158,6 +158,15 @@ Partial Public Class Teams
     Protected WithEvents editSection_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''FixtureRow control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FixtureRow As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
     '''FixtureNo_TextBox control.
     '''</summary>
     '''<remarks>
