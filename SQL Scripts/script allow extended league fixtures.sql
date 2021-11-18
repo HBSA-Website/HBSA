@@ -88,7 +88,7 @@ set @SQL=@SQL + '
 from FixtureGrids M
 join FixtureDates D
   on D.SectionID=' + convert(varchar,@SectionID) + '
- and M.WeekNo=case when D.WeekNo % @MatrixSize = 0 then 18 else D.WeekNo % @MatrixSize end
+ and M.WeekNo=case when D.WeekNo % @MatrixSize = 0 then @MatrixSize else D.WeekNo % @MatrixSize end
 where M.SectionID=' + convert(varchar,@SectionID) + '
 order by FixtureDate'
 exec (@SQL)
@@ -486,7 +486,7 @@ declare FixtureListCursor cursor for
 		from FixtureDates D
 		left join FixtureGrids M
 		  on M.SectionID=@SectionID
-		 and M.WeekNo=case when D.WeekNo % @MatrixSize = 0 then 18 else D.WeekNo % @MatrixSize end
+		 and M.WeekNo=case when D.WeekNo % @MatrixSize = 0 then @MatrixSize else D.WeekNo % @MatrixSize end
 	 where D.SectionID=@SectionID 
 	 order by D.WeekNo
 	 
@@ -611,7 +611,7 @@ declare @AwayFixtureNo int
 	     
 from FixtureGrids
 where SectionID=@SectionID
-  and WeekNo=case when @Weekno  % @MatrixSize = 0 then 18 else @Weekno % @MatrixSize end
+  and WeekNo=case when @Weekno  % @MatrixSize = 0 then @MatrixSize else @Weekno % @MatrixSize end
 
 declare @AwayTeamID int
 select @AwayTeamID = ID from Teams where SectionID = @SectionID and FixtureNo=@AwayFixtureNo 

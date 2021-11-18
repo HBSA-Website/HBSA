@@ -246,7 +246,7 @@ Public Class MatchResult1
                 SessionAwayTeamID.Value = dr.ID
             End Using
 
-            Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
+            Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value, FixtureDate_DropDownList.SelectedItem.Text)
 
 
                 ' If not an administrator ensure it is not outside the 4 week limit
@@ -1236,8 +1236,8 @@ showError:
     Protected Sub Recover_Button_Click(sender As Object, e As EventArgs) Handles Recover_Button.Click
 
         'Given the selection Criteria attempt to recover a previously deleted result
-        Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
-            MatchResult.Recover(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
+        Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value, FixtureDate_DropDownList.SelectedItem.Text)
+            MatchResult.Recover(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value, FixtureDate_DropDownList.SelectedItem.Text)
             PopulateMatchResult(MatchResult)
         End Using
 

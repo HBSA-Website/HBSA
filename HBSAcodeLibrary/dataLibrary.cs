@@ -3480,17 +3480,18 @@ namespace HBSAcodeLibrary
         {
             // set up empty result card.
             // This will format table columns
-            GetResultCard(0, 0);
+            GetResultCard(0, 0, new DateTime(2000,1,1));
         }
-        public MatchResult(int HomeTeamID, int AwayTeamID)
+        public MatchResult(int HomeTeamID, int AwayTeamID, DateTime FixtureDate)
         {
-            GetResultCard(HomeTeamID, AwayTeamID);
+            GetResultCard(HomeTeamID, AwayTeamID, FixtureDate);
         }
-        private void GetResultCard(int HomeTeamID, int AwayTeamID)
+        private void GetResultCard(int HomeTeamID, int AwayTeamID, DateTime FixtureDate)
         {
             DataSet matchResult = SQLcommands.ExecDataSet("checkForResultsCard",
                                                            new List<SqlParameter> { new SqlParameter("HomeTeamID", HomeTeamID),
-                                                                                    new SqlParameter("AwayTeamID", AwayTeamID) });
+                                                                                    new SqlParameter("AwayTeamID", AwayTeamID),
+                                                                                    new SqlParameter("FixtureDate", FixtureDate)});
             Match = matchResult.Tables[0];
             Frames = matchResult.Tables[1];
             HomeBreaksTable = matchResult.Tables[2];
@@ -3500,13 +3501,13 @@ namespace HBSAcodeLibrary
             else
                 MatchResultID = -1;
         }
-        public void Recover(int HomeTeamID, int AwayTeamID)
+        public void Recover(int HomeTeamID, int AwayTeamID, DateTime FixtureDate)
         {
             // given the home & away teams, recover the most recent match result and populate the object
             SQLcommands.ExecDataSet("RecoverMatchResult",
                                      new List<SqlParameter> { new SqlParameter("HomeTeamID", HomeTeamID),
                                                               new SqlParameter("AwayTeamID", AwayTeamID) });
-            GetResultCard(HomeTeamID, AwayTeamID);
+            GetResultCard(HomeTeamID, AwayTeamID, FixtureDate);
         }
         public static DataTable BreaksForMatch(int HomeTeamID, int AwayTeamID)
         {

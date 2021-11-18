@@ -791,12 +791,12 @@ showError:
 
         InitBoxes()
 
-        Using dr As New HBSAcodeLibrary.TeamData(CInt(Section_DropDownList.SelectedValue), CInt(FixtureDate_DropDownList.SelectedValue) Mod 100, CInt(HomeTeam_DropDownList.SelectedValue))
-            AwayTeam_Literal.Text = (dr.ClubName & " " & dr.Team).Trim
-            SessionAwayTeamID.Value = dr.ID
+        Using AwayTeam As New HBSAcodeLibrary.TeamData(CInt(Section_DropDownList.SelectedValue), CInt(FixtureDate_DropDownList.SelectedValue) Mod 100, CInt(HomeTeam_DropDownList.SelectedValue))
+            AwayTeam_Literal.Text = (AwayTeam.ClubName & " " & AwayTeam.Team).Trim
+            SessionAwayTeamID.Value = AwayTeam.ID
         End Using
 
-        Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
+        Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value,FixtureDate_DropDownList.Selecteditem.Text)
             'If not an administrator ensure it is not outside the 4 week limit
             If SessionAdminEmail.Value = "" Then
                 Dim TodaysDate As Date = Utilities.UKDateTimeNow
@@ -1095,8 +1095,8 @@ showError:
     Protected Sub Recover_Button_Click(sender As Object, e As EventArgs) Handles Recover_Button.Click
 
         'Given the selection Criteria attempt to recover a previously deleted result
-        Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
-            MatchResult.Recover(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value)
+        Using MatchResult As New HBSAcodeLibrary.MatchResult(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value, FixtureDate_DropDownList.SelectedItem.Text)
+            MatchResult.Recover(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value, FixtureDate_DropDownList.SelectedItem.Text)
             PopulateMatchResult(MatchResult)
         End Using
 
