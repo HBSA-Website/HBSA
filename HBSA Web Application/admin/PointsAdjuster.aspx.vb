@@ -75,45 +75,74 @@ Partial Class admin_PointsAdjuster
 
     Protected Sub Save_Button_Click(sender As Object, e As EventArgs) Handles Save_Button.Click
 
-        Err_Literal.Text = ""
+        Dim Adjustment As Decimal
+
+        Status_Literal.Text = ""
 
         If Team_DropDownList.SelectedIndex < 1 Then
-            Err_Literal.Text += "Please select team. "
+            Status_Literal.Text += "Please select team. "
         End If
         If Points_TextBox.Text.Trim = "" Then
-            Err_Literal.Text += "Please enter a points value. "
+            Status_Literal.Text += "Please enter a points value. "
+        Else
+            Try
+                Adjustment = Math.Abs(CDec(Points_TextBox.Text.Trim))
+            Catch ex As Exception
+                Status_Literal.Text += "Please enter a valid points value. "
+            End Try
         End If
-        If Comments_TextBox.Text = "" Then
-            Err_Literal.Text += "Please enter a comment. "
-
+        If Reason_TextBox.Text.Trim = "" Then
+            Status_Literal.Text += "Please enter a reason. "
         End If
 
-        If Err_Literal.Text <> "" Then
+        If Status_Literal.Text <> "" Then
             Exit Sub
         End If
 
-        Try
-            Using team As TeamData = New TeamData(Team_DropDownList.SelectedValue)
-                team.UpdateLeaguePointsAdjustment(Adjustment_DropDown.SelectedValue & Points_TextBox.Text,
-                                                  Comments_TextBox.Text.Trim,
-                                                  Session("adminDetails").rows(0)!username)
-            End Using
+        Using team As TeamData = New TeamData(Team_DropDownList.SelectedValue)
+            Try
+                team.UpdateLeaguePointsAdjustment(Adjustment_DropDown.SelectedValue & Adjustment.ToString,
+                                              Reason_TextBox.Text.Trim,
+                                              Session("adminDetails").rows(0)!username)
+                Dim teamName As String = (team.ClubName + " " + team.Team).Trim + " (" + team.SectionName + ")"
+                If Adjustment = 0 Then
+                    Status_Literal.Text = "Adjustment deleted for " + teamName
+                Else
+                    Status_Literal.Text = "Adjustment recorded for " + teamName
+                End If
 
-            PopulateGridView()
-            Edit_Panel.Visible = False
+                If SendEmail_CheckBox.Checked AndAlso Adjustment <> 0 Then
+                    Using Club As New ClubData(team.ClubID)
+                        Dim Status As String = HBSAcodeLibrary.Emailer.SendPointsAdjustmentEmail(
+                                                                          Club.ClubLoginEMail & ";" & team.Contact,
+                                                                          If(Adjustment_DropDown.SelectedValue = "-", "A deduction", "An addition"),
+                                                                          Adjustment.ToString,
+                                                                          (team.ClubName & " " & team.Team).Trim,
+                                                                          team.SectionName, Reason_TextBox.Text.Trim)
+                        If Status = "" Then
+                            Status = "eMails sent."
+                        Else
+                            Status = "<span style='color:red'>" + Status + "</span>"
+                        End If
+                        Status_Literal.Text += " - " + Status
+                    End Using
+                End If
+            Catch ex As Exception
+                Status_Literal.Text += "<br/><span style='color:red'>ERROR occurred: <br/>" & ex.Message
+            End Try
+        End Using
 
-        Catch ex As Exception
-            Err_Literal.Text = "Exception saving adjustment:<br/>" & ex.Message
-
-        End Try
-
+        PopulateGridView()
+        Edit_Panel.Visible = False
 
     End Sub
 
 
     Protected Sub Adjustments_GridView_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Adjustments_GridView.SelectedIndexChanged
 
+        Status_Literal.Text = ""
         Dim ix As Integer = Adjustments_GridView.SelectedIndex
+
         Section_DropDownList.SelectedValue = Adjustments_GridView.Rows(ix).Cells(1).Text
         Section_DropDownList_SelectedIndexChanged(sender, e)
         Team_DropDownList.SelectedValue = Adjustments_GridView.Rows(ix).Cells(2).Text
@@ -126,7 +155,7 @@ Partial Class admin_PointsAdjuster
             Adjustment_DropDown.SelectedValue = "+"
         End If
         Points_TextBox.Text = Math.Abs(CInt(Adjustments_GridView.Rows(ix).Cells(5).Text)).ToString
-        Comments_TextBox.Text = Adjustments_GridView.Rows(ix).Cells(6).Text
+        Reason_TextBox.Text = Adjustments_GridView.Rows(ix).Cells(6).Text
 
         Edit_Panel.Visible = True
 
@@ -141,7 +170,8 @@ Partial Class admin_PointsAdjuster
 
         Adjustment_DropDown.SelectedValue = "-"
         Points_TextBox.Text = ""
-        Comments_TextBox.Text = ""
+        Reason_TextBox.Text = ""
+        Status_Literal.Text = ""
 
         Edit_Panel.Visible = True
 

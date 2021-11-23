@@ -56,6 +56,17 @@
                         <tr><td style="border: 1px solid navy">|AwayFrames|</td><td style="border: 1px solid navy">The number of frames won by the away team</td></tr>
 
                     </table>
+                    <table id="PointsAdjustmentVariables" runat="server" visible="false" style="border-collapse:collapse">
+                        <tr><th style="border: 1px solid navy">Purpose</th><th style="border : 1px solid navy">Variable</th><th style="border: 1px solid navy">Value</th></tr>
+                        <tr><td style="width:150px; border: 1px solid navy">Points Adjustment</td><td style="border: 1px solid navy">|Date|</td><td style="border: 1px solid navy">The date the change was imposed</td></tr>
+                        <tr><td style="width:150px; border: 1px solid navy" rowspan="5">Sent to the club contact, and the team captain</td>
+                            <td style="border: 1px solid navy">|Team|</td><td style="border: 1px solid navy">The team whose points have been adjusted</td></tr>
+                        <tr><td style="border: 1px solid navy">|Section|</td><td style="border: 1px solid navy">The team's League and division/section </td></tr>
+                        <tr><td style="border: 1px solid navy">|DownUp|</td><td style="border: 1px solid navy">&quot;A deduction&quot; or &quot;An addition&quot; whichever is appropriate </td></tr>
+                        <tr><td style="border: 1px solid navy">|Adjustment|</td><td style="border: 1px solid navy">The points added or deducted </td></tr>
+                        <tr><td style="border: 1px solid navy">|Reason|</td><td style="border: 1px solid navy">The reason given for the adjustment </td></tr>
+                    </table>
+
             <br />
             <b>Email Template:</b><asp:Literal ID="Message_Literal" runat="server"></asp:Literal><br />
             

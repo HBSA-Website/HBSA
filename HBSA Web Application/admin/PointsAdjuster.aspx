@@ -9,7 +9,8 @@
 
     <asp:Button ID="Add_Button" runat="server" Text="Create Adjustment" />
     <br /><br />
-
+        <span style="font-size:larger;color:black;"><asp:Literal ID="Status_Literal" runat="server"></asp:Literal></span>
+    <br />
                 <asp:GridView ID="Adjustments_GridView" runat="server"  
                         EnableModelValidation="True" Font-Size="9pt" Width="100%" BackColor="White" BorderColor="#E7E7FF" 
                         BorderStyle="None" BorderWidth="1px" CellPadding="3">
@@ -52,18 +53,21 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align:right">Comments:</td>
-                    <td><asp:TextBox ID="Comments_TextBox" runat="server" BackColor="#FFFFCC" Width="319px" MaxLength="255" /></td>
+                    <td style="text-align:right">Reason for adjustment:</td>
+                    <td><asp:TextBox ID="Reason_TextBox" runat="server" BackColor="#FFFFCC" Width="319px" MaxLength="255" /></td>
                 </tr>
                 <tr>
-                    <td style="text-align:right">
-                        <asp:Button ID="Save_Button" runat="server" Text="Save" /></td>
-                    <td>
-                        <asp:Button ID="Cancel_Button" runat="server" Text="Cancel" /></td>
+                    <td style="text-align:center" colspan="2">
+                        Tick this box
+                        <asp:CheckBox ID="SendEmail_CheckBox" runat="server" Text=" to send emails to the Club contact and Team Captain" />
+                        <br />
+                        <asp:Button ID="Save_Button" runat="server" Text="Save" Width="64px" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="Cancel_Button" runat="server" Text="Cancel" Width="64px" />
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align:center"><span style="color:red">
-                        <asp:Literal ID="Err_Literal" runat="server"></asp:Literal></span></td>
+                    <td colspan="2" style="text-align:center"></td>
                 </tr>
             </table>
         </div>

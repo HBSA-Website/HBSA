@@ -299,6 +299,43 @@ namespace HBSAcodeLibrary
             }
             return SendFineImposedEmailResult;
         }
+        public static string SendPointsAdjustmentEmail(string eMailList, string AddedDeducted, string Adjustment,
+                                                       string Team, string Section, string Reason)
+        {
+            string SendPointsAdjustEmailResult = "";
+            string BodyTemplate;
+
+            using (EmailTemplateData emailTemplate = new EmailTemplateData("PointsAdjustment"))
+            {
+                BodyTemplate = emailTemplate.eMailTemplateHTML;
+            }
+            // send email
+            using (HBSAcodeLibrary.HBSA_Configuration cfg = new HBSAcodeLibrary.HBSA_Configuration())
+            {
+                string toAddress = cfg.Value("LeagueSecretaryEmail");
+                toAddress += ";" + eMailList;
+
+                string subject = "*** Points adjustment alert ***";
+                string body = BodyTemplate.Replace("|Date|", DateTime.Today.ToLongDateString())
+                                           .Replace("|Team|", Team)
+                                           .Replace("|Section|", Section)
+                                           .Replace("|DownUp|", AddedDeducted)
+                                           .Replace("|Adjustment|", Adjustment)
+                                           .Replace("|Reason|", Reason);
+
+                try
+                {
+                    Emailer.Send_eMail(toAddress, subject, body);
+                }
+                catch (Exception)
+                {
+                    string err = "Error sending points adjustment email. " + DateTime.Today.ToLongDateString() + " to " + toAddress;
+                    SendPointsAdjustEmailResult += "<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>");
+                    Emailer.LogEmailfailure(toAddress, err, "impose fine");
+                }
+            }
+            return SendPointsAdjustEmailResult;
+        }
         public static DataTable Get_eMailList (DateTime startDate, DateTime endDate, string subjectFilter)
         {
             return SQLcommands.ExecDataTable("Get_eMailList", new List<SqlParameter> 

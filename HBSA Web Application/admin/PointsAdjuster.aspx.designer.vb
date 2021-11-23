@@ -23,6 +23,15 @@ Partial Public Class admin_PointsAdjuster
     Protected WithEvents Add_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Status_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Status_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''Adjustments_GridView control.
     '''</summary>
     '''<remarks>
@@ -86,13 +95,22 @@ Partial Public Class admin_PointsAdjuster
     Protected WithEvents Points_TextBox As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Comments_TextBox control.
+    '''Reason_TextBox control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Comments_TextBox As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents Reason_TextBox As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''SendEmail_CheckBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendEmail_CheckBox As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
     '''Save_Button control.
@@ -111,13 +129,4 @@ Partial Public Class admin_PointsAdjuster
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Cancel_Button As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Err_Literal control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Err_Literal As Global.System.Web.UI.WebControls.Literal
 End Class

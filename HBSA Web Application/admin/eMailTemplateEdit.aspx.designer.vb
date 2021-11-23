@@ -86,6 +86,15 @@ Partial Public Class EmailTemplateEdit
     Protected WithEvents MatchResultVariables As Global.System.Web.UI.HtmlControls.HtmlTable
 
     '''<summary>
+    '''PointsAdjustmentVariables control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PointsAdjustmentVariables As Global.System.Web.UI.HtmlControls.HtmlTable
+
+    '''<summary>
     '''Message_Literal control.
     '''</summary>
     '''<remarks>
