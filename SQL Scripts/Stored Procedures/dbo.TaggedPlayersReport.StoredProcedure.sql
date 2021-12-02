@@ -196,13 +196,21 @@ select [Last Date]=convert(varchar(11),M6.mDate,113)
 	  ,M6.Played
 	  ,M6.Won
 	  ,M6.Lost      
-      ,ActionNeeded=case when nxt.ID is null then case when M6.Won > 4 and M6.Played > 5 then 'Reduce'
-						                                when M6.Won < 2 and M6.Played > 5 then 'Raise'
+      ,ActionNeeded=case when nxt.ID is null then case when M6.Won > 4 and M6.Played > 5 
+	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
+															then 'Reduce'
+						                                when M6.Won < 2 and M6.Played > 5 
+														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
+														    then 'Raise'
 						                                else ''
 				                                   end
 					    else case when nxt.Handicap <> dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) 
-						                     then  case when M6.Won > 4 and M6.Played > 5 then 'Reduce'
-						                                when M6.Won < 2 and M6.Played > 5 then 'Raise'
+						                     then  case when M6.Won > 4 and M6.Played > 5 
+	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
+															then 'Reduce'
+						                                when M6.Won < 2 and M6.Played > 5 
+														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
+														    then 'Raise'
 						                                else ''
 				                                   end
 						                     else ''
@@ -218,7 +226,7 @@ select [Last Date]=convert(varchar(11),M6.mDate,113)
 	into #tmp
 
 	from @Matches6 M6
-	cross apply (select LeagueID, SectionID, ClubID, Forename, Initials, Surname, Team from Players where ID=PlayerID) p
+	cross apply (select LeagueID, SectionID, ClubID, Forename, Initials, Surname, Team, Handicap from Players where ID=PlayerID) p
 	cross apply (Select [League Name] from Leagues where ID=p.LeagueID) l
 	cross apply (Select [Section Name] from Sections where ID=p.SectionID) s
 	cross apply (Select [Club Name] from Clubs where ID=p.ClubID) c
@@ -226,14 +234,22 @@ select [Last Date]=convert(varchar(11),M6.mDate,113)
 	outer apply (select * from @Matches6 where ID = M6.ID+1 and PlayerID=M6.PlayerID) nxt
 	
 	where (@ActionNeeded=0 or 
-				case when nxt.ID is null then case when M6.Won > 4 and M6.Played > 5 then 1
-						                           when M6.Won < 2 and M6.Played > 5 then 1
+				case when nxt.ID is null then case when M6.Won > 4 and M6.Played > 5 
+	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
+															then 1
+						                           when M6.Won < 2 and M6.Played > 5  
+														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
+														    then 1
 						                           else 0
 				                              end
 					 else case when nxt.Handicap <> dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) 
-						                   then  case when M6.Won > 4 and M6.Played > 5 then 1
-						                              when M6.Won < 2 and M6.Played > 5 then 1
-						                              else 0
+						                   then case when M6.Won > 4 and M6.Played > 5 
+	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
+															then 1
+						                           when M6.Won < 2 and M6.Played > 5  
+														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
+														    then 1
+						                           else 0
 				                                   end
 						                    else 0
                           end
@@ -281,6 +297,3 @@ drop table #tmp
 
 
 GO
-
-exec TaggedPlayersReport --3,0,0,0,0,'scott lawton'
-

@@ -65,7 +65,8 @@ begin tran
 		--Change the team to a bye to retain the fixture structure
 		update Teams 
 			set ClubID=8, 
-				Captain=0
+				Captain=0,
+				Team=''
 			where ID=@TeamID
 
 		--log it

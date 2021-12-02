@@ -230,9 +230,13 @@ Partial Class Contact
                 body += "</table>	"
 
                 Try
-                    HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body,
-                                                        If(Copy_CheckBox.Checked, Email_TextBox.Text.Trim, ""),
-                                                        Email_TextBox.Text.Trim)
+                    HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body)
+
+                    If Copy_CheckBox.Checked Then
+                        body = body.Replace("Message from HBSA website contact page:",
+                                            "Requested copy of Message from HBSA website contact page:")
+                        HBSAcodeLibrary.Emailer.Send_eMail(Email_TextBox.Text.Trim, subject, body)
+                    End If
 
                     MessageSent_Literal.Text = "<span style='color:blue;'>Your message has been sent to the " & Destination_DropDownList.SelectedItem.Text & ".</span>"
                     Contact_Panel.Visible = False
