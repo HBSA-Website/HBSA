@@ -1,9 +1,6 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="Contact.aspx.vb" Inherits="HBSA_Web_Application.Contact2" %>
-
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
- </asp:Content>
-
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="TestContact.aspx.vb" Inherits="HBSA_Web_Application.TestContact" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>

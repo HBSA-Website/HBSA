@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Contact2
+Partial Public Class TestContact
 
     '''<summary>
     '''ScriptManager1 control.
