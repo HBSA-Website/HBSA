@@ -147,7 +147,7 @@ declare c
 		outer apply (select Forename,Initials,Surname, Tagged,Over70, LeagueID, SectionID, ClubID from Players where ID=PlayerID) p
 
 		where Tagged>0
-		  and Over70=0
+		  --and Over70=0
 		  and PlayerID > 0
 		  and (@LeagueID = 0 or @LeagueID = LeagueID)
 		  and (@SectionID = 0 or @SectionID = SectionID)

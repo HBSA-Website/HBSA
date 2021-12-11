@@ -305,16 +305,24 @@
 						<td>
 						   <div style="font-size:10pt; display:block; text-align: left;">
 							   Enter player details here and submit them. <br />
-							   Please use full first names and initials of secondary forenames where they exist.  <br />
+							   Please use full first names, initials of secondary forenames where they exist, and full surname.  <br />
 							   Also use capitals as it makes it easier for us to administer.
 							   <br />
 							   <span style="color:red"><asp:Literal ID="Player_Status_Literal" runat="server" Text=""></asp:Literal></span>
 
 							 <div>
 							<table>
+								<tr>
+								    <td colspan="4" style="font-size:10pt; font-style:italic;">
+										<p>Note that new players are given a handicap of -99.  You will need to request a handicap<br />
+											when entries close and supply supporting evidence to justify your handicap request.<br />
+											Please request a correct handicap to avoid any penalties being imposed in the future.<br />
+										</p>
+								    </td> 
+								</tr>
 									<tr>
 										<th>First Name</th><th>Inits</th><th>Surname</th><th>Handicap</th>
-									 </tr>
+									</tr>
 									<tr>
 										<td><asp:TextBox ID="Player_Forename_TextBox" runat="server" BackColor="#FFFFCC" style="text-align:center;" Width="140px" MaxLength="50"></asp:TextBox></td>
 										<td><asp:TextBox ID="Player_Inits_TextBox" runat="server" BackColor="#FFFFCC" style="text-align:center;" Width="32px" MaxLength="4"></asp:TextBox></td>

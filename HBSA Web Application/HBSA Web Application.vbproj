@@ -616,6 +616,7 @@
     <Content Include="styles\Desktop.css" />
     <Content Include="styles\global.css" />
     <Content Include="TeamRecords.aspx" />
+    <Content Include="Test\Contact.aspx" />
     <Content Include="TrophiesAndPrizes.aspx" />
     <Content Include="UnderMaintenance.aspx" />
     <Content Include="UnseasonedPlayers.aspx" />
@@ -1617,6 +1618,13 @@
     <Compile Include="TeamRecords.aspx.vb">
       <DependentUpon>TeamRecords.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\Contact.aspx.designer.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Contact.aspx.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="TrophiesAndPrizes.aspx.designer.vb">
       <DependentUpon>TrophiesAndPrizes.aspx</DependentUpon>

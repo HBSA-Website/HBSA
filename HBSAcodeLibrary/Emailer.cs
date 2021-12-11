@@ -10,7 +10,7 @@ namespace HBSAcodeLibrary
 {
     public class Emailer
     {
-        public static void Send_eMail(string toAddress, string subject, string Body, string ccAddress = "", string ReplyTo = "", int MatchResultID = 0, string UserID = "")
+        public static void Send_eMail(string toAddress, string subject, string Body, string ccAddress = "", string ReplyTo = "", int MatchResultID = 0, string UserID = "", bool TestOnly = false)
         {
             string Footer = "<br/><br/><i>Please do not reply to this email because it sent from an automatic sender, and the mail box is not monitored.<br>" + 
                             "If you wish to contact the league please use the web site and go to the contact page, or <a href='" + 
@@ -58,7 +58,9 @@ namespace HBSAcodeLibrary
                     // store the email
                     StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
 
-                    if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost"))
+                    if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") 
+                     && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost")
+                     && !TestOnly)
                     {
                         try
                         {
