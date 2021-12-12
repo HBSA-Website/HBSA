@@ -53,6 +53,15 @@
                     <br />
                 </td>
             </tr>
+        <tr id="HcapRow7" runat="server" visible="false">
+            <td>Justify handicap:</td>
+            <td style="background-color:white;">
+                Please Note :- When registering a new player, or requesting a handicap change please monitor the player prior to this request. Then and only then submit a fair and suggested handicap. Do NOT assume that all new players receive +21 as this is not the case.<br />
+                <span style="color:red;">If a handicap is later proven to be unfair sanctions may be applied to the team.</span><br /><br />
+                <asp:CheckBox ID="Justify_CheckBox" CssClass="BigCheckBox" runat="server" Text="Tick this box to indicate you have read the note above, and that you agree and will comply." Font-Italic="False" ForeColor="Blue" />
+                <br />
+            </td>
+        </tr>
         <tr id="HcapRow1" runat="server" visible="false">
             <td>Player's Name:</td>
             <td><asp:TextBox ID="Player_TextBox" runat="server" class="tBox" />

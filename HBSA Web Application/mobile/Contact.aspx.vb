@@ -67,6 +67,7 @@
         HcapRow4.Visible = show
         HcapRow5.Visible = show
         HcapRow6.Visible = show
+        HcapRow7.Visible = show
 
     End Sub
     Sub PopulateCompetitionsDropDown()
@@ -183,6 +184,10 @@
                 End If
             End If
 
+            If Not Justify_CheckBox.Checked Then
+                status_Literal.Text += "<br /><span style='color:red;'>You must tick the Justify box to indicate you have read the notice and agree to comply.</span>"
+            End If
+
             If Reasons_TextBox.Text.Trim = "" Then
                 status_Literal.Text += "<br /><span style='color:red;'>Please enter the reasoning for the handicap..</span>"
             End If
@@ -227,9 +232,13 @@
                 body += "</table>	"
 
                 Try
-                    HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body,
-                                                        If(Copy_CheckBox.Checked, Email_TextBox.Text.Trim, ""),
-                                                        Email_TextBox.Text.Trim)
+                    HBSAcodeLibrary.Emailer.Send_eMail(toAddress, subject, body)
+
+                    If Copy_CheckBox.Checked Then
+                        body = body.Replace("Message from HBSA website contact page:",
+                                            "Requested copy of Message from HBSA website contact page:")
+                        HBSAcodeLibrary.Emailer.Send_eMail(Email_TextBox.Text.Trim, subject, body)
+                    End If
 
                     MessageSent_Literal.Text = "<span style='color:blue;'>Your message has been sent to the "
                     If Destination_DropDownList.SelectedValue = cfg.Value("HandicapCommittee") Then

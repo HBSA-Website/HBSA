@@ -104,6 +104,24 @@ Partial Public Class Contact
     Protected WithEvents Competitions_DropDownList As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''HcapRow7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HcapRow7 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''Justify_CheckBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Justify_CheckBox As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
     '''HcapRow1 control.
     '''</summary>
     '''<remarks>
@@ -309,22 +327,4 @@ Partial Public Class Contact
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MessageSent_Literal As Global.System.Web.UI.WebControls.Literal
-
-    '''<summary>
-    '''Home_HyperLink control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Home_HyperLink As Global.System.Web.UI.WebControls.HyperLink
-
-    '''<summary>
-    '''Contact_HyperLink control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Contact_HyperLink As Global.System.Web.UI.WebControls.HyperLink
 End Class

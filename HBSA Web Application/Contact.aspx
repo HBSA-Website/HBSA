@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" Inherits="HBSA_Web_Application.Contact" Codebehind="Contact.aspx.vb" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
- </asp:Content>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -51,7 +49,6 @@
         .tBox {
             Width:380px
         }
-}
     </style>
 
     <table style="width:auto; margin-left:auto; margin-right:auto;border-collapse:collapse;background-color: #CCFFCC; ">
@@ -80,12 +77,19 @@
         <tr>
             <td class="col1">Your Phone No:</td>
             <td calss="col2"><asp:TextBox ID="Phone_TextBox" runat="server" CssClass="tBox" /></td>
-            <td class="col3">This may be used for any queries.</td>
+            <td class="col3">This may be used for any queries.<br />
+                             Mandatory for player registration/handicap requests.</td>
         </tr>
         <tr id="CompsRow" runat="server" visible="false">
             <td class="col1">Select a competition:</td>
             <td class="col2">&nbsp;&nbsp;&nbsp;&nbsp;<asp:DropDownList ID="Competitions_DropDownList" runat="server"></asp:DropDownList>  </td>
             <td class="col3">Mandatory for Competitions Results</td>
+        </tr>
+        <tr id="HcapRow7" runat="server" visible="false">
+            <td class="col1">Justify handicap:</td>
+            <td class="col3" colspan="2" style="background-color:white;">Please Note :- When registering a new player, or requesting a handicap change please monitor the player prior to this request. Then and only then submit a fair and suggested handicap. Do NOT assume that all new players receive +21 as this is not the case.<br />
+                <span style="color:red;">If a handicap is later proven to be unfair sanctions may be applied to the team.</span><br /><br />
+                <asp:CheckBox ID="Justify_CheckBox" runat="server" Text="Tick this box to indicate you have read the note above, and that you agree and will comply." Font-Italic="False" ForeColor="Blue" /></td>
         </tr>
         <tr id="HcapRow1" runat="server" visible="false">
             <td class="col1">Player's Name:</td>
@@ -135,7 +139,6 @@
             <td class="col2"><asp:TextBox ID="Reasons_TextBox" runat="server" CssClass="tBox" Width="380px" Height="56px" TextMode="MultiLine"  /></td>
             <td class="col3">e.g. Player's Highest Break, handicap in other leagues, playing history etc.</td>
         </tr>
-
         <tr>
             <td class="col1">Your message:</td>
             <td class="col2"  colspan="2" style="width:560px;text-align:left;">
@@ -159,7 +162,7 @@
             <td class="col2" colspan="2" style="width:560px;text-align:center;">
                 <asp:CheckBox ID="Copy_CheckBox" runat="server" Text="Tick this box to send a copy to your email address"/>
                 <br />
-                <asp:Button ID="Send_Button" runat="server" ForeColor="#004000" Text="Send your message" />
+                <asp:Button ID="Send_Button" runat="server" ForeColor="#004000" Text="Submit your request" />
                 <br /><br />
             </td>
         </tr>
@@ -179,9 +182,9 @@
     <asp:Panel ID="MessageSent_Panel" runat="server" CssClass="ThisPanel" Visible="false">
         <br /><br />
         <asp:Literal ID="MessageSent_Literal" runat="server"></asp:Literal><br /><br />
-        <asp:HyperLink ID="Home_HyperLink" runat="server" NavigateUrl="~/Home.aspx">Return to the homepage</asp:HyperLink>
+        <a id="Home_Link" href="../Home.aspx">Return to the homepage</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:HyperLink ID="Contact_HyperLink" runat="server" NavigateUrl="~/Contact.aspx">Submit another message</asp:HyperLink>
+        <a id="Contact_Link" href="Contact.aspx">Submit another message</a>
         <br /><br />
     </asp:Panel> 
 
@@ -189,4 +192,3 @@
     </asp:UpdatePanel>
 
 </asp:Content>
-

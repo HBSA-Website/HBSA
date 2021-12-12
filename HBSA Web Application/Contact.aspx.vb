@@ -1,6 +1,4 @@
 
-Imports System.Drawing
-Imports System.Drawing.Imaging
 Partial Class Contact
     Inherits System.Web.UI.Page
     Private Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -70,6 +68,7 @@ Partial Class Contact
         HcapRow4.Visible = show
         HcapRow5.Visible = show
         HcapRow6.Visible = show
+        HcapRow7.Visible = show
 
     End Sub
     Sub PopulateCompetitionsDropDown()
@@ -189,6 +188,10 @@ Partial Class Contact
             If Reasons_TextBox.Text.Trim = "" Then
                 status_Literal.Text += "<br /><span style='color:red;'>Please enter the reasoning for the handicap..</span>"
             End If
+
+            If Not Justify_CheckBox.Checked Then
+                status_Literal.Text += "<br /><span style='color:red;'>You must tick the Justify box to indicate you have read the notice and agree to comply.</span>"
+            End If
         End If
 
         If status_Literal.Text = "" Then
@@ -262,5 +265,4 @@ Partial Class Contact
         End If
 
     End Sub
-
 End Class
