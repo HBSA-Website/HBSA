@@ -28,7 +28,8 @@ Partial Class Results
                 .DataBind()
 
                 If dt.Rows.Count > 0 Then
-                    .Items.Insert(0, "**Select a division/section**")
+                    .Items.Insert(0, New ListItem("**Select a division/section**", 0))
+                    .Items.Add(New ListItem("**Matches with a No Show**", -1))
                     .Enabled = True
                     .SelectedIndex = 0
                     Section_DropDownList_SelectedIndexChanged(New Object, New EventArgs)

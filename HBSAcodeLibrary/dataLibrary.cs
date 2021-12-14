@@ -3579,15 +3579,22 @@ namespace HBSAcodeLibrary
         }
         public static DataSet ListResults (int sectionID, string matchDate = null, int teamID=0 )
         {
-            List<SqlParameter> parameters = new List<SqlParameter>
-            {
-                new SqlParameter("SectionID", sectionID)
-            };
-            if (matchDate != null)
-                parameters.Add(new SqlParameter("MatchDate", matchDate));
-            if (teamID != 0)
-                parameters.Add(new SqlParameter("TeamID", teamID));
+            List<SqlParameter> parameters = new List<SqlParameter> { };
 
+            if (sectionID < 0)
+            {
+                sectionID = 0;
+                parameters.Add(new SqlParameter("SectionID", sectionID));
+                parameters.Add(new SqlParameter("NoShows", true));
+            }
+            else
+            {
+                parameters.Add(new SqlParameter("SectionID", sectionID));
+                if (matchDate != null)
+                    parameters.Add(new SqlParameter("MatchDate", matchDate));
+                if (teamID != 0)
+                    parameters.Add(new SqlParameter("TeamID", teamID));
+            }
             return SQLcommands.ExecDataSet("ListResults", parameters);
         }
         public static DataSet ResultCard (int matchResultID)
