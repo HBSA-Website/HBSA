@@ -78,7 +78,8 @@
                 Player.Merge(Session("user"))
 
                 If SendEmails_CheckBox.Checked Then
-                    Status_Literal.Text = HBSAcodeLibrary.Emailer.SendHandicapChangeEmail(Player.ClubEmail,
+                    Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("handicapChange", "",
+                                                                                          Player.ClubEmail,
                                                                                           Player.TeamEMail,
                                                                                           Player.eMail,
                                                                                           Player.FullName,

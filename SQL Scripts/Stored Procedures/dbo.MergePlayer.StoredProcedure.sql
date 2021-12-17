@@ -26,7 +26,7 @@ as
 set nocount on
 set xact_abort on
 
-declare @insertedID int
+declare @mergedID int 
 
 begin tran
 
@@ -56,11 +56,32 @@ merge
 		values
 			(@Forename,@Initials,@Surname,@Handicap,@LeagueID,@SectionID,@ClubID,@Team,@email,@Telno,@Tagged,@Over70,@Played, dbo.UKdateTime(getUTCdate()));
 
-select @insertedID= SCOPE_IDENTITY()
+if @ID = 0
+	select @mergedID= SCOPE_IDENTITY()
+else
+	select @mergedID = @ID
+insert Activitylog values (dbo.UKdateTime(getUTCdate()),'Player merged from Admin',isnull(@mergedID,@ID),isnull(@User,original_login()))
 
-insert Activitylog values (dbo.UKdateTime(getUTCdate()),'Player merged from Admin',isnull(@insertedID,@ID),isnull(@User,original_login()))
+select @mergedID
 
 commit tran
 
 
 GO
+--exec MergePlayer
+--     @ID		= 0
+--	,@Forename	= 'Gavinyyyxxx'
+--	,@Initials	= ''
+--	,@Surname	= 'Petts'
+--	,@Handicap	= -4
+--	,@LeagueID	= 1
+--	,@SectionID = 2
+--	,@ClubID	= 15
+--	,@Team		= ''
+--	,@Tagged	= 3
+--	,@Over70	= 0
+--	,@Played	= 0
+--	,@User		= 'Test'
+--	,@eMail		= 'who@dom.com'
+--	,@TelNo     = '07890032654'
+--select top 1 * from Players order by ID desc

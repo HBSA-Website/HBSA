@@ -23,9 +23,19 @@
                     <table id="handicapChangeVariables" runat="server" visible="false" style="border-collapse:collapse">
                         <tr><th style="border: 1px solid navy">Purpose</th><th style="border : 1px solid navy">Variable</th><th style="border: 1px solid navy">Value</th></tr>
                         <tr><td style="width:150px; border: 1px solid navy">Handicap change</td><td style="border: 1px solid navy">|Date|</td><td style="border: 1px solid navy">The date the handicap was changed</td></tr>
-                        <tr><td style="width:150px; border: 1px solid navy" rowspan="4">Sent to all club members, teams and the player with email addresses, whenever a handicap is changed during a season</td><td style="border: 1px solid navy">|Player|</td><td style="border: 1px solid navy">The name of the player</td></tr>
+                        <tr><td style="width:150px; border: 1px solid navy" rowspan="5">Sent to all club members, teams and the player with email addresses, whenever a handicap is changed during a season</td><td style="border: 1px solid navy">|Player|</td><td style="border: 1px solid navy">The name of the player</td></tr>
                         <tr><td style="border: 1px solid navy">|old handicap|</td><td style="border: 1px solid navy">The player's previous handicap</td></tr>
                         <tr><td style="border: 1px solid navy">|new handicap|</td><td style="border: 1px solid navy">The player's new handicap</td></tr>
+                        <tr><td style="border: 1px solid navy">|team|</td><td style="border: 1px solid navy">The team the player belongs to</td></tr>
+                        <tr><td style="border: 1px solid navy">|Section|</td><td style="border: 1px solid navy">The team's League and division/section </td></tr>
+                    </table>
+                    <table id="PlayerRegistrationVariables" runat="server" visible="false" style="border-collapse:collapse">
+                        <tr><th style="border: 1px solid navy">Purpose</th><th style="border : 1px solid navy">Variable</th><th style="border: 1px solid navy">Value</th></tr>
+                        <tr><td style="width:150px; border: 1px solid navy">Player Registration</td><td style="border: 1px solid navy">|Date|</td><td style="border: 1px solid navy">Date the registration made</td></tr>
+                        <tr><td style="width:150px; border: 1px solid navy" rowspan="5">Sent to all club members, teams and the player with email addresses, whenever a handicap is changed during a season</td><td style="border: 1px solid navy">|Player|</td><td style="border: 1px solid navy">The name of the player</td></tr>
+                        <tr><td style="border: 1px solid navy">|handicap|</td><td style="border: 1px solid navy">The player's previous handicap</td></tr>
+                        <tr><td style="border: 1px solid navy">|De-|</td><td style="border: 1px solid navy">Shown as is when player has been deregistered.</td></tr>
+                        <tr><td style="border: 1px solid navy">|team|</td><td style="border: 1px solid navy">The team the player belongs to</td></tr>
                         <tr><td style="border: 1px solid navy">|Section|</td><td style="border: 1px solid navy">The team's League and division/section </td></tr>
                     </table>
                     <table id="fineImposedVariables" runat="server" visible="false" style="border-collapse:collapse" >

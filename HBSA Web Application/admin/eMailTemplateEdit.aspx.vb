@@ -12,11 +12,7 @@
         Else
             If Not IsPostBack Then
                 If Request.QueryString("EmailTemplate") Is Nothing Then
-                    If Session("Caller") = Request.Url.AbsolutePath Then
-                        Response.Redirect("adminhome.aspx")
-                    Else
-                        Response.Redirect(Session("Caller"))
-                    End If
+                    Response.Redirect("eMailTemplates.aspx")
                 Else
                     EmailTemplateName_HiddenField.Value = Request.QueryString("EmailTemplate").ToString
                     PopulatePage()

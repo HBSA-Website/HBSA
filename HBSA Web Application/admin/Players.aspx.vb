@@ -302,7 +302,7 @@ Public Class Players
     End Sub
     Sub PopulateEditClubs(Optional AllClubs As Boolean = False)
 
-        Using dt As DataTable = ClubData.GetClubs(If(AllClubs, 0, editSection_DropDownList.SelectedValue))
+        Using dt As DataTable = ClubData.GetClubs(If(AllClubs, 0, editLeague_DropDownList.SelectedValue + 100))
 
             With editClubs_DropDownList
 
@@ -332,6 +332,7 @@ Public Class Players
     Protected Sub EditLeague_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles editLeague_DropDownList.SelectedIndexChanged
 
         Populate_EditSectionDropdownListWithTeam()
+        PopulateEditClubs()
         'EditSection_DropDownList_SelectedIndexChanged(sender, e)
 
     End Sub
@@ -440,10 +441,19 @@ Public Class Players
 
                 Using player = New PlayerData(CInt(PlayerID_Label.Text))
                     player.Delete(SessionUser.Value)
+                    Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("PlayerRegistration", "De-",
+                                                                                             player.ClubEmail,
+                                                                                             player.TeamEMail,
+                                                                                             player.eMail,
+                                                                                             player.FullName,
+                                                                                             (player.ClubName & " " & player.Team).Trim,
+                                                                                             0,
+                                                                                             player.Handicap,
+                                                                                             (player.LeagueName & " " & player.SectionName).Trim)
+
                 End Using
 
                 Edit_Panel.Visible = False
-                'Refill the gridview
                 FillGrid(Session("sType"))
 
             Catch ex As Exception
@@ -507,8 +517,8 @@ Public Class Players
             End If
 
             Status_Literal.Text += ErrorTeam_Literal.Text
-                ErrorTeam_Literal.Text = ""
-                ErrorTeamRow.Visible = False
+            ErrorTeam_Literal.Text = ""
+            ErrorTeamRow.Visible = False
 
             If Status_Literal.Text = "" AndAlso SubmitPlayer_Button.Text = "Add Player" Then
 
@@ -559,6 +569,7 @@ Public Class Players
 
                     Dim handicap As Integer
                     Dim PrevHandicap As Integer
+                    Dim MergedPlayerID As Integer
 
                     Using Player As New PlayerData(CInt(PlayerID_Label.Text))
 
@@ -586,18 +597,15 @@ Public Class Players
                         Player.eMail = email_TextBox.Text
                         Player.TelNo = TelNo_TextBox.Text
 
-                        Player.Merge(SessionUser.Value)
+                        MergedPlayerID = Player.Merge(SessionUser.Value)
 
                     End Using
 
-                    FillGrid(Session("sType"))
+                    Using NewPlayer As New PlayerData(MergedPlayerID)
 
-                    If SubmitPlayer_Button.Text = "Change Player Details" AndAlso
-                                       handicap <> PrevHandicap Then
-
-                            Using NewPlayer As New PlayerData(CInt(PlayerID_Label.Text))
-
-                                Status_Literal.Text = HBSAcodeLibrary.Emailer.SendHandicapChangeEmail(
+                        If SubmitPlayer_Button.Text = "Change Player Details" AndAlso
+                                           handicap <> PrevHandicap Then
+                            Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("handicapChange", "",
                                                                                              NewPlayer.ClubEmail,
                                                                                              NewPlayer.TeamEMail,
                                                                                              NewPlayer.eMail,
@@ -607,14 +615,35 @@ Public Class Players
                                                                                              handicap,
                                                                                              (NewPlayer.LeagueName & " " & NewPlayer.SectionName).Trim
                                                                                                                   )
-                            End Using
+                        ElseIf SubmitPlayer_Button.Text = "Add Player" OrElse
+                               SubmitPlayer_Button.Text = "Confirm" Then
+                            'assume new and/or amended player
+                            Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("PlayerRegistration", "",
+                                                                                             NewPlayer.ClubEmail,
+                                                                                             NewPlayer.TeamEMail,
+                                                                                             NewPlayer.eMail,
+                                                                                             NewPlayer.FullName,
+                                                                                             (NewPlayer.ClubName & " " & NewPlayer.Team).Trim,
+                                                                                             0,
+                                                                                             handicap,
+                                                                                             (NewPlayer.LeagueName & " " & NewPlayer.SectionName).Trim
+                                                                                                                  )
+                            LeagueSection_DropDownList.SelectedIndex = 0
+                            Club_DropDownList.SelectedIndex = 0
+                            Player_TextBox.Text = NewPlayer.FullName
+                            Session("sType") = SearchType.ByName
+
                         End If
 
-                        If Status_Literal.Text = "" Then
-                            Edit_Panel.Visible = False
-                        End If
+                    End Using
 
-                    Catch ex As Exception
+                    FillGrid(Session("sType"))
+
+                    If Status_Literal.Text = "" Then
+                        Edit_Panel.Visible = False
+                    End If
+
+                Catch ex As Exception
 
                     Dim msg As String = ex.Message
                     Dim exc As Exception = ex.InnerException

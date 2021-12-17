@@ -4111,25 +4111,26 @@ namespace HBSAcodeLibrary
                 TeamEMail = player.Rows[0]["TeamEMail"] == DBNull.Value ? "" : (string)player.Rows[0]["TeamEMail"];
             }
         }
-        public void Merge(string user)
+        public int Merge(string user)
         {
-            SQLcommands.ExecNonQuery("MergePlayer",
-                                      new List<SqlParameter>{ new SqlParameter("ID", ID),
-                                                              new SqlParameter("Forename", Forename),
-                                                              new SqlParameter("Initials", Initials),
-                                                              new SqlParameter("Surname", Surname),
-                                                              new SqlParameter("Handicap", Handicap),
-                                                              new SqlParameter("LeagueID", LeagueID),
-                                                              new SqlParameter("SectionID", SectionID),
-                                                              new SqlParameter("ClubID", ClubID),
-                                                              new SqlParameter("Team", Team),
-                                                              new SqlParameter("Tagged", Tagged),
-                                                              new SqlParameter("Over70", Over70),
-                                                              new SqlParameter("Played", Played),
-                                                              new SqlParameter("User", user),
-                                                              new SqlParameter("email", eMail),
-                                                              new SqlParameter("TelNo", TelNo) });
+            List<SqlParameter> parameters = new List<SqlParameter> { new SqlParameter("ID", ID),
+                                                                     new SqlParameter("Forename", Forename),
+                                                                     new SqlParameter("Initials", Initials),
+                                                                     new SqlParameter("Surname", Surname),
+                                                                     new SqlParameter("Handicap", Handicap),
+                                                                     new SqlParameter("LeagueID", LeagueID),
+                                                                     new SqlParameter("SectionID", SectionID),
+                                                                     new SqlParameter("ClubID", ClubID),
+                                                                     new SqlParameter("Team", Team),
+                                                                     new SqlParameter("Tagged", Tagged),
+                                                                     new SqlParameter("Over70", Over70),
+                                                                     new SqlParameter("Played", Played),
+                                                                     new SqlParameter("User", user),
+                                                                     new SqlParameter("email", eMail),
+                                                                     new SqlParameter("TelNo", TelNo)};
+            return (int)SQLcommands.ExecScalar("MergePlayer", parameters);
         }
+
         public void Delete(string user)
         {
             SQLcommands.ExecNonQuery("DeletePlayer",
@@ -4278,7 +4279,8 @@ namespace HBSAcodeLibrary
                 string SendErrors = "";
                 foreach (DataRow Player in TaggedPlayersTable.Rows)
                 {
-                    string err = HBSAcodeLibrary.Emailer.SendHandicapChangeEmail((string)Player["ClubLoginEmail"],
+                    string err = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("handicapChange", "",
+                                                                                 (string)Player["ClubLoginEmail"],
                                                                                  (string)Player["TeamEMail"],
                                                                                  (string)Player["PlayereMail"],
                                                                                  (string)Player["Player"],

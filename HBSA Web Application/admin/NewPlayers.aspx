@@ -46,7 +46,7 @@
                     <br />
                     Tick to send 'changed handicap' email <asp:CheckBox CssClass="BigCheckBox" ID="SendEmails_CheckBox" runat="server" Text=" to relevant parties." /><br />
                     <br /><asp:Label ID="Player_Label" runat="server" Text="Player Name"></asp:Label>
-                    <asp:Label ID="PlayerID_Label" runat="server" Text="PlayerID" Visible="false"></asp:Label>
+                    &nbsp;<asp:Label ID="PlayerID_Label" runat="server" Text="PlayerID" Visible="false"></asp:Label>
                     <br /><b>&nbsp;&nbsp;&nbsp;&nbsp;Handicap:</b>&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:TextBox ID="Handicap_TextBox" runat="server" BackColor="#FFFFCC" Style="text-align: center;" Width="32px"></asp:TextBox>
                     <br />

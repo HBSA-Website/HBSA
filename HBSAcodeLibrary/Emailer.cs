@@ -12,9 +12,9 @@ namespace HBSAcodeLibrary
     {
         public static void Send_eMail(string toAddress, string subject, string Body, string ccAddress = "", string ReplyTo = "", int MatchResultID = 0, string UserID = "", bool TestOnly = false)
         {
-            string Footer = "<br/><br/><i>Please do not reply to this email because it sent from an automatic sender, and the mail box is not monitored.<br>" + 
-                            "If you wish to contact the league please use the web site and go to the contact page, or <a href='" + 
-                            HBSAcodeLibrary.SiteRootURL.GetSiteRootUrl() + "/Contact.aspx'> click here </a>.</i><br/><br/>" + 
+            string Footer = "<br/><br/><i>Please do not reply to this email because it sent from an automatic sender, and the mail box is not monitored.<br>" +
+                            "If you wish to contact the league please use the web site and go to the contact page, or <a href='" +
+                            HBSAcodeLibrary.SiteRootURL.GetSiteRootUrl() + "/Contact.aspx'> click here </a>.</i><br/><br/>" +
                             "<strong>Huddersfield Billiards and Snooker Web Site</strong>";
             char[] semiColon = { ';' };
 
@@ -58,7 +58,7 @@ namespace HBSAcodeLibrary
                     // store the email
                     StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
 
-                    if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test") 
+                    if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test")
                      && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost")
                      && !TestOnly)
                     {
@@ -76,9 +76,11 @@ namespace HBSAcodeLibrary
                         }
                         catch (Exception ex)
                         {
-                            MimeMessage.Body = new MimeKit.TextPart("html") 
-                                { Text = "ERROR OCCURRED sending this: " + 
-                                            ex.Message + "<hr/>" + Body };
+                            MimeMessage.Body = new MimeKit.TextPart("html")
+                            {
+                                Text = "ERROR OCCURRED sending this: " +
+                                            ex.Message + "<hr/>" + Body
+                            };
                             throw new Exception(ex.Message, ex);
                         }
                     }
@@ -132,7 +134,7 @@ namespace HBSAcodeLibrary
         {
             var parameters = new List<SqlParameter>()
             {
-                new SqlParameter("Sender",AddressList(MimeMessage.From)),     
+                new SqlParameter("Sender",AddressList(MimeMessage.From)),
                 new SqlParameter("ReplyTo", AddressList(MimeMessage.ReplyTo)),
                 new SqlParameter("ToAddresses", AddressList(MimeMessage.To)),
                 new SqlParameter("CCAddresses", AddressList(MimeMessage.Cc)),
@@ -153,7 +155,7 @@ namespace HBSAcodeLibrary
             string addresses = "";
             foreach (MimeKit.InternetAddress address in AddressCollection)
                 addresses += address.ToString() + ";";
-             if (addresses.Length < 1)
+            if (addresses.Length < 1)
                 return "";
             else
                 return addresses.Substring(0, addresses.Length - 1);
@@ -163,7 +165,7 @@ namespace HBSAcodeLibrary
             string addressees = "";
             foreach (MimeKit.InternetAddress address in MimeMessage.To)
                 addressees += address.ToString() + ";";
-            
+
             if (addressees.Length < 1)
                 return false;
             else
@@ -197,62 +199,65 @@ namespace HBSAcodeLibrary
             }
             return Content;
         }
-        public static string SendHandicapChangeEmail(string ClubEmail, string TeamEMail,
-                                                     string PlayerEmail, string PlayerName, string TeamName, 
-                                                     string OldHandicap, string NewHandicap, string SectionName)        // League name + SectionName
-            {
-                string SendHandicapChangeEmailResult = "";
+        public static string SendPlayerMaintenanceEmail(string MaintenanceType,string Deregistered,
+                                                        string ClubEmail, string TeamEMail,
+                                                        string PlayerEmail, string PlayerName, string TeamName,
+                                                        string OldHandicap, string Handicap, string SectionName)        // League name + SectionName
+        {
+            string SendPlayerMaintenanceEmailResult = "";
 
-                string BodyTemplate;
-            using (EmailTemplateData emailTemplate = new EmailTemplateData("handicapChange"))
+            string BodyTemplate;
+            using (EmailTemplateData emailTemplate = new EmailTemplateData(MaintenanceType))
             {
                 BodyTemplate = emailTemplate.eMailTemplateHTML;
             }
 
-                // send email
-                using (HBSAcodeLibrary.HBSA_Configuration cfg = new HBSAcodeLibrary.HBSA_Configuration())
+            // send email
+            using (HBSAcodeLibrary.HBSA_Configuration cfg = new HBSAcodeLibrary.HBSA_Configuration())
+            {
+                string toAddress = cfg.Value("LeagueSecretaryEmail");
+
+                if (cfg.Value("HandicapChangeEmail") != "")
+                    toAddress += ";" + cfg.Value("HandicapChangeEmail");
+
+                try
                 {
-                    string toAddress = cfg.Value("LeagueSecretaryEmail");
-
-                    if (cfg.Value("HandicapChangeEmail") != "")
-                        toAddress += ";" + cfg.Value("HandicapChangeEmail");
-
-                    try
-                    {
-                        if (ClubEmail.Trim() != "")
-                            toAddress += ";" + ClubEmail.Trim();
-                        if (TeamEMail.Trim() != "")
-                            toAddress += ";" + TeamEMail.Trim();
-                    }
-                    catch { }
+                    if (ClubEmail.Trim() != "")
+                        toAddress += ";" + ClubEmail.Trim();
+                    if (TeamEMail.Trim() != "")
+                        toAddress += ";" + TeamEMail.Trim();
+                }
+                catch { }
 
                 if (PlayerEmail.Trim() != "")
-                        toAddress += ";" + PlayerEmail.Trim();
+                    toAddress += ";" + PlayerEmail.Trim();
 
-                    string subject = "*** Web site handicap change alert ***";
-                    string body = BodyTemplate.Replace("|Team|", TeamName)
-                                              .Replace("|Date|", DateTime.Today.ToLongDateString())
-                                              .Replace("|Player|", PlayerName)
-                                              .Replace("|old handicap|", OldHandicap)
-                                              .Replace("|new handicap|", NewHandicap)
-                                              .Replace("|Section|", SectionName);
+                string subject = "*** Player " + Deregistered + "Registration alert. ***";
+                string body = BodyTemplate.Replace("|Team|", TeamName)
+                                          .Replace("|Date|", DateTime.Today.ToLongDateString())
+                                          .Replace("|Player|", PlayerName)
+                                          .Replace("|De-|", Deregistered)
+                                          .Replace("|old handicap|", OldHandicap)
+                                          .Replace("|new handicap|", Handicap)
+                                          .Replace("|handicap|", Handicap)
+                                          .Replace("|Section|", SectionName);
 
-                    try
-                    {
-                        Emailer.Send_eMail(toAddress, subject, body);       // 334
-                    }
-                    catch (Exception eMex)
-                    {
-                        string err = "Team:|Team|, Player:|Player|, new handicap:|new handicap|, Section:|Section|.";
-                        err = err.Replace("|Team|", TeamName).Replace("|Date|", DateTime.Today.ToLongDateString()).Replace("|Player|", PlayerName).Replace("|new handicap|", NewHandicap).Replace("|Section|", SectionName) + Microsoft.VisualBasic.Constants.vbCrLf + eMex.Message;
-                        SendHandicapChangeEmailResult += "<br/><font color=red><strong>Error sending an email:<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>") + ".</strong></font>";
-                        Emailer.LogEmailfailure(toAddress, err, "handicap change");
-                    }
+                try
+                {
+                    Emailer.Send_eMail(toAddress, subject, body);       // 334
                 }
-                return SendHandicapChangeEmailResult;
-           }
-        public static string SendFineImposedEmail(string EmailAddressList, 
-                                                  string ClubName, string Offence, string Comment, 
+                catch (Exception eMex)
+                {
+                    string err = "Team:|Team|, Player:|Player|, new handicap:|new handicap|, Section:|Section|.";
+                    err = err.Replace("|Team|", TeamName).Replace("|Date|", DateTime.Today.ToLongDateString()).Replace("|Player|", PlayerName).Replace("|new handicap|", Handicap).Replace("|Section|", SectionName) + Microsoft.VisualBasic.Constants.vbCrLf + eMex.Message;
+                    SendPlayerMaintenanceEmailResult += "<br/><font color=red><strong>Error sending an email:<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>") + ".</strong></font>";
+                    Emailer.LogEmailfailure(toAddress, err, "handicap change");
+                }
+            }
+            return SendPlayerMaintenanceEmailResult;
+        }
+        public static string SendFineImposedEmail(string EmailAddressList,
+                                                  string ClubName, string Offence, string Comment,
                                                   decimal Amount)
         {
             string BodyTemplate;
@@ -338,9 +343,9 @@ namespace HBSAcodeLibrary
             }
             return SendPointsAdjustEmailResult;
         }
-        public static DataTable Get_eMailList (DateTime startDate, DateTime endDate, string subjectFilter)
+        public static DataTable Get_eMailList(DateTime startDate, DateTime endDate, string subjectFilter)
         {
-            return SQLcommands.ExecDataTable("Get_eMailList", new List<SqlParameter> 
+            return SQLcommands.ExecDataTable("Get_eMailList", new List<SqlParameter>
                                                               {    new SqlParameter("StartDate",startDate),
                                                                    new SqlParameter("EndDate", endDate),
                                                                    new SqlParameter("SubjectFilter",subjectFilter) });

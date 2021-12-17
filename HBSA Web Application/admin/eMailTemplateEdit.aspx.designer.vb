@@ -68,6 +68,15 @@ Partial Public Class EmailTemplateEdit
     Protected WithEvents handicapChangeVariables As Global.System.Web.UI.HtmlControls.HtmlTable
 
     '''<summary>
+    '''PlayerRegistrationVariables control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PlayerRegistrationVariables As Global.System.Web.UI.HtmlControls.HtmlTable
+
+    '''<summary>
     '''fineImposedVariables control.
     '''</summary>
     '''<remarks>
