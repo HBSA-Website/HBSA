@@ -52,7 +52,9 @@
                                                CompletionSetCount="20" CompletionListCssClass="completionList" CompletionListItemCssClass="completionLlistItem" CompletionListHighlightedItemCssClass="completionItemHighlighted"></AjaxToolkit:AutoCompleteExtender>
 
                     </td>
-                    <td style="padding:4px;"><asp:Button ID="GetRecords_Button" runat="server" Text="Get the records" Height="20px" Font-Size="9pt" /></td>
+                    <td style="padding:4px;"><asp:Button ID="GetRecords_Button" runat="server" Text="Get the records" Height="20px" Font-Size="9pt" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Download_Button" runat="server" Text="Download"  Height="20px" Font-Size="9pt" visible="false"/>
+                    </td>
                 </tr>
             </table>
 

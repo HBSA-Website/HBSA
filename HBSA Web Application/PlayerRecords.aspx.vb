@@ -79,11 +79,13 @@
                                                              League_DropDownList.SelectedValue,
                                                              Season_DropDownList.SelectedValue,
                                                              Name_TextBox.Text.Trim)
-                Session("Extract_Data") = playerRecords
+                Session("Player_Records") = playerRecords
 
                 PlayerRecords_GridView.DataSource = playerRecords
                 PlayerRecords_GridView.DataBind()
                 PlayerRecords_GridView.Visible = True
+
+                Download_Button.Visible = (Not playerRecords Is Nothing AndAlso playerRecords.Rows.Count > 0)
 
             End Using
 
@@ -202,7 +204,7 @@
 
         With PlayerRecords_GridView
             .PageIndex = sender.SelectedIndex
-            .DataSource = Session("Extract_Data")
+            .DataSource = Session("Player_Records")
             .DataBind()
         End With
 
@@ -222,7 +224,7 @@
                     .PageIndex = .PageCount - 1
             End Select
 
-            .DataSource = Session("Extract_Data")
+            .DataSource = Session("Player_Records")
             .DataBind()
 
         End With
@@ -237,10 +239,16 @@
             .PageSize = sender.SelectedValue
             .PageIndex = startIndex / .PageSize
 
-            .DataSource = Session("Extract_Data")
+            .DataSource = Session("Player_Records")
             .DataBind()
 
         End With
+
+    End Sub
+
+    Protected Sub Download_Button_Click(sender As Object, e As EventArgs) Handles Download_Button.Click
+
+        Response.Redirect("CreateAndDownloadFile.aspx?source=Player_Records&fileName=Player Records")
 
     End Sub
 #End Region

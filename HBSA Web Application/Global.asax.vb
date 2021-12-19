@@ -4,9 +4,13 @@ Imports System.IO
 Imports System.Web.HttpContext
 Public Class Global_asax
     Inherits HttpApplication
-
     Sub Application_Start(sender As Object, e As EventArgs)
         ' Fires when the application is started
+        HBSAcodeLibrary.ActivityLog.LogActivity("Web Application Start", 0, "Global")
+    End Sub
+    Sub Application_End(sender As Object, e As EventArgs)
+        ' Fires when the application is stopped
+        HBSAcodeLibrary.ActivityLog.LogActivity("Web Application End", 0, "Global")
     End Sub
 
     Sub Session_Start(sender As Object, e As EventArgs)
@@ -17,7 +21,6 @@ Public Class Global_asax
         If connStr.StartsWith("[connStr]") Then
             File.WriteAllText(filePath, HBSAencoder.Encode(connStr.Substring(9).Trim()))
         End If
-
 
         ''Ensure unique SessionID
         'If SessionInfo.SessionIDexists(Session.SessionID) Then
@@ -99,9 +102,9 @@ Public Class Global_asax
 
         'get randomised list of advertisers
         Dim RandomisedAdverts As HBSAcodeLibrary.Advert.RandomAdverts = HBSAcodeLibrary.Advert.RandomiseAdverts
-        Session("NoAdverts") = RandomisedAdverts.NoAdverts
-        Session("Advertisers") = RandomisedAdverts.Advertisers
-        Session("LastAdvert") = RandomisedAdverts.LastAdvert
+        Session("NoAdverts") = RandomisedAdverts.noAdverts
+        Session("Advertisers") = RandomisedAdverts.advertisers
+        Session("LastAdvert") = RandomisedAdverts.lastAdvert
         Session("advertCounter") = RandomisedAdverts.advertCounter
 
     End Sub

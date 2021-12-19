@@ -86,6 +86,15 @@ Partial Public Class PlayerRecords
     Protected WithEvents GetRecords_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Download_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Download_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Error_Literal control.
     '''</summary>
     '''<remarks>
