@@ -45,17 +45,34 @@
         Session("captchaString") = HBSAcodeLibrary.Captcha.SetCaptchaImage(captcha_Image, captcha_Textbox)
 
     End Sub
+    Sub ClearContactControls()
 
+        For Each ctl As Control In Contact_Panel.Controls
+            If TypeOf (ctl) Is TextBox Then
+                CType(ctl, TextBox).Text = ""
+            ElseIf TypeOf (ctl) Is DropDownList Then
+                CType(ctl, DropDownList).SelectedIndex = 0
+            ElseIf TypeOf (ctl) Is CheckBox Then
+                CType(ctl, CheckBox).Checked = False
+            End If
+        Next
+    End Sub
     Protected Sub Destination_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Destination_DropDownList.SelectedIndexChanged
 
         CompsRow.Visible = False
         ShowHideHcapRows(False)
+        Agreement_Panel.Visible = False
+        Justify_CheckBox.Checked = False
+        Contact_Panel.Visible = True
+        'ClearContactControls()
 
         If Destination_DropDownList.SelectedItem.Text.ToLower Like "*competition*" Then
             CompsRow.Visible = True
             PopulateCompetitionsDropDown()
         ElseIf Destination_DropDownList.SelectedItem.Text.ToLower Like "*handicap*" Then
             ShowHideHcapRows(True)
+            Agreement_Panel.Visible = True
+            Contact_Panel.Visible = False
         End If
 
     End Sub
@@ -67,7 +84,6 @@
         HcapRow4.Visible = show
         HcapRow5.Visible = show
         HcapRow6.Visible = show
-        HcapRow7.Visible = show
 
     End Sub
     Sub PopulateCompetitionsDropDown()
@@ -250,6 +266,7 @@
                     MessageSent_Literal.Text &= ".</span>"
                     Contact_Panel.Visible = False
                     MessageSent_Panel.Visible = True
+                    ClearContactControls()
 
                 Catch ex As Exception
                     Dim errorMessage As String
@@ -267,6 +284,15 @@
                 End Try
 
             End Using
+
+        End If
+
+    End Sub
+    Protected Sub Justify_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Justify_CheckBox.CheckedChanged
+
+        If Justify_CheckBox.Checked Then
+            Agreement_Panel.Visible = False
+            Contact_Panel.Visible = True
 
         End If
 

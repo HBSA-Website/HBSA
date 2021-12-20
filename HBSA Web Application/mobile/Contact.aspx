@@ -18,8 +18,6 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-
-        <asp:Panel ID="Contact_Panel" runat="server">
     <div style="width:100%; text-align:center;">
     To email us please enter your details, select where email should go,  enter the &quot;Prove you&#39;re human&quot; code, then click "Send your message".
     </div>
@@ -29,6 +27,26 @@
                 <td>Select where the email should be sent:</td>
                 <td><asp:DropDownList ID="Destination_DropDownList" runat="server" AutoPostBack="true"></asp:DropDownList></td>
             </tr>
+        </table>
+            <asp:Panel ID="Agreement_Panel" runat="server" Visible="false">
+                <table style="width: auto; margin-left: auto; margin-right: auto; border-collapse: collapse; background-color: #CCFFCC;">
+                    <table style="width: auto; margin-left: auto; margin-right: auto; border-collapse: collapse; background-color: #CCFFCC;">
+                        <tr>
+                            <td class="col2">Please Note :- When registering a new player, or requesting a handicap change please monitor the player prior to this request. Then and only then submit a fair and suggested handicap. Do NOT assume that all new players receive +21 as this is not the case.<br />
+                                <span style="color: red;">If a handicap is later proven to be unfair sanctions may be applied to the team.</span><br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col2">
+                                <asp:CheckBox ID="Justify_CheckBox" runat="server" Text="Tick this box to indicate you have read the note above, and that you agree and will comply." CssClass="BigCheckBox" Font-Italic="False" ForeColor="Blue" AutoPostBack="true" />
+                            </td>
+                        </tr>
+                    </table>
+            </asp:Panel>
+
+
+    <asp:Panel ID="Contact_Panel" runat="server">
+        <table>
             <tr>
                 <td>Your name:</td>
                 <td><asp:TextBox ID="name_TextBox" runat="server" ></asp:TextBox>
@@ -53,15 +71,6 @@
                     <br />
                 </td>
             </tr>
-        <tr id="HcapRow7" runat="server" visible="false">
-            <td>Justify handicap:</td>
-            <td style="background-color:white;">
-                Please Note :- When registering a new player, or requesting a handicap change please monitor the player prior to this request. Then and only then submit a fair and suggested handicap. Do NOT assume that all new players receive +21 as this is not the case.<br />
-                <span style="color:red;">If a handicap is later proven to be unfair sanctions may be applied to the team.</span><br /><br />
-                <asp:CheckBox ID="Justify_CheckBox" CssClass="BigCheckBox" runat="server" Text="Tick this box to indicate you have read the note above, and that you agree and will comply." Font-Italic="False" ForeColor="Blue" />
-                <br />
-            </td>
-        </tr>
         <tr id="HcapRow1" runat="server" visible="false">
             <td>Player's Name:</td>
             <td><asp:TextBox ID="Player_TextBox" runat="server" class="tBox" />
