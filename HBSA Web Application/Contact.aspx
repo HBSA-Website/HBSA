@@ -19,7 +19,7 @@
             <style type="text/css">
                 .col1 {
                     /*width: 180px;*/
-                    border: #006600 1px solid;
+                    border: #006600 1px solid; 
                     font-size: 9pt;
                     vertical-align: middle;
                     color: black;
