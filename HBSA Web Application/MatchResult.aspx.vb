@@ -688,12 +688,12 @@ showError:
                 Delete_Result_Div.Visible = False
             End If
 
+        Else
+
             status_Literal.Text = "<br />To submit your match results enter the details, then click 'Check your results card'"
 
             matchDate_CalendarExtender.SelectedDate = FixtureDate_DropDownList.SelectedItem.Text
             matchDate_Textbox.Text = Format(matchDate_CalendarExtender.SelectedDate, "dd MMM yyyy")
-
-        Else
 
             If SessionAdminEmail.Value <> "" AndAlso HBSAcodeLibrary.MatchResult.DeletedExists(HomeTeam_DropDownList.SelectedValue, SessionAwayTeamID.Value) Then
                 Recover_Button.Visible = True
