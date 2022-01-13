@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="MatchResult.aspx.vb" Inherits="HBSA_Web_Application.MatchResult" ClientIDMode="Static"  %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="MatchResult.aspx.vb" Inherits="HBSA_Web_Application.MatchResult" ClientIDMode="Static" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -7,11 +7,43 @@
   <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script> 
     <%--//1.12.4.js"></script>--%>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"  type="text/javascript"></script>
+    <script type="text/javascript">
+        function MatchDateChanged()
+        {
+            var div = document.getElementById("MatchDateWarning_Div");
+            div.innerHTML = "";
+            div.style.display = "none";
+
+            var teamSelector = document.getElementById("HomeTeam_DropDownList");
+            var homeTeamID = teamSelector.options[teamSelector.selectedIndex].value;
+            var matchDate = document.getElementById("matchDate_Textbox").value;
+            var fixtureDateSelector = document.getElementById("FixtureDate_DropDownList");
+            var fixtureDate = fixtureDateSelector.options[fixtureDateSelector.selectedIndex].text
+
+            if (matchDate != fixtureDate)
+                HBSA_Web_Application.CheckMatchDate.CheckMatchDate(homeTeamID, matchDate, OnComplete, OnError);
+        }
+        function OnComplete(message) {
+            if (message != "") {
+                var div = document.getElementById("MatchDateWarning_Div");
+                div.innerHTML = message;
+                div.style.display = "block";
+                document.getElementById("matchDate_Textbox").value = "";
+            }
+        }
+        function OnError(result) {
+            alert("Error: " + result.get_message());
+        }
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
+      <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="CheckMatchDate.asmx" />
+        </Services>
+      </asp:ScriptManager> 
 
   <%--prevent enter key causing postback--%>
   <script type="text/javascript">
@@ -59,6 +91,7 @@
             <asp:AsyncPostBackTrigger ControlID="FixtureDate_DropDownList" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="Section_DropDownList" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="HomeTeam_DropDownList" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="matchDate_Textbox" EventName="TextChanged" />
             <asp:AsyncPostBackTrigger ControlID="Send_Button" />
             <asp:AsyncPostBackTrigger ControlID="Retry_Button" />
             <asp:AsyncPostBackTrigger ControlID="Cancel_Button" />
@@ -119,14 +152,16 @@
             <td class="style17" rowspan="9" style="width:20px;background:white;">&nbsp;</td>
             <td class="style9">Away Team</td>
             <td class="style17" colspan="2" rowspan="2">
-                <asp:TextBox ID="matchDate_Textbox" runat="server" style="background:#FFFFCC; text-align:center" Width="84px"  />
+                <asp:TextBox ID="matchDate_Textbox" runat="server" style="background:#FFFFCC; text-align:center" 
+                    Width="84px" onchange="MatchDateChanged();" />
                 <%--<asp:Image ID="MatchDate_Image" runat="server" ImageUrl="~/images/Icon-Calendar.png" />--%>
                 <AjaxToolkit:CalendarExtender ID="matchDate_CalendarExtender" runat="server" 
                                       TargetControlID="matchDate_Textbox" PopupButtonID="matchDate_Textbox" 
                                       Format="dd MMM yyyy" TodaysDateFormat="d MMM yyyy">
                 </AjaxToolkit:CalendarExtender>
-
-
+                <div id="MatchDateWarning_Div" style="border: 1px solid #000000; display:none; position: fixed; text-align: left; padding: 4px;
+                                                      top: 400px; left: 50%; background-color: #FFFFFF;"
+                    onmouseover="this.style.cursor='pointer';" onclick="this.innerHTML = ''; this.style.display = 'none';"></div>
             </td>
         </tr>
         

@@ -217,6 +217,7 @@
     <Content Include="Adverts.aspx" />
     <Content Include="AGM_Vote.aspx" />
     <Content Include="bin\YamlDotNet.dll" />
+    <Content Include="CheckMatchDate.asmx" />
     <Content Include="ckeditor\adapters\jquery.js" />
     <Content Include="ckeditor\ckeditor.js" />
     <Content Include="ckeditor\ckeditor_basic.js" />
@@ -1087,6 +1088,10 @@
     <Compile Include="Breaks.aspx.vb">
       <DependentUpon>Breaks.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckMatchDate.asmx.vb">
+      <DependentUpon>CheckMatchDate.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ClubLogin.aspx.designer.vb">
       <DependentUpon>ClubLogin.aspx</DependentUpon>

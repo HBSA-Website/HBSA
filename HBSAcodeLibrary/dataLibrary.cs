@@ -3480,7 +3480,7 @@ namespace HBSAcodeLibrary
         {
             // set up empty result card.
             // This will format table columns
-            GetResultCard(0, 0, new DateTime(2000,1,1));
+            GetResultCard(0, 0, new DateTime(2000, 1, 1));
         }
         public MatchResult(int HomeTeamID, int AwayTeamID, DateTime FixtureDate)
         {
@@ -3577,7 +3577,7 @@ namespace HBSAcodeLibrary
         {
             return SQLcommands.ExecDataTable("MissingResults");
         }
-        public static DataSet ListResults (int sectionID, string matchDate = null, int teamID=0 )
+        public static DataSet ListResults(int sectionID, string matchDate = null, int teamID = 0)
         {
             List<SqlParameter> parameters = new List<SqlParameter> { };
 
@@ -3597,7 +3597,7 @@ namespace HBSAcodeLibrary
             }
             return SQLcommands.ExecDataSet("ListResults", parameters);
         }
-        public static DataSet ResultCard (int matchResultID)
+        public static DataSet ResultCard(int matchResultID)
         {
             return SQLcommands.ExecDataSet("ResultsCard",
                                             new List<SqlParameter> { new SqlParameter("MatchResultID", matchResultID) });
@@ -3617,7 +3617,7 @@ namespace HBSAcodeLibrary
                 addressList += address["eMailAddress"] + ";";
             }
 
-            return addressList.Substring(0,addressList.Length - 1);
+            return addressList.Substring(0, addressList.Length - 1);
 
         }
         public static DataTable WeeklyResultsForExaminer(int leagueID, int weekNo)
@@ -3625,6 +3625,11 @@ namespace HBSAcodeLibrary
             return SQLcommands.ExecDataTable("WeeklyResultsForExaminer", new List<SqlParameter>{ new SqlParameter("LeagueID",leagueID),
                                                                                                  new SqlParameter("WeekNo",weekNo) });
         }
+        public static DataTable MatchPlayed(int HomeTeamID, DateTime MatchPlayedDate) {
+            return SQLcommands.ExecDataTable("MatchPlayed", new List<SqlParameter>{ new SqlParameter("HomeTeamID",HomeTeamID),
+                                                                                    new SqlParameter("MatchPlayedDate",MatchPlayedDate) });
+        }
+
 
         #region IDisposable support
         private bool disposedValue; // To detect redundant calls

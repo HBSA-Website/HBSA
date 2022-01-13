@@ -232,7 +232,12 @@ namespace HBSAcodeLibrary
                 if (PlayerEmail.Trim() != "")
                     toAddress += ";" + PlayerEmail.Trim();
 
-                string subject = "*** Player " + Deregistered + "Registration alert. ***";
+                string subject;
+                if (MaintenanceType.ToLower().Contains("handicap"))
+                    subject = "*** Handicap change alert. ***";
+                else
+                    subject = "*** Player " + Deregistered + "Registration alert. ***";
+
                 string body = BodyTemplate.Replace("|Team|", TeamName)
                                           .Replace("|Date|", DateTime.Today.ToLongDateString())
                                           .Replace("|Player|", PlayerName)

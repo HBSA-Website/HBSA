@@ -377,6 +377,15 @@ Public Class MatchResult
             Try
                 matchDate = CDate(matchDate_Textbox.Text)
                 matchDate_CalendarExtender.SelectedDate = matchDate
+                If matchDate <> CDate(FixtureDate_DropDownList.SelectedItem.Text) Then
+                    Using match As DataTable = HBSAcodeLibrary.MatchResult.MatchPlayed(HomeTeam_DropDownList.SelectedValue, matchDate)
+                        If match.Rows.Count > 0 Then
+                            errMsg.Append("The home team already recorded a match for this date. (" & match.Rows(0).ItemArray(1) & ") " &
+                                          "Choose a different date or amend the other match.")
+                        End If
+                    End Using
+                End If
+
             Catch ex As Exception
                 errMsg.Append("Invalid match date<br/>")
             End Try
