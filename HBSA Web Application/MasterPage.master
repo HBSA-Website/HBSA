@@ -65,7 +65,7 @@
             <td style="text-align:center; border-bottom-style: solid; border-bottom-width: 2px">
 
                 <div style="text-align:center; width:100%;" onmouseover="hideMenuDiv();">
-                    <img src="images/SHBSA.jpg" width="700" alt="Huddersfield Billiards and Snooker Association"/>
+                    <asp:Image runat="server" ImageUrl="~/images/SHBSA.jpg" width="700" alt="Huddersfield Billiards and Snooker Association"/>
                 </div>
 
                 <br />
@@ -397,17 +397,17 @@
 				<td style="width:200px; vertical-align:top;background:#ffffff;" class="border-right">
 
                         <div style="border: 1px solid #008080; width:200px">
-                            <a href="YorkshireLeague.aspx"><img src="images/YBSA.png" alt="YBSA" width="200" /></a>
+                            <a href="YorkshireLeague.aspx"><asp:Image runat="server" ImageUrl="~/images/YBSA.png" alt="YBSA" width="200" /></a>
                         </div>
                     <br />    
                     <div style="text-align:left; border: 2px solid #106496; width:200px">
-                         <br /><a href="http://www.worldsnooker.com" target="_blank"><img src="images/WorldSnooker.jpg" width="200" style="border:none;" alt="World Snooker" />
+                         <br /><a href="http://www.worldsnooker.com" target="_blank"><asp:Image runat="server" ImageUrl="~/images/WorldSnooker.jpg" width="200" style="border:none;" alt="World Snooker" />
                         </a> 
                     </div>
                     <br />
                     
                     <div style="text-align:left; border: 2px solid #106496; width:200px">
-                        <a href="http://www.epsb.co.uk" target="_blank"><img src="images/epsb.png" width="200" alt="English Partnership for Snooker & Billiards" /></a>
+                        <a href="http://www.epsb.co.uk" target="_blank"><asp:Image runat="server" ImageUrl="~/images/epsb.png" width="200" alt="English Partnership for Snooker & Billiards" /></a>
                     </div>
                   
                  <br />
