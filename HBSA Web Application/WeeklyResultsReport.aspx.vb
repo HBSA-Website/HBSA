@@ -13,17 +13,17 @@
 
     Protected Sub PopulateLeagues()
 
-        Using leaguesList As DataTable = HBSAcodeLibrary.LeagueData.GetLeagues()
+        Using leaguesList As DataTable = HBSAcodeLibrary.SectionData.GetSections()
 
             With League_DropDownList
                 .Items.Clear()
                 .Visible = True
                 .DataSource = leaguesList
-                .DataTextField = "League Name"
+                .DataTextField = "Section Name"
                 .DataValueField = "ID"
                 .DataBind()
                 If leaguesList.Rows.Count > 1 Then
-                    .Items.Insert(0, New ListItem("**Select a League**", 0))
+                    .Items.Insert(0, New ListItem("**Select a Division/Section**", 0))
                 End If
 
                 .SelectedIndex = 0
@@ -45,7 +45,7 @@
 
                 With FixtureDate_DropDownList
                     .Items.Clear()
-                    .Items.Add(New ListItem("All fixture dates", 0))
+                    '.Items.Add(New ListItem("All fixture dates", 0))
                     For Each row As DataRow In fixtureList.Tables(1).Rows
                         If row!FixtureDate <= Today Then
                             .Items.Add(New ListItem(row!Fixturedate, row!WeekNo))
@@ -76,14 +76,29 @@
 
     Protected Sub FixtureDate_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FixtureDate_DropDownList.SelectedIndexChanged
 
-        Using results As DataTable = HBSAcodeLibrary.MatchResult.WeeklyResultsForExaminer(League_DropDownList.SelectedValue, FixtureDate_DropDownList.SelectedValue)
+        Err_Literal.Text = ""
+
+        Try
+            Using results As DataTable = HBSAcodeLibrary.MatchResult.WeeklyResultsForExaminer(League_DropDownList.SelectedValue, FixtureDate_DropDownList.SelectedValue)
+
+                With Results_GridView
+                    .DataSource = results
+                    .DataBind()
+                    .Visible = True
+                End With
+
+            End Using
+        Catch ex As Exception
+            Err_Literal.Text = "<span style=color:red;>Error occured: " + ex.Message + "</span><br/>" &
+                               "<a href='Contact.aspx'>Please contact us for assistace</a>, and supply this message."
 
             With Results_GridView
-                .DataSource = results
+                .DataSource = Nothing
                 .DataBind()
+                .Visible = False
             End With
 
-        End Using
+        End Try
 
     End Sub
 End Class

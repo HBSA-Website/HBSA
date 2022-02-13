@@ -1050,6 +1050,7 @@ showError:
                                                        AwayHcap2_TextBox.Text,
                                                        AwayHcap3_TextBox.Text,
                                                        If(AwayHcap4_TextBox.Text.Trim = "", 0, AwayHcap4_TextBox.Text),
+                                                       FixtureDate_DropDownList.SelectedItem.Text,
                                                        SessionUser.Value)
             Store_result = MatchID
 

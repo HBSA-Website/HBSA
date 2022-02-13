@@ -1,16 +1,14 @@
 USE [HBSA]
 GO
 /****** Object:  StoredProcedure [dbo].[insertMatchResult]    Script Date: 12/12/2014 17:46:00 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+if exists (select ROUTINE_NAME from INFORMATION_SCHEMA.ROUTINES where ROUTINE_NAME='insertMatchResult')
+	drop procedure dbo.insertMatchResult
 GO
 
-alter procedure [dbo].[insertMatchResult]
+create procedure dbo.insertMatchResult
 	(@MatchDate date
 	,@HomeTeamID int
 	,@AwayTeamID int
-
 	,@HomePlayer1 varchar(55)
 	,@HomeHandicap1 int
 	,@HomeScore1 int
@@ -35,7 +33,7 @@ alter procedure [dbo].[insertMatchResult]
 	,@AwayPlayer4 varchar(55)
 	,@AwayHandicap4 int
 	,@AwayScore4 int
-
+	,@FixtureDate date
 	,@UserID varchar(255)
 	)
 as
@@ -61,7 +59,7 @@ update Players set Played=1, Team=@Team where ID=@AwayPlayer3
 update Players set Played=1, Team=@Team where ID=@AwayPlayer4
 
 
-if (select count(*) from matchResults where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID) > 0 
+if exists(select ID from MatchResultsDetails2 where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID and FixtureDate = @FixtureDate)
 	exec deleteMatchResult @HomeTeamID,@AwayTeamID,@UserID 
 
 declare @MatchResultID int
