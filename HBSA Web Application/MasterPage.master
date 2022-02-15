@@ -161,6 +161,9 @@
                                              text-align:left; " >
                                             <a runat="server" href="Results.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Match Results</a></td></tr>
 
+                                         <tr><td style=" color:#006633;  text-align:left;">
+                                             <a href="WeeklyResultsReport.aspx"  runat="server"><img alt="" style="border-style: none" src="Images/red.jpg" />&nbsp;Weekly&nbsp;Results&nbsp;Report</a></td></tr>
+
                                     <tr><td style="margin: 0px; padding: 2px; color:#006633; font-family:Verdana; font-weight:bold;
                                              text-align:left; " class="openSeason">
                                             <a runat="server" href="MissingResults.aspx" ><img alt="" style="border-style: none" src="Images/red.jpg" /> Missing Results</a></td></tr>

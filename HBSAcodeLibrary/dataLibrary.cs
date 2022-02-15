@@ -3634,6 +3634,16 @@ namespace HBSAcodeLibrary
             return SQLcommands.ExecDataTable("WeeklyResultsForExaminer", new List<SqlParameter>{ new SqlParameter("LeagueID",leagueID),
                                                                                                  new SqlParameter("WeekNo",weekNo) });
         }
+        public static DataSet WeeklyResults(int leagueID, int SectionID, DateTime FixtureDate)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter> { new SqlParameter("FixtureDate", FixtureDate) };
+            if (leagueID != 0)
+                parameters.Add(new SqlParameter("LeagueID", leagueID));
+            if (SectionID != 0)
+                parameters.Add(new SqlParameter("SectionID", SectionID));
+
+            return SQLcommands.ExecDataSet("WeeklyResults", parameters);
+        }
         public static DataTable MatchPlayed(int HomeTeamID, DateTime MatchPlayedDate) {
             return SQLcommands.ExecDataTable("MatchPlayed", new List<SqlParameter>{ new SqlParameter("HomeTeamID",HomeTeamID),
                                                                                     new SqlParameter("MatchPlayedDate",MatchPlayedDate) });

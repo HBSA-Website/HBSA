@@ -41,11 +41,11 @@ Partial Public Class WeeklyResultsReport
     Protected WithEvents Err_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''Results_GridView control.
+    '''Results_Literal control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Results_GridView As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents Results_Literal As Global.System.Web.UI.WebControls.Literal
 End Class

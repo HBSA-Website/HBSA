@@ -13,24 +13,41 @@
 
     Protected Sub PopulateLeagues()
 
-        Using leaguesList As DataTable = HBSAcodeLibrary.SectionData.GetSections()
+        With League_DropDownList
 
-            With League_DropDownList
+            Using SectionsList As DataTable = HBSAcodeLibrary.LeagueData.GetSections(0)
+
                 .Items.Clear()
                 .Visible = True
-                .DataSource = leaguesList
-                .DataTextField = "Section Name"
-                .DataValueField = "ID"
+                For Each Section As DataRow In SectionsList.Rows
+                    If CInt(Section!ID) = 10 Then
+                        .Items.Add(New ListItem("Billiards", CInt(Section!ID)))
+                    Else
+                        .Items.Add(New ListItem(Section.Field(Of String)("Section Name"), CInt(Section!ID)))
+                    End If
+                Next
+
                 .DataBind()
-                If leaguesList.Rows.Count > 1 Then
-                    .Items.Insert(0, New ListItem("**Select a Division/Section**", 0))
+
+            End Using
+
+            Using leaguesList As DataTable = HBSAcodeLibrary.LeagueData.GetLeagues
+
+                For Each League As DataRow In leaguesList.Rows
+                    If CInt(League!ID) <> 3 Then
+                        .Items.Add(New ListItem("All sections in " & League.Field(Of String)("League Name"), CInt(League!ID) + 100))
+                    End If
+                Next
+
+            End Using
+
+            If .Items.Count > 1 Then
+                    .Items.Insert(0, New ListItem("**Select a Section or League**", 0))
                 End If
 
-                .SelectedIndex = 0
+            .SelectedIndex = 0
 
-            End With
-
-        End Using
+        End With
 
     End Sub
 
@@ -40,6 +57,7 @@
             FixtureDate_DropDownList.Items.Clear()
 
         Else
+            Dim LeagueID As Integer
 
             Using fixtureList As DataSet = HBSAcodeLibrary.FixturesData.GetFixtureDatesForLeague(League_DropDownList.SelectedValue)
 
@@ -78,27 +96,44 @@
 
         Err_Literal.Text = ""
 
-        Try
-            Using results As DataTable = HBSAcodeLibrary.MatchResult.WeeklyResultsForExaminer(League_DropDownList.SelectedValue, FixtureDate_DropDownList.SelectedValue)
+        Dim SectionID As Integer = 0
+        Dim LeagueID As Integer = 0
+        If League_DropDownList.SelectedValue > 100 Then
+            LeagueID = League_DropDownList.SelectedValue Mod 100
+        Else
+            SectionID = League_DropDownList.SelectedValue
+        End If
 
-                With Results_GridView
-                    .DataSource = results
-                    .DataBind()
-                    .Visible = True
-                End With
+        Using results As DataSet = HBSAcodeLibrary.MatchResult.WeeklyResults(LeagueID, SectionID, FixtureDate_DropDownList.SelectedItem.Text)
+            Dim WR As New StringBuilder("<b>" + results.Tables(0).Rows(0).ItemArray(0).ToString() + "</b><br/><hr/>")
+            For Each match As DataRow In results.Tables(1).Rows
+                WR.Append("<b>" & match!Home & " " & match!H_Pts & " v " & match!Away & " " & match!A_Pts & " (" & match!Section & ")</b><br/>")
+                WR.Append((match!HomePlayer1 & " (" & match!HomeHandicap1 & ") " & match!HomePlayer1Score & ", " & match!AwayPlayer1 & " (" & match!AwayHandicap1 & ") " & match!AwayPlayer1Score).Replace("-", "&#8209;") & ", " &
+                          (match!HomePlayer2 & " (" & match!HomeHandicap2 & ") " & match!HomePlayer2Score & ", " & match!AwayPlayer2 & " (" & match!AwayHandicap2 & ") " & match!AwayPlayer2Score).Replace("-", "&#8209;") & ", " &
+                          (match!HomePlayer3 & " (" & match!HomeHandicap3 & ") " & match!HomePlayer3Score & ", " & match!AwayPlayer3 & " (" & match!AwayHandicap3 & ") " & match!AwayPlayer3Score).Replace("-", "&#8209;")
+                         )
+                If Not match!Homeplayer4 Is DBNull.Value Then
+                    WR.Append(", " & (match!HomePlayer4 & " (" & match!HomeHandicap4 & ") " & match!HomePlayer4Score & ", " & match!AwayPlayer4 & " (" & match!AwayHandicap4 & ") " & match!AwayPlayer4Score)).Replace("-", "&#8209;")
+                End If
 
-            End Using
-        Catch ex As Exception
-            Err_Literal.Text = "<span style=color:red;>Error occured: " + ex.Message + "</span><br/>" &
-                               "<a href='Contact.aspx'>Please contact us for assistace</a>, and supply this message."
+                Dim Breaks() As DataRow = results.Tables(2).Select("MatchResultID = " & match!ID)
+                If Breaks.Length > 0 Then
+                    WR.Append("<br/><b>Breaks: </b>")
+                    For Each break As DataRow In Breaks
+                        If break!MatchResultID = match!ID Then
+                            WR.Append(break!Player & " " & break!Break & ", ")
+                        End If
+                    Next
+                    WR.Remove(WR.Length - 2, 2)
+                End If
 
-            With Results_GridView
-                .DataSource = Nothing
-                .DataBind()
-                .Visible = False
-            End With
+                WR.Append("<hr/>")
 
-        End Try
+            Next
+
+            Results_Literal.Text = WR.ToString()
+
+        End Using
 
     End Sub
 End Class
