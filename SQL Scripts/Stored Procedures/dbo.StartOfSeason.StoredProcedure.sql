@@ -77,6 +77,9 @@ delete resultsusers
 	where teams.id is null
 	   or Confirmed <> 'Confirmed'
 
+--Set up the fixture links table 
+exec SetUpFixtureLinks
+
 commit tran
 
 

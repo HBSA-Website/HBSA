@@ -58,12 +58,11 @@ update Players set Played=1, Team=@Team where ID=@AwayPlayer2
 update Players set Played=1, Team=@Team where ID=@AwayPlayer3
 update Players set Played=1, Team=@Team where ID=@AwayPlayer4
 
-
-if exists(select ID from MatchResultsDetails2 where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID and FixtureDate = @FixtureDate)
-	exec deleteMatchResult @HomeTeamID,@AwayTeamID,@UserID 
-
 declare @MatchResultID int
-	
+select @MatchResultID= ID from MatchResultsDetails2 where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID and FixtureDate = @FixtureDate
+if @MatchResultID is not null
+	exec deleteMatchResult @MatchResultID, @UserID
+
 insert matchResults values 
 	(@MatchDate 
 	,@HomeTeamID
@@ -98,6 +97,10 @@ insert matchResults values
 
 select @MatchResultID=scope_identity()
 
+-- update MatchResultsFixtureLink
+insert MatchResultsFixtureDates
+	(MatchResultID, FixtureDate)
+	values(@MatchResultID, @FixtureDate)
 --convert userID to the resultuser login if it's numereic
 if isnumeric(@userID) = 1 
 	select @UserID=eMailAddress from resultsusers where id=@UserID

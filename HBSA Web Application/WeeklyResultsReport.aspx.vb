@@ -57,7 +57,6 @@
             FixtureDate_DropDownList.Items.Clear()
 
         Else
-            Dim LeagueID As Integer
 
             Using fixtureList As DataSet = HBSAcodeLibrary.FixturesData.GetFixtureDatesForLeague(League_DropDownList.SelectedValue)
 

@@ -7,18 +7,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER procedure [dbo].[deleteMatchResult]
-	(@HomeTeamID int
-	,@AwayTeamID int
+	(@MatchResultID int
 	,@UserID varchar(255)
 	)
 as
 
 set nocount on
 set xact_abort on
-
-declare @MatchResultID int
-
-select @MatchResultID = ID from matchResults where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID
 
 if @MatchResultID is not null
 	begin
@@ -32,12 +27,12 @@ if @MatchResultID is not null
 		end
 	
 	
-	insert MatchResults_Deleted select * from MatchResults where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID
-	delete matchResults where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID
+	insert MatchResults_Deleted select * from MatchResults where ID = @MatchResultID
+	delete matchResults where ID = @MatchResultID
 	
 	insert ActivityLog values
 		(dbo.UKdateTime(getUTCdate())
-		,'delete match result: HomeTeamID='+convert(varchar,@HomeTeamID)+ ' and AwayTeamID='+convert(varchar,@AwayTeamID)
+		,'delete match result: MatchresultID='+convert(varchar,@MatchresultID)
 		,@MatchResultID
 		,@Userid)
 	
