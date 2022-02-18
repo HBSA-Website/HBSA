@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" Inherits="HBSA_Web_Application.Contact" CodeBehind="Contact.aspx.vb" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -70,16 +69,56 @@
                 <table style="width: auto; margin-left: auto; margin-right: auto; border-collapse: collapse; background-color: #CCFFCC;">
                     <table style="width: auto; margin-left: auto; margin-right: auto; border-collapse: collapse; background-color: #CCFFCC;">
                         <tr>
-                            <td class="col2">Please Note :- When registering a new player, or requesting a handicap change please monitor the player prior to this request.<br />
-                                Then and only then submit a fair and suggested handicap. Do NOT assume that all new players receive +21 as this is not the case.<br />
-                                <span style="color: red;">If a handicap is later proven to be unfair sanctions may be applied to the team.</span><br />
+                            <td class="col2">
+                                <br />
+                                Please Note :- When registering a new player, or requesting a handicap change please monitor the player prior to this request.<br />
+                                Then and only then submit a fair and suggested handicap. Do NOT assume that all new players receive +21 as this is not the case.<br /> <br />
                             </td>
                         </tr>
                         <tr>
                             <td class="col2">
-                                <asp:CheckBox ID="Justify_CheckBox" runat="server" Text="Tick this box to indicate you have read the note above, and that you agree and will comply." CssClass="BigCheckBox" Font-Italic="False" ForeColor="Blue" AutoPostBack="true" />
+                                <b>
+                                <br />
+                                Have you personally observed and made an assessment of the player's ability, over several frames?</b>
+                                <div style="padding-left: 20px;padding-top:5px;padding-bottom: 5px">
+                                <asp:RadioButtonList ID="Check1" runat="server" RepeatLayout="Flow" AutoPostBack="true" RepeatDirection="Horizontal">
+                                    <asp:ListItem>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</asp:ListItem>
+                                    <asp:ListItem>&nbsp;&nbsp;No</asp:ListItem>
+                                </asp:RadioButtonList>
+                                </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="col2">
+                                <b>
+                                <br />
+                                Have you gathered all relevant information?</b>
+                                <div style="padding-left: 20px;padding-top:5px;padding-bottom: 5px">
+                                    (such as: the players record in practice against other league players; their highest break; their handicaps in other leagues; whether the player plays existing cue sports, and if so to what standard.)<br />
+                                </div>
+                                <div style="padding-left: 20px;padding-top:5px;padding-bottom: 5px">
+                                <asp:RadioButtonList ID="Check2" runat="server" RepeatLayout="Flow" AutoPostBack="true" RepeatDirection="Horizontal">
+                                    <asp:ListItem>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</asp:ListItem>
+                                    <asp:ListItem>&nbsp;&nbsp;No</asp:ListItem>
+                                </asp:RadioButtonList>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col2">
+                                <span style="color:red; font-weight:bold">
+                                <br />
+                                Do you understand that if you recommend a handicap which proves to be too high (due to not assessing the player properly, not declaring information about the player, etc) then POINTS REDUCTIONS may be applied.</span><br />
+                                <div style="padding-left: 20px;padding-top:5px;padding-bottom: 5px">
+                                <asp:RadioButtonList ID="Check3" runat="server" RepeatLayout="Flow" AutoPostBack="true" RepeatDirection="Horizontal">
+                                    <asp:ListItem>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</asp:ListItem>
+                                    <asp:ListItem>&nbsp;&nbsp;No</asp:ListItem>
+                                </asp:RadioButtonList>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr><td>
+                            <asp:Literal ID="Check_Literal" runat="server"></asp:Literal></td></tr>
                     </table>
             </asp:Panel>
 

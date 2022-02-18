@@ -6,11 +6,11 @@ Public Class Global_asax
     Inherits HttpApplication
     Sub Application_Start(sender As Object, e As EventArgs)
         ' Fires when the application is started
-        HBSAcodeLibrary.ActivityLog.LogActivity("Web Application Start", 0, "Global")
+        'HBSAcodeLibrary.ActivityLog.LogActivity("Web Application Start", 0, "Global")
     End Sub
     Sub Application_End(sender As Object, e As EventArgs)
         ' Fires when the application is stopped
-        HBSAcodeLibrary.ActivityLog.LogActivity("Web Application End", 0, "Global")
+        'HBSAcodeLibrary.ActivityLog.LogActivity("Web Application End", 0, "Global")
     End Sub
 
     Sub Session_Start(sender As Object, e As EventArgs)

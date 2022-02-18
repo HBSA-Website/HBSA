@@ -857,7 +857,8 @@ showError:
 
         Try
             Dim MatchID As Integer =
-                HBSAcodeLibrary.MatchResult.InsertResultCard(matchDate_Textbox.Text,
+                HBSAcodeLibrary.MatchResult.InsertResultCard(
+                                                       matchDate_Textbox.Text,
                                                        HomeTeam_DropDownList.SelectedValue,
                                                        SessionAwayTeamID.Value,
                                                        HomePlayer1_DropDownList.SelectedValue.Split("|")(0),
@@ -884,6 +885,7 @@ showError:
                                                        AwayHcap2_TextBox.Text,
                                                        AwayHcap3_TextBox.Text,
                                                        If(AwayHcap4_TextBox.Text.Trim = "", 0, AwayHcap4_TextBox.Text),
+                                                       FixtureDate_DropDownList.SelectedItem.Text,
                                                        SessionUser.Value)
             Store_result = MatchID
 

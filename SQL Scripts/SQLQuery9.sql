@@ -8,7 +8,7 @@ GO
 
 
 alter procedure [dbo].[WeeklyResultsForExaminer]
-	(@LeagueID int
+	(@SectionID int
 	,@WeekNo int = 0
 	)
 as		
@@ -18,13 +18,14 @@ set nocount on
 If @WeekNo = 0
 	select @WeekNo=max(weekNo)
 		from FixtureDates 
-		where SectionID in (Select ID from Sections where LeagueID=@LeagueID) 
+		where SectionID =@SectionID
 		  and FixtureDate between dateadd(week,-1,dbo.UKdateTime(getUTCdate())) and dbo.UKdateTime(getUTCdate())
 
-select Section=0,Result=convert(varchar(4000),'<strong> ' + [League Name] + ' League Scores:<br/>')
+select Section=0,Result=convert(varchar(4000),'<strong> ' + [League Name] + ' ' + [Section Name] + ' Section Scores:<br/>')
 	into #tempresults
-	from Leagues 
-	where ID=@LeagueID
+	from Sections 
+	join Leagues on Leagues.ID=LeagueID
+	where Sections.ID=@SectionID
 
 insert #tempresults
 select distinct 
@@ -66,15 +67,15 @@ select distinct
 	join Leagues l on l.ID = s.LeagueID	
 	outer apply (select WeekNo from FixtureDates where FixtureDate=R.FixtureDate)FD
 
-	where l.ID=@LeagueID
+	where s.ID=@SectionID
 	  and WeekNo=@WeekNo 
 	
 	order by H.SectionID, result
 
 if (select count(*) from #tempresults)=1
-	select Section=0,Result='No results for ' + [League Name] + ' for the selected fixture date.'
-		from Leagues 
-		where ID=@LeagueID	
+	select Section=0,Result='No results for ' + [Section Name] + ' for the selected fixture date.'
+		from Sections 
+		where ID=@SectionID
 else
 	select result from #tempresults order by Section, Result
 
@@ -82,4 +83,6 @@ drop table #tempresults
 
 GO
 
-exec WeeklyResultsForExaminer 3, 19
+exec WeeklyResultsForExaminer 1,17
+
+exec GetAllSections
