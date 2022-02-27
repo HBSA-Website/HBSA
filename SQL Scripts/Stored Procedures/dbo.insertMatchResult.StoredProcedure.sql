@@ -59,7 +59,12 @@ update Players set Played=1, Team=@Team where ID=@AwayPlayer3
 update Players set Played=1, Team=@Team where ID=@AwayPlayer4
 
 declare @MatchResultID int
-select @MatchResultID= ID from MatchResultsDetails2 where HomeTeamID=@HomeTeamID and AwayTeamID=@AwayTeamID and FixtureDate = @FixtureDate
+select @MatchResultID= ID 
+	from MatchResultsDetails5 
+	where HomeTeamID=@HomeTeamID
+	  and AwayTeamID=@AwayTeamID 
+	  and FixtureDate = @FixtureDate
+
 if @MatchResultID is not null
 	exec deleteMatchResult @MatchResultID, @UserID
 

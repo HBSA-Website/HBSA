@@ -3629,11 +3629,6 @@ namespace HBSAcodeLibrary
             return addressList.Substring(0, addressList.Length - 1);
 
         }
-        public static DataTable WeeklyResultsForExaminer(int leagueID, int weekNo)
-        {
-            return SQLcommands.ExecDataTable("WeeklyResultsForExaminer", new List<SqlParameter>{ new SqlParameter("LeagueID",leagueID),
-                                                                                                 new SqlParameter("WeekNo",weekNo) });
-        }
         public static DataSet WeeklyResults(int leagueID, int SectionID, DateTime FixtureDate)
         {
             List<SqlParameter> parameters = new List<SqlParameter> { new SqlParameter("FixtureDate", FixtureDate) };
