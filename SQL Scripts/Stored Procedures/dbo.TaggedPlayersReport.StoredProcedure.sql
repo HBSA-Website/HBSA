@@ -33,7 +33,7 @@ if @fromApplyHCaps = 0
 	end
 		
 declare @WinLosses table 
-	(MatchDate date
+	(FirstDateLodged date
 	,PlayerID int
 	,Player varchar(106)
 	,Handicap int
@@ -42,87 +42,87 @@ declare @WinLosses table
 		 	
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,HomePlayer1ID
 		,HomePlayer1
 		,HomeHandicap1
 		,WinLose=case when HomePlayer1Score>AwayPlayer1Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer1ID > 0 and AwayPlayer1ID > 0
 
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,HomePlayer2ID
 		,HomePlayer2
 		,HomeHandicap2
 		,WinLose=case when HomePlayer2Score>AwayPlayer2Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer2ID > 0 and AwayPlayer2ID > 0
 
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,HomePlayer3ID
 		,HomePlayer3
 		,HomeHandicap3
 		,WinLose=case when HomePlayer3Score>AwayPlayer3Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer3ID > 0 and AwayPlayer3ID > 0
 
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,HomePlayer4ID
 		,HomePlayer4
 		,HomeHandicap4
 		,WinLose=case when HomePlayer4Score>AwayPlayer4Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer4ID > 0 and AwayPlayer4ID > 0
 
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,AwayPlayer1ID
 		,AwayPlayer1
 		,AwayHandicap1
 		,WinLose=case when AwayPlayer1Score>HomePlayer1Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer1ID > 0 and AwayPlayer1ID > 0
 
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,AwayPlayer2ID
 		,AwayPlayer2
 		,AwayHandicap2
 		,WinLose=case when AwayPlayer2Score>HomePlayer2Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer2ID > 0 and AwayPlayer2ID > 0
 
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,AwayPlayer3ID
 		,AwayPlayer3
 		,AwayHandicap3
 		,WinLose=case when AwayPlayer3Score>HomePlayer3Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer3ID > 0 and AwayPlayer3ID > 0
 
 insert @WinLosses
 	select
-		 MatchDate -- =DateTimeLodged
+		 FirstDateLodged
 		,AwayPlayer4ID
 		,AwayPlayer4
 		,AwayHandicap4
 		,WinLose=case when AwayPlayer4Score>HomePlayer4Score then 1 else 0 end
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer4ID > 0 and AwayPlayer4ID > 0
 
 declare @Matches6 table 
 	(ID int identity (1,1)
-	,mDate date
+	,keyDate date
 	,PlayerID int
 	,Handicap int
 	,Played int
@@ -132,8 +132,8 @@ declare @Matches6 table
 
 declare @lastHcap int
        ,@lastPlayerID int
-       ,@lastmDate date
-	   ,@mDate date
+       ,@lastkeyDate date
+	   ,@keyDate date
 	   ,@PlayerID int
 	   ,@Handicap int
 	   ,@WinLose tinyint
@@ -142,7 +142,7 @@ declare @lastHcap int
 
 declare c 
 	cursor fast_forward for
-	select MatchDate, PlayerID, Handicap, WinLose
+	select FirstDateLodged, PlayerID, Handicap, WinLose
 		from @WinLosses
 		outer apply (select Forename,Initials,Surname, Tagged,Over70, LeagueID, SectionID, ClubID from Players where ID=PlayerID) p
 
@@ -154,21 +154,21 @@ declare c
 		  and (@ClubID = 0 or @ClubID = ClubID)
 		  and (@Player='' or dbo.FullPlayerName(Forename, Initials, Surname) in (select Player from @Players))
 
-		order by PlayerID, MatchDate
+		order by PlayerID, FirstDateLodged
 
 set @lastHcap=99
 set @lastPlayerID=-1
 select @Played=0, @Won=0
 
 open c
-fetch c into @mDate, @PlayerID, @Handicap, @WinLose
+fetch c into @keyDate, @PlayerID, @Handicap, @WinLose
 while @@fetch_status=0
 	begin
 	
 	if @PlayerID <> @lastPlayerID
 	or @Played > 5
 		begin
-		insert @Matches6 values (@lastmDate,@lastPlayerID,@lastHcap,@Played, @Won, @Played-@Won)
+		insert @Matches6 values (@lastkeyDate,@lastPlayerID,@lastHcap,@Played, @Won, @Played-@Won)
 		select @Played=0, @Won=0
 		end
 
@@ -176,20 +176,20 @@ while @@fetch_status=0
 	set @Won=@Won+case when @WinLose > 0 then 1 else 0 end			
 	set @lastHcap=@Handicap
 	set @lastPlayerID=@PlayerID
-	set @lastmDate=@mdate
+	set @lastkeyDate=@keyDate
 	
-	fetch c into @mDate, @PlayerID, @Handicap, @WinLose
+	fetch c into @keyDate, @PlayerID, @Handicap, @WinLose
 
 	end  	
 
-insert @Matches6 values (@lastmDate,@lastPlayerID,@lastHcap,@Played, @Won, @Played-@Won)
+insert @Matches6 values (@lastkeyDate,@lastPlayerID,@lastHcap,@Played, @Won, @Played-@Won)
 
 close c
 deallocate c
 
 --select * from @Matches6 where playerid=2000
 
-select [Last Date]=convert(varchar(11),M6.mDate,113)
+select [Last Date]=convert(varchar(11),M6.keyDate,113)
 	  ,M6.PlayerID
       ,Player = Forename + case when Initials <> '' then ' ' + Initials + '.' else ' ' end + Surname 
       ,M6.Handicap
@@ -255,7 +255,7 @@ select [Last Date]=convert(varchar(11),M6.mDate,113)
                           end
 				 end  = 1 
 					)
-	order by SectionID, [Club Name] + ' ' + Team, Player, M6.mDate
+	order by SectionID, [Club Name] + ' ' + Team, Player, M6.keyDate
 
 if @fromApplyHCaps=1
 	select [Last Date]
@@ -297,3 +297,4 @@ drop table #tmp
 
 
 GO
+exec TaggedPlayersReport 
