@@ -59,13 +59,40 @@ Partial Public Class Contact1
     Protected WithEvents Agreement_Panel As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Justify_CheckBox control.
+    '''Check1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Justify_CheckBox As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents Check1 As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Check2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Check2 As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Check3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Check3 As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''Check_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Check_Literal As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
     '''Contact_Panel control.

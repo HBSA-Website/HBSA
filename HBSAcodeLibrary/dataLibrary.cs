@@ -3529,40 +3529,49 @@ namespace HBSAcodeLibrary
                                                                new SqlParameter("AwayTeamID", AwayTeamID),
                                                                new SqlParameter("UserID", UserID) });
         }
-        public static int InsertResultCard(DateTime MatchDate, int HomeTeamID, int AwayTeamID, string HomePlayer1, int HomeScore1, string AwayPlayer1, int AwayScore1, string HomePlayer2, int HomeScore2, string AwayPlayer2, int AwayScore2, string HomePlayer3, int HomeScore3, string AwayPlayer3, int AwayScore3, string HomePlayer4, int HomeScore4, string AwayPlayer4, int AwayScore4, int HomeHandicap1, int HomeHandicap2, int HomeHandicap3, int HomeHandicap4, int AwayHandicap1, int AwayHandicap2, int AwayHandicap3, int AwayHandicap4, string UserID)
+        public static int InsertResultCard(DateTime MatchDate, int HomeTeamID, int AwayTeamID, 
+                                           string HomePlayer1, int HomeScore1, string AwayPlayer1, int AwayScore1, 
+                                           string HomePlayer2, int HomeScore2, string AwayPlayer2, int AwayScore2, 
+                                           string HomePlayer3, int HomeScore3, string AwayPlayer3, int AwayScore3, 
+                                           string HomePlayer4, int HomeScore4, string AwayPlayer4, int AwayScore4, 
+                                           int HomeHandicap1, int HomeHandicap2, int HomeHandicap3, int HomeHandicap4, 
+                                           int AwayHandicap1, int AwayHandicap2, int AwayHandicap3, int AwayHandicap4,
+                                           DateTime FixtureDate,  string UserID)
         {
             List<SqlParameter> parameters = new List<SqlParameter>
             {
-               new SqlParameter("MatchDate", MatchDate),
+                new SqlParameter("MatchDate", MatchDate),
                 new SqlParameter("HomeTeamID", HomeTeamID),
                 new SqlParameter("AwayTeamID", AwayTeamID),
                 new SqlParameter("HomePlayer1", HomePlayer1),
+                new SqlParameter("HomeHandicap1", HomeHandicap1),
                 new SqlParameter("HomeScore1", HomeScore1),
+                new SqlParameter("AwayHandicap1", AwayHandicap1),
                 new SqlParameter("AwayPlayer1", AwayPlayer1),
                 new SqlParameter("AwayScore1", AwayScore1),
                 new SqlParameter("HomePlayer2", HomePlayer2),
+                new SqlParameter("HomeHandicap2", HomeHandicap2),
                 new SqlParameter("HomeScore2", HomeScore2),
                 new SqlParameter("AwayPlayer2", AwayPlayer2),
+                new SqlParameter("AwayHandicap2", AwayHandicap2),
                 new SqlParameter("AwayScore2", AwayScore2),
                 new SqlParameter("HomePlayer3", HomePlayer3),
+                new SqlParameter("HomeHandicap3", HomeHandicap3),
                 new SqlParameter("HomeScore3", HomeScore3),
                 new SqlParameter("AwayPlayer3", AwayPlayer3),
+                new SqlParameter("AwayHandicap3", AwayHandicap3),
                 new SqlParameter("AwayScore3", AwayScore3),
                 new SqlParameter("HomePlayer4", HomePlayer4),
                 new SqlParameter("HomeScore4", HomeScore4),
                 new SqlParameter("AwayPlayer4", AwayPlayer4),
-                new SqlParameter("AwayScore4", AwayScore4),
-                new SqlParameter("HomeHandicap1", HomeHandicap1),
-                new SqlParameter("HomeHandicap2", HomeHandicap2),
-                new SqlParameter("HomeHandicap3", HomeHandicap3),
-                new SqlParameter("HomeHandicap4", HomeHandicap4),
-                new SqlParameter("AwayHandicap1", AwayHandicap1),
-                new SqlParameter("AwayHandicap2", AwayHandicap2),
-                new SqlParameter("AwayHandicap3", AwayHandicap3),
                 new SqlParameter("AwayHandicap4", AwayHandicap4),
+                new SqlParameter("AwayScore4", AwayScore4),
+                new SqlParameter("HomeHandicap4", HomeHandicap4),
+                new SqlParameter("FixtureDate",FixtureDate),
                 new SqlParameter("UserID", UserID),
             };
 
+            
             return (int)SQLcommands.ExecScalar("insertMatchResult", parameters);
         }
         public static void InsertMatchBreak(int MatchResultID, int PlayerID, int Break, string UserID)
@@ -3620,10 +3629,15 @@ namespace HBSAcodeLibrary
             return addressList.Substring(0, addressList.Length - 1);
 
         }
-        public static DataTable WeeklyResultsForExaminer(int leagueID, int weekNo)
+        public static DataSet WeeklyResults(int leagueID, int SectionID, DateTime FixtureDate)
         {
-            return SQLcommands.ExecDataTable("WeeklyResultsForExaminer", new List<SqlParameter>{ new SqlParameter("LeagueID",leagueID),
-                                                                                                 new SqlParameter("WeekNo",weekNo) });
+            List<SqlParameter> parameters = new List<SqlParameter> { new SqlParameter("FixtureDate", FixtureDate) };
+            if (leagueID != 0)
+                parameters.Add(new SqlParameter("LeagueID", leagueID));
+            if (SectionID != 0)
+                parameters.Add(new SqlParameter("SectionID", SectionID));
+
+            return SQLcommands.ExecDataSet("WeeklyResults", parameters);
         }
         public static DataTable MatchPlayed(int HomeTeamID, DateTime MatchPlayedDate) {
             return SQLcommands.ExecDataTable("MatchPlayed", new List<SqlParameter>{ new SqlParameter("HomeTeamID",HomeTeamID),

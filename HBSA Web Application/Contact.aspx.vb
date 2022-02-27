@@ -63,7 +63,9 @@ Partial Class Contact
         CompsRow.Visible = False
         ShowHideHcapRows(False)
         Agreement_Panel.Visible = False
-        Justify_CheckBox.Checked = False
+        Check1.SelectedIndex = -1
+        Check2.SelectedIndex = -1
+        Check3.SelectedIndex = -1
         Contact_Panel.Visible = True
         'ClearContactControls()
 
@@ -133,6 +135,11 @@ Partial Class Contact
 
         If Destination_DropDownList.SelectedIndex < 1 Then
             status_Literal.Text += "<br /><span style='color:red;'>Please select where the email should be sent to</span>"
+        End If
+
+        If Session("captchaString") Is Nothing Then
+            status_Literal.Text += "<br /><span style='color:red;'>Session has expired, please try again.</span>"
+            CaptchaRefresh_Button_Click(sender, e)
         End If
 
         If Session("captchaString").ToString() <> captcha_Textbox.Text Then
@@ -205,8 +212,10 @@ Partial Class Contact
                 status_Literal.Text += "<br /><span style='color:red;'>Please enter the reasoning for the handicap..</span>"
             End If
 
-            If Not Justify_CheckBox.Checked Then
-                status_Literal.Text += "<br /><span style='color:red;'>You must tick the Justify box to indicate you have read the notice and agree to comply.</span>"
+            If Not (Check1.SelectedIndex = 0 AndAlso
+                    Check2.SelectedIndex = 0 AndAlso
+                    Check3.SelectedIndex = 0) Then
+                status_Literal.Text += "<br /><span style='color:red;'>You must select yes to all the questions to indicate you have read them and agree to comply.</span>"
             End If
         End If
 
@@ -282,12 +291,16 @@ Partial Class Contact
         End If
 
     End Sub
-    Protected Sub Justify_CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles Justify_CheckBox.CheckedChanged
+    Protected Sub CheckRadioButton_selectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles Check1.SelectedIndexChanged, Check2.SelectedIndexChanged, Check3.SelectedIndexChanged
 
-        If Justify_CheckBox.Checked Then
+        If Check1.SelectedIndex = 0 AndAlso
+           Check2.SelectedIndex = 0 AndAlso
+           Check3.SelectedIndex = 0 Then
             Agreement_Panel.Visible = False
             Contact_Panel.Visible = True
         End If
 
     End Sub
+
 End Class

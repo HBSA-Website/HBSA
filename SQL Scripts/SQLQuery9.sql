@@ -8,7 +8,7 @@ GO
 
 
 alter procedure [dbo].[WeeklyResultsForExaminer]
-	(@LeagueID int
+	(@SectionID int
 	,@WeekNo int = 0
 	)
 as		
@@ -18,13 +18,14 @@ set nocount on
 If @WeekNo = 0
 	select @WeekNo=max(weekNo)
 		from FixtureDates 
-		where SectionID in (Select ID from Sections where LeagueID=@LeagueID) 
+		where SectionID =@SectionID
 		  and FixtureDate between dateadd(week,-1,dbo.UKdateTime(getUTCdate())) and dbo.UKdateTime(getUTCdate())
 
-select Section=0,Result=convert(varchar(4000),'<strong> ' + [League Name] + ' League Scores:<br/>')
+select Section=0,Result=convert(varchar(4000),'<strong> ' + [League Name] + ' ' + [Section Name] + ' Section Scores:<br/>')
 	into #tempresults
-	from Leagues 
-	where ID=@LeagueID
+	from Sections 
+	join Leagues on Leagues.ID=LeagueID
+	where Sections.ID=@SectionID
 
 insert #tempresults
 select distinct 
@@ -57,39 +58,24 @@ select distinct
 		   case when dbo.BreaksInMatch(R.ID) = '' then '' else '<br/><strong>Breaks:</strong> ' + dbo.BreaksInMatch(R.ID) 
 	   end
 	  	 
-	from MatchResultsDetails R
+	from MatchResultsDetails2 R
 	join Teams H on H.ID=HomeTeamID
 		join Clubs HC on HC.ID=H.ClubID 
 	join Teams A on A.ID=AwayTeamID 
 		join Clubs AC on AC.ID = A.ClubID
-	join Sections s on s.ID=h.SectionID
+	join Sections s on s.ID=H.SectionID
 	join Leagues l on l.ID = s.LeagueID	
-	outer apply ( select D.FixtureDate, WeekNo
-					from FixtureGrids F
-					cross apply (select FixtureNo, SectionID from Teams where ID=(select HomeTeamID from MatchResultsDetails where ID=R.ID)) H
-					cross apply	(select FixtureNo from Teams where ID=(select AwayTeamID from MatchResultsDetails where ID=R.ID)) A
-					cross apply (Select FixtureDate from FixtureDates where SectionSize=F.SectionSize and WeekNo = F.WeekNo) D
-					where F.SectionID=H.SectionID
-					  and ((h1=H.FixtureNo and a1=A.FixtureNo)
-						or (h2=H.FixtureNo and a2=A.FixtureNo)
-						or (h3=H.FixtureNo and a3=A.FixtureNo)
-						or (h4=H.FixtureNo and a4=A.FixtureNo)
-						or (h5=H.FixtureNo and a5=A.FixtureNo)
-						or (h6=H.FixtureNo and a6=A.FixtureNo)
-						or (h7=H.FixtureNo and a7=A.FixtureNo)
-						or (h8=H.FixtureNo and a8=A.FixtureNo)
-						  )
-				)FD
+	outer apply (select WeekNo from FixtureDates where FixtureDate=R.FixtureDate)FD
 
-	where l.ID=@LeagueID
+	where s.ID=@SectionID
 	  and WeekNo=@WeekNo 
 	
 	order by H.SectionID, result
 
 if (select count(*) from #tempresults)=1
-	select Section=0,Result='No results for ' + [League Name] + ' for the selected fixture date.'
-		from Leagues 
-		where ID=@LeagueID	
+	select Section=0,Result='No results for ' + [Section Name] + ' for the selected fixture date.'
+		from Sections 
+		where ID=@SectionID
 else
 	select result from #tempresults order by Section, Result
 
@@ -97,4 +83,6 @@ drop table #tempresults
 
 GO
 
-exec WeeklyResultsForExaminer 1,26
+exec WeeklyResultsForExaminer 1,17
+
+exec GetAllSections
