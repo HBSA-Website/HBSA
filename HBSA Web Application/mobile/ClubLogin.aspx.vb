@@ -236,7 +236,7 @@
                     End While
 
                     status_Literal.Text = "<span style='color:red;'>Your Email has NOT been sent. <br/>" &
-                                                           "There was an error.  Please use the contacts page for assistance and add the following information:<br/>" &
+                                                           "There was an error.   Please use the <a href='contact,aspx'>contact us page</a> to request assistance.<br/>" &
                                                            errorMessage & "</span>"
                 End Try
 

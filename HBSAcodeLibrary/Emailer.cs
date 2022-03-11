@@ -54,10 +54,6 @@ namespace HBSAcodeLibrary
 
                 if (!EmailIsDuplicate(MimeMessage, Body, Footer))
                 {
-
-                    // store the email
-                    StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
-
                     if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test")
                      && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost")
                      && !TestOnly)
@@ -65,22 +61,23 @@ namespace HBSAcodeLibrary
                         try
                         {
                             using (MailKit.Net.Smtp.SmtpClient smtpClient = new MailKit.Net.Smtp.SmtpClient())
-                            {
+                            {   
                                 smtpClient.Connect(cfg.Value("SMTPServer"),
                                                    System.Convert.ToInt32(cfg.Value("SMTPport")),
                                                    System.Convert.ToBoolean(cfg.Value("SMTPssl")));
                                 smtpClient.Authenticate(cfg.Value("SMTPServerUsername"), cfg.Value("SMTPServerPassword"));
                                 smtpClient.Send(MimeMessage);
                                 smtpClient.Disconnect(true);
+                                // store the email
+                                StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
                             }
                         }
                         catch (Exception ex)
                         {
-                            MimeMessage.Body = new MimeKit.TextPart("html")
-                            {
-                                Text = "ERROR OCCURRED sending this: " +
-                                            ex.Message + "<hr/>" + Body
-                            };
+                            MimeMessage.Subject = "***** ERROR OCCURRED sending this eMail: " + ex.Message + "<hr/>" + MimeMessage.Subject;
+                            // store the email
+                            StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
+
                             throw new Exception(ex.Message, ex);
                         }
                     }
@@ -114,22 +111,22 @@ namespace HBSAcodeLibrary
                 return false;
             }
         }
-        public static void LogEmailfailure(string emailAddresses, string Detail, string emailType)
-        {
-            HBSAcodeLibrary.ActivityLog.LogActivity("Send " + emailType + " email to " + emailAddresses + " failure.", 0, Detail);
+        //public static void LogEmailfailure(string emailAddresses, string Detail, string emailType)
+        //{
+        //    HBSAcodeLibrary.ActivityLog.LogActivity("Send " + emailType + " email to " + emailAddresses + " failure.", 0, Detail);
 
-            try
-            {
-                using (HBSAcodeLibrary.HBSA_Configuration cfg = new HBSAcodeLibrary.HBSA_Configuration())
-                {
-                    Send_eMail(cfg.Value("WebFromAddress"), "Email failure", "Check Activity log for email failure");
-                }
-            }
-            catch (Exception)
-            { //ignore exceptions as we're only logging a previous error }
-            }
+        //    try
+        //    {
+        //        using (HBSAcodeLibrary.HBSA_Configuration cfg = new HBSAcodeLibrary.HBSA_Configuration())
+        //        {
+        //            Send_eMail(cfg.Value("WebFromAddress"), "Email failure", "Check Activity log for email failure");
+        //        }
+        //    }
+        //    catch (Exception)
+        //    { //ignore exceptions as we're only logging a previous error }
+        //    }
 
-        }
+        //}
         public static void StoreTheEmail(MimeKit.MimeMessage MimeMessage, string Body, int MatchResultID, string Footer, string UserID, string SMTPHost, string SMTPPort)
         {
             var parameters = new List<SqlParameter>()
@@ -234,9 +231,9 @@ namespace HBSAcodeLibrary
 
                 string subject;
                 if (MaintenanceType.ToLower().Contains("handicap"))
-                    subject = "*** Handicap change alert. ***";
+                    subject = "Handicap change alert.";
                 else
-                    subject = "*** Player " + Deregistered + "Registration alert. ***";
+                    subject = "Player " + Deregistered + " Registration alert.";
 
                 string body = BodyTemplate.Replace("|Team|", TeamName)
                                           .Replace("|Date|", DateTime.Today.ToLongDateString())
@@ -256,7 +253,6 @@ namespace HBSAcodeLibrary
                     string err = "Team:|Team|, Player:|Player|, new handicap:|new handicap|, Section:|Section|.";
                     err = err.Replace("|Team|", TeamName).Replace("|Date|", DateTime.Today.ToLongDateString()).Replace("|Player|", PlayerName).Replace("|new handicap|", Handicap).Replace("|Section|", SectionName) + Microsoft.VisualBasic.Constants.vbCrLf + eMex.Message;
                     SendPlayerMaintenanceEmailResult += "<br/><font color=red><strong>Error sending an email:<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>") + ".</strong></font>";
-                    Emailer.LogEmailfailure(toAddress, err, "handicap change");
                 }
             }
             return SendPlayerMaintenanceEmailResult;
@@ -280,7 +276,7 @@ namespace HBSAcodeLibrary
                 toAddress += ";" + cfg.Value("TreasurerEmail");
                 toAddress += ";" + EmailAddressList;
 
-                string subject = "*** Fine imposed alert ***";
+                string subject = "Fine imposed alert";
                 string body;
                 using (ContentData InfoPage = new ContentData("Payments"))
                 {
@@ -306,7 +302,6 @@ namespace HBSAcodeLibrary
                     string err = "Error sending fine imposed email. " + DateTime.Today.ToLongDateString() + " to " + ClubName +
                                  " for " + Offence + " " + Comment + " " + Amount.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-GB"));
                     SendFineImposedEmailResult += "<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>") + ".</font>";
-                    Emailer.LogEmailfailure(toAddress, err, "impose fine");
                 }
             }
             return SendFineImposedEmailResult;
@@ -327,7 +322,7 @@ namespace HBSAcodeLibrary
                 string toAddress = cfg.Value("LeagueSecretaryEmail");
                 toAddress += ";" + eMailList;
 
-                string subject = "*** Points adjustment alert ***";
+                string subject = "Points adjustment alert";
                 string body = BodyTemplate.Replace("|Date|", DateTime.Today.ToLongDateString())
                                            .Replace("|Team|", Team)
                                            .Replace("|Section|", Section)
@@ -343,7 +338,6 @@ namespace HBSAcodeLibrary
                 {
                     string err = "Error sending points adjustment email. " + DateTime.Today.ToLongDateString() + " to " + toAddress;
                     SendPointsAdjustEmailResult += "<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>");
-                    Emailer.LogEmailfailure(toAddress, err, "impose fine");
                 }
             }
             return SendPointsAdjustEmailResult;

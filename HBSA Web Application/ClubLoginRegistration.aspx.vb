@@ -263,7 +263,7 @@ Public Class ClubLoginRegistration
 
             Status_Literal.Text = "<span style='color:navy;'>Your HBSA Club login registration has been recorded.</span> <br/>" &
                                   "<span style='color:red;'>However the email requesting confirmation could NOT been sent. <br/>" &
-                                  "There was an error.  Please phone 0789 003 2041 for assistance and have the following information to hand:<br/>" &
+                                  "There was an error.  Please use the <a href='contact,aspx'>contact us page</a> to request assistance.<br/>" &
                                            errorMessage & "</span>"
 
         End Try
