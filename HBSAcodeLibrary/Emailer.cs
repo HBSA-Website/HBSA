@@ -54,9 +54,13 @@ namespace HBSAcodeLibrary
 
                 if (!EmailIsDuplicate(MimeMessage, Body, Footer))
                 {
-                    if (!HttpContext.Current.Request.Url.Authority.ToLower().Contains("test")
+                    if (HttpContext.Current.Request.Url.Authority.ToLower().Contains("test")
                      && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost")
                      && !TestOnly)
+                    {  // Only store the message when testing
+                        StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
+                    }
+                    else
                     {
                         try
                         {
