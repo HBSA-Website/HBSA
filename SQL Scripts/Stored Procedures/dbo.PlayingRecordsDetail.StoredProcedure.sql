@@ -41,8 +41,9 @@ if @Player <> ''
 	insert @Players exec SuggestPlayers @LeagueID,0,0,10000,@word1,@word2,@word3
 	end
 
-declare @MatchSummaries table 
+create table #MatchSummaries
 	(MatchDate date
+	,DateSubmitted date
 	,PlayerID int
 	,OpponentPlayerID int
 	,Handicap int
@@ -59,100 +60,108 @@ if @SectionID > 100
 else
 	set @LeagueID=0
 		 	
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,HomePlayer1ID
         ,AwayPlayer1ID
 		,HomeHandicap1
         ,HomePlayer1Score
 		,AwayPlayer1Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer1ID <> 0 and AwayPlayer1ID <> 0
 
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,HomePlayer2ID
         ,AwayPlayer2ID
 		,HomeHandicap2
         ,HomePlayer2Score
 		,AwayPlayer2Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer2ID <> 0 and AwayPlayer2ID <> 0
 
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,HomePlayer3ID
         ,AwayPlayer3ID
 		,HomeHandicap3
         ,HomePlayer3Score
 		,AwayPlayer3Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer3ID <> 0 and AwayPlayer3ID <> 0
 
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,HomePlayer4ID
         ,AwayPlayer4ID
 		,HomeHandicap4
         ,HomePlayer4Score
 		,AwayPlayer4Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where HomePlayer4ID <> 0 and AwayPlayer4ID <> 0
 
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,AwayPlayer1ID
         ,HomePlayer1ID
 		,AwayHandicap1
         ,AwayPlayer1Score
 		,HomePlayer1Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer1ID <> 0 and HomePlayer1ID <> 0
 
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,AwayPlayer2ID
         ,HomePlayer2ID
 		,AwayHandicap2
         ,AwayPlayer2Score
 		,HomePlayer2Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer2ID <> 0 and HomePlayer2ID <> 0
 
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,AwayPlayer3ID
         ,HomePlayer3ID
 		,AwayHandicap3
         ,AwayPlayer3Score
 		,HomePlayer3Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer3ID <> 0 and HomePlayer3ID <> 0
 
-insert @MatchSummaries
+insert #MatchSummaries
 	select
 		 MatchDate
+		,FirstDateLodged
 		,AwayPlayer4ID
         ,HomePlayer4ID
 		,AwayHandicap4
         ,AwayPlayer4Score
 		,HomePlayer4Score
 		,ID
-	from MatchResultsDetails
+	from MatchResultsDetails6
 	where AwayPlayer4ID <> 0 and HomePlayer4ID <> 0
 
 select Section=[League Name] + ' ' + [Section Name]
@@ -160,6 +169,7 @@ select Section=[League Name] + ' ' + [Section Name]
       ,Player=dbo.FullPlayerName(p.Forename,p.Initials,p.Surname)
       ,Handicap
       ,Tag=dbo.TagDescription (p.Tagged)
+	  ,[Date Submitted] = convert(varchar(11),DateSubmitted,113)
       ,[Match Date]=convert(varchar(11),Matchdate,113)
       ,OpponentTeam=oc.[Club Name] + ' ' + op.Team
 	  ,Opponent=dbo.FullPlayerName(op.Forename,op.Initials,op.Surname)
@@ -169,7 +179,7 @@ select Section=[League Name] + ' ' + [Section Name]
 	  ,BreaksFor=dbo.BreaksInMatchForPlayer(MatchID,PlayerID)
 	  ,BreaksAgainst=dbo.BreaksInMatchForPlayer(MatchID,OpponentPlayerID)
       
-	from @MatchSummaries
+	from #MatchSummaries
 	outer apply (select LeagueID,SectionID,ClubID,Tagged,Over70, Team, Forename, Initials, Surname from Players where ID=PlayerID) p
 	outer apply (select LeagueID,SectionID,ClubID,Tagged,Over70, Team, Forename, Initials, Surname from Players where ID=OpponentPlayerID) op
 	outer apply (Select [League Name] from Leagues where ID=p.LeagueID) l
@@ -189,7 +199,8 @@ select Section=[League Name] + ' ' + [Section Name]
 	  and (@Over70 = 0    or @Over70 = p.Over70)
 	  and (@Player =  ''  or dbo.FullPlayerName(p.Forename,p.Initials,p.Surname) in (select Player from @Players))
 	  and (@Handicap is null or @handicap = Handicap)
-	order by p.SectionID, c.[Club Name] + ' ' + p.Team, Player, Matchdate
-	 
-GO
+	order by p.SectionID, c.[Club Name] + ' ' + p.Team, Player, DateSubmitted
 
+drop  table #MatchSummaries	 
+GO
+--exec PlayingRecordsDetail @player='e z'

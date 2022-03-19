@@ -167,6 +167,7 @@ while @@fetch_status=0
 	
 	if @PlayerID <> @lastPlayerID
 	or @Played > 5
+	or @LastHcap <> @Handicap
 		begin
 		insert @Matches6 values (@lastkeyDate,@lastPlayerID,@lastHcap,@Played, @Won, @Played-@Won)
 		select @Played=0, @Won=0
@@ -297,4 +298,4 @@ drop table #tmp
 
 
 GO
-exec TaggedPlayersReport 
+exec TaggedPlayersReport @Player='k h'
