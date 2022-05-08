@@ -866,7 +866,7 @@ namespace HBSAcodeLibrary
 
 
             DataTable dt = SQLcommands.ExecDataTable("Awards_TemplateData", parameters);
-            while (dt != null && dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
             {
                 AwardType = (int)dt.Rows[0]["AwardType"];
                 AwardID = DBNull.Value == dt.Rows[0]["AwardID"] ? null : dt.Rows[0]["AwardID"];

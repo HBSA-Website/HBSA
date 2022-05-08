@@ -1,3 +1,6 @@
+use hbsa
+go
+
 if exists (select ROUTINE_NAME from INFORMATION_SCHEMA.ROUTINES where ROUTINE_NAME='Awards_HighBreaksByLeague')
 	drop procedure dbo.Awards_HighBreaksByLeague
 GO
@@ -10,11 +13,6 @@ set nocount ON
 set xact_abort on
 
 begin tran
-
-declare @AwardType int
-select @AwardType=AwardType 
-	from Awards_Types 
-	where StoredProcedureName = object_name(@@procid)
 
 --Get highest breaks by category
 declare @HighBreaks table
@@ -32,7 +30,7 @@ insert @HighBreaks
 delete Awards where AwardType=4
 
 insert Awards
-	select AwardType=@AwardType
+	select AwardType=4
 		  ,ID=NULL
 		  ,SubID=NULL
 		  ,LeagueID=L.LeagueID
@@ -54,4 +52,3 @@ GO
 
 exec Awards_HighBreaksByLeague
 exec Awards_Report 4
-
