@@ -40,6 +40,8 @@ while @@FETCH_STATUS=0
 
 	select top 1 @MaxPts=Points,@MaxWon=won,@MaxDrawn=drawn
 		from @last6 L
+		  -- exclude any division/section winners
+		  where teamID NOT in (select teamID from Awards_League_Winners where LeagueID = @LeagueID) 
 		order by Points desc, Won desc
 
 	insert Awards
