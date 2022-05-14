@@ -41,7 +41,7 @@ while @@FETCH_STATUS=0
 	select top 1 @MaxPts=Points,@MaxWon=won,@MaxDrawn=drawn
 		from @last6 L
 		  -- exclude any division/section winners
-		  where teamID NOT in (select teamID from Awards_League_Winners where LeagueID = @LeagueID) 
+		  where teamID NOT in (select entrantID from Awards where AwardType=1 and subid=1 and LeagueID = @LeagueID) 
 		order by Points desc, Won desc
 
 	insert Awards
@@ -53,6 +53,8 @@ while @@FETCH_STATUS=0
 		  ,NULL
 		from @last6 L
 		where @MaxPts=Points and @MaxWon=won and @MaxDrawn=drawn
+		  -- exclude any division/section winners
+		  and teamID NOT in (select entrantID from Awards where AwardType=1 and subid=1 and LeagueID = @LeagueID) 
 
 	fetch Leagues_Cursor into @LeagueID
 

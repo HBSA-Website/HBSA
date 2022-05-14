@@ -86,20 +86,6 @@ insert Awards
 	from @tmpWinners W
 	outer apply (select LeagueID from  Sections where ID=SectionID) L
 
-if exists(select table_name from INFORMATION_SCHEMA.TABLES 
-                            where TABLE_NAME='Awards_League_Winners'
-							  and TABLE_SCHEMA='dbo')
-	truncate table dbo.Awards_League_Winners
-else
-	create table dbo.Awards_League_Winners
-		(Posn integer, TeamID int, SectionID int, LeagueID int)
-
---store league winners to be excluded from best last 6 trophies
-insert Awards_League_Winners
-	select * from @tmpWinners W
-		outer apply (select LeagueID from  Sections where ID=SectionID) L
-		where Posn=1
-
 commit tran
 
 GO
@@ -107,4 +93,4 @@ GO
 exec dbo.Awards_LeagueWinners
 exec Awards_Report 1
 
-select * from Awards_League_Winners
+select * from Awards where AwardType=5 and LeagueID=2
