@@ -40,9 +40,6 @@ while @@FETCH_STATUS=0
 
 	select top 1 @MaxPts=Points,@MaxWon=won,@MaxDrawn=drawn
 		from @last6 L
-		outer apply (select AwardID from Awards where LeagueID=L.LeagueID and AwardType=1 and EntrantID=TeamID) A
-		outer apply (select top 1 * from Competitions_Entries where CompetitionID in (select ID from Competitions where CompType=4) and  EntrantID=TeamID) CE
-		where CE.EntryID is null
 		order by Points desc, Won desc
 
 	insert Awards
@@ -53,10 +50,7 @@ while @@FETCH_STATUS=0
 		  ,teamID
 		  ,NULL
 		from @last6 L
-		outer apply (select AwardID from Awards where LeagueID=L.LeagueID and AwardType=1 and EntrantID=TeamID) A
-		outer apply (select top 1 * from Competitions_Entries where CompetitionID in (select ID from Competitions where CompType=4) and  EntrantID=TeamID) CE
-		where CE.EntryID is null
-		  and @MaxPts=Points and @MaxWon=won and @MaxDrawn=drawn
+		where @MaxPts=Points and @MaxWon=won and @MaxDrawn=drawn
 
 	fetch Leagues_Cursor into @LeagueID
 
