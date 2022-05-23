@@ -1,15 +1,35 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/admin/adminMasterPage.master" CodeBehind="BetweenSeasons.aspx.vb" Inherits="HBSA_Web_Application.BetweenSeasons" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-    .auto-style1 {
-        font-family: Verdana;
-        font-weight: bold;
-        font-size: small;
-        color: #FF0000;
-    }
+        table {
+            border-width: 1px;
+            border-spacing: 2px;
+            border-style: outset;
+            border-color: gray;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        td {
+            border-width: 1px;
+            padding: 1px;
+            border-style: inset;
+            border-color: gray;
+            background-color: white;
+            -moz-border-radius:;
+        }
+
+        .auto-style1 {
+            font-family: Verdana;
+            font-weight: bold;
+            font-size: small;
+            color: #FF0000;
+        }
+
         .auto-style2 {
             color: #FF0000;
         }
+
         .auto-style3 {
             color: #FF0000;
             font-style: italic;

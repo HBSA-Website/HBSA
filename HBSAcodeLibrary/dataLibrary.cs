@@ -392,6 +392,11 @@ namespace HBSAcodeLibrary
         {
             return SQLcommands.ExecDataTable(SPname);
         }
+        public static string HandicapsSeason()
+        {
+            return (string)SQLcommands.ExecScalar("DownloadHandicapsSeason");
+        }
+
     }
     public class Administrator : IDisposable 
     {

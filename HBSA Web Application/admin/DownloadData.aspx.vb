@@ -2,12 +2,17 @@
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        HandicapSeason_Literal.Text = "Season " & HBSAcodeLibrary.SharedRoutines.HandicapsSeason()
+
     End Sub
     Protected Sub DownloadContactsReport_Button_Click(sender As Object, e As EventArgs) Handles DownloadContactsReport_Button.Click
         download("ContactsReport", "Contacts Report")
     End Sub
     Protected Sub MatchResults_Button_Click(sender As Object, e As EventArgs) Handles MatchResults_Button.Click
         download("DownloadMatches", "Match Results")
+    End Sub
+    Protected Sub Handicaps_Button_Click(sender As Object, e As EventArgs) Handles Handicaps_Button.Click
+        download("DownloadHandicaps", "End of season handicaps")
     End Sub
     Protected Sub download(SPname As String, fileName As String)
 
