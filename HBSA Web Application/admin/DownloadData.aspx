@@ -23,10 +23,7 @@
             <table>
                 <tr><td style="text-align:right">Contacts Report: </td><td><asp:Button ID="DownloadContactsReport_Button" runat="server" Text="Download Contacts Report" Width="212px" /></td></tr>
                 <tr><td style="text-align:right">Match Results: </td><td><asp:Button ID="MatchResults_Button" runat="server" Text="Download Match Results" Width="212px" /></td></tr>
-                <tr><td style="text-align:right">End of season handicaps: </td><td><asp:Button ID="Handicaps_Button" runat="server" Text="End of season handicaps" Width="212px" /></td>
-                    <td>
-                        <asp:Literal ID="HandicapSeason_Literal" runat="server"></asp:Literal></td> 
-                </tr>
+                <tr><td style="text-align:right">Handicaps: </td><td><asp:Button ID="Handicaps_Button" runat="server" Text="End of season handicaps" Width="212px" /></td>                </tr>
             </table>
 
   <%--      </ContentTemplate>

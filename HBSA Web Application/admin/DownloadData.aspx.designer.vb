@@ -48,13 +48,4 @@ Partial Public Class DownloadData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Handicaps_Button As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''HandicapSeason_Literal control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents HandicapSeason_Literal As Global.System.Web.UI.WebControls.Literal
 End Class

@@ -1,10 +1,5 @@
 ﻿Public Class DownloadData
     Inherits System.Web.UI.Page
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-        HandicapSeason_Literal.Text = "Season " & HBSAcodeLibrary.SharedRoutines.HandicapsSeason()
-
-    End Sub
     Protected Sub DownloadContactsReport_Button_Click(sender As Object, e As EventArgs) Handles DownloadContactsReport_Button.Click
         download("ContactsReport", "Contacts Report")
     End Sub
