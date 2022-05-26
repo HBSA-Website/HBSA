@@ -146,12 +146,13 @@ select PlayerID, Player
 	  ,Tag = dbo.TagDescription(Tagged)
 	  ,League
 	  ,[From] = convert(varchar(11), DateFrom, 113)
-      ,Handicap
+	  ,LastPlayedHandicap=Tag.Handicap
       ,Played
 	  ,Won
 	  ,Lost=Played - won
+      ,CurrentHandicap=T.Handicap
 	from #tmp T
-	cross apply (select Tagged from Players where ID = T.PlayerID) Tag
+	cross apply (select Tagged, Handicap from Players where ID = T.PlayerID) Tag
 	where dateFrom =
 			(select max(Datefrom) from #tmp where PlayerID = T.PlayerID)
 	order by League, Player
