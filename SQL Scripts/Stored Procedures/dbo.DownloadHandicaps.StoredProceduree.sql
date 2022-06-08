@@ -8,9 +8,6 @@ create procedure dbo.DownloadHandicaps
 as
 
 set nocount on
-
-	declare @Players table (Player varchar(100))
-
 		
 declare @WinLosses table 
 	(FirstDateLodged date
@@ -155,6 +152,23 @@ select PlayerID, Player
 	cross apply (select Tagged, Handicap from Players where ID = T.PlayerID) Tag
 	where dateFrom =
 			(select max(Datefrom) from #tmp where PlayerID = T.PlayerID)
+union
+select PlayerID=ID
+      ,Player=dbo.FullPlayerName(Forename, Initials, Surname)
+	  ,Tag = dbo.TagDescription(Tagged)
+	  ,[League Name]
+	  ,[From] = convert(varchar(11), DateRegistered, 113)
+	  ,LastPlayedHandicap=P.Handicap
+      ,Played=0
+	  ,Won=0
+	  ,Lost=0
+      ,CurrentHandicap=P.Handicap 
+	from Players P
+	outer apply(select[League Name] from Leagues where ID=LeagueID) L
+	left join tmp on ID = PlayerID
+	where ID > 0
+	  and PlayerID is null
+
 	order by League, Player
 
 drop table #tmp

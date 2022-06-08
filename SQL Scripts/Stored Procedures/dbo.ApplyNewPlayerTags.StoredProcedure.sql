@@ -30,13 +30,20 @@ select @TagNoOfMatchesToPlay = [Value]
 	from [Configuration]
 	where [Key] = 'TagNoOfMatchesToPlay'
 
+--identify qualifying seasons as those that exist in playing records
+declare @SeasonsToQualify table (ID int identity(1,1),season int)
+insert into @SeasonsToQualify
+	select distinct top (@NoOfSeasonsToUntag) Season 
+		from PlayerRecords 
+		order by Season desc
+
 declare @Surname varchar(50)
        ,@Forename varchar(50)
 	   ,@Initials varchar(4)
 	   ,@PlayerID int
 	   ,@LeagueID int
        ,@newTag int
-       ,@QualifyingSeason int
+       ,@QualifyingSeasonID int
 
 declare playersCursor cursor fast_forward for
 	select Surname, Forename, Initials, ID, LeagueID from Players where ID > 0
@@ -53,26 +60,26 @@ while @@fetch_status = 0
 		select distinct LeagueID, Player, Season, Team
             from PlayerRecords
             where PlayerID=@PlayerID
-              and Season > @thisSeason - @NoOfSeasonsToUntag
+              and Season >= (select min(Season) from @SeasonsToQualify)
               group by LeagueID, Player, Season, Team, PlayerID
               having sum(P) >= @TagNoOfMatchesToPlay
               order by season desc
 
 	set @newTag = @NoOfSeasonsToUntag --start at max rag
-	set @QualifyingSeason = @thisSeason
+	set @QualifyingSeasonID=1
 
 	open playerRecordsCursor
 	fetch playerRecordsCursor into @prLeagueID, @Player, @Season, @Team
 	while @@fetch_status = 0
 		begin
 		--adjust tag according to qualifying seasons
-		if @season = @QualifyingSeason
+		if @season = (select season from @SeasonsToQualify where ID = @QualifyingSeasonID)
 			begin
 			set @newTag = @newTag - 1
-			set @QualifyingSeason = @QualifyingSeason - 1
+			set @QualifyingSeasonID = @QualifyingSeasonID + 1
 			end
 		else
-			break  --jump out of loop
+			break  --jump out of while @@fetch_status = 0 loop
 	
 		fetch playerRecordsCursor into @prLeagueID, @Player, @Season, @Team
 		end
