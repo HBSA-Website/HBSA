@@ -143,16 +143,17 @@ select PlayerID, Player
 	  ,Tag = dbo.TagDescription(Tagged)
 	  ,League
 	  ,[From] = convert(varchar(11), DateFrom, 113)
-	  ,LastPlayedHandicap=Tag.Handicap
+	  ,LastPlayedHandicap=T.Handicap
       ,Played
 	  ,Won
 	  ,Lost=Played - won
-      ,CurrentHandicap=T.Handicap
+      ,CurrentHandicap=Tag.Handicap
 	from #tmp T
 	cross apply (select Tagged, Handicap from Players where ID = T.PlayerID) Tag
 	where dateFrom =
 			(select max(Datefrom) from #tmp where PlayerID = T.PlayerID)
 union
+
 select PlayerID=ID
       ,Player=dbo.FullPlayerName(Forename, Initials, Surname)
 	  ,Tag = dbo.TagDescription(Tagged)
@@ -165,7 +166,7 @@ select PlayerID=ID
       ,CurrentHandicap=P.Handicap 
 	from Players P
 	outer apply(select[League Name] from Leagues where ID=LeagueID) L
-	left join tmp on ID = PlayerID
+	left join #tmp on ID = PlayerID
 	where ID > 0
 	  and PlayerID is null
 

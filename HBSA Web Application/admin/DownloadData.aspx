@@ -21,9 +21,10 @@
         <asp:Literal ID="Status_Literal" runat="server"></asp:Literal>
 
             <table>
-                <tr><td style="text-align:right">Contacts Report: </td><td><asp:Button ID="DownloadContactsReport_Button" runat="server" Text="Download Contacts Report" Width="212px" /></td></tr>
-                <tr><td style="text-align:right">Match Results: </td><td><asp:Button ID="MatchResults_Button" runat="server" Text="Download Match Results" Width="212px" /></td></tr>
-                <tr><td style="text-align:right">Handicaps: </td><td><asp:Button ID="Handicaps_Button" runat="server" Text="End of season handicaps" Width="212px" /></td>                </tr>
+                <tr><td style="text-align:right">Contacts Report: </td><td><asp:Button ID="DownloadContactsReport_Button" runat="server" Text="Download Contacts Report" Width="400
+                    px" /></td></tr>
+                <tr><td style="text-align:right">Match Results: </td><td><asp:Button ID="MatchResults_Button" runat="server" Text="Download Match Results" Width="400px" /></td></tr>
+                <tr><td style="text-align:right">Handicaps: </td><td><asp:Button ID="Handicaps_Button" runat="server" Text="Handicaps" Width="400px" /></td>                </tr>
             </table>
 
   <%--      </ContentTemplate>
