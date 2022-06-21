@@ -148,29 +148,30 @@ select PlayerID, Player
 	  ,Won
 	  ,Lost=Played - won
       ,CurrentHandicap=Tag.Handicap
+	  ,[Status]='1 - Current'
 	from #tmp T
-	cross apply (select Tagged, Handicap from Players where ID = T.PlayerID) Tag
+	cross apply (select Tagged, Handicap, SectionID from Players where ID = T.PlayerID) Tag
 	where dateFrom =
 			(select max(Datefrom) from #tmp where PlayerID = T.PlayerID)
 union
 
 select PlayerID=ID
       ,Player=dbo.FullPlayerName(Forename, Initials, Surname)
-	  ,Tag = dbo.TagDescription(Tagged)
-	  ,[League Name]
+	  ,Tag = dbo.TagDescription(Tagged),[League Name]
 	  ,[From] = convert(varchar(11), DateRegistered, 113)
 	  ,LastPlayedHandicap=P.Handicap
       ,Played=0
 	  ,Won=0
 	  ,Lost=0
       ,CurrentHandicap=P.Handicap 
+	  ,[Status]=case when SectionID=0 then '3 - Deleted' else '2 - Not played' end
 	from Players P
 	outer apply(select[League Name] from Leagues where ID=LeagueID) L
 	left join #tmp on ID = PlayerID
 	where ID > 0
 	  and PlayerID is null
 
-	order by League, Player
+	order by [Status], League, Player
 
 drop table #tmp
 

@@ -464,10 +464,7 @@
             BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" Font-Size="10pt" /></span>
         <br />
                 <div style="padding: 4px; width:70%; text-align:left; color:#006633; background-color:white; display:inline-block; font-size:smaller; ">
-                  THE HUDDERSFIELD BILLIARDS &amp; SNOOKER ASSOCIATION DOES NOT OPERATE OR CONTROL ANY SOCIAL MEDIA SITE SUCH AS A FACEBOOK OR TWITTER ACCOUNT.
-                    <br /><br />
-                  THE ASSOCIATION HAS NO CONNECTION OR INVOLVEMENT WITH THE HUDDERSFIELD SNOOKER FACEBOOK GROUP AND CANNOT BE HELD RESPONSIBLE FOR ANY COMMENT OR CONTENT PUBLISHED ON THIS SOCIAL MEDIA SITE.
-
+                    <asp:Literal ID="Footer_Literal" runat="server"></asp:Literal>
                 </div>
         <br />
         Visitor count <asp:Literal ID="HitCount_Literal" runat="server"></asp:Literal>

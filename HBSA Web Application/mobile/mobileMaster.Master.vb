@@ -17,6 +17,10 @@ Public Class MobileMaster
             End If
         End Using
 
+        Using InfoPage As New HBSAcodeLibrary.ContentData("Footer")
+            Footer_Literal.Text = InfoPage.ContentHTML
+        End Using
+
         If Session("mobile") Then
             Dim Destination As String = Request.Url.Segments(Request.Url.Segments.Length - 1) 'Gives as the destination page filename
             Dim FilePath As String = Server.MapPath("~/mobile/" & Destination)

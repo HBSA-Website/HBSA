@@ -331,17 +331,14 @@
     </div>
     <br />
     <hr />
-    <div class="footer">
-    <table>
-      <tr> 
-          <td>
+    <div class="footer" style="text-align: left;
+    border: 2px solid black;
+    max-height: 999999px; /*prevent chrome resizing font*/
+    font-size: 40px;
+    padding: 10px;
+    color: white">
                 Huddersfield Billiards &amp; Snooker Association <br />
-          THE HUDDERSFIELD BILLIARDS &amp; SNOOKER ASSOCIATION DOES NOT OPERATE OR CONTROL ANY SOCIAL MEDIA SITE SUCH AS A FACEBOOK OR TWITTER ACCOUNT.
-        <br />
-          THE ASSOCIATION HAS NO CONNECTION OR INVOLVEMENT WITH THE HUDDERSFIELD SNOOKER FACEBOOK GROUP AND CANNOT BE HELD RESPONSIBLE FOR ANY COMMENT OR CONTENT PUBLISHED ON THIS SOCIAL MEDIA SITE.
-          </td>  
-     </tr>
-    </table>
+                <asp:Literal ID="Footer_Literal" runat="server"></asp:Literal>
     </div>
 
 </form>

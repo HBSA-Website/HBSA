@@ -147,7 +147,7 @@
                     <td class="MenuTd">
                         <div id="Menu_Home" 
                             onclick="loadMenuDiv('SubMenu_Home_Div','Menu_Home');" onmouseover="this.style.cursor='pointer';loadMenuDiv('SubMenu_Home_Div','Menu_Home');">
-                            &nbsp;Home,&nbsp;Pages >> &nbsp;|
+                            &nbsp;Home&nbsp >> &nbsp;|
                         </div>
                         <div id="SubMenu_Home_Div" class="SubMenuDiv">
                             <table class="MenuTable">

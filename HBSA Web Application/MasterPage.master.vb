@@ -73,6 +73,9 @@ Partial Public Class MasterPage
 
             End Using
 
+            Using InfoPage As New HBSAcodeLibrary.ContentData("Footer")
+                Footer_Literal.Text = InfoPage.ContentHTML
+            End Using
         End If
 
         Version_Literal.Text = GetType(MasterPage).Assembly.GetName().Version.ToString ' My.Application.Info.Version.ToString

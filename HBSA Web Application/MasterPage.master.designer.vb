@@ -464,6 +464,15 @@ Partial Public Class MasterPage
     Protected WithEvents SiteMap_Button As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Footer_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Footer_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''HitCount_Literal control.
     '''</summary>
     '''<remarks>
