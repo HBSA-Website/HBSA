@@ -41,11 +41,12 @@
                     <table id="fineImposedVariables" runat="server" visible="false" style="border-collapse:collapse" >
                         <tr><th style="border: 1px solid navy">Purpose</th><th style="border: 1px solid navy">Variable</th><th style="border: 1px solid navy">Value</th></tr>
                         <tr><td style="width:150px; border: 1px solid navy">Fine imposed</td><td style="border: 1px solid navy">|Date|</td><td style="border: 1px solid navy">The date the fine was imposed</td></tr>
-                        <tr><td style="width:150px; border: 1px solid navy" rowspan="5">Sent to club email and team email addresses, when a fine is imposed by an administrator.</td><td style="border: 1px solid navy">|Club Name|</td><td style="border: 1px solid navy">The club on whom the fine is imposed</td></tr>
+                        <tr><td style="width:150px; border: 1px solid navy" rowspan="6">Sent to club email and team email addresses, when a fine is imposed by an administrator.</td><td style="border: 1px solid navy">|Club Name|</td><td style="border: 1px solid navy">The club on whom the fine is imposed</td></tr>
                         <tr><td style="border: 1px solid navy">|PayByDate|</td><td style="border: 1px solid navy">The date by which the fine must be paid</td></tr>
                         <tr><td style="border: 1px solid navy">|Amount|</td><td style="border: 1px solid navy">The fine amount</td></tr>
                         <tr><td style="border: 1px solid navy">|Offence|</td><td style="border: 1px solid navy">The offence that attracted the fine </td></tr>
                         <tr><td style="border: 1px solid navy">|Comment|</td><td style="border: 1px solid navy">Comment as entered by the fine imposer</td></tr>
+                        <tr><td style="border: 1px solid navy">|Payment Clause|</td><td style="border: 1px solid navy">The payment clause as found under Payments in Content Management.</td></tr>
                     </table>
                     <table id="MatchResultVariables" runat="server" visible="false" style="border-collapse:collapse" >
                         <tr><th style="border: 1px solid navy">Purpose</th><th style="border: 1px solid navy">Variable</th><th style="border: 1px solid navy">Value</th></tr>
