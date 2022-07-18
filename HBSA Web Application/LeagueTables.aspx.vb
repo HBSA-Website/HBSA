@@ -78,7 +78,15 @@
             If e.Row.Cells(e.Row.Cells.Count - 1).Text.Trim <> "&nbsp;" AndAlso
                e.Row.Cells(e.Row.Cells.Count - 1).Text.Trim <> "" Then
                 e.Row.Cells(e.Row.Cells.Count - 1).ForeColor = Drawing.Color.Red
+                e.Row.Cells(e.Row.Cells.Count - 1).HorizontalAlign = HorizontalAlign.Left
+                e.Row.Cells(e.Row.Cells.Count - 1).Text = e.Row.Cells(e.Row.Cells.Count - 1).Text.Replace("&lt;", "<").Replace("&gt;", ">")
             End If
+
+            If e.Row.Cells(1).Text = "&nbsp;" Then  'section header
+                e.Row.Cells(0).Font.Bold = True
+            End If
+
+            e.Row.Cells(5).Text = e.Row.Cells(5).Text.Replace(".0", "")
 
             For CellIx = 1 To e.Row.Cells.Count - 2
                 e.Row.Cells(CellIx).HorizontalAlign = HorizontalAlign.Center

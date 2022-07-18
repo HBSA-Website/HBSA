@@ -50,6 +50,15 @@ Partial Public Class admin_PointsAdjuster
     Protected WithEvents Edit_Panel As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
+    '''Edit_Panel_Literal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Edit_Panel_Literal As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''Selection_Literal control.
     '''</summary>
     '''<remarks>

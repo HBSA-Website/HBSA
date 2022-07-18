@@ -10,7 +10,9 @@ namespace HBSAcodeLibrary
 {
     public class Emailer
     {
-        public static void Send_eMail(string toAddress, string subject, string Body, string ccAddress = "", string ReplyTo = "", int MatchResultID = 0, string UserID = "", bool TestOnly = false)
+        public static void Send_eMail(string toAddress, string subject, string Body, 
+                                      string ccAddress = "", string ReplyTo = "", int MatchResultID = 0, 
+                                      string UserID = "", bool TestOnly = false)
         {
             string Footer = "<br/><br/><i>Please do not reply to this email because it sent from an automatic sender, and the mail box is not monitored.<br>" +
                             "If you wish to contact the league please use the web site and go to the contact page, or <a href='" +
@@ -52,11 +54,11 @@ namespace HBSAcodeLibrary
                 MimeMessage.Body = new MimeKit.TextPart("html") { Text = Body + Footer };
                 MimeMessage.Subject = subject;
 
-                if (!EmailIsDuplicate(MimeMessage, Body, Footer))
+                if (! EmailIsDuplicate(MimeMessage, Body, Footer))
                 {
                     if (HttpContext.Current.Request.Url.Authority.ToLower().Contains("test")
-                     && !HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost")
-                     && !TestOnly)
+                     || HttpContext.Current.Request.Url.Authority.ToLower().Contains("localhost")
+                     || TestOnly)
                     {  // Only store the message when testing
                         StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
                     }
@@ -82,7 +84,7 @@ namespace HBSAcodeLibrary
                             // store the email
                             StoreTheEmail(MimeMessage, Body, MatchResultID, Footer, UserID, cfg.Value("SMTPServer"), cfg.Value("SMTPport"));
 
-                            throw new Exception(ex.Message, ex);
+                            throw;
                         }
                     }
                 }
@@ -311,7 +313,7 @@ namespace HBSAcodeLibrary
             return SendFineImposedEmailResult;
         }
         public static string SendPointsAdjustmentEmail(string eMailList, string AddedDeducted, string Adjustment,
-                                                       string Team, string Section, string Reason)
+                                                       string Team, string Section, string Reason, string action )
         {
             string SendPointsAdjustEmailResult = "";
             string BodyTemplate;
@@ -332,15 +334,18 @@ namespace HBSAcodeLibrary
                                            .Replace("|Section|", Section)
                                            .Replace("|DownUp|", AddedDeducted)
                                            .Replace("|Adjustment|", Adjustment)
-                                           .Replace("|Reason|", Reason);
+                                           .Replace("|Reason|", Reason)
+                                           .Replace("|Action|", action);
 
                 try
                 {
                     Emailer.Send_eMail(toAddress, subject, body);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    string err = "Error sending points adjustment email. " + DateTime.Today.ToLongDateString() + " to " + toAddress;
+                    string err = "Error sending points adjustment email: " + 
+                        ex.Message + ". " +
+                        DateTime.Today.ToLongDateString() + " to " + toAddress;
                     SendPointsAdjustEmailResult += "<br/>" + err.Replace(Microsoft.VisualBasic.Constants.vbCrLf, "<br/>");
                 }
             }

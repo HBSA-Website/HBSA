@@ -3431,7 +3431,11 @@ namespace HBSAcodeLibrary
         }
         public static DataTable LeagueTable(int SectionID)
         {
-            return SQLcommands.ExecDataTable("LeagueTable",
+            if (SectionID > 99)
+                return SQLcommands.ExecDataTable("LeagueTablesByLeague",
+                                              new List<SqlParameter> { new SqlParameter("LeagueID", SectionID % 100) });
+            else
+                return SQLcommands.ExecDataTable("LeagueTable",
                                               new List<SqlParameter> { new SqlParameter("SectionID", SectionID) });
         }
         public static DataTable GetLast6Matches(int LeagueID, int SectionID)
@@ -4870,15 +4874,31 @@ namespace HBSAcodeLibrary
                     new SqlParameter("NewSectionID", NewSectionID),
                     new SqlParameter("NewTeam", NewTeam) });
         }
-        public void UpdateLeaguePointsAdjustment (decimal points, string comment, string createdBy)
+        public void UpdateLeaguePointsAdjustment (decimal points, string comment, string createdBy, int adjustmentID)
         {
             SQLcommands.ExecNonQuery("updateLeaguePointsAdjustment",
+                new List<SqlParameter> {
+                    new SqlParameter("AdjustmentID",adjustmentID),
+                    new SqlParameter("Points",points),
+                    new SqlParameter("Comment",comment),
+                    new SqlParameter("CreatedBy", createdBy )});
+        }
+        public void insertLeaguePointsAdjustment(decimal points, string comment, string createdBy)
+        {
+            SQLcommands.ExecNonQuery("insertLeaguePointsAdjustment",
                 new List<SqlParameter> {
                     new SqlParameter("TeamID",ID),
                     new SqlParameter("Points",points),
                     new SqlParameter("Comment",comment),
                     new SqlParameter("CreatedBy", createdBy )});
         }
+        public void DeleteLeaguePointsAdjustment(int adjustmentID)
+        {
+            SQLcommands.ExecNonQuery("DeleteLeaguePointsAdjustment",
+                new List<SqlParameter> {
+                    new SqlParameter("AdjustmentID",adjustmentID)});
+        }
+
         public static DataSet GetTeamTables(int LeagueID)
         {
             using (var TeamsTables = SQLcommands.ExecDataSet("GetTeamsTables",
