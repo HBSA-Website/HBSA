@@ -223,7 +223,7 @@
                                             <asp:Button ID="CancelPlayer_Button" runat="server" Text="Cancel" />
                                         </td>
                                     </tr>
-                                </table>--%>
+                                </table>
 
                             </div>
                             </asp:Panel>
@@ -235,12 +235,13 @@
                         <%--</asp:Panel>--%>
 
                         <br />
-                        <asp:GridView ID="Players_GridView" runat="server"
-                            EnableModelValidation="True" Font-Size="9pt" Width="100%" BackColor="White" BorderColor="#E7E7FF"
+                        <asp:GridView ID="Players_GridView" runat="server" Font-Size="9pt" Width="100%" BackColor="White" BorderColor="#E7E7FF"
                             BorderStyle="None" BorderWidth="1px" CellPadding="3"
                             DataKeyNames="ID" AllowSorting="True" EmptyDataText="No data found">
                             <Columns>
-                                <asp:CommandField ShowDeleteButton="True" CausesValidation="False" InsertVisible="False" ShowCancelButton="False" ShowEditButton="True" />
+                                <asp:CommandField ShowDeleteButton="True" CausesValidation="False" InsertVisible="False" 
+                                                  ShowEditButton="True" 
+                                                  ShowSelectButton="True" SelectText="Decease"  />
                             </Columns>
                             <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#F7F7F7" />
                             <RowStyle Height="18px" BackColor="#E7E7FF" ForeColor="#000044" />

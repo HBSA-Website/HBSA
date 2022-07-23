@@ -118,10 +118,23 @@ Public Class Players
         Next
 
     End Sub
+    Private Sub Players_GridView_SelectedIndexChanging(sender As Object, e As GridViewSelectEventArgs) Handles Players_GridView.SelectedIndexChanging
+
+        Dim PlayerRow As GridViewRow = Players_GridView.Rows(e.NewSelectedIndex)
+        e.Cancel = True
+
+        Delete_Decease_Player(PlayerRow, "Decease")
+
+    End Sub
     Private Sub Players_GridView_RowDeleting(sender As Object, e As GridViewDeleteEventArgs) Handles Players_GridView.RowDeleting
 
         Dim PlayerRow As GridViewRow = Players_GridView.Rows(e.RowIndex)
         e.Cancel = True
+
+        Delete_Decease_Player(PlayerRow, "Delete")
+    End Sub
+    Private Sub Delete_Decease_Player(PlayerRow As GridViewRow, Delete_Decease As String)
+
 
         If PlayerRow.RowType = DataControlRowType.DataRow Then
 
@@ -156,9 +169,9 @@ Public Class Players
                                           "He/She CANNOT BE DELETED.</span>"
                     SubmitPlayer_Button.Visible = False
                 Else
-                    Status_Literal.Text = "<span style='color:red;font-size:large'>Confirm that you wish to delete this player by clicking the Delete Player button.</span>"
+                    Status_Literal.Text = "<span style='color:red;font-size:large'>Confirm that you wish to " + Delete_Decease + " this player by clicking the " + Delete_Decease + " Player button.</span>"
                     SubmitPlayer_Button.Visible = True
-                    SubmitPlayer_Button.Text = "Delete Player"
+                    SubmitPlayer_Button.Text = Delete_Decease + " Player"
                 End If
 
                 ShowHideEditControls(False)
@@ -435,13 +448,19 @@ Public Class Players
 
         Status_Literal.Text = ""
 
-        If SubmitPlayer_Button.Text = "Delete Player" Then
+        If SubmitPlayer_Button.Text = "Delete Player" OrElse
+           SubmitPlayer_Button.Text = "Decease Player" Then
 
             Try
 
                 Using player = New PlayerData(CInt(PlayerID_Label.Text))
-                    player.Delete(SessionUser.Value)
-                    Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("PlayerRegistration", "De-",
+                    If SubmitPlayer_Button.Text = "Delete Player" Then
+                        player.Delete(SessionUser.Value)
+                    Else
+                        player.Deceased(SessionUser.Value)
+                    End If
+                    Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("PlayerRegistration",
+                                                                                             If(SubmitPlayer_Button.Text = "Decease Player", "(Deceased) De-", "De-"),
                                                                                              player.ClubEmail,
                                                                                              player.TeamEMail,
                                                                                              player.eMail,

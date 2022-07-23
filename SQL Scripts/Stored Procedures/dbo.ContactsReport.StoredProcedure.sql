@@ -31,7 +31,7 @@ else
 	,eMail    varchar(250)
 	,[Tel No 1] varchar(20)
     ,[Tel No 2] varchar(20)
-	)
+	,ReRegister int)
 
 insert ContactsReportTable
 select	 [Source] = 'Base'
@@ -49,6 +49,7 @@ select	 [Source] = 'Base'
 	    ,Email = ''
 	    ,[Tel No 1] = ContactTelNo
 	    ,[Tel No 2] = ContactMobNo
+		,null
 	from Clubs 
 	where [Club Name] <> 'Bye'
 	order by [Club Name]
@@ -69,6 +70,7 @@ select	 [Source] = 'Base'
 	    ,Email=eMailAddress 
 	    ,[Tel No 1] = Telephone 
 	    ,[Tel No 2] = ''
+		,null
 	
 	from ClubUsers
 	outer apply (select [Club Name] from Clubs where ID=ClubID) C
@@ -91,6 +93,7 @@ select	 [Source] = 'Base'
 	    ,Email = eMail
 	    ,[Tel No 1] = TelNo
 	    ,[Tel No 2] = ''
+		,null
 	
 	from Teams T
 	outer apply (select LeagueID, [Section Name] from Sections where ID=SectionID)S
@@ -116,6 +119,7 @@ select	 [Source] = 'Base'
 	    ,Email = R.eMailAddress
 	    ,[Tel No 1] = T.Telephone
 	    ,[Tel No 2] = ''
+		,null
 	
 	from ResultsUsers R
 	outer apply (select TeamID, ClubID, SectionID, Team, Contact=dbo.FullPlayerName(FirstName,'',Surname), eMail, Telephone 
@@ -142,6 +146,7 @@ select	 [Source] = 'Base'
 	    ,Email = isnull(eMail,'')
 	    ,[Tel No 1] = isnull(TelNo,'')
 	    ,[Tel No 2] = ''
+		,null
 	
 	from Players P
 	outer apply (select ID, [League Name] from Leagues where ID = P.LeagueID)L
@@ -167,6 +172,7 @@ select	 [Source] = 'Entry Form'
 	    ,Email = ''
 	    ,[Tel No 1] = ContactTelNo
 	    ,[Tel No 2] = ContactMobNo
+		,null
 	
 	from EntryForm_Clubs 
 	where [Club Name] <> 'Bye'
@@ -188,6 +194,7 @@ select	 [Source] = 'Entry Form'
 	    ,Email = X.eMail
 	    ,[Tel No 1] = X.TelNo
 	    ,[Tel No 2] = ''
+		,null
 	
 	from EntryForm_Teams T
 	outer apply (select ID, [League Name] from Leagues where ID=LeagueID)L
@@ -213,7 +220,8 @@ select	 [Source] = 'Entry Form'
 	    ,Email = isnull(eMail,'')
 	    ,[Tel No 1] = isnull(TelNo,'')
 	    ,[Tel No 2] = ''
-	
+		,ReRegister
+		
 	from Entryform_Players P
 	outer apply (select [League Name] from  Leagues where ID = LeagueID)L
 	outer apply (select [Club Name] from Entryform_Clubs C where ClubID = P.ClubID) C

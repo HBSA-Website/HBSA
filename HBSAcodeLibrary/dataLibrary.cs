@@ -4165,6 +4165,11 @@ namespace HBSAcodeLibrary
                                       new List<SqlParameter>{ new SqlParameter("ID", ID),
                                                               new SqlParameter("User", user) });
         }
+        public void Deceased(string user) 
+        {
+            Surname = Surname.Replace("(Deceased)","").Trim() + " (Deceased)";
+            Merge(user);
+        }
         public static List<string> GetSuggestedPlayers(string prefixText, int count, int LeagueId, int SectionID, int ClubID)
         {
             List<string> suggestions = new List<string>();
