@@ -456,19 +456,19 @@ Public Class Players
                 Using player = New PlayerData(CInt(PlayerID_Label.Text))
                     If SubmitPlayer_Button.Text = "Delete Player" Then
                         player.Delete(SessionUser.Value)
+                        Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("PlayerRegistration", "De-",
+                                                                                                 player.ClubEmail,
+                                                                                                 player.TeamEMail,
+                                                                                                 player.eMail,
+                                                                                                 player.FullName,
+                                                                                                 (player.ClubName & " " & player.Team).Trim,
+                                                                                                 0,
+                                                                                                 player.Handicap,
+                                                                                                 (player.LeagueName & " " & player.SectionName).Trim)
                     Else
                         player.Deceased(SessionUser.Value)
+                        Status_Literal.Text = player.FullName + " marked as deceased."
                     End If
-                    Status_Literal.Text = HBSAcodeLibrary.Emailer.SendPlayerMaintenanceEmail("PlayerRegistration",
-                                                                                             If(SubmitPlayer_Button.Text = "Decease Player", "(Deceased) De-", "De-"),
-                                                                                             player.ClubEmail,
-                                                                                             player.TeamEMail,
-                                                                                             player.eMail,
-                                                                                             player.FullName,
-                                                                                             (player.ClubName & " " & player.Team).Trim,
-                                                                                             0,
-                                                                                             player.Handicap,
-                                                                                             (player.LeagueName & " " & player.SectionName).Trim)
 
                 End Using
 
