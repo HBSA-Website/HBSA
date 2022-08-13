@@ -55,7 +55,7 @@ Public Class Teams
     End Sub
     Sub PopulateClubs(LeagueID As Integer)
 
-        Using clubsAndByes As DataTable = ClubData.GetClubs(100 + LeagueID, False)
+        Using clubsAndByes As DataTable = ClubData.GetClubs(100 + LeagueID, True)
 
             With Club_DropDownList
                 .Items.Clear()
@@ -368,7 +368,7 @@ Public Class Teams
                     Else
 
                         Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
-                            If newTeam.ID > 0 AndAlso newTeam.ID <> CInt(ID_TextBox.Text) Then  'shows no team in this league with the new credentials, so is OK to use.
+                            If newTeam.ID > 0 AndAlso newTeam.ID <> CInt(ID_TextBox.Text) AndAlso newTeam.ClubName.ToLower <> "bye" Then  'shows no team in this league with the new credentials, so is OK to use.
                                 Edit_Literal.Text = "<span style='color:red;'>Error:  Cannot submit.  The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
                                     " already exists in " & newTeam.SectionName & "<br/>" &
                                     "Choose an alternative or Cancel.</span>"
@@ -429,7 +429,7 @@ Public Class Teams
                     End If
                 End With
 
-                If newTeam.ID > 0 AndAlso newTeam.ID <> CInt(ID_TextBox.Text) Then  'shows a team in this league exists with the team details chosen, so is not OK to use.
+                If newTeam.ID > 0 AndAlso newTeam.ID <> CInt(ID_TextBox.Text) AndAlso newTeam.ClubName.ToLower <> "bye" Then  'shows a team in this league exists with the team details chosen, so is not OK to use.
                     Edit_Literal.Text = "<span style='color:red;'>The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
                         " already exists in " & newTeam.SectionName & "<br/>" &
                         "Choose an alternative or Cancel. </span>"

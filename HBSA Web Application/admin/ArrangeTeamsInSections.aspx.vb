@@ -223,98 +223,39 @@ Public Class ArrangeTeamsInSections
         Dim Teams As DataTable = TeamTables.Tables(0)
         Dim TeamIDs As DataTable = TeamTables.Tables(1)
 
-        'validate
-        'Dim errMsg As String = ""
-        Dim EmptyTeamDetected As Boolean = False
-
-        'For iCol = 1 To Teams.Columns.Count - 1
-
-        '    For iRow = 0 To Teams.Rows.Count - 1
-
-        '        Dim F_No As Integer = Teams.Rows(iRow).Item(0)
-
-        'If F_No < 0 Then
-
-        '    If Not ignoreWarning AndAlso Teams.Rows(iRow).Item(iCol) <> "" AndAlso Teams.Rows(iRow).Item(iCol).tolower.trim <> "bye" Then
-
-        '        QuerySave_Literal.Text = "<span style='color:red;'>WARNING: Any team left in the work area will be deleted." & vbCrLf &
-        '                Teams.Rows(iRow).Item(iCol) & If(F_No > 0, "   f_no = " & F_No, "") & ", Section = " & Teams.Columns(iCol).ColumnName & vbCrLf & vbCrLf &
-        '                "Click Yes to proceed with the deletion, otherwise Click No"
-        '        QuerySavePanel.Visible = True
-
-        '        Exit Sub
-
-        '    End If
-
-        'Else
-
-        'If Teams.Rows(iRow).Item(iCol) = "" Then
-
-        '    If iCol = Teams.Columns.Count - 1 Then
-        '        EmptyTeamDetected = True
-        '    Else
-        '        errMsg = "Cannot have an empty team in the fixture slots." & vbCrLf & "   f_no = " & F_No & ", Section = " & Teams.Columns(iCol).ColumnName
-        '        Exit For
-        '    End If
-
-        'Else
-
-        '    If EmptyTeamDetected Then 'the last column has shown an empty team previously - not allowed
-        '        errMsg = "Cannot have an empty team in the fixture slots." & vbCrLf & "   f_no = " & F_No & ", Section = " & Teams.Columns(iCol).ColumnName
-        '        Exit For
-        '    End If
-
-        'End If
-
-        ''End If
-        '    Next
-
-        'If errMsg <> "" Then
-        '    Exit For
-        'End If
-
-        'Next
-
-        'If errMsg <> "" Then
-
-        '    msgBox_Literal.Text = "<span style='color:red;'>Cannot save: " & errMsg & "</span>"
-        '    msgBox_Panel.Visible = True
-        '    Exit Sub
-
-        'End If
-
-        'save changes
         For row As Integer = 0 To Teams.Rows.Count - 1
 
             For col As Integer = 1 To Teams.Rows(row).ItemArray.Length - 1
 
-                Dim teamID As Integer = TeamIDs.Rows(row).Item(col)
+                If Not IsDBNull(TeamIDs.Rows(row).Item(col)) Then
 
-                If Teams.Rows(row).Item(col) <> "" Then
+                    Dim teamID As Integer = TeamIDs.Rows(row).Item(col)
 
-                    Dim SectionID As Integer = TeamIDs.Columns(col).ColumnName
-                    Dim FixtureNo As Integer = TeamIDs.Rows(row).Item(0)
+                    If Teams.Rows(row).Item(col) <> "" Then
 
-                    Using team As New TeamData(teamID)
+                        Dim SectionID As Integer = TeamIDs.Columns(col).ColumnName
+                        Dim FixtureNo As Integer = TeamIDs.Rows(row).Item(0)
 
-                        With team
+                        Using team As New TeamData(teamID)
 
-                            'If Teams.Rows(row).Item(0) > 0 Then 'update
-                            .SectionID = SectionID
-                            .FixtureNo = FixtureNo
-                            'Else                         ' In the work area, Delete it
-                            '.SectionID = -1
-                            'End If
+                            With team
 
-                            .Merge()
+                                'If Teams.Rows(row).Item(0) > 0 Then 'update
+                                .SectionID = SectionID
+                                .FixtureNo = FixtureNo
+                                'Else                         ' In the work area, Delete it
+                                '.SectionID = -1
+                                'End If
 
-                        End With
+                                .Merge()
 
-                    End Using
+                            End With
 
+                        End Using
+
+                    End If
                 End If
             Next
-
         Next
 
         'Having possibly changed the sizes of sections reassign their fixture grids.
