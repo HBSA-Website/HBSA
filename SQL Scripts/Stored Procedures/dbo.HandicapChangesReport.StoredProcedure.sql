@@ -65,7 +65,7 @@ select Player, Team, Section, [Old HCap]= OldHandicap, [New HCap]=NewHandicap, [
 									  and Team=P.Team
 									  and Section=p.Section
 									order by dateTimeChanged desc)N
-	--where OldHandicap <> NewHandicap
+	where OldHandicap <> -99 --ignore new registration adjustment.
 	order by SectionID, Team
 drop table #Details
 drop table #Players									   
