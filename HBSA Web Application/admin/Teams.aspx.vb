@@ -423,9 +423,12 @@ Public Class Teams
                         .Items.Add(New ListItem("", 0))
                         .SelectedIndex = 0
                         .Enabled = False
+                        Team_DropDownList.SelectedIndex = 0
+                        Team_DropDownList.Enabled = False
                     Else
                         PopulateCaptainDropDownList(newTeam)
                         .Enabled = True
+                        Team_DropDownList.Enabled = True
                     End If
                 End With
 
