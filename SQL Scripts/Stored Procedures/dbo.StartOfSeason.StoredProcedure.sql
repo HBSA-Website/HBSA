@@ -69,6 +69,9 @@ update Configuration
 update Configuration	
 	set value=convert (varchar(11),dbo.UKdateTime(getUTCdate()),113)
 	where [key]='CloseSeasonEndDate'
+
+--clear down table of fixture dates for match results
+truncate table MatchResultsFixtureDates
 	   
 --remove any orphaned team logins, and any outstanding unconfirmed logins
 delete resultsusers
