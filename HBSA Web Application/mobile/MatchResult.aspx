@@ -2,6 +2,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+        <style>
+            td {
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+        </style>
+
   <%--Set up references to JQuery libraries etc.--%>  
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
   <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script> 
@@ -157,7 +164,7 @@
         <table>
             <tr>
                 <td>Section:</td>
-                <td><asp:DropDownList ID="Section_DropDownList" runat="server" AutoPostBack="true"/></td>
+                <td style=""><asp:DropDownList ID="Section_DropDownList" runat="server" AutoPostBack="true"/></td>
             </tr>
             <tr>
                 <td>Home Team:</td>
@@ -361,7 +368,7 @@
 
                     <tr >
                         <td  colspan="3">
-                            <span style="font-size: larger; font-style: italic; color: #FF0000">To add a break, select a player, enter the break and click Add this break.</span>
+                            <span style="font-size: larger; font-style: italic; color: #FF0000">To add a break, select a player, enter the break and click Add this break, otherwise click/touch Next&gt;.</span>
                         </td>
                     </tr>
 
@@ -387,7 +394,7 @@
        </table>
     </asp:Panel>
  
-    <div id="AdminActionsDiv" runat="server" class="CentredDiv">
+    <div id="AdminActionsDiv" runat="server" class="CentredDiv"><br />
         <div id="Delete_Result_Div" style="" runat="server" visible="false">
             <input id="Delete_Result_Button" type="button" value="Delete this result" 
                 onclick="loadDiv('divDeleteResult');" onmouseover="this.style.cursor='pointer';" />
@@ -413,7 +420,7 @@
                     </tr>
                 </table>
  	</div>
-        <asp:Button ID="Recover_Button" runat="server" Text="Recover result for the requested match." visible="false"/>
+        <br /><asp:Button ID="Recover_Button" runat="server" Text="Recover result for the requested match." visible="false"/>
     </div>
 
 
@@ -428,12 +435,12 @@
        </table>
 
             <div  style="text-align:center;">
-                <asp:Literal ID="status_Literal" runat="server"></asp:Literal><br />
+                <asp:Literal ID="status_Literal" runat="server"></asp:Literal><br /><br />
 
                 <asp:Button ID="Send_Button" runat="server" Text="Check your results card" />
-                <br />
+                <br /><br />
                 <asp:Button ID="Cancel_Button" runat="server" Text="Cancel" />
-                <br />
+                <br /><br />
                 <asp:Button ID="Retry_Button" runat="server" Visible="false" Text="Resend the emails" />
             </div>
 

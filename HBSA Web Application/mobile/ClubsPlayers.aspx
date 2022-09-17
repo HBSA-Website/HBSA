@@ -31,6 +31,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+        <style>
+            td {
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+        </style>
+
     <asp:ScriptManager ID="ScriptManager1" runat="server">
         <Services>
            <asp:ServiceReference Path="~/mobile/ActiveTableDetail.asmx" />

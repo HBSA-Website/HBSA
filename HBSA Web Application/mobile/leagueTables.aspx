@@ -6,9 +6,9 @@
     <div class="pageDiv">
     <span style="font-weight:bold;">League Tables</span><br />
     <asp:Literal ID="Selection_Literal" runat="server" Text="Select a league and a section:"></asp:Literal>
-    <br />
+        <br /><br />
     <asp:DropDownList ID="Section_DropDownList" runat="server" CssClass="dropDown" AutoPostBack="True" ></asp:DropDownList>
-    <br />
+        <br /><br />
     <asp:GridView ID="LeagueTable_GridView" runat="server" CssClass="gridView" HorizontalAlign="Center" CellPadding="4">
             <HeaderStyle CssClass="gridViewHeader"/>
             <RowStyle CssClass="gridViewRow" />

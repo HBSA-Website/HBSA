@@ -11,7 +11,10 @@ as
 
 set nocount on
 
- select [Fixture Date] = convert(varchar(11),F.FixtureDate,113)
+--ensure fixture links are up to date
+exec SetUpFixtureLinks
+
+select [Fixture Date] = convert(varchar(11),F.FixtureDate,113)
 	  ,Section=[League Name] + ' ' +[Section Name]
 	  ,[Home Team] = rtrim(HC.[Club Name] + ' ' + HT.Team)
 	  ,[Away Team] = rtrim(AC.[Club Name] + ' ' + AT.Team)

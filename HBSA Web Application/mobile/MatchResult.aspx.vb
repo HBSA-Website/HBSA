@@ -1284,9 +1284,11 @@ showError:
 
         For ix As Integer = 0 To 7
             If Not ((ix Mod 4) = 3 AndAlso Section_DropDownList.SelectedValue >= 7) Then
-                If PlayerDD(ix).SelectedValue.Split("|")(0) < 0 Then
-                    'if no opponent/no show, frame not played set appropiate score
-                    ScoreBox(ix).Text = PlayerDD(ix).SelectedValue.Split("|")(0) Mod 2 + 2
+                If PlayerDD(ix).SelectedValue <> " | " Then
+                    If PlayerDD(ix).SelectedValue.Split("|")(0) < 0 Then
+                        'if no opponent/no show, frame not played set appropiate score
+                        ScoreBox(ix).Text = PlayerDD(ix).SelectedValue.Split("|")(0) Mod 2 + 2
+                    End If
                 End If
             End If
         Next

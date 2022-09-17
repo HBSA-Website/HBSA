@@ -6,12 +6,9 @@
               <div>
             <b>Breaks over 25</b><br />
             <br />
-              Click a link below and an appropriate set of breaks will be shown.<br />
-              <br />
-              <asp:Button ID="Open_Button" runat="server" Text="Open Snooker Leagues" CssClass="button" />
-              <asp:Button ID="Vets_Button" runat="server" Text="Vets Snooker Leagues" CssClass="button" />
-              <asp:Button ID="Billiards_Button" runat="server" Text="Billiards Leagues" CssClass="button" />
-              <br />
+              Select a league and an appropriate set of breaks will be shown.<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:DropDownList ID="League_DropDownList" runat="server" AutoPostBack="true"></asp:DropDownList>
+                  <br />
               <br />
               <asp:GridView ID="Breaks_GridView" runat="server" CssClass="gridView" HorizontalAlign="Center" CellPadding="4">
                     <HeaderStyle CssClass="gridViewHeader"/>

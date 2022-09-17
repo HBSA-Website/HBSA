@@ -1,18 +1,40 @@
 ﻿Public Class Breaks1
     Inherits System.Web.UI.Page
 
-    Protected Sub Open_Button_Click(sender As Button, e As EventArgs) _
-        Handles Open_Button.Click, Vets_Button.Click, Billiards_Button.Click
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Using breaksReport As DataTable = HBSAcodeLibrary.SharedRoutines.BreaksReport(If(sender.ClientID Like "*Open*", 1, If(sender.ClientID Like "*Vets*", 2, 3)))
+        If Not IsPostBack Then
 
-            With Breaks_GridView
-                .DataSource = breaksReport
-                .DataBind()
-            End With
+            Using LeaguesTable As DataTable = HBSAcodeLibrary.LeagueData.GetLeagues
 
-        End Using
+                With League_DropDownList
+                    .Items.Clear()
+                    .Items.Add(New ListItem("** Select a League **", 0))
+                    For Each row As DataRow In LeaguesTable.Rows
+                        .Items.Add(New ListItem(row.Item("League Name"), row.Item("ID")))
+                    Next
 
+                End With
+
+            End Using
+
+        End If
+
+    End Sub
+    Protected Sub League_DropDownList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles League_DropDownList.SelectedIndexChanged
+
+        If League_DropDownList.SelectedIndex > 0 Then
+
+            Using breaksReport As DataTable = HBSAcodeLibrary.SharedRoutines.BreaksReport(League_DropDownList.SelectedValue)
+
+                With Breaks_GridView
+                    .DataSource = breaksReport
+                    .DataBind()
+                End With
+
+            End Using
+
+        End If
 
     End Sub
 

@@ -12,34 +12,16 @@ Option Explicit On
 
 
 Partial Public Class Breaks1
-    
+
     '''<summary>
-    '''Open_Button control.
+    '''League_DropDownList control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Open_Button As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''Vets_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Vets_Button As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''Billiards_Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Billiards_Button As Global.System.Web.UI.WebControls.Button
-    
+    Protected WithEvents League_DropDownList As Global.System.Web.UI.WebControls.DropDownList
+
     '''<summary>
     '''Breaks_GridView control.
     '''</summary>

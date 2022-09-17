@@ -7,11 +7,11 @@
         <br />
         &nbsp;&nbsp;&nbsp;
         <asp:DropDownList ID="Section_DropDownList" runat="server" CssClass="dropDown" AutoPostBack="true"></asp:DropDownList>
-        &nbsp;&nbsp;&nbsp;
+        <br /><br />
         <asp:DropDownList ID="Fixture_Date_DropDownList" runat="server" CssClass="dropDown" ></asp:DropDownList>
         &nbsp;&nbsp;&nbsp;
         <asp:DropDownList ID="Team_DropDownList" runat="server" CssClass="dropDown" ></asp:DropDownList>
-        &nbsp;&nbsp;&nbsp;
+        <br /><br />
         <asp:Button ID="Get_Button" runat="server" Text="Show Fixtures" CssClass="button" />
 
         <asp:GridView ID="Fixtures_GridView" runat="server" CssClass="gridView" HorizontalAlign="Center" CellPadding="4"> 
