@@ -117,6 +117,7 @@ textarea {
     position: fixed;
     top: 450px;
     left: 5%;
+    width: 90%;
     display: none; 
 }
 

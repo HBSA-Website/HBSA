@@ -540,6 +540,7 @@
     <Content Include="mobile\Results.aspx" />
     <Content Include="mobile\Scripts\mobileMaster.js" />
     <Content Include="mobile\Styles\mobileStyles.css" />
+    <Content Include="mobile\TestLeagueTables.aspx" />
     <Content Include="mobile\YorkshireLeague.aspx" />
     <Content Include="PayPalAPIError.aspx" />
     <Content Include="Breaks.aspx" />
@@ -1434,6 +1435,13 @@
     <Compile Include="mobile\Results.aspx.vb">
       <DependentUpon>Results.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mobile\TestLeagueTables.aspx.designer.vb">
+      <DependentUpon>TestLeagueTables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mobile\TestLeagueTables.aspx.vb">
+      <DependentUpon>TestLeagueTables.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="mobile\YorkshireLeague.aspx.designer.vb">
       <DependentUpon>YorkshireLeague.aspx</DependentUpon>
