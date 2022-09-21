@@ -10,7 +10,6 @@
         End If
 
     End Sub
-
     Protected Sub PopulateSections()
 
         PlayingRecords_Div.InnerHtml = ""
@@ -40,7 +39,6 @@
         PopulateClubs()
 
     End Sub
-
     Protected Sub PopulateClubs()
 
         PlayingRecords_Div.InnerHtml = ""
@@ -70,7 +68,6 @@
         PopulateTeams()
 
     End Sub
-
     Protected Sub PopulateTeams()
 
         PlayingRecords_Div.InnerHtml = ""

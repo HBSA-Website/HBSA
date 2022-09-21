@@ -27,12 +27,15 @@
         <ContentTemplate>
             <span style="font-size: smaller">Select a division/section, and/or a club and/or a team:</span><br />
             <asp:DropDownList ID="Section_DropDownList" runat="server" AutoPostBack="True" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+            <br />
+            <br />
             <asp:DropDownList ID="Clubs_DropDownList" runat="server" AutoPostBack="True" />
+            &nbsp;&nbsp;
             <asp:Literal ID="Team_Literal" runat="server">
-            &nbsp;&nbsp;Team:            
+            Team:            
             </asp:Literal>
             <asp:DropDownList ID="Team_DropDownList" runat="server" BackColor="#FFFFCC" AutoPostBack="True" />
+            <br />
             <br />
             <span style="font-size: smaller"> and/or a player: </span>
             <asp:TextBox ID="Player_TextBox" runat="server"></asp:TextBox>
@@ -43,6 +46,7 @@
                 CompletionSetCount="20" CompletionListCssClass="mobileCompletionList" CompletionListItemCssClass="mobileCompletionLlistItem" CompletionListHighlightedItemCssClass="mobileCompletionItemHighlighted">
             </ajaxToolkit:AutoCompleteExtender>
             <br />
+            <br />
             <asp:CheckBox ID="Tagged_CheckBox" CssClass="BigCheckBox" runat="server" Text="Tagged players." AutoPostBack="True" />
             <asp:CheckBox ID="Over70_CheckBox" CssClass="BigCheckBox" runat="server" Text="Players over80 (Vets)." AutoPostBack="True" />
             <br />
@@ -52,7 +56,7 @@
 
             <span style='color: maroon; font-size: smaller'>Touch/click a player for more detail</span>
             <div id="PlayingRecords_Div" runat="server"></div>
-            <div id="ActiveDetailDiv" class="infoDiv" onclick="this.style.display='none';"></div>
+            <div id="ActiveDetailDiv" class="infoDiv" style="top:1000px;" onclick="this.style.display='none';"></div>
 
         </ContentTemplate>
     </asp:UpdatePanel>
