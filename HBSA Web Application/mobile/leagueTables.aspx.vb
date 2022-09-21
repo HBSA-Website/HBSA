@@ -1,11 +1,10 @@
 ﻿Public Class leagueTables1
     Inherits System.Web.UI.Page
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
 
-            populateSections()
+            PopulateSections()
 
         End If
 
@@ -65,6 +64,8 @@
                 LeagueTable_GridView.DataBind()
                 LeagueTable_GridView.Visible = True
 
+                Session("LeagueTable") = HBSAcodeLibrary.Utilities.SerialiseDataTable(FixtureList)
+
             End Using
 
         End If
@@ -76,13 +77,19 @@
         e.Row.Cells(0).HorizontalAlign = HorizontalAlign.Left
         e.Row.Cells(0).Wrap = False
         e.Row.Cells(e.Row.Cells.Count - 1).Wrap = True
+        e.Row.Cells(e.Row.Cells.Count - 1).Visible = False 'hide points comments
 
         If e.Row.RowType = DataControlRowType.DataRow Then
             If e.Row.Cells(e.Row.Cells.Count - 1).Text.Trim <> "&nbsp;" AndAlso
                e.Row.Cells(e.Row.Cells.Count - 1).Text.Trim <> "" Then
-                e.Row.Cells(e.Row.Cells.Count - 1).ForeColor = Drawing.Color.Red
                 e.Row.Cells(e.Row.Cells.Count - 1).HorizontalAlign = HorizontalAlign.Left
                 e.Row.Cells(e.Row.Cells.Count - 1).Text = e.Row.Cells(e.Row.Cells.Count - 1).Text.Replace("&lt;", "<").Replace("&gt;", ">")
+
+                e.Row.ForeColor = Drawing.Color.Red
+
+                e.Row.Attributes.Add("onmouseover", "this.style.cursor='pointer'")
+                e.Row.Attributes.Add("onclick", "PointsDetailDiv('" & e.Row.Cells(0).Text & "<br/>" &
+                                                e.Row.Cells(e.Row.Cells.Count - 1).Text.Replace(".0", "") & "')")
             End If
 
             If e.Row.Cells(1).Text = "&nbsp;" Then  'section header
