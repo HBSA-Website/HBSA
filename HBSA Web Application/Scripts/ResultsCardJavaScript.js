@@ -26,7 +26,7 @@ function ddChanged(ddList) {
     var hcapBoxname = HomeAway + "Hcap" + ddRow + "_TextBox";
     var ScoreBoxname = HomeAway + "Score" + ddRow + "_TextBox";
 
-    // look for no show/no opponent
+    // look for no show/no opponent                   
     if (ddValues[0].substr(0, 1) == "-") {
         //set handicap to zero
         document.getElementById(hcapBoxname).value = "0";
@@ -82,18 +82,13 @@ function ddChanged(ddList) {
 
         // populate handicap & score boxes
         document.getElementById(hcapBoxname).value = ddValues[1];
-        // document.getElementById(ScoreBoxname).value = "";
+        document.getElementById(ScoreBoxname).value = "";
         document.getElementById(ScoreBoxname).disabled = false;
 
         removeBreak(HomeAway, oldPlayerName)
 
-        //Make an entry in the breaks players dropdown list
-        var opt = document.createElement("option");
-        opt.text = newPlayerName;    // player name
-        opt.value = ddValues[0];   // player ID
         var BreaksPlayersDDName = HomeAway + "BreakPlayers_DropDownList";
         var MPList = document.getElementById(BreaksPlayersDDName);
-        MPList.options.add(opt);
 
         // Clear old entry from breaks players dropdown list
         for (var ix = 0; ix < MPList.options.length; ix++) {
@@ -102,6 +97,29 @@ function ddChanged(ddList) {
                 break;
             }
         }
+
+        if (ddList.selectedIndex > 0) {
+            // check the selected player is not selected in another drop down list
+            for (var ix = 1; ix < 4; ix++) {
+                if (ix != ddRow) {
+                    var otherDDName = HomeAway + "Player" + ix + "_DropDownList";
+                    var otherDD = document.getElementById(otherDDName);
+                    if (currIx == otherDD.selectedIndex) {
+                        ddList.selectedIndex = 0;
+                        document.getElementById(hcapBoxname).value = "";
+                        window.alert(newPlayerName + " is already selected. Choose another");
+                        return;
+                    }
+                }
+            }
+        }
+
+        //Make an entry in the breaks players dropdown list
+        var opt = document.createElement("option");
+        opt.text = newPlayerName;    // player name
+        opt.value = ddValues[0];   // player ID
+        MPList.options.add(opt);
+
     }
 }
 
