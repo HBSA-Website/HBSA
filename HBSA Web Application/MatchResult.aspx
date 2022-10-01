@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="MatchResult.aspx.vb" Inherits="HBSA_Web_Application.MatchResult" ClientIDMode="Static" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.master" CodeBehind="MatchResult.aspx.vb" 
+    Inherits="HBSA_Web_Application.MatchResult" ClientIDMode="Static" ValidateRequest="false" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -288,10 +289,10 @@
         <tr>
             <td class="style17" colspan="3">
                 
-                <table>
+                <table style="margin: 10px">
                     
                     <tr >
-                        <td colspan="3" style="text-align:left">
+                        <td colspan="3">
                             <span style="color: #006600"><strong>Breaks</strong></span>
                         </td>
                     </tr>
@@ -321,7 +322,7 @@
 
             <td style="vertical-align: top; text-align: left" colspan="3">
 
-                <table >
+                <table style="margin: 10px">
             
                       <tr >
                         <td  colspan="4">
