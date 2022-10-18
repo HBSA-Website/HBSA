@@ -120,6 +120,8 @@ insert @WinLosses
 	from MatchResultsDetails6
 	where AwayPlayer4ID > 0 and AwayPlayer4ID > 0
 
+--select * from @WinLosses where PlayerID=2246
+
 declare @Matches6 table 
 	(ID int identity (1,1)
 	,keyDate date
@@ -188,7 +190,7 @@ insert @Matches6 values (@lastkeyDate,@lastPlayerID,@lastHcap,@Played, @Won, @Pl
 close c
 deallocate c
 
---select * from @Matches6 where playerid=2000
+--select * from @Matches6 where playerid=2246
 
 select [Last Date]=convert(varchar(11),M6.keyDate,113)
 	  ,M6.PlayerID
@@ -197,19 +199,19 @@ select [Last Date]=convert(varchar(11),M6.keyDate,113)
 	  ,M6.Played
 	  ,M6.Won
 	  ,M6.Lost      
-      ,ActionNeeded=case when nxt.ID is null then case when M6.Won > 4 and M6.Played > 5 
+      ,ActionNeeded=case when nxt.ID is null then case when M6.Won > 3 and M6.Played > 5 
 	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
 															then 'Reduce'
-						                                when M6.Won < 2 and M6.Played > 5 
+						                                when M6.Won < 3 and M6.Played > 5 
 														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
 														    then 'Raise'
 						                                else ''
 				                                   end
 					    else case when nxt.Handicap <> dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) 
-						                     then  case when M6.Won > 4 and M6.Played > 5 
+						                     then  case when M6.Won > 3 and M6.Played > 5 
 	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
 															then 'Reduce'
-						                                when M6.Won < 2 and M6.Played > 5 
+						                                when M6.Won < 3 and M6.Played > 5 
 														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
 														    then 'Raise'
 						                                else ''
@@ -235,19 +237,19 @@ select [Last Date]=convert(varchar(11),M6.keyDate,113)
 	outer apply (select * from @Matches6 where ID = M6.ID+1 and PlayerID=M6.PlayerID) nxt
 	
 	where (@ActionNeeded=0 or 
-				case when nxt.ID is null then case when M6.Won > 4 and M6.Played > 5 
+				case when nxt.ID is null then case when M6.Won > 3 and M6.Played > 5 
 	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
 															then 1
-						                           when M6.Won < 2 and M6.Played > 5  
+						                           when M6.Won < 3 and M6.Played > 5  
 														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
 														    then 1
 						                           else 0
 				                              end
 					 else case when nxt.Handicap <> dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) 
-						                   then case when M6.Won > 4 and M6.Played > 5 
+						                   then case when M6.Won > 3 and M6.Played > 5 
 	                                                    and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) < P.Handicap 
 															then 1
-						                           when M6.Won < 2 and M6.Played > 5  
+						                           when M6.Won < 3 and M6.Played > 5  
 														 and dbo.newTaggedHandicap(M6.Played,M6.Won,M6.Handicap,LeagueID) > P.Handicap 
 														    then 1
 						                           else 0
@@ -257,6 +259,8 @@ select [Last Date]=convert(varchar(11),M6.keyDate,113)
 				 end  = 1 
 					)
 	order by SectionID, [Club Name] + ' ' + Team, Player, M6.keyDate
+
+--select * from #tmp
 
 if @fromApplyHCaps=1
 	select [Last Date]
@@ -298,4 +302,4 @@ drop table #tmp
 
 
 GO
-exec TaggedPlayersReport @Player='k h'
+exec TaggedPlayersReport @SectionID=2, @ActionNeeded=1 ,@fromApplyHCaps=1
