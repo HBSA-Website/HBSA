@@ -227,7 +227,11 @@ Public Class Players
                 Populate_EditSectionDropdownListWithTeam()
                 If editSection_DropDownList.Items.Count > 0 AndAlso
                     .Cells(15).Text > 0 Then
-                    editSection_DropDownList.SelectedValue = .Cells(15).Text
+                    Try
+                        editSection_DropDownList.SelectedValue = .Cells(15).Text
+                    Catch ex As Exception
+                        editSection_DropDownList.SelectedIndex = 0
+                    End Try
                 End If
                 Played_CheckBox.Checked = DirectCast(.Cells(7).Controls(0), CheckBox).Checked
                 Tagged_DropDownList.SelectedValue = .Cells(8).Text
