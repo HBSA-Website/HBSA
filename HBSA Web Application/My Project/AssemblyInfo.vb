@@ -9,9 +9,9 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 <Assembly: AssemblyTitle("HBSA_Web_Application")>
 <Assembly: AssemblyDescription(".NET 4.6.1")>
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyCompany("Huddersfield Billiards and Snooker Association")>
 <Assembly: AssemblyProduct("HBSA_Web_Application")>
-<Assembly: AssemblyCopyright("Copyright © 2021")>
+<Assembly: AssemblyCopyright("Copyright © 2022")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
