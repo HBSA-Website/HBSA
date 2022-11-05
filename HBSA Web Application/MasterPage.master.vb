@@ -80,6 +80,7 @@ Partial Public Class MasterPage
 
         Version_Literal.Text = GetType(MasterPage).Assembly.GetName().Version.ToString ' My.Application.Info.Version.ToString
         Version_Literal.Text += " / " + GetType(HBSAcodeLibrary.ClubData).Assembly.GetName().Version.ToString ' My.Application.Info.Version.ToString
+        Version_Literal.Text += ": " + Now.ToShortDateString + " " + Now.ToShortTimeString
         HitCount_Literal.Text = If(Session("HitCount"), "No hit count available")
 
         EntryForm_Button.Visible = HBSAcodeLibrary.HBSA_Configuration.CloseSeason And HBSAcodeLibrary.HBSA_Configuration.AllowLeaguesEntryForms

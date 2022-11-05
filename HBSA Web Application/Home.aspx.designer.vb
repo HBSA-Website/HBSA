@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Home
-    
+
     '''<summary>
     '''HandicapChangesDiv control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HandicapChangesDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''HandicapChanges_Literal control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HandicapChanges_Literal As Global.System.Web.UI.WebControls.Literal
-    
+
     '''<summary>
     '''HandicapChanges_GridView control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HandicapChanges_GridView As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''NewRegistrationsDiv control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NewRegistrationsDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''NewRegistrations_Literal control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NewRegistrations_Literal As Global.System.Web.UI.WebControls.Literal
-    
+
     '''<summary>
     '''NewRegistrations_GridView control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NewRegistrations_GridView As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''HomePage_Literal control.
     '''</summary>

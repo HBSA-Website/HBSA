@@ -17,7 +17,31 @@
 <asp:Content ID="Content2" runat="server" contentplaceholderid="ContentPlaceHolder1">
 
     <div onmouseover="hideMenuDiv();">
-    
+    <div>
+        <div style="margin-left:auto;margin-right:auto; width:100%; font-weight:bold; text-align:center;">Important website update.</div>
+        <div style="padding: 4px; margin: 4px; border: thin solid #008000;">
+            1. We have been forced to revert to our own contingency backup due to a problem with our website host.
+            <br />
+            <br />
+            2. UNFORTUNATELY, SOME RECENT RESULTS HAVE BEEN LOST (entered after 5pm 28th Oct).
+
+            <br />
+            <br />
+            3. PLEASE COULD YOU CHECK HERE <a href="https://huddersfieldsnooker.com/MissingResults.aspx">https://huddersfieldsnooker.com/MissingResults.aspx</a>
+<strong>AND RE-INPUT THE MISSING RESULTS FOR YOUR TEAM.</strong> Please note that if the card has been lost or destroyed, the person registered to enter results will have been sent an email with a copy of the full results card.
+            <br />
+            <br />
+            4. The results from the Open League games on 3rd Nov can now be input as normal.
+            <br />
+            <br />
+            5. Competition entry forms submitted after 5pm Oct 28th have also been lost. The Competition Sec will issue a separate update on this in the next day or two. <strong>IN THE MEANTIME, IF YOU HAVE ARRANGED ANY GAMES PLEASE DO NOT PLAY THEM YET, AS THE DRAWS MAY HAVE TO BE REDONE. </strong>
+            <br />
+            <br />
+            Please accept our sincerest apologies and thanks for your support.
+
+            <br />
+
+        </div>
         <div id="HandicapChangesDiv" runat="server" class="HandicapChanges" style="width:100%" onmouseover="hideMenuDiv();">
             <asp:Literal ID="HandicapChanges_Literal" runat="server">Handicap changes made during the last week.<br />Emails have been sent to all relevant persons that can be found in the system.</asp:Literal>
             <table style="width:auto;margin-left:auto;margin-right:auto;">
@@ -58,7 +82,7 @@
              <asp:Literal ID="HomePage_Literal" runat="server">Date    Title<br />Content</asp:Literal>
 
 </div>
-        
+    </div>    
 </asp:Content>
 
 
