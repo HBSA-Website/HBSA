@@ -19,8 +19,10 @@
                     .DataBind()
                 End With
                 HandicapChangesDiv.Visible = True
+                'NewHandicapsTitleDiv.Visible = True
             Else
                 HandicapChangesDiv.Visible = False
+                'NewHandicapsTitleDiv.Visible = False
             End If
 
             NewRegistrationsDiv.Visible = False

@@ -19,8 +19,10 @@
                     .DataBind()
                 End With
                 HandicapChangesDiv.Visible = True
+                'NewHandicapsTitleDiv.Visible = True
             Else
                 HandicapChangesDiv.Visible = False
+                'NewHandicapsTitleDiv.Visible = False
             End If
 
             NewRegistrationsDiv.Visible = False
@@ -56,7 +58,7 @@
             Using Article As New HBSAcodeLibrary.HomeContent(ArticleRow!ID)
                 rowNo += 1
                 HomePage_Literal.Text += "<div id='TitleDiv" & Format(rowNo, "000") &
-                                            "' style='width: 100%; font-size: 14px; font-weight: bold; background-color: #CCFFCC; border-style: solid; border-width: 1px;' " &
+                                            "'style='width: 100%; font-size: 14px; font-weight: bold; background-color: #CCFFCC; border-style: solid; border-width: 1px;' " &
                                             "onclick='swapDiv(""ArticleDiv" & Format(rowNo, "000") & """,""TitleImg" & Format(rowNo, "000") & """);' onmouseover='this.style.cursor=""pointer"";'>" &
                                             "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id = 'TitleImg" & Format(rowNo, "000") & "' height=""24"" src='../Images/PointDownSmall.bmp' alt='Expand'/>" &
                                             "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" & Format(Article.dateTimeLodged, "dd MMM yyyy") & "&nbsp;&nbsp;&nbsp;&nbsp;" & vbCrLf & Article.title & "</div>"
