@@ -383,15 +383,6 @@ Partial Public Class MobileMaster
     Protected WithEvents AGMVoteRef As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
     '''<summary>
-    '''Covid19Button control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Covid19Button As Global.System.Web.UI.HtmlControls.HtmlTableCell
-
-    '''<summary>
     '''resultButton control.
     '''</summary>
     '''<remarks>
