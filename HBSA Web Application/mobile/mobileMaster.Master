@@ -278,6 +278,12 @@
             </tr>
              <tr><td id="AGMVoteButton"><img alt="" src="../Images/red.jpg" />
                      <a id="AGMVoteRef" runat="server" href="../AGM_Vote.aspx">AGM Voting form</a></td></tr>
+             <tr>
+                 <td id="Covid19Button">
+                     <img alt="" src="../Images/red.jpg" />
+                     <a href="InfoPage.aspx?Subject=COVID-19&Title=COVID-19" runat="server">COVID-19</a></td>
+             </tr>
+
              <tr><td id="resultButton"><img alt="" src="../Images/red.jpg" />
                     <a href="MatchResult.aspx" runat="server" >Enter or Change Result</a></td></tr>
             <tr><td id="EntryFormButton"><img alt="" src="../Images/red.jpg" />

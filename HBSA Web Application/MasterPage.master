@@ -329,6 +329,12 @@
                 BorderStyle="None" Font-Underline="True" ForeColor="#0033CC" 
                 onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" ToolTip="Log in here to enter match results" />
             &nbsp;
+        <a runat="server" style="color: #0033CC; font-size: 10pt; background-color: ButtonFace" href="InfoPage.aspx?Subject=COVID-19&Title=COVID-19">Covid-19</a>
+            &nbsp;
+<%--        <asp:Button ID="Covid_19_Compliance_Button" runat="server" Text="Covid 19 Compliance"
+                    BorderStyle="None" Font-Underline="True" ForeColor="#0033cc"
+                    onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="225px" />
+        &nbsp;--%>
         <asp:Button ID="AGM_Vote_Button" runat="server" Text="AGM Voting form"
             BorderStyle="None" Font-Underline="True" ForeColor="#0033cc"
             onmouseover="this.style.cursor='pointer';hideMenuDiv();" Font-Size="10pt" Width="225px" />
