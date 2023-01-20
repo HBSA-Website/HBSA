@@ -402,7 +402,7 @@ Public Class Players
                     .Items.Insert(0, New ListItem("** Select a Section ** ", 0))
                     .Enabled = True
                 ElseIf .Items.Count = 1 Then
-                    .Enabled = False
+                    '.Enabled = False
                 Else
                     ErrorTeam_Literal.Text = "This team does not exist in this League/Division/Section for this Club."
                     ErrorTeamRow.Visible = True
