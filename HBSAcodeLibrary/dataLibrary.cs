@@ -685,7 +685,7 @@ namespace HBSAcodeLibrary
                 new SqlParameter("AwardType", AwardType)
             };
 
-            return SQLcommands.ExecDataTable("Awards_Report_Static", parameters);
+            return SQLcommands.ExecDataTable("Awards_Report", parameters);
         }
         public void Insert(int AwardType
                         , string AwardID
