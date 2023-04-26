@@ -48,4 +48,13 @@ Partial Public Class DownloadData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Handicaps_Button As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''ContentData_Button control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ContentData_Button As Global.System.Web.UI.WebControls.Button
 End Class

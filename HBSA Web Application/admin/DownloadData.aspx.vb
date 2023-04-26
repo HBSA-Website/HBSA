@@ -1,4 +1,6 @@
-﻿Public Class DownloadData
+﻿Imports System.IO
+
+Public Class DownloadData
     Inherits System.Web.UI.Page
     Protected Sub DownloadContactsReport_Button_Click(sender As Object, e As EventArgs) Handles DownloadContactsReport_Button.Click
         download("ContactsReport", "Contacts Report")
@@ -8,6 +10,9 @@
     End Sub
     Protected Sub Handicaps_Button_Click(sender As Object, e As EventArgs) Handles Handicaps_Button.Click
         download("DownloadHandicaps", "End of season handicaps")
+    End Sub
+    Protected Sub ContentData_Button_Click(sender As Object, e As EventArgs)
+        download("getHomeContent", "Home Page Articles")
     End Sub
     Protected Sub download(SPname As String, fileName As String)
 
@@ -40,7 +45,12 @@
                     Dim dr As DataRow
                     For Each dr In main_DataTable.Rows
                         For ix As Integer = 0 To main_DataTable.Columns.Count - 1
-                            strFileContent.Append(dr.Item(ix).ToString.Replace(",", ";").Replace(vbCr, "|").Replace(vbLf, "|") & ",")
+                            Dim strItem = dr.Item(ix).ToString.Replace(",", ";").Replace(vbCr, "|").Replace(vbLf, "|")
+                            If SPname = "getHomeContent" AndAlso ix = 2 Then 'need to convert html to plain text
+                                strItem = HBSAcodeLibrary.Utilities.HTMLToText(strItem)
+                                strItem = strItem.Replace("|", "").Replace(",", ";").Replace(vbCr, "").Replace(vbLf, "")
+                            End If
+                            strFileContent.Append(strItem & ",")
                         Next
                         strFileContent.Remove(strFileContent.Length - 1, 1)
                         strFileContent.Append(vbCrLf)
@@ -67,5 +77,4 @@
         End If
 
     End Sub
-
 End Class

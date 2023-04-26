@@ -25,6 +25,8 @@
                     px" /></td></tr>
                 <tr><td style="text-align:right">Match Results: </td><td><asp:Button ID="MatchResults_Button" runat="server" Text="Download Match Results" Width="400px" /></td></tr>
                 <tr><td style="text-align:right">Handicaps: </td><td><asp:Button ID="Handicaps_Button" runat="server" Text="Handicaps" Width="400px" /></td>                </tr>
+                <tr><td style="text-align:right">Home Page Articles: </td><td>
+                    <asp:Button ID="ContentData_Button" runat="server" Text="Home Page Articles" Width="400px" OnClick="ContentData_Button_Click" /></td>                </tr>
             </table>
 
   <%--      </ContentTemplate>
