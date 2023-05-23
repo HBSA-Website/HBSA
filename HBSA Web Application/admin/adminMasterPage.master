@@ -330,7 +330,6 @@
                                 <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="EmailTemplates.aspx">Email Templates</a></td></tr>
                                 <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="NotePad.aspx">Note Pad</a></td></tr>
                                 <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="FAQ.aspx">FAQ</a></td></tr>
-                                <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="SMTPTester.aspx">SMTP Client Tester</a></td></tr>
                                 <tr><td class="MenuTd" onmouseover="hideMenu_InLineDiv()"><a href="DownloadData.aspx">Download data from database</a></td></tr>
                             </table>
                         </div>

@@ -220,7 +220,6 @@
     <Content Include="admin\scripts\redips-drag-min.js" />
     <Content Include="admin\Sections.aspx" />
     <Content Include="admin\Settings.aspx" />
-    <Content Include="admin\SMTPTester.aspx" />
     <Content Include="admin\Styles\Dynamic.css" />
     <Content Include="admin\TaggedPlayers.aspx" />
     <Content Include="admin\Teams.aspx" />
@@ -492,7 +491,6 @@
     <Content Include="ckeditor\skins\kama\templates.css" />
     <Content Include="ckeditor\themes\default\theme.js" />
     <Content Include="ClubLoginReset.aspx" />
-    <Content Include="DocumentPage.aspx" />
     <Content Include="Fines.aspx" />
     <Content Include="helpFAQ.aspx" />
     <Content Include="images\AjaxLoadingSave.gif" />
@@ -541,7 +539,6 @@
     <Content Include="mobile\Scripts\mobileMaster.js" />
     <Content Include="mobile\Styles\mobileStyles.css" />
     <Content Include="mobile\YorkshireLeague.aspx" />
-    <Content Include="PayPalAPIError.aspx" />
     <Content Include="Breaks.aspx" />
     <Content Include="ClubLogin.aspx" />
     <Content Include="ClubLoginConfirm.aspx" />
@@ -555,9 +552,6 @@
     <Content Include="EntryForm.aspx" />
     <Content Include="EntryFormsDownload.aspx" />
     <Content Include="EntryFormShowDetail.aspx" />
-    <Content Include="PayPalCancelled.aspx" />
-    <Content Include="PayPalCheckOut.aspx" />
-    <Content Include="PayPalConfirm.aspx" />
     <Content Include="FixtureLists.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Handbook.aspx" />
@@ -1044,13 +1038,6 @@
       <DependentUpon>Settings.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="admin\SMTPTester.aspx.designer.vb">
-      <DependentUpon>SMTPTester.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\SMTPTester.aspx.vb">
-      <DependentUpon>SMTPTester.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="admin\TaggedPlayers.aspx.designer.vb">
       <DependentUpon>TaggedPlayers.aspx</DependentUpon>
     </Compile>
@@ -1173,13 +1160,6 @@
     <Compile Include="Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DocumentPage.aspx.designer.vb">
-      <DependentUpon>DocumentPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DocumentPage.aspx.vb">
-      <DependentUpon>DocumentPage.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="EntryForm.aspx.designer.vb">
       <DependentUpon>EntryForm.aspx</DependentUpon>
@@ -1440,27 +1420,6 @@
     <Compile Include="mobile\YorkshireLeague.aspx.vb">
       <DependentUpon>YorkshireLeague.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PayPalCancelled.aspx.designer.vb">
-      <DependentUpon>PayPalCancelled.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PayPalCancelled.aspx.vb">
-      <DependentUpon>PayPalCancelled.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="PayPalCheckOut.aspx.designer.vb">
-      <DependentUpon>PayPalCheckOut.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PayPalCheckOut.aspx.vb">
-      <DependentUpon>PayPalCheckOut.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="PayPalConfirm.aspx.designer.vb">
-      <DependentUpon>PayPalConfirm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PayPalConfirm.aspx.vb">
-      <DependentUpon>PayPalConfirm.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="FixtureLists.aspx.designer.vb">
       <DependentUpon>FixtureLists.aspx</DependentUpon>

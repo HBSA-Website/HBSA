@@ -73,7 +73,6 @@
     <Compile Include="Captcha.cs" />
     <Compile Include="dataLibrary.cs" />
     <Compile Include="Emailer.cs" />
-    <Compile Include="PayPalFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
