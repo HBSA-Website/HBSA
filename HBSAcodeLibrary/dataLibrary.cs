@@ -18,7 +18,7 @@ namespace HBSAcodeLibrary
             else  //connStr.StartsWith("UnClear: ")
                 return HBSAencoder.Decode(connStr);
         }
-        public static Object ExecScalar(String proc, List<SqlParameter> parameters = null)
+        public static Object ExecScalar(String proc, List<SqlParameter> parameters = null )
         {
             object result = DBNull.Value;
 
