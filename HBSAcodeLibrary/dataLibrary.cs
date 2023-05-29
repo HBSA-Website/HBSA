@@ -601,7 +601,9 @@ namespace HBSAcodeLibrary
             System.Random generator = new System.Random();
 
             // ensure lowest is first
-            if (inMin > inMax) { Int32 temp = inMin; inMin = inMax; inMax = temp; }
+            if (inMin > inMax) {
+                (inMax, inMin) = (inMin, inMax);
+            }
 
             // cope with max value (cannot add 1)
             if (inMax < Int32.MaxValue) { return generator.Next(inMin, inMax + 1); }
@@ -4888,7 +4890,7 @@ namespace HBSAcodeLibrary
                     new SqlParameter("Comment",comment),
                     new SqlParameter("CreatedBy", createdBy )});
         }
-        public void insertLeaguePointsAdjustment(decimal points, string comment, string createdBy)
+        public void InsertLeaguePointsAdjustment(decimal points, string comment, string createdBy)
         {
             SQLcommands.ExecNonQuery("insertLeaguePointsAdjustment",
                 new List<SqlParameter> {

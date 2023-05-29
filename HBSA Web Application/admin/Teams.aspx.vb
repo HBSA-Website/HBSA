@@ -367,7 +367,7 @@ Public Class Teams
                         action = .Remove(Session("AdminUser"))
                     Else
 
-                        Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
+                        Using newTeam As New TeamData(CInt(editSection_DropDownList.SelectedValue), CInt(Club_DropDownList.SelectedValue), Team_DropDownList.SelectedValue)
                             If newTeam.ID > 0 AndAlso newTeam.ID <> CInt(ID_TextBox.Text) AndAlso newTeam.ClubName.ToLower <> "bye" Then  'shows no team in this league with the new credentials, so is OK to use.
                                 Edit_Literal.Text = "<span style='color:red;'>Error:  Cannot submit.  The team " & (newTeam.ClubName & " " & newTeam.Team).Trim &
                                     " already exists in " & newTeam.SectionName & "<br/>" &
@@ -413,7 +413,7 @@ Public Class Teams
         'If the club and/or team letter changes, need to ensure the new team doesn't exist
         If Club_DropDownList.SelectedValue <> 0 AndAlso
            editSection_DropDownList.SelectedValue <> 0 Then
-            Using newTeam As TeamData = New TeamData(CInt(editSection_DropDownList.SelectedValue),
+            Using newTeam As New TeamData(CInt(editSection_DropDownList.SelectedValue),
                                                      CInt(Club_DropDownList.SelectedValue),
                                                      Team_DropDownList.SelectedValue)
 

@@ -84,7 +84,7 @@ Public Class Competitions
 
     Sub BuildCompetitionTable(ByVal ID As Integer, ByVal Name As String, ByVal NoRounds As Integer)
 
-        Using CompRounds As CompetitionRounds = New CompetitionRounds(Competitions_DropDownList.SelectedValue)
+        Using CompRounds As New CompetitionRounds(Competitions_DropDownList.SelectedValue)
 
             Comment_Literal.Text = CompRounds.CompetitionComment(Competitions_DropDownList.SelectedValue).Replace(vbCrLf, "<br/>")
 

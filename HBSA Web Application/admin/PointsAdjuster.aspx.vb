@@ -117,7 +117,7 @@ Partial Class admin_PointsAdjuster
                                               AdjustmentID)
                     Status_Literal.Text = "Adjustment recorded for " + teamName
                 ElseIf Save_Button.Text = "Create" Then
-                    team.insertLeaguePointsAdjustment(Adjustment_DropDown.SelectedValue & Adjustment.ToString,
+                    team.InsertLeaguePointsAdjustment(Adjustment_DropDown.SelectedValue & Adjustment.ToString,
                                               Reason_TextBox.Text.Trim,
                                               Session("adminDetails").rows(0)!username)
                     Status_Literal.Text = "Adjustment created for " + teamName
