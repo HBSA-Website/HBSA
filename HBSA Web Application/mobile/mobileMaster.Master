@@ -32,6 +32,9 @@
             </tr>
         </table>
     </div>   
+                <p style="text-align:center">
+                <a style="font-size:larger;font-weight:bold" href="https://huddersfieldsnooker.com" target="_blank" >Touch here to go to the new website.</a><br />
+             </p>
 
    <div onmouseover="hideMenuDiv();">
    <%--Premium Advertising slot --%>

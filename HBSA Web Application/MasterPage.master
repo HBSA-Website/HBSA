@@ -66,10 +66,10 @@
 
                 <div style="text-align:center; width:100%;" onmouseover="hideMenuDiv();">
                     <asp:Image runat="server" ImageUrl="~/images/SHBSA.jpg" width="700" alt="Huddersfield Billiards and Snooker Association"/>
+                <p>
+                <a style="font-size:large;font-weight:bold" href="https://huddersfieldsnooker.com" target="_blank" >Click here to go to the new website.</a><br />
+             </p>
                 </div>
-
-                <br />
-             
             <table id="Menu_Div" style=" width:100%; margin: 0px; padding: 0px; color:#006633; font-family:Verdana; font-size: 8pt;" runat="server" >
                 <tr>    
                 <td style="width:10%"></td>
